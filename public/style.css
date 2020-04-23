@@ -6,9 +6,11 @@
 }
 
 body {
+  margin:0;
   font-family: helvetica, arial, sans-serif;
-  height: 100vh;
   text-transform: uppercase;
+  font-size: 1.5em;
+  height:100vh;
 }
 
 h1 {
@@ -22,11 +24,15 @@ h2 {
 ul {
   margin:0;
   list-style:none;
-  padding-inline-start:none;
+  padding-inline-start: 0;
 }
 
 header {
-  margin-bottom: 2em;
+}
+
+main {
+  height:100%;
+  padding: 4em;
 }
 
 .row{
@@ -38,15 +44,11 @@ header {
 }
 
 .overview__left{
-  display:flex;
-  align-items: center;
-  flex-direction: column;
+  text-align:center;
 }
 
 .overview__right{
-  display:flex;
-  align-items: center;
-  flex-direction: column;
+  text-align:center;
 }
 
 .main {
