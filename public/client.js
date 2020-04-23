@@ -2,7 +2,7 @@
 // run by the browser each time your view template is loaded
 
 $(function() {
-  $.getJSON('/data', function(data) {
+  $.getJSON('/pies', function(data) {
     var $dataContainer = $('#data-container');
       
     if (data.error) {
