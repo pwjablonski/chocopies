@@ -29,6 +29,29 @@ app.get("/checkout", function(request, response) {
   response.sendFile(__dirname + '/views/checkout.html');
 });
 
+app.get("/pies", function(request, response) {
+    base("pies").select({
+      maxRecords: 10,
+      view: viewName,
+    }).firstPage(function(error, records) {
+      if (error) {
+        response.send({error: error});
+      } else {
+        cachedResponse = {
+          records: records.map(record => {
+            return {
+              name: record.get('Name'),
+              picture: record.get('Picture'),
+            };
+          }),
+        };
+        cachedResponseDate = new Date();
+        
+        response.send(cachedResponse);
+      }
+    });
+});
+
 // Cache the records in case we get a lot of traffic.
 // Otherwise, we'll hit Airtable's rate limit.
 var cacheTimeoutMs = 5 * 1000; // Cache for 5 seconds.

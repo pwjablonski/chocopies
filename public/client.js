@@ -3,10 +3,22 @@
 
 (async function(d) {
   
-  const req = await fetch('/pies')
-  const resp = await req.json()
+  const pies = await fetchPies();
+  displayPies(pies)
   
-  console.log(resp)
+  async function fetchPies(){
+    const req = await fetch('/pies')
+    const resp = await req.json()
+    return resp
+  }
+  
+  function displayPies(pies){
+    const map = document.querySelector(".map");
+    pies.forEach(pie => {
+      const pieDiv = document.createElement("div");
+      map.appendChild(pieDiv)
+    })
+  }
   
   
   
