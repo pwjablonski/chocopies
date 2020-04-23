@@ -14,16 +14,16 @@
   }
   
   function displayPies(pies){
-    const map = document.querySelector(".map");
+    const map = document.querySelector(".map-svg");
     pies.forEach(pie => {
-      const pieDiv = document.createElement("div");
-      pieDiv.dataset.id = pie.id
-      pieDiv.classList.add("pie")
-      pieDiv.style.height = "10px";
-      pieDiv.style.width = "10px";
-      pieDiv.style.background = "red"
-      pieDiv.style.border = "1px solid black"
-      map.appendChild(pieDiv)
+      const pieRect = document.createElement("rect");
+      pieRect.dataset.id = pie.id
+      pieRect.classList.add("pie")
+      pieRect.style.height = "10px";
+      pieRect.style.width = "10px";
+      pieRect.style.fill = "red"
+      pieRect.style.border = "1px solid black"
+      map.appendChild(pieRect)
     })
   }
   
