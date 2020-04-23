@@ -52,20 +52,23 @@ main {
 }
 
 .main {
-  height:100%;
   display:flex;
   align-items: center;
+  height:100%;
+}
+
+
+.menu {
+  flex:1;
 }
 
 .map {
-  width:100%
-}
-
-.menu {
-  min-width:200px;
+  border: 1px solid grey;
+  flex:2;
+  height:80%;
 }
 
 .cta {
-  min-width:200px;
   text-align: right;
+  flex:1;
 }
