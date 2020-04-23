@@ -7,14 +7,13 @@
 
 body {
   font-family: helvetica, arial, sans-serif;
-  margin: 25px;
+  height: 100vh;
+  text-transform: uppercase;
 }
 
 h1 {
   font-weight: bold;
   font-size: 48px;
-  color: Indigo;
-  margin-bottom: 0;
 }
 
 header {

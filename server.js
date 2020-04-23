@@ -21,6 +21,14 @@ app.get("/", function(request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
+app.get("/register", function(request, response) {
+  response.sendFile(__dirname + '/views/register.html');
+});
+
+app.get("/checkout", function(request, response) {
+  response.sendFile(__dirname + '/views/checkout.html');
+});
+
 // Cache the records in case we get a lot of traffic.
 // Otherwise, we'll hit Airtable's rate limit.
 var cacheTimeoutMs = 5 * 1000; // Cache for 5 seconds.
