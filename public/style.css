@@ -19,13 +19,21 @@ h2 {
   margin: 0;
 }
 
+ul {
+  margin:0;
+  list-style:none;
+  padding-inline-start:none;
+}
+
 header {
   margin-bottom: 2em;
 }
 
-
 .row{
   display:flex;
+}
+
+.overview {
   justify-content: space-around;
 }
 
@@ -39,4 +47,23 @@ header {
   display:flex;
   align-items: center;
   flex-direction: column;
+}
+
+.main {
+  height:100%;
+  display:flex;
+  align-items: center;
+}
+
+.map {
+  width:100%
+}
+
+.menu {
+  min-width:200px;
+}
+
+.cta {
+  min-width:200px;
+  text-align: right;
 }
