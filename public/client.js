@@ -19,9 +19,10 @@
       const pieDiv = document.createElement("div");
       pieDiv.dataset.id = pie.id
       pieDiv.classList.add("pie")
-      pie.style.height = "10px";
-      pie.style.width = "10px";
-      pie.style.backgroundUrl = "https://images-na.ssl-images-amazon.com/images/I/61306GKjdVL._SL1000_.jpg"
+      pieDiv.style.height = "10px";
+      pieDiv.style.width = "10px";
+      pieDiv.style.background = "red"
+      pieDiv.style.border = "1px solid black"
       map.appendChild(pieDiv)
     })
   }
