@@ -8,16 +8,17 @@
 body {
   margin:0;
   font-family: helvetica, arial, sans-serif;
-  text-transform: uppercase;
   font-size: 1.5em;
   height:100vh;
 }
 
 h1 {
+  text-transform: uppercase;
   margin: 0;
 }
 
 h2 {
+  text-transform: uppercase;
   margin: 0;
 }
 
@@ -25,6 +26,11 @@ ul {
   margin:0;
   list-style:none;
   padding-inline-start: 0;
+  text-decoration:underline;
+}
+
+li {
+  margin-bottom: 1em;
 }
 
 header {
@@ -56,7 +62,6 @@ main {
   align-items: center;
   height:100%;
 }
-
 
 .menu {
   flex:1;
