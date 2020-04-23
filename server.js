@@ -32,22 +32,12 @@ app.get("/checkout", function(request, response) {
 app.get("/pies", function(request, response) {
     base("pies").select({
       maxRecords: 10,
-      view: viewName,
+      view: "Grid view",
     }).firstPage(function(error, records) {
       if (error) {
         response.send({error: error});
       } else {
-        cachedResponse = {
-          records: records.map(record => {
-            return {
-              name: record.get('Name'),
-              picture: record.get('Picture'),
-            };
-          }),
-        };
-        cachedResponseDate = new Date();
-        
-        response.send(cachedResponse);
+        response.send(records);
       }
     });
 });
