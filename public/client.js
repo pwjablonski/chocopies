@@ -19,10 +19,9 @@
       const pieRect = document.createElement("rect");
       pieRect.dataset.id = pie.id
       pieRect.classList.add("pie")
-      pieRect.style.height = "10px";
-      pieRect.style.width = "10px";
+      pieRect.height = "10";
+      pieRect.width = "10";
       pieRect.style.fill = "red"
-      pieRect.style.border = "1px solid black"
       map.appendChild(pieRect)
     })
   }
