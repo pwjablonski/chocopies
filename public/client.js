@@ -16,11 +16,11 @@
   function displayPies(pies){
     const map = document.querySelector(".map-svg");
     pies.forEach(pie => {
-      const pieRect = document.createElement("rect");
+      const pieRect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
       pieRect.dataset.id = pie.id
       pieRect.classList.add("pie")
-      pieRect.height = "10";
-      pieRect.width = "10";
+      pieRect.setAttributeNS("height", "10");
+      pieRect.setAttributeNS("width", "10")
       pieRect.style.fill = "red"
       map.appendChild(pieRect)
     })
