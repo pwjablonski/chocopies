@@ -1,7 +1,7 @@
 // client-side js
 // run by the browser each time your view template is loaded
 
-(async function(d) {
+(async function(d, d3) {
   
   const pies = await fetchPies();
   displayPies(pies)
@@ -14,18 +14,21 @@
   }
   
   function displayPies(pies){
-    const map = document.querySelector(".map-svg");
-    pies.forEach(pie => {
-      const pieRect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
-      pieRect.dataset.id = pie.id
-      pieRect.classList.add("pie")
-      pieRect.setAttribute("height", "10");
-      pieRect.setAttribute("width", "10")
-      pieRect.style.fill = "red"
-      map.appendChild(pieRect)
-    })
+    
+    
+    
+    // const map = document.querySelector(".map-svg"); 
+    // pies.forEach(pie => {
+    //   const pieRect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
+    //   pieRect.dataset.id = pie.id
+    //   pieRect.classList.add("pie")
+    //   pieRect.setAttribute("height", "10");
+    //   pieRect.setAttribute("width", "10")
+    //   pieRect.style.fill = "red"
+    //   map.appendChild(pieRect)
+    // })
   }
   
   
   
-})(document);
+})(document, d3);
