@@ -14,8 +14,7 @@
   }
   
   function displayPies(pies){
-    
-    
+
     
     // const map = document.querySelector(".map-svg"); 
     // pies.forEach(pie => {
