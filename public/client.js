@@ -19,8 +19,8 @@
       const pieRect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
       pieRect.dataset.id = pie.id
       pieRect.classList.add("pie")
-      pieRect.setAttributeNS("height", "10");
-      pieRect.setAttributeNS("width", "10")
+      pieRect.setAttribute("height", "10");
+      pieRect.setAttribute("width", "10")
       pieRect.style.fill = "red"
       map.appendChild(pieRect)
     })
