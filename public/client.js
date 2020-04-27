@@ -31,8 +31,8 @@
     // const bb = await d3.json(url);
 
     
-    var width = "100%";
-    var height = "100%";
+    var width = 700;
+    var height = 800;
 
     var svg = d3.select( ".map" )
         .append( "svg" )
@@ -41,17 +41,14 @@
 
     var g = svg.append( "g" );
        
-    var albersProjection = d3.geoAlbers()
+    var albersProjection = d3.geo.albers()
       .scale( 190000 )
       .rotate( [71.057,0] )
       .center( [0, 42.313] )
       .translate( [width/2,height/2] );
     
-    var geoPath = d3.geoPath()
+    var geoPath = d3.geo.path()
       .projection( albersProjection );
-    
-    console.log(geoPath)
-    console.log(albersProjection)
     
     g.selectAll( "path" )
       .data( n.features )
@@ -60,10 +57,10 @@
       .attr( "fill", "#ccc" )
       .attr( "stroke", "#333")
       .attr( "d", geoPath );
-    
-    console.log(n.features)
-    
+      
   }
 
   drawMap();
 })(document, d3, neighborhoods_json);
+
+    
