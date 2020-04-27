@@ -1,7 +1,7 @@
 // client-side js
 // run by the browser each time your view template is loaded
 
-(async function(d, d3, k, t) {
+(async function(d, d3) {
   const pies = await fetchPies();
   displayPies(pies);
 
@@ -28,7 +28,7 @@
 
   
   d3.queue()
-    .defer(d3.json, "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json")
+    .defer(d3.json, "korea.json")
     .await(drawMap);
   
   async function drawMap(error, countries) {
@@ -57,7 +57,7 @@
       .projection( albersProjection );
     
     g.selectAll( "path" )
-      .data( n.features )
+      .data( countries.features )
       .enter()
       .append( "path" )
       .attr( "fill", "#ccc" )
@@ -75,6 +75,6 @@
       
   }
 
-})(document, d3, korea_json, topojson);
+})(document, d3);
 
     
