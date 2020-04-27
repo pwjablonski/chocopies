@@ -13,7 +13,6 @@
   }
 
   function displayPies(pies) {
-
     // const map = document.querySelector(".map-svg");
     // pies.forEach(pie => {
     //   const pieRect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
@@ -25,39 +24,34 @@
     //   map.appendChild(pieRect)
     // })
   }
-  
-  
-  async function drawMap(){
-    let width = "100%"
-    let height = "100%"
+
+  async function drawMap() {
+    var url =
+      "https://gist.githubusercontent.com/milafrerichs/78ef5702db2dc514fc2bed465d58406b/raw/f1366ee2a83a9afb1dd2427e9cbd4cd3db8d87ca/bundeslaender_simplify200.geojson";
+    const bb = await d3.json(url);
+
+    console.log(bb.features)
     
-    const data = d3.json("https://gist.githubusercontent.com/milafrerichs/78ef5702db2dc514fc2bed465d58406b/raw/f1366ee2a83a9afb1dd2427e9cbd4cd3db8d87ca/bundeslaender_simplify200.geojson")
-    
-    var albersProjection = d3.geoAlbers()
-    .scale( 190000 )
-    .rotate( [71.057,0] )
-    .center( [0, 42.313] )
-    .translate( [width/2,height/2] );
-    
-    var geoPath = d3.geoPath()
-    .projection( albersProjection );
-    
-    
-    let svg = d3
-        .select(".map")
-        .append("svg")
-        .style("width", width)
-        .style("height", height);
-    
-    let g = svg.append( "g" );
-    
-    g.selectAll( "path" )
-      .data( neighborhoods_json.features )
+    var width = "100%";
+    var height = "100%";
+    var projection = d3.geoEqualEarth();
+    projection.fitExtent([[20, 20], [width, height]], bb);
+    var geoGenerator = d3.geoPath().projection(projection);
+    var svg = d3
+      .select(".map")
+      .append("svg")
+      .style("width", "100%")
+      .style("height", "100%");
+    svg
+      .append("g")
+      .selectAll("path")
+      .data(bb.features)
       .enter()
-      .append( "path" )
-      .attr( "fill", "#ccc" )
-      .attr( "stroke", "#333")
-      .attr( "d", geoPath ); 
+      .append("path")
+      .attr("d", geoGenerator)
+      .attr("fill", "#088")
+      .attr("stroke", "#000");
   }
-  
+
+  drawMap();
 })(document, d3);
