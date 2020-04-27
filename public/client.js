@@ -51,6 +51,7 @@
       .projection( albersProjection );
     
     console.log(geoPath)
+    console.log(albersProjection)
     
     g.selectAll( "path" )
       .data( n.features )
