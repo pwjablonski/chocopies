@@ -1,7 +1,7 @@
 // client-side js
 // run by the browser each time your view template is loaded
 
-(async function(d, d3, n) {
+(async function(d, d3, n, q, ) {
   const pies = await fetchPies();
   displayPies(pies);
 
@@ -25,6 +25,12 @@
     // })
   }
 
+
+  
+  q()
+    .defer(d3.json, "/mbostock/raw/4090846/us.json")
+    .await(drawMap);
+  
   async function drawMap() {
     // var url =
     //   "https://gist.githubusercontent.com/milafrerichs/78ef5702db2dc514fc2bed465d58406b/raw/f1366ee2a83a9afb1dd2427e9cbd4cd3db8d87ca/bundeslaender_simplify200.geojson";
@@ -60,7 +66,6 @@
       
   }
 
-  drawMap();
-})(document, d3, neighborhoods_json);
+})(document, d3, neighborhoods_json, queue);
 
     
