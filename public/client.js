@@ -1,7 +1,7 @@
 // client-side js
 // run by the browser each time your view template is loaded
 
-(async function(d, d3) {
+(async function(d, d3, n) {
   const pies = await fetchPies();
   displayPies(pies);
 
@@ -26,11 +26,10 @@
   }
 
   async function drawMap() {
-    var url =
-      "https://gist.githubusercontent.com/milafrerichs/78ef5702db2dc514fc2bed465d58406b/raw/f1366ee2a83a9afb1dd2427e9cbd4cd3db8d87ca/bundeslaender_simplify200.geojson";
-    const bb = await d3.json(url);
+    // var url =
+    //   "https://gist.githubusercontent.com/milafrerichs/78ef5702db2dc514fc2bed465d58406b/raw/f1366ee2a83a9afb1dd2427e9cbd4cd3db8d87ca/bundeslaender_simplify200.geojson";
+    // const bb = await d3.json(url);
 
-    console.log(bb.features)
     
     var width = "100%";
     var height = "100%";
@@ -55,7 +54,7 @@
       .projection( albersProjection );
     
     g.selectAll( "path" )
-      .data( bb.features )
+      .data( n.features )
       .enter()
       .append( "path" )
       .attr( "fill", "#ccc" )
@@ -82,4 +81,4 @@
   }
 
   drawMap();
-})(document, d3);
+})(document, d3, neighborhoods_json);
