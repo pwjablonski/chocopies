@@ -31,8 +31,8 @@
     // const bb = await d3.json(url);
 
     
-    var width = 700;
-    var height = 800;
+    var width = 400;
+    var height = 500;
 
     var svg = d3.select( ".map" )
         .append( "svg" )
@@ -42,7 +42,7 @@
     var g = svg.append( "g" );
        
     var albersProjection = d3.geo.albers()
-      .scale( 190000 )
+      .scale( 100000 )
       .rotate( [71.057,0] )
       .center( [0, 42.313] )
       .translate( [width/2,height/2] );

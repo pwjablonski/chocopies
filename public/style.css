@@ -68,9 +68,11 @@ main {
 }
 
 .map {
-  border: 1px solid grey;
   flex:2;
   height:80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cta {
