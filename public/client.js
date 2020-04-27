@@ -1,7 +1,7 @@
 // client-side js
 // run by the browser each time your view template is loaded
 
-(async function(d, d3, n, q, ) {
+(async function(d, d3, n, q, t) {
   const pies = await fetchPies();
   displayPies(pies);
 
@@ -28,10 +28,10 @@
 
   
   q()
-    .defer(d3.json, "/mbostock/raw/4090846/us.json")
+    .defer(d3.json, "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json")
     .await(drawMap);
   
-  async function drawMap() {
+  async function drawMap(error, countries) {
     // var url =
     //   "https://gist.githubusercontent.com/milafrerichs/78ef5702db2dc514fc2bed465d58406b/raw/f1366ee2a83a9afb1dd2427e9cbd4cd3db8d87ca/bundeslaender_simplify200.geojson";
     // const bb = await d3.json(url);
@@ -56,16 +56,25 @@
     var geoPath = d3.geo.path()
       .projection( albersProjection );
     
-    g.selectAll( "path" )
-      .data( n.features )
-      .enter()
-      .append( "path" )
-      .attr( "fill", "#ccc" )
-      .attr( "stroke", "#333")
-      .attr( "d", geoPath );
+    // g.selectAll( "path" )
+    //   .data( n.features )
+    //   .enter()
+    //   .append( "path" )
+    //   .attr( "fill", "#ccc" )
+    //   .attr( "stroke", "#333")
+    //   .attr( "d", geoPath );
+    
+    svg.append("g")
+      .attr("class", "counties")
+    .selectAll("path")
+      .data(t.feature(countries, us.objects.counties).features) // Bind TopoJSON data elements
+    .enter().append("path")
+      .attr("d", geoPath)
+      .style("fill", "white")
+      .style("stroke", "black");
       
   }
 
-})(document, d3, neighborhoods_json, queue);
+})(document, d3, neighborhoods_json, queue, topojson);
 
     
