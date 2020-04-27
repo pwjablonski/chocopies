@@ -1,7 +1,7 @@
 // client-side js
 // run by the browser each time your view template is loaded
 
-(async function(d, d3, n, q, t) {
+(async function(d, d3, n, t) {
   const pies = await fetchPies();
   displayPies(pies);
 
@@ -27,7 +27,7 @@
 
 
   
-  q()
+  d3.queue()
     .defer(d3.json, "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json")
     .await(drawMap);
   
@@ -48,7 +48,7 @@
     var g = svg.append( "g" );
        
     var albersProjection = d3.geo.albers()
-      .scale( 100000 )
+      .scale( 1000 )
       .rotate( [71.057,0] )
       .center( [0, 42.313] )
       .translate( [width/2,height/2] );
@@ -65,9 +65,9 @@
     //   .attr( "d", geoPath );
     
     svg.append("g")
-      .attr("class", "counties")
+      .attr("class", "countries")
     .selectAll("path")
-      .data(t.feature(countries, us.objects.counties).features) // Bind TopoJSON data elements
+      .data(t.feature(countries, countries.objects.countries).features) // Bind TopoJSON data elements
     .enter().append("path")
       .attr("d", geoPath)
       .style("fill", "white")
@@ -75,6 +75,6 @@
       
   }
 
-})(document, d3, neighborhoods_json, queue, topojson);
+})(document, d3, neighborhoods_json, topojson);
 
     
