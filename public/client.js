@@ -48,9 +48,9 @@
     var g = svg.append( "g" );
        
     var albersProjection = d3.geo.albers()
-      .scale( 1000 )
-      .rotate( [71.057,0] )
-      .center( [0, 42.313] )
+      .scale( 2750 )
+      .rotate( [232.5] )
+      .center( [0, 38] )
       .translate( [width/2,height/2] );
     
     var geoPath = d3.geo.path()
