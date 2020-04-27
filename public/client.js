@@ -1,7 +1,7 @@
 // client-side js
 // run by the browser each time your view template is loaded
 
-(async function(d, d3, n, t) {
+(async function(d, d3, k, t) {
   const pies = await fetchPies();
   displayPies(pies);
 
@@ -75,6 +75,6 @@
       
   }
 
-})(document, d3, neighborhoods_json, topojson);
+})(document, d3, korea_json, topojson);
 
     
