@@ -56,22 +56,22 @@
     var geoPath = d3.geo.path()
       .projection( albersProjection );
     
-    // g.selectAll( "path" )
-    //   .data( n.features )
-    //   .enter()
-    //   .append( "path" )
-    //   .attr( "fill", "#ccc" )
-    //   .attr( "stroke", "#333")
-    //   .attr( "d", geoPath );
+    g.selectAll( "path" )
+      .data( n.features )
+      .enter()
+      .append( "path" )
+      .attr( "fill", "#ccc" )
+      .attr( "stroke", "#333")
+      .attr( "d", geoPath );
     
-    svg.append("g")
-      .attr("class", "countries")
-    .selectAll("path")
-      .data(t.feature(countries, countries.objects.countries).features) // Bind TopoJSON data elements
-    .enter().append("path")
-      .attr("d", geoPath)
-      .style("fill", "white")
-      .style("stroke", "black");
+    // svg.append("g")
+    //   .attr("class", "countries")
+    // .selectAll("path")
+    //   .data(t.feature(countries, countries.objects.countries).features) // Bind TopoJSON data elements
+    // .enter().append("path")
+    //   .attr("d", geoPath)
+    //   .style("fill", "white")
+    //   .style("stroke", "black");
       
   }
 
