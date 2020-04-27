@@ -34,23 +34,51 @@
     
     var width = "100%";
     var height = "100%";
-    var projection = d3.geoEqualEarth();
-    projection.fitExtent([[20, 20], [width, height]], bb);
-    var geoGenerator = d3.geoPath().projection(projection);
-    var svg = d3
-      .select(".map")
-      .append("svg")
-      .style("width", "100%")
-      .style("height", "100%");
-    svg
-      .append("g")
-      .selectAll("path")
-      .data(bb.features)
+    // Create SVG
+    var svg = d3.select( ".map" )
+        .append( "svg" )
+        .attr( "width", width )
+        .attr( "height", height );
+
+    // Append empty placeholder g element to the SVG
+    // g will contain geometry elements
+    var g = svg.append( "g" );
+    
+    
+    var albersProjection = d3.geoAlbers()
+      .scale( 190000 )
+      .rotate( [71.057,0] )
+      .center( [0, 42.313] )
+      .translate( [width/2,height/2] );
+    
+    var geoPath = d3.geoPath()
+      .projection( albersProjection );
+    
+    g.selectAll( "path" )
+      .data( bb.features )
       .enter()
-      .append("path")
-      .attr("d", geoGenerator)
-      .attr("fill", "#088")
-      .attr("stroke", "#000");
+      .append( "path" )
+      .attr( "fill", "#ccc" )
+      .attr( "stroke", "#333")
+      .attr( "d", geoPath );
+    
+    // var projection = d3.geoEqualEarth();
+    // projection.fitExtent([[20, 20], [width, height]], bb);
+    // var geoGenerator = d3.geoPath().projection(projection);
+    // var svg = d3
+    //   .select(".map")
+    //   .append("svg")
+    //   .style("width", "100%")
+    //   .style("height", "100%");
+    // svg
+    //   .append("g")
+    //   .selectAll("path")
+    //   .data(bb.features)
+    //   .enter()
+    //   .append("path")
+    //   .attr("d", geoGenerator)
+    //   .attr("fill", "#088")
+    //   .attr("stroke", "#000");
   }
 
   drawMap();
