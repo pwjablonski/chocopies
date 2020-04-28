@@ -24,51 +24,55 @@
     //   map.appendChild(pieRect)
     // })
   }
-
-  d3.queue()
-    .defer(d3.json, "korea.json")
-    .await(drawMap);
-
-  async function drawMap(error, countries) {
-    // var url =
-    //   "https://gist.githubusercontent.com/milafrerichs/78ef5702db2dc514fc2bed465d58406b/raw/f1366ee2a83a9afb1dd2427e9cbd4cd3db8d87ca/bundeslaender_simplify200.geojson";
-    // const bb = await d3.json(url);
-
-    var width = 400;
-    var height = 500;
-
-    var svg = d3
-      .select(".map")
-      .append("svg")
-      .attr("width", width)
-      .attr("height", height)
-
-
-    var g = svg.append("g");
-
-    function zoomed() {
-      console.log("test");
-    }
-
-    var albersProjection = d3.geoAlbers()
-      .scale(2750)
-      .rotate([232.5])
-      .center([0, 38])
-      .translate([width / 2, height / 2]);
-
-    var geoPath = d3.geoPath(albersProjection);
-
-
-    g.selectAll("path")
-      .data(countries.features)
-      .enter()
-      .append("path")
-      .attr("fill", "red")
-      .attr("stroke", "#333")
-      .attr("d", geoPath)
-      .call(d3.zoom().on("zoom", function () {
-        g.attr("transform", d3.event.transform)
-      }))
-
-  }
+  
+  
 })(document, d3);
+
+
+
+
+//   d3.queue()
+//     .defer(d3.json, "korea.json")
+//     .await(drawMap);
+
+//   async function drawMap(error, countries) {
+//     // var url =
+//     //   "https://gist.githubusercontent.com/milafrerichs/78ef5702db2dc514fc2bed465d58406b/raw/f1366ee2a83a9afb1dd2427e9cbd4cd3db8d87ca/bundeslaender_simplify200.geojson";
+//     // const bb = await d3.json(url);
+
+//     var width = 400;
+//     var height = 500;
+
+//     var svg = d3
+//       .select(".map")
+//       .append("svg")
+//       .attr("width", width)
+//       .attr("height", height)
+
+
+//     var g = svg.append("g");
+
+//     function zoomed() {
+//       console.log("test");
+//     }
+
+//     var albersProjection = d3.geoAlbers()
+//       .scale(2750)
+//       .rotate([232.5])
+//       .center([0, 38])
+//       .translate([width / 2, height / 2]);
+
+//     var geoPath = d3.geoPath(albersProjection);
+
+
+//     g.selectAll("path")
+//       .data(countries.features)
+//       .enter()
+//       .append("path")
+//       .attr("fill", "red")
+//       .attr("stroke", "#333")
+//       .attr("d", geoPath)
+//       .call(d3.zoom().on("zoom", function () {
+//         g.attr("transform", d3.event.transform)
+//       }))
+//       }
