@@ -8,7 +8,12 @@
   async function fetchPies() {
     const req = await fetch("/pies");
     const resp = await req.json();
-    console.log(resp);
+    return resp;
+  }
+  
+  async function fetchPixels() {
+    const req = await fetch("/pixels");
+    const resp = await req.json();
     return resp;
   }
 
@@ -25,5 +30,22 @@
     // })
   }
   
+  function drawMap(pixels) {
+    const map = document.querySelector(".map-svg");
+    pixels.forEach(pixel => {
+      const pixelRect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
+      pixelRect.classList.add("pie")
+      pixelRect.setAttribute("height", "10");
+      pixelRect.setAttribute("width", "10")
+      pixelRect.style.fill = `rgb(${pixel.r},${pixel.g},${pixel.b})`
+      pixelRect.setAttribute("x", 10 * pixel.x)
+      pixelRect.setAttribute("y", 10 * pixel.y)
+
+      map.appendChild(pixelRect)
+    })
+  }
   
-})(document, d3);
+  const pixels = await fetchPixels();
+  drawMap(pixels.data)
+  
+})(document);

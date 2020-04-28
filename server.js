@@ -38,8 +38,7 @@ app.get("/pixels", function(request, response) {
         for (var x = 0; x < width; x++) {
           var pixel = Jimp.intToRGBA(image.getPixelColor(x, y));
           // pixels.push(`${pixel.r}, ${pixel.g}, ${pixel.b}`);
-          if (!(pixel.r === 255 && pixel.g === 255 && pixel.b === 255)) {
-            count++
+          // if (!(pixel.r === 255 && pixel.g === 255 && pixel.b === 255)) {
             pixels.push({
               x,
               y,
@@ -47,10 +46,10 @@ app.get("/pixels", function(request, response) {
               g: pixel.g,
               b: pixel.b
             });
-          }
+          // }
         }
       }
-      response.send({ count: count, data: pixels });
+      response.send({ data: pixels });
       // fs.writeFile('output.json', JSON.stringify({ data: pixels }), 'utf8', (err) => {
       //     if (err) { throw err; }
       // });
