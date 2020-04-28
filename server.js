@@ -1,8 +1,4 @@
-// server.js
-// where your node app starts
-
-// We're going to use the "Product Catalog and Orders" base template:
-// https://airtable.com/templates/featured/expZvMLT9L6c4yeBX/product-catalog-and-orders
+var Jimp = require("jimp");
 var Airtable = require('airtable');
 var base = new Airtable({
   apiKey: process.env.AIRTABLE_API_KEY,
@@ -27,6 +23,30 @@ app.get("/register", function(request, response) {
 
 app.get("/checkout", function(request, response) {
   response.sendFile(__dirname + '/views/checkout.html');
+});
+
+
+
+app.get("/pixels", function(request, response) {
+
+  // Jimp.read("https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fpixil-frame-0.png?v=1588042676267")
+  //   .then(image => {
+  //     var width = image.bitmap.width;
+  //     var height = image.bitmap.height;
+  //     var pixels = [];
+  //     for (var y = 0; y < height; y++) {
+  //       for (var x = 0; x < width; x++) {
+  //         var pixel = Jimp.intToRGBA(image.getPixelColor(x, y));
+  //         pixels.push(`${pixel.r}, ${pixel.g}, ${pixel.b}`);
+  //       }
+  //     }
+  //     response.send({ data: pixels });
+  //     // fs.writeFile('output.json', JSON.stringify({ data: pixels }), 'utf8', (err) => {
+  //     //     if (err) { throw err; }
+  //     // });
+  //   })
+  // .catch(err => { throw err; });
+  
 });
 
 app.get("/pies", function(request, response) {
