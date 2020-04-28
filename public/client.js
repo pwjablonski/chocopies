@@ -30,14 +30,16 @@
     // })
   }
   
-  function drawMap(pixels) {
+  function drawMap(response) {
     const map = document.querySelector(".map-svg");
-    pixels.forEach(pixel => {
+    response.pixels.forEach((pixel, i) => {
       const pixelRect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
       pixelRect.classList.add("pie")
       pixelRect.setAttribute("height", "5");
       pixelRect.setAttribute("width", "5")
-      pixelRect.style.fill = `rgb(${pixel.r},${pixel.g},${pixel.b})`
+      if(pixel){
+        pixelRect.style.fill = "red"
+      }
       pixelRect.setAttribute("x", 5 * pixel.x)
       pixelRect.setAttribute("y", 5 * pixel.y)
       pixelRect.dataset.x = pixel.x
@@ -46,7 +48,7 @@
     })
   }
   
-  const pixels = await fetchPixels();
-  drawMap(pixels.data)
+  const response = await fetchPixels();
+  drawMap(response)
   
 })(document);
