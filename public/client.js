@@ -40,7 +40,8 @@
       pixelRect.style.fill = `rgb(${pixel.r},${pixel.g},${pixel.b})`
       pixelRect.setAttribute("x", 5 * pixel.x)
       pixelRect.setAttribute("y", 5 * pixel.y)
-
+      pixelRect.dataset.x = pixel.x
+      pixelRect.dataset.y = pixel.y
       map.appendChild(pixelRect)
     })
   }

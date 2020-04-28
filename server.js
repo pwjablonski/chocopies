@@ -37,16 +37,19 @@ app.get("/pixels", function(request, response) {
       for (var y = 0; y < height; y++) {
         for (var x = 0; x < width; x++) {
           var pixel = Jimp.intToRGBA(image.getPixelColor(x, y));
-          // pixels.push(`${pixel.r}, ${pixel.g}, ${pixel.b}`);
-          // if (!(pixel.r === 255 && pixel.g === 255 && pixel.b === 255)) {
+          if (!(pixel.r === 255 && pixel.g === 255 && pixel.b === 255)) {
             pixels.push({
               x,
               y,
-              r: pixel.r,
-              g: pixel.g,
-              b: pixel.b
+              filled: true
             });
-          // }
+          } else {
+            pixels.push({
+              x,
+              y,
+              filled: false
+            });
+          }
         }
       }
       response.send({ data: pixels });
