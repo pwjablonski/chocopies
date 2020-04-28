@@ -27,9 +27,9 @@
 
 
   
-  // d3.queue()
-  //   .defer(d3.json, "korea.json")
-  //   .await(drawMap);
+  d3.queue()
+    .defer(d3.json, "korea.json")
+    .await(drawMap);
   
   async function drawMap(error, countries) {
     // var url =
@@ -44,6 +44,10 @@
         .append( "svg" )
         .attr( "width", width )
         .attr( "height", height );
+    
+    const zoom = d3.zoom()
+      .scaleExtent([1, 8])
+      .on('zoom', zoomed);
 
     var g = svg.append( "g" );
        
@@ -60,23 +64,18 @@
       .data( countries.features )
       .enter()
       .append( "path" )
-      .attr( "fill", "#ccc" )
+      .attr( "fill", "red" )
       .attr( "stroke", "#333")
-      .attr( "d", geoPath );
+      .attr( "d", geoPath );    
     
-    // svg.append("g")
-    //   .attr("class", "countries")
-    // .selectAll("path")
-    //   .data(t.feature(countries, countries.objects.countries).features) // Bind TopoJSON data elements
-    // .enter().append("path")
-    //   .attr("d", geoPath)
-    //   .style("fill", "white")
-    //   .style("stroke", "black");
-      
+    function zoomed() {
+      g
+        .selectAll('path') // To prevent stroke width from scaling
+        .attr('transform', d3.event.transform);
+    }
   }
   
-  drawMap("", k)
 
-})(document, d3, korea);
+})(document, d3);
 
     
