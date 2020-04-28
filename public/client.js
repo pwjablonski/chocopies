@@ -70,7 +70,7 @@
       .call(zoom);
 
     function zoomed() {
-      console.log("test");
+      console.log(d3.event.translate, d3.event.scale);
       g.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
     }
   }
