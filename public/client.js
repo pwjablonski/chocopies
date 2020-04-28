@@ -1,7 +1,7 @@
 // client-side js
 // run by the browser each time your view template is loaded
 
-(async function(d, d3) {
+(async function(d, d3, k) {
   const pies = await fetchPies();
   displayPies(pies);
 
@@ -27,9 +27,9 @@
 
 
   
-  d3.queue()
-    .defer(d3.json, "korea.json")
-    .await(drawMap);
+  // d3.queue()
+  //   .defer(d3.json, "korea.json")
+  //   .await(drawMap);
   
   async function drawMap(error, countries) {
     // var url =
@@ -74,7 +74,9 @@
     //   .style("stroke", "black");
       
   }
+  
+  drawMap("", k)
 
-})(document, d3);
+})(document, d3, korea);
 
     
