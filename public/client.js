@@ -44,12 +44,12 @@
         .append( "svg" )
         .attr( "width", width )
         .attr( "height", height );
-    
-    const zoom = d3.zoom()
-      .scaleExtent([1, 8])
-      .on('zoom', zoomed);
 
     var g = svg.append( "g" );
+    
+    function zoomed(){
+      console.log('test')
+    }
        
     var albersProjection = d3.geo.albers()
       .scale( 2750 )
@@ -66,15 +66,13 @@
       .append( "path" )
       .attr( "fill", "red" )
       .attr( "stroke", "#333")
-      .attr( "d", geoPath );    
+      .attr( "d", geoPath )
+      .on("click", clicked);
     
-    function zoomed() {
-      g
-        .selectAll('path') // To prevent stroke width from scaling
-        .attr('transform', d3.event.transform);
+    function clicked(d, e){
+      console.log(d, e)
     }
   }
-  
 
 })(document, d3);
 
