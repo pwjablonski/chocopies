@@ -42,9 +42,6 @@
       .append("svg")
       .attr("width", width)
       .attr("height", height)
-      .call(d3.zoom().on("zoom", function () {
-        g.attr("transform", d3.event.transform)
-      }))
 
 
     var g = svg.append("g");
@@ -69,6 +66,9 @@
       .attr("fill", "red")
       .attr("stroke", "#333")
       .attr("d", geoPath)
+      .call(d3.zoom().on("zoom", function () {
+        g.attr("transform", d3.event.transform)
+      }))
 
   }
 })(document, d3);
