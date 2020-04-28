@@ -41,7 +41,11 @@
       .select(".map")
       .append("svg")
       .attr("width", width)
-      .attr("height", height);
+      .attr("height", height)
+      .call(d3.zoom().on("zoom", function () {
+        g.attr("transform", d3.event.transform)
+      }))
+
 
     var g = svg.append("g");
 
@@ -49,16 +53,14 @@
       console.log("test");
     }
 
-    var albersProjection = d3.geo
-      .albers()
+    var albersProjection = d3.geoAlbers()
       .scale(2750)
       .rotate([232.5])
       .center([0, 38])
       .translate([width / 2, height / 2]);
 
-    var geoPath = d3.geo.path().projection(albersProjection);
+    var geoPath = d3.geoPath(albersProjection);
 
-    var zoom = d3.behavior.zoom().on("zoom", zoomed);
 
     g.selectAll("path")
       .data(countries.features)
@@ -67,11 +69,6 @@
       .attr("fill", "red")
       .attr("stroke", "#333")
       .attr("d", geoPath)
-      .call(zoom);
 
-    function zoomed() {
-      console.log(d3.event.translate, d3.event.scale);
-      g.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
-    }
   }
 })(document, d3);
