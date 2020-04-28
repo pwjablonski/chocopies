@@ -32,27 +32,22 @@ app.get("/pixels", function(request, response) {
     .then(image => {
       var width = image.bitmap.width;
       var height = image.bitmap.height;
-      var pixels = [];
-      var count = 0;
+      var pixels = {};
+      var filled = 0;
+      var unfilled = 0;
       for (var y = 0; y < height; y++) {
         for (var x = 0; x < width; x++) {
           var pixel = Jimp.intToRGBA(image.getPixelColor(x, y));
           if (!(pixel.r === 255 && pixel.g === 255 && pixel.b === 255)) {
-            pixels.push({
-              x,
-              y,
-              filled: true
-            });
+            filled++
+            pixels.push(true)
           } else {
-            pixels.push({
-              x,
-              y,
-              filled: false
-            });
+            unfilled++
+            pixels.push(false)
           }
         }
       }
-      response.send({ data: pixels });
+      response.send({ filled, unfilled, height, width, data: pixels });
       // fs.writeFile('output.json', JSON.stringify({ data: pixels }), 'utf8', (err) => {
       //     if (err) { throw err; }
       // });
