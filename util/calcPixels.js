@@ -1,7 +1,6 @@
 var Jimp = require("jimp");
 
-
-async function getPixels(){
+exports.getPixels = async function(){
   const image = Jimp.read("https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fpixil-frame-0.png?v=1588042676267")  
   var width = image.bitmap.width;
   var height = image.bitmap.height;
@@ -22,4 +21,4 @@ async function getPixels(){
     }
   }
   return ({ filled, unfilled, height, width, data: pixels });
-}
+} 
