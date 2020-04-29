@@ -35,7 +35,7 @@
       pixelRect.setAttribute("y", 5 * y)
       if(pixel){
         pixelRect.style.fill = "red"
-        pixelRect.dataset.id = i
+        pixelRect.id = i
       } else{
         pixelRect.style.fill = "white"
       }
@@ -43,7 +43,10 @@
     })
     
     pies.forEach((pie)=> {
-      console.log(pie.fields)
+      const pixelRect = document.getElementById(`${pie.fields.location}`);
+      if(pixelRect){
+        pixelRect.style.fill = "blue"
+      }
     })
   }
   
