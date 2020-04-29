@@ -20,17 +20,26 @@ app.get("/browsing", function(request, response) {
   response.sendFile(__dirname + "/views/browsing.html");
 });
 
-app.get("/registration", function(request, response) {
-  response.sendFile(__dirname + "/views/registration.html");
+app.get("/register", function(request, response) {
+  response.sendFile(__dirname + "/views/register.html");
 });
 
-app.post("/registration", function(request, response) {
+app.post("/register", function(request, response) {
   response.sendFile(__dirname + "/views/confirmation.html");
 });
 
-app.get("/checkout", function(request, response) {
-  response.sendFile(__dirname + "/views/checkout.html");
+app.get("/about", function(request, response) {
+  response.sendFile(__dirname + "/views/about.html");
 });
+
+app.get("/chocopie", function(request, response) {
+  response.sendFile(__dirname + "/views/chocopie.html");
+});
+
+app.get("/triennial", function(request, response) {
+  response.sendFile(__dirname + "/views/triennial.html");
+});
+
 
 
 app.get("/pies", function(request, response) {
