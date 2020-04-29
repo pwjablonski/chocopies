@@ -3,6 +3,13 @@
 
 (async function(d, d3, k) {
 
+  
+  const pies = await fetchPies();
+  const pixels = await fetchPixels();
+  
+  drawMap(pixels, pies)
+  
+  
   async function fetchPies() {
     const req = await fetch("/pies");
     const resp = await req.json();
@@ -10,12 +17,12 @@
   }
   
   async function fetchPixels() {
-    const req = await fetch("/pixels");
+    const req = await fetch("korea.json");
     const resp = await req.json();
     return resp;
   }
   
-  function drawMap(pixels) {
+  function drawMap(pixels, pies) {
     const map = document.querySelector(".map-svg");
     pixels.data.forEach((pixel, i) => {
       const y = Math.floor(i / pixels.width)
@@ -34,11 +41,10 @@
       }
       map.appendChild(pixelRect)
     })
+    
+    pies.forEach((pie)=> {
+      console.log(pie.fields)
+    })
   }
-  
-  const pies = await fetchPies();
-  const pixels = await fetchPixels();
-  console.log(pies)
-  drawMap(pixels, pies)
   
 })(document);

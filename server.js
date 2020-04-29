@@ -8,9 +8,6 @@ var viewName = "Main View";
 var express = require("express");
 var app = express();
 
-var {getPixels} = require("./util/calcPixels.js");
-console.log(await getPixels())
-
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
 
@@ -25,10 +22,6 @@ app.get("/register", function(request, response) {
 
 app.get("/checkout", function(request, response) {
   response.sendFile(__dirname + "/views/checkout.html");
-});
-
-app.get("/pixels", function(request, response) {
-
 });
 
 app.get("/pies", function(request, response) {
