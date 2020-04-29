@@ -23,7 +23,8 @@
   }
   
   function drawMap(pixels, pies) {
-    const map = document.querySelector(".map-svg");
+    const map = document.querySelector(".map-svg")
+    const group = document.createElementNS("http://www.w3.org/2000/svg", 'g');
     pixels.data.forEach((pixel, i) => {
       const y = Math.floor(i / pixels.width)
       const x = i % pixels.width
@@ -39,8 +40,11 @@
       } else{
         pixelRect.style.fill = "white"
       }
-      map.appendChild(pixelRect)
+      group.appendChild(pixelRect)
     })
+    
+    group.setAttribute("transform", "scale(1)")
+    map.appendChild(group)
     
     pies.forEach((pie)=> {
       const pixelRect = document.getElementById(`${pie.fields.location}`);
