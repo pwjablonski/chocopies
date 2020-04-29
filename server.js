@@ -1,4 +1,3 @@
-var Jimp = require("jimp");
 var Airtable = require("airtable");
 var base = new Airtable({
   apiKey: process.env.AIRTABLE_API_KEY
@@ -8,6 +7,9 @@ var viewName = "Main View";
 
 var express = require("express");
 var app = express();
+
+var test = require(".util/calcPixels.js");
+console.log('test')
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
@@ -26,33 +28,7 @@ app.get("/checkout", function(request, response) {
 });
 
 app.get("/pixels", function(request, response) {
-  Jimp.read(
-    "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fpixil-frame-0.png?v=1588042676267"
-  )
-    .then(image => {
-      var width = image.bitmap.width;
-      var height = image.bitmap.height;
-      var pixels = [];
-      var filled = 0;
-      var unfilled = 0;
-      for (var y = 0; y < height; y++) {
-        for (var x = 0; x < width; x++) {
-          var pixel = Jimp.intToRGBA(image.getPixelColor(x, y));
-          var id = (y * width) + x
-          if (!(pixel.r === 255 && pixel.g === 255 && pixel.b === 255)) {
-            filled++
-            pixels.push(true) 
-          } else {
-            unfilled++
-            pixels.push(false) 
-          }
-        }
-      }
-      response.send({ filled, unfilled, height, width, data: pixels });
-    })
-    .catch(err => {
-      throw err;
-    });
+
 });
 
 app.get("/pies", function(request, response) {
