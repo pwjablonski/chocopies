@@ -1,7 +1,7 @@
 // client-side js
 // run by the browser each time your view template is loaded
 
-(async function(d, d3, k) {
+(async function(d,) {
 
   
   const pies = await fetchPies();
@@ -24,6 +24,7 @@
   
   function drawMap(pixels, pies) {
     const map = document.querySelector(".map-svg")
+    
     const group = document.createElementNS("http://www.w3.org/2000/svg", 'g');
     pixels.data.forEach((pixel, i) => {
       const y = Math.floor(i / pixels.width)
