@@ -37,6 +37,7 @@
       pixelRect.setAttribute("y", 1 * y)
       if(pixel){
         pixelRect.style.fill = "red"
+        pixelRect.style.fill = "red"
         pixelRect.id = i
       } else{
         pixelRect.style.fill = "white"

@@ -17,7 +17,9 @@ header {
   display:flex;
   justify-content: space-around;
   align-items:center;
-  background: rgba(255, 255, 255, 0.5);;
+  background: rgba(255, 255, 255, 0.75);
+  position:absolute;
+  width:100%;
 }
 
 h1 {
@@ -50,7 +52,11 @@ header {
 
 main {
   height:100%;
-  padding: 4em;
+}
+
+.container {
+  padding:4em;
+  height:100%;
 }
 
 .row{
