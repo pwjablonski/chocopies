@@ -8,8 +8,8 @@ var viewName = "Main View";
 var express = require("express");
 var app = express();
 
-var test = require("./util/calcPixels.js");
-console.log('test')
+var {getPixels} = require("./util/calcPixels.js");
+console.log(await getPixels())
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
