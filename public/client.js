@@ -29,10 +29,10 @@
       const x = i % pixels.width
       const pixelRect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
       pixelRect.classList.add("pie")
-      pixelRect.setAttribute("height", "5");
-      pixelRect.setAttribute("width", "5")
-      pixelRect.setAttribute("x", 5 * x)
-      pixelRect.setAttribute("y", 5 * y)
+      pixelRect.setAttribute("height", "1");
+      pixelRect.setAttribute("width", "1")
+      pixelRect.setAttribute("x", 1 * x)
+      pixelRect.setAttribute("y", 1 * y)
       if(pixel){
         pixelRect.style.fill = "red"
         pixelRect.id = i
