@@ -16,13 +16,22 @@ app.get("/", function(request, response) {
   response.sendFile(__dirname + "/views/index.html");
 });
 
-app.get("/register", function(request, response) {
-  response.sendFile(__dirname + "/views/register.html");
+app.get("/browsing", function(request, response) {
+  response.sendFile(__dirname + "/views/browsing.html");
+});
+
+app.get("/registration", function(request, response) {
+  response.sendFile(__dirname + "/views/registration.html");
+});
+
+app.post("/registration", function(request, response) {
+  response.sendFile(__dirname + "/views/confirmation.html");
 });
 
 app.get("/checkout", function(request, response) {
   response.sendFile(__dirname + "/views/checkout.html");
 });
+
 
 app.get("/pies", function(request, response) {
   base("pies")
