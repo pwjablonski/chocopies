@@ -117,3 +117,18 @@ main {
 .send{
   display:flex;
 }
+
+.customize{
+  display:flex;
+  flex:1
+}
+
+.checkoutform{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+
+.customize_choco{
+  width:100%;
+}
