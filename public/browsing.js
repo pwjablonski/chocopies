@@ -61,16 +61,28 @@
         const title = document.createElementNS("http://www.w3.org/2000/svg", 'tspan');
         const name = document.createElementNS("http://www.w3.org/2000/svg", 'tspan');
         const date = document.createElementNS("http://www.w3.org/2000/svg", 'tspan');
-        title.textContent = "SHARED BY\nPETER\n4-21-2020"
+        title.textContent = "SHARED BY"
+        name.textContent = "PETER"
+        date.textContent ="4-20-20"
         
-        
-        
+        title.setAttribute("dy", "0em")
+        title.setAttribute("x", 1 * x)
+        name.setAttribute("dy", "2em")
+        name.setAttribute("x", 1 * x)
+        date.setAttribute("dy", "2em")
+        date.setAttribute("x", 1 * x)
+
         text.style.fill = "white"
         text.setAttribute("x", 1 * x)
-        text.setAttribute("y", 1 * y)
+        text.setAttribute("y", (1 * y) - 0.2)
         text.setAttribute("text-anchor", "middle")
         text.setAttribute("font-size", "0.005em")
-        pixelRect.style.stroke = "blue"
+        
+        text.appendChild(title)
+        text.appendChild(name)
+        text.appendChild(date)
+        
+        pixelRect.style.stroke = "#0080ff"
         pixelRect.parentElement.appendChild(text)
       }
     })
