@@ -33,7 +33,7 @@
       const pixelgroup = document.createElementNS("http://www.w3.org/2000/svg", 'g');
       pixelRect.classList.add("pie")
       pixelRect.setAttribute("height", "1");
-      pixelRect.setAttribute("width", "1")
+      pixelRect.setAttribute("width", "0")
       pixelRect.setAttribute("x", 1 * x)
       pixelRect.setAttribute("y", 1 * y)
       if(pixel){
@@ -42,7 +42,7 @@
         pixelRect.id = i
       } else{
         // pixelRect.style.fill = "white"
-        pixelRect.style.fill = "white"
+        pixelRect.style.stroke = "white"
       }
       pixelgroup.appendChild(pixelRect)
       mapgroup.appendChild(pixelgroup)
@@ -66,15 +66,15 @@
         date.textContent ="4-20-20"
         
         title.setAttribute("dy", "0em")
-        title.setAttribute("x", 1 * x)
+        title.setAttribute("x", (1 * x) + 0.5)
         name.setAttribute("dy", "2em")
-        name.setAttribute("x", 1 * x)
+        name.setAttribute("x", (1 * x) + 0.5)
         date.setAttribute("dy", "2em")
-        date.setAttribute("x", 1 * x)
+        date.setAttribute("x", (1 * x) + 0.5)
 
         text.style.fill = "white"
-        text.setAttribute("x", 1 * x)
-        text.setAttribute("y", (1 * y) - 0.2)
+        text.setAttribute("x", (1 * x))
+        text.setAttribute("y", (1 * y) + 0.3)
         text.setAttribute("text-anchor", "middle")
         text.setAttribute("font-size", "0.005em")
         
@@ -82,7 +82,6 @@
         text.appendChild(name)
         text.appendChild(date)
         
-        pixelRect.style.fill = "#0080ff"
         pixelRect.style.stroke = "#0080ff"
         pixelRect.parentElement.appendChild(text)
       }
