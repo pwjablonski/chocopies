@@ -16,15 +16,15 @@ app.get("/", function(request, response) {
   response.sendFile(__dirname + "/views/index.html");
 });
 
-app.get("/browsing", function(request, response) {
-  response.sendFile(__dirname + "/views/browsing.html");
+app.get("/browse", function(request, response) {
+  response.sendFile(__dirname + "/views/browse.html");
 });
 
 app.get("/checkout", function(request, response) {
   response.sendFile(__dirname + "/views/checkout.html");
 });
 
-app.post("/checkout", function(request, response) {
+app.post("/confirmation", function(request, response) {
   response.sendFile(__dirname + "/views/confirmation.html");
 });
 
