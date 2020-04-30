@@ -20,6 +20,10 @@ app.get("/browsing", function(request, response) {
   response.sendFile(__dirname + "/views/browsing.html");
 });
 
+app.get("/checkout", function(request, response) {
+  response.sendFile(__dirname + "/views/checkout.html");
+});
+
 app.get("/register", function(request, response) {
   response.sendFile(__dirname + "/views/register.html");
 });

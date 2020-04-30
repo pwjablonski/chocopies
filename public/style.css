@@ -112,3 +112,8 @@ main {
 .pie:hover {
   stroke: yellow;
 }
+
+
+.send{
+  display:flex;
+}
