@@ -24,12 +24,13 @@ app.get("/checkout", function(request, response) {
   response.sendFile(__dirname + "/views/checkout.html");
 });
 
-app.get("/register", function(request, response) {
-  response.sendFile(__dirname + "/views/register.html");
+app.post("/checkout", function(request, response) {
+  response.sendFile(__dirname + "/views/confirmation.html");
 });
 
-app.post("/register", function(request, response) {
-  response.sendFile(__dirname + "/views/confirmation.html");
+
+app.get("/register", function(request, response) {
+  response.sendFile(__dirname + "/views/register.html");
 });
 
 app.get("/about", function(request, response) {
