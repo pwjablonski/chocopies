@@ -21,11 +21,15 @@ app.get("/browse", function(request, response) {
 });
 
 app.get("/chocopie/:id", function(request, response) {
+  response.sendFile(__dirname + "/views/chocopie.html");
+});
+
+app.get("/chocopie/:id/send", function(request, response) {
   response.sendFile(__dirname + "/views/checkout.html");
 });
 
-app.put("/chocopie", function(request, response) {
-  response.sendFile(__dirname + "/views/checkout.html");
+app.put("/chocopie/:id", function(request, response) {
+  response.sendFile(__dirname + "/views/chocopie.html");
 });
 
 // app.post("/chocopie", function(request, response) {
