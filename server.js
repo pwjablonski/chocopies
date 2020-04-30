@@ -1,15 +1,18 @@
-var Airtable = require("airtable");
-var base = new Airtable({
+const Airtable = require("airtable");
+const express = require("express");
+const bodyParser = require("body-parser");
+
+const base = new Airtable({
   apiKey: process.env.AIRTABLE_API_KEY
 }).base(process.env.AIRTABLE_BASE_ID);
-var tableName = "Furniture";
-var viewName = "Main View";
+const tableName = "Furniture";
+const viewName = "Main View";
 
-var express = require("express");
-var app = express();
 
-// http://expressjs.com/en/starter/static-files.html
-app.use(express.static("public"));
+const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.static("public")); 
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function(request, response) {
@@ -29,8 +32,8 @@ app.get("/chocopie/:id/send", function(request, response) {
 });
 
 app.post("/chocopie", function(request, response) {
-  console.log(response.params)
-  response.redirect('/chocopie');
+  console.log(request.body)
+  response.redirect('/chocopie/' + request.body.id); 
 });
 
 // app.post("/chocopie", function(request, response) {
