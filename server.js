@@ -33,7 +33,7 @@ app.get("/chocopie/:id/send", function(request, response) {
 
 app.post("/chocopie", function(request, response) {
   console.log(request.body)
-  response.redirect('/chocopie/' + request.body.id); 
+  response.redirect('/chocopie/' + request.body.fid);
 });
 
 // app.post("/chocopie", function(request, response) {
