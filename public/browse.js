@@ -22,6 +22,13 @@
     return resp;
   }
   
+  document.addEventListener('click',function(e){
+    console.log(e.target)
+    if(e.target.classList.contains("pie")){
+      window.location.href = `/checkout/${e.target.id}`
+    }
+  })
+  
   function drawMap(pixels, pies) {
     const map = document.querySelector(".map-svg")
     
@@ -30,10 +37,7 @@
       const y = Math.floor(i / pixels.width)
       const x = i % pixels.width
       const pixelRect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
-      const pixelGroup = document.createElementNS("http://www.w3.org/2000/svg", 'g');
-      const pixelLink = document.createElementNS("http://www.w3.org/2000/svg", 'a');
-      
-      pixelLink.
+      const pixelgroup = document.createElementNS("http://www.w3.org/2000/svg", 'g');
       pixelRect.classList.add("pie")
       pixelRect.setAttribute("height", "0.98");
       pixelRect.setAttribute("width", "0.98")
@@ -47,8 +51,8 @@
         // pixelRect.style.fill = "white"
         pixelRect.style.stroke = "white"
       }
-      pixelGroup.appendChild(pixelRect)
-      mapgroup.appendChild(pixelGroup)
+      pixelgroup.appendChild(pixelRect)
+      mapgroup.appendChild(pixelgroup)
     })
     
     mapgroup.setAttribute("transform", "scale(1)")
