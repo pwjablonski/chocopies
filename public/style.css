@@ -102,3 +102,12 @@ main {
   height:100%;
   width:100%;
 }
+
+
+.pie {
+  stroke:red;
+  stroke-width: 0.01;
+}
+.pie:hover{
+  stroke:yellow;
+}

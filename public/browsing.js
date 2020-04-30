@@ -38,11 +38,11 @@
       pixelRect.setAttribute("y", 1 * y)
       if(pixel){
         // pixelRect.style.fill = "red"
-        pixelRect.style.stroke = "red"
+        // pixelRect.style.stroke = "red"
         pixelRect.id = i
       } else{
         // pixelRect.style.fill = "white"
-        pixelRect.style.stroke = "white"
+        pixelRect.style.fill = "white"
       }
       pixelgroup.appendChild(pixelRect)
       mapgroup.appendChild(pixelgroup)
@@ -82,6 +82,7 @@
         text.appendChild(name)
         text.appendChild(date)
         
+        pixelRect.style.fill = "#0080ff"
         pixelRect.style.stroke = "#0080ff"
         pixelRect.parentElement.appendChild(text)
       }
