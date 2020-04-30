@@ -30,7 +30,10 @@
       const y = Math.floor(i / pixels.width)
       const x = i % pixels.width
       const pixelRect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
-      const pixelgroup = document.createElementNS("http://www.w3.org/2000/svg", 'g');
+      const pixelGroup = document.createElementNS("http://www.w3.org/2000/svg", 'g');
+      const pixelLink = document.createElementNS("http://www.w3.org/2000/svg", 'a');
+      
+      pixelLink.
       pixelRect.classList.add("pie")
       pixelRect.setAttribute("height", "0.98");
       pixelRect.setAttribute("width", "0.98")
@@ -44,8 +47,8 @@
         // pixelRect.style.fill = "white"
         pixelRect.style.stroke = "white"
       }
-      pixelgroup.appendChild(pixelRect)
-      mapgroup.appendChild(pixelgroup)
+      pixelGroup.appendChild(pixelRect)
+      mapgroup.appendChild(pixelGroup)
     })
     
     mapgroup.setAttribute("transform", "scale(1)")
