@@ -28,8 +28,9 @@ app.get("/chocopie/:id/send", function(request, response) {
   response.sendFile(__dirname + "/views/checkout.html");
 });
 
-app.put("/chocopie/:id", function(request, response) {
-  response.sendFile(__dirname + "/views/chocopie.html");
+app.post("/chocopie", function(request, response) {
+  console.log(response.params)
+  response.redirect('/chocopie');
 });
 
 // app.post("/chocopie", function(request, response) {
