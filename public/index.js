@@ -40,7 +40,7 @@
         pixelRect.style.stroke = "red"
         pixelRect.id = i
       } else{
-        // pixelRect.style.fill = "white"
+        pixelRect.style.fill = "white"
         pixelRect.style.stroke = "white"
       }
       group.appendChild(pixelRect)
@@ -52,7 +52,7 @@
     pies.forEach((pie)=> {
       const pixelRect = document.getElementById(`${pie.fields.location}`);
       if(pixelRect){
-        // pixelRect.style.fill = "blue"
+        pixelRect.style.fill = "blue"
         pixelRect.style.stroke = "blue"
       }
     })

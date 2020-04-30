@@ -32,8 +32,8 @@
       const pixelRect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
       const pixelgroup = document.createElementNS("http://www.w3.org/2000/svg", 'g');
       pixelRect.classList.add("pie")
-      pixelRect.setAttribute("height", "1");
-      pixelRect.setAttribute("width", "0")
+      pixelRect.setAttribute("height", "0.98");
+      pixelRect.setAttribute("width", "0.98")
       pixelRect.setAttribute("x", 1 * x)
       pixelRect.setAttribute("y", 1 * y)
       if(pixel){
@@ -82,7 +82,7 @@
         text.appendChild(name)
         text.appendChild(date)
         
-        pixelRect.style.stroke = "#0080ff"
+        pixelRect.style.fill = "#0080ff"
         pixelRect.parentElement.appendChild(text)
       }
     })

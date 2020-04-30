@@ -104,7 +104,11 @@ main {
 }
 
 .pie {
-  stroke-width: .001em;
+  stroke-width: .02;
   stroke: black;
   fill: red;
+}
+
+.pie:hover {
+  stroke: yellow;
 }
