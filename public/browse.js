@@ -25,7 +25,7 @@
   document.addEventListener('click',function(e){
     console.log(e.target)
     if(e.target.classList.contains("pie")){
-      window.location.href = `/checkout/${e.target.id}`
+      window.location.href = `/chocopie/${e.target.id}`
     }
   })
   

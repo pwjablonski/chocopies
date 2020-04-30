@@ -20,13 +20,17 @@ app.get("/browse", function(request, response) {
   response.sendFile(__dirname + "/views/browse.html");
 });
 
-app.get("/checkout", function(request, response) {
+app.get("/chocopie/:id", function(request, response) {
   response.sendFile(__dirname + "/views/checkout.html");
 });
 
-app.post("/confirmation", function(request, response) {
-  response.sendFile(__dirname + "/views/confirmation.html");
+app.put("/chocopie", function(request, response) {
+  response.sendFile(__dirname + "/views/checkout.html");
 });
+
+// app.post("/chocopie", function(request, response) {
+//   response.sendFile(__dirname + "/views/confirmation.html");
+// });
 
 
 app.get("/register", function(request, response) {
@@ -37,9 +41,6 @@ app.get("/about", function(request, response) {
   response.sendFile(__dirname + "/views/about.html");
 });
 
-app.get("/chocopie", function(request, response) {
-  response.sendFile(__dirname + "/views/chocopie.html");
-});
 
 app.get("/triennial", function(request, response) {
   response.sendFile(__dirname + "/views/triennial.html");
