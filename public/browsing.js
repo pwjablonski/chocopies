@@ -58,10 +58,17 @@
       if(pixelRect){
         // pixelRect.style.fill = "blue"
         const text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-        text.textContent = "HI!"
+        const title = document.createElementNS("http://www.w3.org/2000/svg", 'tspan');
+        const name = document.createElementNS("http://www.w3.org/2000/svg", 'tspan');
+        const date = document.createElementNS("http://www.w3.org/2000/svg", 'tspan');
+        title.textContent = "SHARED BY\nPETER\n4-21-2020"
+        
+        
+        
         text.style.fill = "white"
         text.setAttribute("x", 1 * x)
         text.setAttribute("y", 1 * y)
+        text.setAttribute("text-anchor", "middle")
         text.setAttribute("font-size", "0.005em")
         pixelRect.style.stroke = "blue"
         pixelRect.parentElement.appendChild(text)
