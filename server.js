@@ -61,20 +61,40 @@ app.get("/triennial", function(request, response) {
 });
 
 app.get("/seedPies", async function(request, response) {
-  const image = Jimp.read(
+  const image = await Jimp.read(
     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fpixil-frame-0.png?v=1588042676267"
   );
+
   const width = image.bitmap.width;
   const height = image.bitmap.height;
+  
+
   for (var y = 0; y < height; y++) {
     for (var x = 0; x < width; x++) {
       var pixel = Jimp.intToRGBA(image.getPixelColor(x, y));
       if (!(pixel.r === 255 && pixel.g === 255 && pixel.b === 255)) {
-        pixels.push(true);
+        base("pies").create(
+          [
+            {
+              fields: {
+                xCoor: x,
+                yCoor: y,
+              }
+            },
+          function(err, records) {
+            if (err) {
+              console.error(err);
+              return;
+            }
+            records.forEach(function(record) {
+              console.log(record.getId());
+            });
+          }
+        );
       }
     }
   }
-  response.send({ filled, unfilled, height, width, data: pixels })
+  response.send("seeding complete")
 });
 
 app.get("/pies", function(request, response) {
