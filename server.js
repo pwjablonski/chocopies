@@ -24,6 +24,19 @@ app.get("/browse", function(request, response) {
 });
 
 app.get("/chocopie/:id", function(request, response) {
+  base("pies")
+    .select({
+      maxRecords: 10,
+      view: "Grid view",
+      
+    })
+    .firstPage(function(error, records) {
+      if (error) {
+        response.send({ error: error });
+      } else {
+        response.send(records);
+      }
+    });
   response.sendFile(__dirname + "/views/chocopie.html");
 });
 
@@ -35,10 +48,6 @@ app.post("/chocopie", function(request, response) {
   console.log(request.body)
   response.redirect('/chocopie/' + request.body.fid);
 });
-
-// app.post("/chocopie", function(request, response) {
-//   response.sendFile(__dirname + "/views/confirmation.html");
-// });
 
 
 app.get("/register", function(request, response) {
