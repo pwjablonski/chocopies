@@ -67,34 +67,28 @@ app.get("/seedPies", async function(request, response) {
 
   const width = image.bitmap.width;
   const height = image.bitmap.height;
-  
 
   for (var y = 0; y < height; y++) {
     for (var x = 0; x < width; x++) {
       var pixel = Jimp.intToRGBA(image.getPixelColor(x, y));
       if (!(pixel.r === 255 && pixel.g === 255 && pixel.b === 255)) {
         base("pies").create(
-          [
-            {
-              fields: {
-                xCoor: x,
-                yCoor: y,
-              }
-            },
-          function(err, records) {
+          {
+            xCoor: x,
+            yCoor: y
+          },
+          function(err, record) {
             if (err) {
               console.error(err);
               return;
             }
-            records.forEach(function(record) {
-              console.log(record.getId());
-            });
+            console.log(record.getId());
           }
         );
       }
     }
   }
-  response.send("seeding complete")
+  response.send("seeding complete");
 });
 
 app.get("/pies", function(request, response) {
