@@ -1,4 +1,5 @@
 const Airtable = require("airtable");
+var Jimp = require("jimp");
 const express = require("express");
 const bodyParser = require("body-parser");
 
@@ -8,11 +9,10 @@ const base = new Airtable({
 const tableName = "Furniture";
 const viewName = "Main View";
 
-
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static("public")); 
+app.use(express.static("public"));
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function(request, response) {
@@ -27,8 +27,7 @@ app.get("/chocopie/:id", function(request, response) {
   base("pies")
     .select({
       maxRecords: 10,
-      view: "Grid view",
-      
+      view: "Grid view"
     })
     .firstPage(function(error, records) {
       if (error) {
@@ -45,10 +44,9 @@ app.get("/chocopie/:id/send", function(request, response) {
 });
 
 app.post("/chocopie", function(request, response) {
-  console.log(request.body)
-  response.redirect('/chocopie/' + request.body.fid);
+  console.log(request.body);
+  response.redirect("/chocopie/" + request.body.fid);
 });
-
 
 app.get("/register", function(request, response) {
   response.sendFile(__dirname + "/views/register.html");
@@ -58,12 +56,26 @@ app.get("/about", function(request, response) {
   response.sendFile(__dirname + "/views/about.html");
 });
 
-
 app.get("/triennial", function(request, response) {
   response.sendFile(__dirname + "/views/triennial.html");
 });
 
-
+app.get("/seedPies", async function(request, response) {
+  const image = Jimp.read(
+    "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fpixil-frame-0.png?v=1588042676267"
+  );
+  const width = image.bitmap.width;
+  const height = image.bitmap.height;
+  for (var y = 0; y < height; y++) {
+    for (var x = 0; x < width; x++) {
+      var pixel = Jimp.intToRGBA(image.getPixelColor(x, y));
+      if (!(pixel.r === 255 && pixel.g === 255 && pixel.b === 255)) {
+        pixels.push(true);
+      }
+    }
+  }
+  response.send({ filled, unfilled, height, width, data: pixels })
+});
 
 app.get("/pies", function(request, response) {
   base("pies")
