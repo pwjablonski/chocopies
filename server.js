@@ -11,11 +11,11 @@ app.use(express.static("public"));
 // Database
 
 const pies = [
-      ["John","Hancock"],
-      ["Liz","Smith"],
-      ["Ahmed","Khan"]
+      {x:1, y:1},
+      {x:2, y:1},
+      {x:3, y:1}
     ];
-var User;
+let Pie;
 
 // setup a new database
 // using database credentials set in .env
@@ -37,12 +37,15 @@ sequelize.authenticate()
   .then(function(err) {
     console.log('Connection has been established successfully.');
     // define a new table 'users'
-    User = sequelize.define('users', {
-      firstName: {
+    Pie = sequelize.define('pies', {
+      x: {
         type: Sequelize.STRING
       },
-      lastName: {
+      y: {
         type: Sequelize.STRING
+      },
+      isClaimed: {
+        type: Sequelize.B
       }
     });
     
