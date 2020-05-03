@@ -139,11 +139,13 @@ main {
 }
 
 .checkout__form-input{
-  height:4em;
+  height:2em;
   width:100%;
   border: 2px solid black;
   color:red;
   font-weight:bold;
+  font-size: 1em;
+  padding-left: 1em;
 }
 
 
