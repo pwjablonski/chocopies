@@ -3,7 +3,6 @@
 
 (async function(d) {
   const {pies} = await fetchPies();
-  console.log(pies)
 
   drawMap(pies);
 
