@@ -5,12 +5,17 @@
 <html>
   <head>
     <title>Airtable Furniture Gallery</title>
-    <meta name="description" content="Rendering Airtable data in a web page">
-    <link id="favicon" rel="icon" href="https://glitch.com/favicon.ico" type="image/x-icon">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/style.css">
+    <meta name="description" content="Rendering Airtable data in a web page" />
+    <link
+      id="favicon"
+      rel="icon"
+      href="https://glitch.com/favicon.ico"
+      type="image/x-icon"
+    />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
     <header>
@@ -27,8 +32,35 @@
         Register
       </a>
     </header>
+    <main>
+      <div class="container">
+        <h1>Personalize your chocopie</h1>
+        <div class="send">
+          <div class="customize">
+            <img class="customize_choco" src="https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-04-30%20at%209.40.37%20AM.png?v=1588257676068">
+          </div>
+          <div class="checkout">
+            <form class="checkout__form">
+              <label class="checkout__form-label" for="name" required>
+                Recipient's Name
+              </label>
+              <input class="checkout__form-input" type="text" name="name" required />
+              <label class="checkout__form-label" for="email">
+                Recipient's Email
+              </label>
+              <input class="checkout__form-input" type="email" name="email" />
+              <label class="checkout__form-label"  for="message">
+                Message
+              </label>
+              <input class="checkout__form-input" type="text-area" name="message" />
+              <input type="hidden" value="2500" name="id" readonly />
+              <input type="submit" value="Submit" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
 
-    <script src="/client.js"></script>
-
+    <script src="/checkout.js"></script>
   </body>
 </html>

@@ -2,7 +2,8 @@
 // run by the browser each time your view template is loaded
 
 (async function(d) {
-  const {pies} = await fetchPies();
+  const {total, claimed, pies} = await fetchPies();
+  console.log(claimed)
 
   drawMap(pies);
 

@@ -90,8 +90,10 @@ app.get("/pies", async function(request, response) {
     total: 0,
     pies: []
   };
-  const pies = await Pie.findAll();
-  pies.forEach(function(pie) {
+  data.claimed = await Pie.count({where: {isClaimed: true}});
+  const {count, rows} = await Pie.findAndCountAll();
+  data.total = count
+  rows.forEach(function(pie) {
     data.pies.push(pie);
   });
   response.send(data);
