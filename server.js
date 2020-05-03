@@ -114,14 +114,15 @@ app.post("/pies", async function(request, response) {
 
 
 app.get("/chocopie/:id", async function(request, response) {
-  const pie = await Pie.findAll({
+  const pie = await Pie.findOne({
     where: {id: request.params.id}
   });
+  console.log(pie.isClaimed)
   if (pie.isClaimed){
-    
+    response.sendFile(__dirname + "/views/chocopie.html");
+  } else{
+    response.sendFile(__dirname + "/views/checkout.html");
   }
-  response.sendFile(__dirname + "/views/chocopie.html");
-  response.sendFile(__dirname + "/views/checkout.html");
 });
 
 app.post("/chocopie", function(request, response) {
