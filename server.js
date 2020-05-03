@@ -104,6 +104,14 @@ app.get("/pies/:id", async function(request, response) {
   response.send(pie);
 });
 
+app.post("/pies", async function(request, response) {
+  console.log(request.body)
+  // const pie = await Pie.findAll({
+  //   where: {id: request.params.id}
+  // });
+  // response.send(pie);
+});
+
 
 app.get("/chocopie/:id", function(request, response) {
   response.sendFile(__dirname + "/views/chocopie.html");

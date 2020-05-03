@@ -1,15 +1,16 @@
 (async function(d) {
-  console.log(window.location.pathname.split('/')[2])
+  const pieId = window.location.pathname.split('/')[2]
   
-//   async function fetchPies() {
-//     const req = await fetch("/pies");
-//     const resp = await req.json();
-//     return resp;
-//   }
+  async function sendPie(pieId) {
+    const req = await fetch("/pies", {method: "post",     body: JSON.stringify({ data: date }),
+    headers: { "Content-Type": "application/json" }});
+    const resp = await req.json();
+    return resp;
+  }
 
-//   document.addEventListener("click", function(e) {
-//     if (e.target.classList.contains("pie")) {
-//       window.location.href = `/chocopie/${e.target.id}/send`;
-//     }
-//   });
+  document.addEventListener("submit", function(e) {
+    e.preventDefault();
+    sendPie(pieId)
+  });
+  
 })(document);
