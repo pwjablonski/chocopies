@@ -117,7 +117,6 @@ app.get("/chocopie/:id", async function(request, response) {
   const pie = await Pie.findOne({
     where: {id: request.params.id}
   });
-  console.log(pie.isClaimed)
   if (pie.isClaimed){
     response.sendFile(__dirname + "/views/chocopie.html");
   } else{
