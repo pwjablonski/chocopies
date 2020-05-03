@@ -113,11 +113,14 @@ app.post("/pies", async function(request, response) {
 });
 
 
-app.get("/chocopie/:id", function(request, response) {
+app.get("/chocopie/:id", async function(request, response) {
+  const pie = await Pie.findAll({
+    where: {id: request.params.id}
+  });
+  if (pie.isClaimed){
+    
+  }
   response.sendFile(__dirname + "/views/chocopie.html");
-});
-
-app.get("/chocopie/:id/send", function(request, response) {
   response.sendFile(__dirname + "/views/checkout.html");
 });
 
