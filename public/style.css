@@ -47,9 +47,6 @@ a {
   color:black;
 }
 
-header {
-}
-
 main {
   height:100%;
 }
@@ -162,12 +159,13 @@ main {
   text-decoration:underline;
   background-color:#FFF;
   border: none;
-  font-size:2em;
+  font-size:1.5em;
   text-align:right;
+  cursor:pointer;
 }
 
 .checkout__form-submit:hover{
-  color:
+  color:grey;
 }
 
 
