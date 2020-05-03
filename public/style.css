@@ -117,20 +117,37 @@ main {
 
 .send{
   display:flex;
+  height:100%
 }
 
-
-
-.checkoutform{
+.checkout{
   flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items: center;
+}
+
+.checkout__form{
+  text-align:left;
   display:flex;
   flex-direction:column;
 }
 
+.checkout__form-input{
+  height:2em;
+  width:100%;
+  border: 2px solid black;
+  color:red;
+  font-weight:bold;
+}
+
+
 .customize{
   display:flex;
-  flex:1
-  justify
+  flex:1;
+  justify-content:center;
+  align-items: center;
 }
 
 .customize_choco{

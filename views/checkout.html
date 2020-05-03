@@ -39,20 +39,20 @@
           <div class="customize">
             <img class="customize_choco" src="https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-04-30%20at%209.40.37%20AM.png?v=1588257676068">
           </div>
-          <div class="checkoutform">
-            <form>
+          <div class="checkout">
+            <form class="checkout__form">
               <label for="name" required>
                 Recipient's Name
               </label>
-              <input type="email" name="name" required />
+              <input class="checkout__form-input" type="email" name="name" required />
               <label for="email">
                 Recipient's Email
               </label>
-              <input type="text" name="email" />
+              <input class="checkout__form-input" type="text" name="email" />
               <label for="message">
                 Message
               </label>
-              <input type="text" name="message" />
+              <input class="checkout__form-input" type="text" name="message" />
               <input type="hidden" value="2500" name="id" readonly />
               <input type="submit" value="Submit" />
             </form>
