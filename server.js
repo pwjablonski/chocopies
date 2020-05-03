@@ -9,17 +9,9 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 
 // Database
-
-const pies = [
-  { x: 0, y: 0, isClaimed: false },
-  { x: 1, y: 0, isClaimed: false },
-  { x: 2, y: 0, isClaimed: false }
-];
 let Pie;
 
-// setup a new database
-// using database credentials set in .env
-var sequelize = new Sequelize(
+const sequelize = new Sequelize(
   "database",
   process.env.DB_USER,
   process.env.DB_PASS,
@@ -76,7 +68,7 @@ async function setup() {
     for (var x = 0; x < width; x++) {
       var pixel = Jimp.intToRGBA(image.getPixelColor(x, y));
       if (!(pixel.r === 255 && pixel.g === 255 && pixel.b === 255)) {
-        Pie.create({ x, y, isClaimed: false });        
+        Pie.create({ x, y, isClaimed: false });
       }
     }
   }
@@ -92,19 +84,26 @@ app.get("/browse", function(request, response) {
   response.sendFile(__dirname + "/views/browse.html");
 });
 
-app.get("/pies", function(request, response) {
+app.get("/pies", async function(request, response) {
   const data = {
     claimed: 0,
     total: 0,
     pies: []
   };
-  Pie.findAll().then(function(pies) {
-    pies.forEach(function(pie) {
-      data.pies.push(pie);
-    });
-    response.send(data);
+  const pies = await Pie.findAll();
+  pies.forEach(function(pie) {
+    data.pies.push(pie);
   });
+  response.send(data);
 });
+
+app.get("/pies/:id", async function(request, response) {
+  const pie = await Pie.findAll({
+    where: {id: request.params.id}
+  });
+  response.send(pie);
+});
+
 
 app.get("/chocopie/:id", function(request, response) {
   response.sendFile(__dirname + "/views/chocopie.html");
