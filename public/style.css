@@ -57,6 +57,7 @@ main {
 .container {
   padding:4em;
   height:100%;
+  text-align:center;
 }
 
 .row{
@@ -118,10 +119,7 @@ main {
   display:flex;
 }
 
-.customize{
-  display:flex;
-  flex:1
-}
+
 
 .checkoutform{
   flex:1;
@@ -129,6 +127,17 @@ main {
   flex-direction:column;
 }
 
+.customize{
+  display:flex;
+  flex:1
+  justify
+}
+
 .customize_choco{
-  width:100%;
+  width:200px;
+  height:200px;
+}
+
+.social {
+  font-size: 2.5em;
 }
