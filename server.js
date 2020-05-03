@@ -11,33 +11,39 @@ app.use(express.static("public"));
 // Database
 
 const pies = [
-      {x:0, y:0, isClaimed:false},
-      {x:1, y:0, isClaimed:false},
-      {x:2, y:0, isClaimed:false}
-    ];
+  { x: 0, y: 0, isClaimed: false },
+  { x: 1, y: 0, isClaimed: false },
+  { x: 2, y: 0, isClaimed: false }
+];
 let Pie;
 
 // setup a new database
 // using database credentials set in .env
-var sequelize = new Sequelize('database', process.env.DB_USER, process.env.DB_PASS, {
-  host: '0.0.0.0',
-  dialect: 'sqlite',
-  pool: {
-    max: 5,
-    min: 0,
-    idle: 10000
-  },
+var sequelize = new Sequelize(
+  "database",
+  process.env.DB_USER,
+  process.env.DB_PASS,
+  {
+    host: "0.0.0.0",
+    dialect: "sqlite",
+    pool: {
+      max: 5,
+      min: 0,
+      idle: 10000
+    },
     // Security note: the database is saved to the file `database.sqlite` on the local filesystem. It's deliberately placed in the `.data` directory
     // which doesn't get copied if someone remixes the project.
-  storage: '.data/database.sqlite'
-});
+    storage: ".data/database.sqlite"
+  }
+);
 
 // authenticate with the database
-sequelize.authenticate()
+sequelize
+  .authenticate()
   .then(function(err) {
-    console.log('Connection has been established successfully.');
+    console.log("Connection has been established successfully.");
     // define a new table 'users'
-    Pie = sequelize.define('pies', {
+    Pie = sequelize.define("pies", {
       x: {
         type: Sequelize.INTEGER
       },
@@ -48,36 +54,33 @@ sequelize.authenticate()
         type: Sequelize.BOOLEAN
       }
     });
-    
+
     setup();
   })
-  .catch(function (err) {
-    console.log('Unable to connect to the database: ', err);
+  .catch(function(err) {
+    console.log("Unable to connect to the database: ", err);
   });
 
 // populate table with default users
-async function setup(){
-  await Pie.sync({force: true})
-  for(var i=0; i<pies.length; i++){ // loop through all users
-    Pie.create(pies[i]); // create a new entry in the users table
+async function setup() {
+  await Pie.sync({ force: true });
+
+  const image = await Jimp.read(
+    "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fpixil-frame-0.png?v=1588042676267"
+  );
+
+  const width = image.bitmap.width;
+  const height = image.bitmap.height;
+
+  for (var y = 0; y < height; y++) {
+    for (var x = 0; x < width; x++) {
+      var pixel = Jimp.intToRGBA(image.getPixelColor(x, y));
+      if (!(pixel.r === 255 && pixel.g === 255 && pixel.b === 255)) {
+        Pie.create({ x, y, isClaimed: false });        
+      }
+    }
   }
 }
-
-//   const image = await Jimp.read(
-//     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fpixil-frame-0.png?v=1588042676267"
-//   );
-
-//   const width = image.bitmap.width;
-//   const height = image.bitmap.height;
-
-//   for (var y = 0; y < height; y++) {
-//     for (var x = 0; x < width; x++) {
-//       var pixel = Jimp.intToRGBA(image.getPixelColor(x, y));
-//       if (!(pixel.r === 255 && pixel.g === 255 && pixel.b === 255)) {
-//       }
-//     }
-//   }
-
 
 // ROUTES
 
@@ -89,14 +92,17 @@ app.get("/browse", function(request, response) {
   response.sendFile(__dirname + "/views/browse.html");
 });
 
-
 app.get("/pies", function(request, response) {
-  var dbPies=[];
-  Pie.findAll().then(function(pies) { // find all entries in the users tables
+  const data = {
+    claimed: 0,
+    total: 0,
+    pies: []
+  };
+  Pie.findAll().then(function(pies) {
     pies.forEach(function(pie) {
-      dbPies.push(pie); // adds their info to the dbUsers value
+      data.pies.push(pie);
     });
-    response.send(dbPies); // sends dbUsers back to the page
+    response.send(data);
   });
 });
 
