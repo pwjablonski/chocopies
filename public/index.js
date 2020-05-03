@@ -3,8 +3,8 @@
 
 (async function(d) {
   const {total, claimed, pies} = await fetchPies();
-  console.log(claimed)
-
+  
+  drawData(total, claimed);
   drawMap(pies);
 
   async function fetchPies() {
@@ -12,6 +12,16 @@
     const resp = await req.json();
     return resp;
   }
+  
+  function drawData(total, claimed){
+    const totalDiv = document.querySelector("#totalPies");
+    const claimedDiv = document.querySelector("#piesClaimed");
+    const moneyDiv = document.querySelector("#moneyRaised");  
+    totalDiv.innerHTML = total;
+    claimedDiv.innerHTML= claimed;
+    moneyDiv.innerHTML = `$ ${claimed}`;
+  }
+  
 
   function drawMap(pies) {
     const map = document.querySelector(".map-svg");
