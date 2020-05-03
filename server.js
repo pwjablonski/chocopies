@@ -105,10 +105,10 @@ app.get("/pies/:id", async function(request, response) {
 });
 
 app.post("/pies", async function(request, response) {
-  console.log(request.body)
-  // const pie = await Pie.findAll({
-  //   where: {id: request.params.id}
-  // });
+  console.log(request.body.pieId)
+  const pie = await Pie.update({isClaimed: true}, {
+    where: {id: request.body.pieId}
+  });
   // response.send(pie);
 });
 

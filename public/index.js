@@ -27,7 +27,7 @@
         pieRect.setAttribute("x", pie.x);
         pieRect.setAttribute("y", pie.y);
         pieRect.id = pie.id;
-        if (pieRect.isClaimed) {
+        if (pie.isClaimed) {
           pieRect.style.fill = "blue";
           pieRect.style.stroke = "blue";
         } else {
