@@ -14,6 +14,6 @@
   document.addEventListener("submit", function(e) {
     e.preventDefault();
     sendPie(pieId);
-    window.location.replace("http://www.w3schools.com");
+    location.reload();
   });
 })(document);
