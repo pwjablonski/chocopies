@@ -11,9 +11,9 @@ app.use(express.static("public"));
 // Database
 
 const pies = [
-      {x:1, y:1},
-      {x:2, y:1},
-      {x:3, y:1}
+      {x:0, y:0, isClaimed:false},
+      {x:1, y:0, isClaimed:false},
+      {x:2, y:0, isClaimed:false}
     ];
 let Pie;
 
@@ -39,13 +39,13 @@ sequelize.authenticate()
     // define a new table 'users'
     Pie = sequelize.define('pies', {
       x: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       y: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       isClaimed: {
-        type: Sequelize.B
+        type: Sequelize.BOOLEAN
       }
     });
     
@@ -56,19 +56,31 @@ sequelize.authenticate()
   });
 
 // populate table with default users
-function setup(){
-  User.sync({force: true}) // We use 'force: true' in this example to drop the table users if it already exists, and create a new one. You'll most likely want to remove this setting in your own apps
-    .then(function(){
-      // Add the default users to the database
-      for(var i=0; i<users.length; i++){ // loop through all users
-        User.create({ firstName: users[i][0], lastName: users[i][1]}); // create a new entry in the users table
-      }
-    });  
+async function setup(){
+  await Pie.sync({force: true})
+  for(var i=0; i<pies.length; i++){ // loop through all users
+    Pie.create(pies[i]); // create a new entry in the users table
+  }
 }
 
+//   const image = await Jimp.read(
+//     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fpixil-frame-0.png?v=1588042676267"
+//   );
+
+//   const width = image.bitmap.width;
+//   const height = image.bitmap.height;
+
+//   for (var y = 0; y < height; y++) {
+//     for (var x = 0; x < width; x++) {
+//       var pixel = Jimp.intToRGBA(image.getPixelColor(x, y));
+//       if (!(pixel.r === 255 && pixel.g === 255 && pixel.b === 255)) {
+//       }
+//     }
+//   }
 
 
 // ROUTES
+
 app.get("/", function(request, response) {
   response.sendFile(__dirname + "/views/index.html");
 });
@@ -78,13 +90,13 @@ app.get("/browse", function(request, response) {
 });
 
 
-app.get("/users", function(request, response) {
-  var dbUsers=[];
-  User.findAll().then(function(users) { // find all entries in the users tables
-    users.forEach(function(user) {
-      dbUsers.push([user.firstName,user.lastName]); // adds their info to the dbUsers value
+app.get("/pies", function(request, response) {
+  var dbPies=[];
+  Pie.findAll().then(function(pies) { // find all entries in the users tables
+    pies.forEach(function(pie) {
+      dbPies.push(pie); // adds their info to the dbUsers value
     });
-    response.send(dbUsers); // sends dbUsers back to the page
+    response.send(dbPies); // sends dbUsers back to the page
   });
 });
 
@@ -111,24 +123,6 @@ app.get("/about", function(request, response) {
 
 app.get("/triennial", function(request, response) {
   response.sendFile(__dirname + "/views/triennial.html");
-});
-
-app.get("/seedPies", async function(request, response) {
-  const image = await Jimp.read(
-    "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fpixil-frame-0.png?v=1588042676267"
-  );
-
-  const width = image.bitmap.width;
-  const height = image.bitmap.height;
-
-  for (var y = 0; y < height; y++) {
-    for (var x = 0; x < width; x++) {
-      var pixel = Jimp.intToRGBA(image.getPixelColor(x, y));
-      if (!(pixel.r === 255 && pixel.g === 255 && pixel.b === 255)) {
-      }
-    }
-  }
-  response.send("seeding complete");
 });
 
 // listen for requests :)
