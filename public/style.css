@@ -256,28 +256,17 @@ main {
 /*Outer box of the fake checkbox*/
 .checkbox label::before{
     height: 1em;
-    width: 1em;
-    
-    border: 1px solid;
-    left: 0px;
-    
-    /*(24px line-height - 16px height of fake checkbox) / 2 - 1px for the border
-     *to vertically center it.
-     */
-    top: 3px;
+    width: 1em; 
+    border: 2px solid;
+    left: 0;
+    top: 0;
 }
 
 /*Checkmark of the fake checkbox*/
 .checkbox label::after {
-    height: 5px;
-    width: 9px;
-    border-left: 2px solid;
-    border-bottom: 2px solid;
-    
-    transform: rotate(-45deg);
-    
-    left: 4px;
-    top: 7px;
+    left: .33em;
+    top: 0;
+    color:red;
 }
 
 /*Hide the checkmark by default*/
@@ -287,7 +276,7 @@ main {
 
 /*Unhide on the checked state*/
 .checkbox input[type="checkbox"]:checked + label::after {
-    content: "";
+    content: "x";
 }
 
 /*Adding focus styles on the outer-box of the fake checkbox*/
