@@ -37,25 +37,37 @@
         <h1>Personalize your chocopie</h1>
         <div class="send">
           <div class="customize">
-            <img class="customize_choco" src="https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-04-30%20at%209.40.37%20AM.png?v=1588257676068">
+            <img
+              class="customize_choco"
+              src="https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-04-30%20at%209.40.37%20AM.png?v=1588257676068"
+            />
           </div>
           <div class="checkout">
             <form class="checkout__form">
               <label class="checkout__form-label" for="name" required>
                 Your Name
               </label>
-              <input class="checkout__form-input" type="text" name="name" required />
+              <input
+                class="checkout__form-input"
+                type="text"
+                name="name"
+                required
+              />
               <label class="checkout__form-label" for="email">
                 Your Email
               </label>
               <input class="checkout__form-input" type="email" name="email" />
-              
-              <label class="checkout__form-label checkout__form-checkbox-container" for="signup">
-                <input class="checkout__form-checkbox" type="checkbox" name="signup"  />
-                <span class="checkout__form-checkbox-text">Yes I would like to recieve asia society newsletters</span>
-              </label>
-              
-              <input class="checkout__form-submit" type="submit" value="Next >" />
+
+              <div class="checkbox">
+                <input type="checkbox" id="checkbox_1" />
+                <label for="checkbox_1">Yes I would like to recieve asia society newsletters</label>
+              </div>
+
+              <input
+                class="checkout__form-submit"
+                type="submit"
+                value="Next >"
+              />
             </form>
           </div>
         </div>
