@@ -210,6 +210,7 @@ main {
     transition-duration: 0.3s;
     background-color: #41B883;
     cursor: pointer;
+    position:absolute;
   }
 
 .checkbox > input:checked {
@@ -240,7 +241,7 @@ main {
     display: inline-block;
     
     /*16px width of fake checkbox + 6px distance between fake checkbox and text*/
-    padding-left: 22px;
+    padding-left: 1.5em;
 }
 
 .checkbox label::before,
@@ -254,8 +255,8 @@ main {
 
 /*Outer box of the fake checkbox*/
 .checkbox label::before{
-    height: 16px;
-    width: 16px;
+    height: 1em;
+    width: 1em;
     
     border: 1px solid;
     left: 0px;
