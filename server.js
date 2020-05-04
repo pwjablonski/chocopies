@@ -111,7 +111,6 @@ app.post("/pies", async function(request, response) {
   const pie = await Pie.update({isClaimed: true}, {
     where: {id: request.body.pieId}
   });
-  // response.send(pie);
 });
 
 
