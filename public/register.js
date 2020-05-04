@@ -14,7 +14,10 @@
 
 
   document.addEventListener("submit", function(e) {
-    
+    const name = e.target[0].value
+    const email = e.target[0].value
+    const signUp = e.target[0].checked
+  
     e.preventDefault();
   });
 })(document);
