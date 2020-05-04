@@ -42,19 +42,21 @@
           <div class="checkout">
             <form class="checkout__form">
               <label class="checkout__form-label" for="name" required>
-                Recipient's Name
+                Your Name
               </label>
               <input class="checkout__form-input" type="text" name="name" required />
               <label class="checkout__form-label" for="email">
-                Recipient's Email
+                Your Email
               </label>
               <input class="checkout__form-input" type="email" name="email" />
-              <label class="checkout__form-label"  for="message">
-                Message
+              
+              <label class="checkout__form-label" for="signup">
+                <input lass="checkout__form-checkbox" type="checkbox" name="signup"  />
+                <span class="checkout__form-checkmark"></span>
+                Yes I would like to recieve asia society newsletters
               </label>
-              <input class="checkout__form-input" type="text-area" name="message" />
-              <input type="hidden" value="2500" name="id" readonly />
-              <input type="submit" value="Submit" />
+              
+              <input class="checkout__form-submit" type="submit" value="Next >" />
             </form>
           </div>
         </div>
