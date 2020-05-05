@@ -39,15 +39,21 @@
         <div class="row main">
           <div class="menu">
             <ul>
-              <li><a data-toggle="modal" href="#myModal">About Choco Pie &#x203A;</a></li>
-              <li><a data-toggle="modal" href="#aboutArtist">About the Artist &#x203A;</a></li>
-              <li><a data-toggle="modal" href="#aboutTriennial">About Triennial &#x203A;</a></li>
+              <li data-toggle="modal" data-target="#aboutChocopie">
+                About Choco Pie &#x203A;
+              </li>
+              <li data-toggle="modal" data-target="#aboutArtist">
+                About the Artist &#x203A;
+              </li>
+              <li data-toggle="modal" data-target="#aboutTriennial">
+                About Triennial &#x203A;
+              </li>
             </ul>
           </div>
           <div class="map" data-toggle="modal" data-target="#myModal">
-<!--             <a href="browse"> -->
-              <svg class="map-svg" viewBox="0 0 75 125"></svg>
-<!--             </a> -->
+            <!--             <a href="browse"> -->
+            <svg class="map-svg" viewBox="0 0 75 125"></svg>
+            <!--             </a> -->
           </div>
           <div class="cta">
             <h3>
@@ -61,36 +67,94 @@
         </div>
       </div>
     </main>
-    <button data-toggle="modal" data-target="#myModal"> click me, I make a modal</button>
-    
+
     <div class="modal" id="sendPie">
       <div class="modal-content">
         <span class="close-btn" data-dismiss="modal">&times;</span>
-        <p>this is the text inside the modal</p>
+        <h1>Personalize your chocopie</h1>
+        <div class="send">
+          <div class="customize">
+            <img
+              class="customize_choco"
+              src="https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-04-30%20at%209.40.37%20AM.png?v=1588257676068"
+            />
+          </div>
+          <div class="checkout">
+            <form class="checkout__form">
+              <label class="checkout__form-label" for="name" required>
+                Your Name
+              </label>
+              <input
+                class="checkout__form-input"
+                type="text"
+                name="name"
+                required
+              />
+              <label class="checkout__form-label" for="email">
+                Your Email
+              </label>
+              <input class="checkout__form-input" type="email" name="email" />
+              <label class="checkout__form-label" for="name" required>
+                Recipient's Name
+              </label>
+              <input
+                class="checkout__form-input"
+                type="text"
+                name="name"
+                required
+              />
+              <label class="checkout__form-label" for="email">
+                Recipient's Email
+              </label>
+              <input class="checkout__form-input" type="email" name="email" />
+              <label class="checkout__form-label" for="message">
+                Message
+              </label>
+              <textarea
+                class="checkout__form-textarea"
+                type="textarea"
+                name="message"
+              >
+              </textarea>
+
+              <div class="checkbox">
+                <input type="checkbox" id="checkbox_1" checked />
+                <label class="checkout__form-label" for="checkbox_1"
+                  >Yes I would like to recieve asia society newsletters</label
+                >
+              </div>
+              <input
+                class="checkout__form-submit"
+                type="submit"
+                value="Send >"
+              />
+            </form>
+          </div>
+        </div>
       </div>
     </div>
-    
+
     <div class="modal" id="aboutArtist">
       <div class="modal-content">
         <span class="close-btn" data-dismiss="modal">&times;</span>
         <p>About Artist</p>
       </div>
     </div>
-    
+
     <div class="modal" id="aboutTriennial">
       <div class="modal-content">
         <span class="close-btn" data-dismiss="modal">&times;</span>
         <p>Triennial</p>
       </div>
     </div>
-    
+
     <div class="modal" id="aboutChocopie">
       <div class="modal-content">
         <span class="close-btn" data-dismiss="modal">&times;</span>
         <p>About Chocopie</p>
       </div>
     </div>
-    
+
     <script src="/index.js"></script>
   </body>
 </html>
