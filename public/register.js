@@ -11,13 +11,14 @@
 //     return resp;
 //   }
   
-
+  console.log(window.location.search)
 
   document.addEventListener("submit", function(e) {
     const name = e.target[0].value
     const email = e.target[0].value
     const signUp = e.target[0].checked
-  
+    
+    // window.location.href = `/chocopie/${e.target.id}`;
     e.preventDefault();
   });
 })(document);

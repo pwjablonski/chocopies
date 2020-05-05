@@ -88,7 +88,6 @@
   document.addEventListener("click", function(e) {
     if (e.target.classList.contains("pie")) {
       window.location.href = `/register?pieId=10`;
-      // window.location.href = `/chocopie/${e.target.id}`;
     }
   });
 })(document);
