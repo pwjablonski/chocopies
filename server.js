@@ -85,7 +85,6 @@ app.get("/", function(request, response) {
   response.sendFile(__dirname + "/views/index.html");
 });
 
-
 app.get("/pies", async function(request, response) {
   const data = {
     claimed: 0,
@@ -135,7 +134,6 @@ app.post("/pies", async function(request, response) {
     console.log(e.response.body.errors);
   }
 });
-
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function() {
