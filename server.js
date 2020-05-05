@@ -9,6 +9,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
+// email
+async function createTransporter() {
+  let testAccount = await nodemailer.createTestAccount();
+
+  return nodemailer.createTransport({
+    host: "smtp.ethereal.email",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: testAccount.user, // generated ethereal user
+      pass: testAccount.pass // generated ethereal password
+    }
+  });
+}
+
+
 // Database
 let Pie;
 
@@ -91,9 +107,9 @@ app.get("/pies", async function(request, response) {
     total: 0,
     pies: []
   };
-  data.claimed = await Pie.count({where: {isClaimed: true}});
-  const {count, rows} = await Pie.findAndCountAll();
-  data.total = count
+  data.claimed = await Pie.count({ where: { isClaimed: true } });
+  const { count, rows } = await Pie.findAndCountAll();
+  data.total = count;
   rows.forEach(function(pie) {
     data.pies.push(pie);
   });
@@ -102,26 +118,41 @@ app.get("/pies", async function(request, response) {
 
 app.get("/pies/:id", async function(request, response) {
   const pie = await Pie.findAll({
-    where: {id: request.params.id}
+    where: { id: request.params.id }
   });
   response.send(pie);
 });
 
 app.post("/pies", async function(request, response) {
-  console.log(request.body.pieId)
-  const pie = await Pie.update({isClaimed: true}, {
-    where: {id: request.body.pieId}
-  });
-});
+  console.log(request.body.pieId);
 
+  const pie = await Pie.update(
+    { isClaimed: true },
+    {
+      where: { id: request.body.pieId }
+    }
+  );
+
+  const transporter = await createTransporter();
+  let info = await transporter.sendMail({
+    from: '"Fred Foo 👻" <foo@example.com>', // sender address
+    to: "pwjablonski@gmail.com, baz@example.com", // list of receivers
+    subject: "Hello ✔", // Subject line
+    text: "Hello world?", // plain text body
+    html: "<b>Hello world?</b>" // html body
+  });
+
+  console.log("Message sent: %s", info.messageId);
+  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+});
 
 app.get("/chocopie/:id", async function(request, response) {
   const pie = await Pie.findOne({
-    where: {id: request.params.id}
+    where: { id: request.params.id }
   });
-  if (pie.isClaimed){
+  if (pie.isClaimed) {
     response.sendFile(__dirname + "/views/chocopie.html");
-  } else{
+  } else {
     response.sendFile(__dirname + "/views/checkout.html");
   }
 });
