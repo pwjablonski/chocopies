@@ -100,7 +100,6 @@
   }
 
   d.addEventListener("click", function(e) {
-    console.log(e);
     if (e.target.dataset.toggle == "modal") {
       let modal = document.querySelector(e.target.dataset.target);
       modal.style.display = "block";
@@ -134,8 +133,7 @@
 
     const pie = await sendPie(selectedPieId);
     console.log(pie)
-    console.log(pie)
-    let pieRect = document.querySelectorAll(`#${selectedPieId}`);
+    let pieRect = document.getElementById(selectedPieId);
     const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
     const title = document.createElementNS(
       "http://www.w3.org/2000/svg",
@@ -154,11 +152,11 @@
     date.textContent = "4-20-20";
 
     title.setAttribute("dy", "0em");
-    title.setAttribute("x", 1 * pie.x + 0.5);
+    title.setAttribute("x", 1 * pieRect.x + 0.5);
     name.setAttribute("dy", "2em");
-    name.setAttribute("x", 1 * pie.x + 0.5);
+    name.setAttribute("x", 1 * pieRect.x + 0.5);
     date.setAttribute("dy", "2em");
-    date.setAttribute("x", 1 * pie.x + 0.5);
+    date.setAttribute("x", 1 * pieRect.x + 0.5);
 
     text.style.fill = "white";
     text.setAttribute("x", 1 * pie.x);

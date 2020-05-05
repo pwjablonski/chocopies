@@ -113,9 +113,11 @@ app.post("/pies", async function(request, response) {
   const pie = await Pie.update(
     { isClaimed: true },
     {
-      where: { id: request.body.pieId }
+      where: { id: request.body.pieId },
+      returning: true
     }
   );
+  console.log(pie)
 
   response.send(pie)
   // email
