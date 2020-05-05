@@ -17,7 +17,7 @@
     fit: true,
     center: true,
     minZoom: 0.1,
-    maxZoom:25,
+    maxZoom:30,
   });
   
 
