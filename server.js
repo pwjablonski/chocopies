@@ -125,7 +125,7 @@ app.post("/pies", async function(request, response) {
   const msg = {
     to: "pwjablonski@gmail.com",
     from: "pwjablonski@gmail.com",
-    subject: "Sending with Twilio SendGrid is Fun",
+    subject: "Hi Peter!",
     text: "and easy to do anywhere, even with Node.js",
     html: "<strong>and easy to do anywhere, even with Node.js</strong>"
   };
