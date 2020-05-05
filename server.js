@@ -159,13 +159,6 @@ app.get("/register", function(request, response) {
   response.sendFile(__dirname + "/views/register.html");
 });
 
-app.get("/about", function(request, response) {
-  response.sendFile(__dirname + "/views/about.html");
-});
-
-app.get("/triennial", function(request, response) {
-  response.sendFile(__dirname + "/views/triennial.html");
-});
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function() {
