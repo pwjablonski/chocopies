@@ -3,10 +3,13 @@
 
 (async function(d) {
   let pieData = await fetchPies();
+  let claimed = pieData.claimed
+  let total = pieData.total
+  let pies = pieData.pies
   let selectedPieId = null;
 
-  drawData(pieData.total, pieData.claimed);
-  drawMap(pieData.pies);
+  drawData(total, claimed);
+  drawMap(pies);
 
   async function fetchPies() {
     const req = await fetch("/pies");
@@ -131,9 +134,12 @@
   document.addEventListener("submit", async function(e) {
     e.preventDefault();
 
-    const pie = await sendPie(selectedPieId);
-    console.log(pie)
+    await sendPie(selectedPieId);
     let pieRect = document.getElementById(selectedPieId);
+    // update claimed
+    claimed +=1
+    drawData(total, claimed);
+    
     const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
     const title = document.createElementNS(
       "http://www.w3.org/2000/svg",
@@ -152,15 +158,15 @@
     date.textContent = "4-20-20";
 
     title.setAttribute("dy", "0em");
-    title.setAttribute("x", 1 * pieRect.x + 0.5);
+    title.setAttribute("x", 1 * pieRect.getAttribute('x') + 0.5);
     name.setAttribute("dy", "2em");
-    name.setAttribute("x", 1 * pieRect.x + 0.5);
+    name.setAttribute("x", 1 * pieRect.getAttribute('x') + 0.5);
     date.setAttribute("dy", "2em");
-    date.setAttribute("x", 1 * pieRect.x + 0.5);
+    date.setAttribute("x", 1 * pieRect.getAttribute('x') + 0.5);
 
     text.style.fill = "white";
-    text.setAttribute("x", 1 * pie.x);
-    text.setAttribute("y", 1 * pie.y + 0.3);
+    text.setAttribute("x", 1 * pieRect.getAttribute('x'));
+    text.setAttribute("y", 1 * pieRect.getAttribute('x') + 0.3);
     text.setAttribute("text-anchor", "middle");
     text.setAttribute("font-size", "0.005em");
 
