@@ -300,7 +300,8 @@ main {
   background-color: white;
   padding: 20px; 
   margin: auto; 
-  width: 75%;  
+  width: 75%; 
+  height: 90%;
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;

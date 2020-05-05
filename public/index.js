@@ -50,12 +50,20 @@
     map.appendChild(group);
   }
 
-  let modalBtn = document.getElementById("modal-btn");
-  let modal = document.querySelector(".modal");
-  let closeBtn = document.querySelector(".close-btn");
+
   d.addEventListener("click", function(e) {
+    console.log(e)
     if (e.target.dataset.toggle == "modal") {
-      let modal = document.querySelector(e.target.dataset.toggle);
+      let modal = document.querySelector(e.target.dataset.target);
+      modal.style.display = "block"
     }
+    if (e.target.dataset.dismiss == "modal") {
+      let modal = document.querySelector(".modal");
+      modal.style.display = "none"
+    }
+    if (e.target.classList.contains("modal")) {
+      e.target.style.display = "none"
+    }
+    
   });
 })(document);
