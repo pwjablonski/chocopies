@@ -79,9 +79,6 @@ async function setup() {
 // email
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-console.log(process.env.SENDGRID_API_KEY)
-console.log(sgMail)
-
 // ROUTES
 
 app.get("/", function(request, response) {
@@ -132,12 +129,14 @@ app.post("/pies", async function(request, response) {
     text: "and easy to do anywhere, even with Node.js",
     html: "<strong>and easy to do anywhere, even with Node.js</strong>"
   };
-  try{
-    sgMail.send(msg);
-  } catch(e){
-      console.log(e);
+  try {
+    console.log(process.env.SENDGRID_API_KEY);
+    console.log(sgMail);
+    await sgMail.send(msg);
+  } catch (e) {
+    console.log(e);
+    console.log(e.response.body.errors);
   }
-
 });
 
 app.get("/chocopie/:id", async function(request, response) {
