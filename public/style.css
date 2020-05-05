@@ -81,6 +81,7 @@ main {
 
 .menu {
   flex:1;
+  text-align:left;
 }
 
 .map {
@@ -153,7 +154,6 @@ main {
   color:red;
   font-weight:bold;
   font-size: 1em;
-  padding-left: 1em;
 }
 
 .checkout__form-submit{
