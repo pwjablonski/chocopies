@@ -14,6 +14,7 @@
   document.addEventListener("submit", function(e) {
     e.preventDefault();
     sendPie(pieId);
+    sessionStorage.setItem("pieId", "");
     location.reload();
   });
 })(document);

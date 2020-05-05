@@ -2,6 +2,7 @@ const express = require("express");
 const Sequelize = require("sequelize");
 const Jimp = require("jimp");
 const bodyParser = require("body-parser");
+const nodemailer = require("nodemailer");
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
