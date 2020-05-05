@@ -3,6 +3,8 @@ const Sequelize = require("sequelize");
 const Jimp = require("jimp");
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
+var mandrillTransport = require("nodemailer-mandrill-transport");
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -10,16 +12,15 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 
 // email
-async function createTransporter() {
-  return nodemailer.createTransport({
-    host: "Mandrill",
-    auth: {
-      user: "pwjablonski@gmail.com",
-      pass: "4c379df82e6e68cd940e861d01d89496-us8"
-    }
-  });
-}
-
+// async function createTransporter() {
+//   return nodemailer.createTransport(
+//     mandrillTransport({
+//       auth: {
+//         apiKey: "4c379df82e6e68cd940e861d01d89496-us8"
+//       }
+//     })
+//   );
+// }
 
 // Database
 let Pie;
@@ -129,17 +130,17 @@ app.post("/pies", async function(request, response) {
     }
   );
 
-  const transporter = await createTransporter();
-  let info = await transporter.sendMail({
-    from: '"Fred Foo 👻" <foo@example.com>', // sender address
-    to: "pwjablonski@gmail.com, baz@example.com", // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Hello world?</b>" // html body
-  });
+//   const transporter = await createTransporter();
+//   let info = await transporter.sendMail({
+//     from: '"Fred Foo 👻" <foo@example.com>', // sender address
+//     to: "pwjablonski@gmail.com, baz@example.com", // list of receivers
+//     subject: "Hello ✔", // Subject line
+//     text: "Hello world?", // plain text body
+//     html: "<b>Hello world?</b>" // html body
+//   });
 
-  console.log("Message sent: %s", info.messageId);
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+//   console.log("Message sent: %s", info.messageId);
+//   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 });
 
 app.get("/chocopie/:id", async function(request, response) {
