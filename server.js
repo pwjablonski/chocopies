@@ -11,15 +11,11 @@ app.use(express.static("public"));
 
 // email
 async function createTransporter() {
-  let testAccount = await nodemailer.createTestAccount();
-
   return nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false, // true for 465, false for other ports
+    host: "Mandrill",
     auth: {
-      user: testAccount.user, // generated ethereal user
-      pass: testAccount.pass // generated ethereal password
+      user: "pwjablonski@gmail.com",
+      pass: "4c379df82e6e68cd940e861d01d89496-us8"
     }
   });
 }
