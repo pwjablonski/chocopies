@@ -45,45 +45,30 @@
     );
     
     pies.forEach(pie => {
-      // const pieRect = document.createElementNS(
-      //   "http://www.w3.org/2000/svg",
-      //   "rect"
-      // );
-//       const pieObject = document.createElementNS(
-//         "http://www.w3.org/2000/svg",
-//         "image"
-//       );
+      const pieRect = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "rect"
+      );
       
-//       const pieGroup = document.createElementNS(
-//         "http://www.w3.org/2000/svg",
-//         "g"
-//       );
-      
-//       pieObject.setAttribute("href", "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-04-30%20at%209.40.37%20AM.png?v=1588257676068");
-//       pieObject.classList.add("pie");
-//       pieObject.setAttribute("height", "0.98");
-//       pieObject.setAttribute("width", "0.98");
-//       // pieObject.setAttribute("x", 1 * pie.x);
-//       // pieObject.setAttribute("y", 1 * pie.y);
-//       pieObject.id = pie.id;
-//       pieGroup.appendChild(pieObject);
-      
+      const pieGroup = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "g"
+      );
+      pieRect.classList.add("pie");
+      pieRect.setAttribute("height", "0.98");
+      pieRect.setAttribute("width", "0.98");
+      pieRect.setAttribute("x", 1 * pie.x);
+      pieRect.setAttribute("y", 1 * pie.y);
+      pieRect.id = pie.id;
+      pieGroup.appendChild(pieRect);
+      mapgroup.appendChild(pieGroup);
 
-      // pieRect.classList.add("pie");
-      // pieRect.setAttribute("height", "0.98");
-      // pieRect.setAttribute("width", "0.98");
-      // pieRect.setAttribute("x", 1 * pie.x);
-      // pieRect.setAttribute("y", 1 * pie.y);
-      // pieRect.id = pie.id;
-      // pieGroup.appendChild(pieRect);
-      // mapgroup.appendChild(pieGroup);
-
-      // if (pie.isClaimed) {
-      //   drawClaimedPie(pieRect);
-      // } else {
-      //   pieRect.dataset.toggle = "modal";
-      //   pieRect.dataset.target = "#sendPie";
-      // }
+      if (pie.isClaimed) {
+        drawClaimedPie(pieRect);
+      } else {
+        pieRect.dataset.toggle = "modal";
+        pieRect.dataset.target = "#sendPie";
+      }
     });
 
     map.appendChild(mapgroup);
@@ -124,6 +109,7 @@
     text.appendChild(name);
     text.appendChild(date);
 
+    pieRect.style.filter = "none";
     pieRect.style.fill = "#0080ff";
     pieRect.parentElement.appendChild(text);
   }

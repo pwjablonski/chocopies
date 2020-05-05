@@ -98,7 +98,7 @@ main {
 .pie {
   stroke-width: .02;
   stroke: black;
-  fill: red;
+  filter:url(#image);
 }
 
 .pie:hover {
