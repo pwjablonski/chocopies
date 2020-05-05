@@ -159,7 +159,7 @@ main {
   text-decoration:underline;
   background-color:#FFF;
   border: none;
-  font-size:1em;
+  font-size:1.5em;
   text-align:right;
   cursor:pointer;
 }
@@ -298,7 +298,7 @@ main {
 .modal-content {
   position: relative; 
   background-color: white;
-  padding: 20px; 
+  padding: 2em; 
   margin: auto; 
   width: 75%; 
   height: 90%;
@@ -306,6 +306,10 @@ main {
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
   animation-duration: 0.4s
+}
+
+.modal-header{
+  text-align:center;
 }
 .close-btn {
   float: right; 
