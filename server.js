@@ -117,21 +117,18 @@ app.post("/pies", async function(request, response) {
 
   response.send(pie)
   // email
-  // const msg = {
-  //   to: "pwjablonski@gmail.com",
-  //   from: "pwjablonski@gmail.com",
-  //   subject: "Hi Peter!",
-  //   text: "and easy to do anywhere, even with Node.js",
-  //   html: "<strong>and easy to do anywhere, even with Node.js</strong>"
-  // };
-  // try {
-  //   console.log(process.env.SENDGRID_API_KEY);
-  //   console.log(sgMail);
-  //   await sgMail.send(msg);
-  // } catch (e) {
-  //   console.log(e);
-  //   console.log(e.response.body.errors);
-  // }
+  const msg = {
+    to: request.body.data.recipientEmail ,
+    from: "pwjablonski@gmail.com",
+    subject: `Hi ${request.body.data.recipientName}!`,
+    text: request.body.data.message,
+    html: `<strong>and easy to do anywhere, even with Node.js</strong>"
+  };
+  try {
+    await sgMail.send(msg);
+  } catch (e) {
+    console.log(e);
+  }
 });
 
 // listen for requests :)

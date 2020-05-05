@@ -3,9 +3,9 @@
 
 (async function(d) {
   let pieData = await fetchPies();
-  let claimed = pieData.claimed
-  let total = pieData.total
-  let pies = pieData.pies
+  let claimed = pieData.claimed;
+  let total = pieData.total;
+  let pies = pieData.pies;
   let selectedPieId = null;
 
   drawData(total, claimed);
@@ -52,7 +52,7 @@
       mapgroup.appendChild(pieGroup);
 
       if (pie.isClaimed) {
-         drawClaimedPie(pieRect)
+        drawClaimedPie(pieRect);
       } else {
         pieRect.dataset.toggle = "modal";
         pieRect.dataset.target = "#sendPie";
@@ -62,9 +62,9 @@
     mapgroup.setAttribute("transform", "scale(1)");
     map.appendChild(mapgroup);
   }
-  
-  function drawClaimedPie(pieRect){
-        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+
+  function drawClaimedPie(pieRect) {
+    const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
     const title = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "tspan"
@@ -82,15 +82,15 @@
     date.textContent = "4-20-20";
 
     title.setAttribute("dy", "0em");
-    title.setAttribute("x", 1 * pieRect.getAttribute('x') + 0.5);
+    title.setAttribute("x", 1 * pieRect.getAttribute("x") + 0.5);
     name.setAttribute("dy", "2em");
-    name.setAttribute("x", 1 * pieRect.getAttribute('x') + 0.5);
+    name.setAttribute("x", 1 * pieRect.getAttribute("x") + 0.5);
     date.setAttribute("dy", "2em");
-    date.setAttribute("x", 1 * pieRect.getAttribute('x') + 0.5);
+    date.setAttribute("x", 1 * pieRect.getAttribute("x") + 0.5);
 
     text.style.fill = "white";
-    text.setAttribute("x", 1 * pieRect.getAttribute('x'));
-    text.setAttribute("y", 1 * pieRect.getAttribute('x') + 0.3);
+    text.setAttribute("x", 1 * pieRect.getAttribute("x"));
+    text.setAttribute("y", 1 * pieRect.getAttribute("x") + 0.3);
     text.setAttribute("text-anchor", "middle");
     text.setAttribute("font-size", "0.005em");
 
@@ -121,10 +121,10 @@
     }
   });
 
-  async function sendPie(pieId) {
+  async function sendPie(pieId, data) {
     const req = await fetch("/pies", {
       method: "post",
-      body: JSON.stringify({ pieId }),
+      body: JSON.stringify({ pieId, data }),
       headers: { "Content-Type": "application/json" }
     });
     const resp = await req.json();
@@ -133,14 +133,18 @@
 
   document.addEventListener("submit", async function(e) {
     e.preventDefault();
+    const data = {};
+    data.senderName = e.target[0].value;
+    data.senderEmail = e.target[1].value;
+    data.recipientName = e.target[2].value;
+    data.recipientEmail = e.target[3].value;
+    data.message = e.target[4].value;
+    data.signUp = e.target[5].checked;
     
-    
-
-    await sendPie(selectedPieId);
+    await sendPie(selectedPieId, data);
     let pieRect = document.getElementById(selectedPieId);
-    claimed +=1
+    claimed += 1;
     drawData(total, claimed);
-    drawClaimedPie(pieRect)
-    
+    drawClaimedPie(pieRect);
   });
 })(document);
