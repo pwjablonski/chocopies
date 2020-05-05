@@ -3,7 +3,8 @@
 
 (async function(d) {
   const { total, claimed, pies } = await fetchPies();
-
+  let selectedPieId = null;
+  
   drawData(total, claimed);
   drawMap(pies);
 
@@ -65,6 +66,26 @@
     if (e.target.classList.contains("modal")) {
       e.target.style.display = "none"
     }
-    
+    if (e.target.classList.contains("pie")) {
+      selectedPieId = e.target.id
+    }
   });
+  
+
+  async function sendPie(pieId) {
+    const req = await fetch("/pies", {
+      method: "post",
+      body: JSON.stringify({ pieId }),
+      headers: { "Content-Type": "application/json" }
+    });
+    const resp = await req.json();
+    return resp;
+  }
+
+  document.addEventListener("submit", function(e) {
+    e.preventDefault();
+    sendPie(selectedPieId);
+    location.reload(); // get rid of this
+  });
+  
 })(document);

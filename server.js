@@ -85,9 +85,6 @@ app.get("/", function(request, response) {
   response.sendFile(__dirname + "/views/index.html");
 });
 
-app.get("/browse", function(request, response) {
-  response.sendFile(__dirname + "/views/browse.html");
-});
 
 app.get("/pies", async function(request, response) {
   const data = {
@@ -137,26 +134,6 @@ app.post("/pies", async function(request, response) {
     console.log(e);
     console.log(e.response.body.errors);
   }
-});
-
-app.get("/chocopie/:id", async function(request, response) {
-  const pie = await Pie.findOne({
-    where: { id: request.params.id }
-  });
-  if (pie.isClaimed) {
-    response.sendFile(__dirname + "/views/chocopie.html");
-  } else {
-    response.sendFile(__dirname + "/views/checkout.html");
-  }
-});
-
-app.post("/chocopie", function(request, response) {
-  console.log(request.body);
-  response.redirect("/chocopie/" + request.body.fid);
-});
-
-app.get("/register", function(request, response) {
-  response.sendFile(__dirname + "/views/register.html");
 });
 
 
