@@ -1,7 +1,7 @@
 // client-side js
 // run by the browser each time your view template is loaded
 
-(async function(d) {
+(async function(d, sPZ) {
   let pieData = await fetchPies();
   let claimed = pieData.claimed;
   let total = pieData.total;
@@ -10,6 +10,16 @@
 
   drawData(total, claimed);
   drawMap(pies);
+  
+  const panZoomInstance = sPZ('.map-svg', {
+    zoomEnabled: true,
+    controlIconsEnabled: true,
+    fit: true,
+    center: true,
+    minZoom: 0.1,
+    maxZoom:25,
+  });
+  
 
   async function fetchPies() {
     const req = await fetch("/pies");
@@ -59,7 +69,6 @@
       }
     });
 
-    mapgroup.setAttribute("transform", "scale(1)");
     map.appendChild(mapgroup);
   }
 
@@ -89,8 +98,8 @@
     date.setAttribute("x", 1 * pieRect.getAttribute("x") + 0.5);
 
     text.style.fill = "white";
-    text.setAttribute("x", 1 * pieRect.getAttribute("x"));
-    text.setAttribute("y", 1 * pieRect.getAttribute("x") + 0.3);
+    text.setAttribute("x", 1 * pieRect.getAttribute("y"));
+    text.setAttribute("y", 1 * pieRect.getAttribute("y") + 0.3);
     text.setAttribute("text-anchor", "middle");
     text.setAttribute("font-size", "0.005em");
 
@@ -147,4 +156,4 @@
     drawData(total, claimed);
     drawClaimedPie(pieRect);
   });
-})(document);
+})(document, svgPanZoom);
