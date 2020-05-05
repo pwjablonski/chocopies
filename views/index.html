@@ -39,10 +39,9 @@
         <div class="row main">
           <div class="menu">
             <ul>
-              <li><a href="browse">Share Now &#x203A;</a></li>
-              <li><a href="chocopie">About Choco Pie &#x203A;</a></li>
-              <li><a href="about">About the Artist &#x203A;</a></li>
-              <li><a href="triennial">About Triennial &#x203A;</a></li>
+              <li><a data-toggle="modal" href="#myModal">About Choco Pie &#x203A;</a></li>
+              <li><a data-toggle="modal" href="#aboutArtist">About the Artist &#x203A;</a></li>
+              <li><a data-toggle="modal" href="#aboutTriennial">About Triennial &#x203A;</a></li>
             </ul>
           </div>
           <div class="map" data-toggle="modal" data-target="#myModal">
@@ -64,10 +63,31 @@
     </main>
     <button data-toggle="modal" data-target="#myModal"> click me, I make a modal</button>
     
-    <div class="modal" id="myModal">
+    <div class="modal" id="sendPie">
       <div class="modal-content">
         <span class="close-btn" data-dismiss="modal">&times;</span>
         <p>this is the text inside the modal</p>
+      </div>
+    </div>
+    
+    <div class="modal" id="aboutArtist">
+      <div class="modal-content">
+        <span class="close-btn" data-dismiss="modal">&times;</span>
+        <p>About Artist</p>
+      </div>
+    </div>
+    
+    <div class="modal" id="aboutTriennial">
+      <div class="modal-content">
+        <span class="close-btn" data-dismiss="modal">&times;</span>
+        <p>Triennial</p>
+      </div>
+    </div>
+    
+    <div class="modal" id="aboutChocopie">
+      <div class="modal-content">
+        <span class="close-btn" data-dismiss="modal">&times;</span>
+        <p>About Chocopie</p>
       </div>
     </div>
     

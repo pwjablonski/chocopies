@@ -32,6 +32,8 @@
         "rect"
       );
       pieRect.classList.add("pie");
+      pieRect.dataset.target = "#myModal";
+      pieRect.dataset.toggle = "modal";
       pieRect.setAttribute("height", "1");
       pieRect.setAttribute("width", "1");
       pieRect.setAttribute("x", pie.x);
