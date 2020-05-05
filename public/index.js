@@ -54,14 +54,8 @@
   let modal = document.querySelector(".modal");
   let closeBtn = document.querySelector(".close-btn");
   d.addEventListener("click", function(e) {
-    if (e.target == modal) {
-      modal.style.display = "none";
-    }
-    if(e.target == modalBtn){
-      modal.style.display = "block";
-    }
-    if(e.target == closeBtn){
-      modal.style.display = "none";
+    if (e.target.dataset.toggle == "modal") {
+      let modal = document.querySelector(e.target.dataset.toggle);
     }
   });
 })(document);
