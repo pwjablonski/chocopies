@@ -122,7 +122,7 @@ app.post("/pies", async function(request, response) {
     from: "pwjablonski@gmail.com",
     subject: `Hi ${request.body.data.recipientName}!`,
     text: request.body.data.message,
-    html: `<strong>and easy to do anywhere, even with Node.js</strong>"
+    html: `<strong>${request.body.data.message}</strong>`
   };
   try {
     await sgMail.send(msg);
