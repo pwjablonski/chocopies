@@ -2,11 +2,11 @@
 // run by the browser each time your view template is loaded
 
 (async function(d) {
-  const { total, claimed, pies } = await fetchPies();
+  let pieData = await fetchPies();
   let selectedPieId = null;
   
-  drawData(total, claimed);
-  drawMap(pies);
+  drawData(pieData.total, pieData.claimed);
+  drawMap(pieData.pies);
 
   async function fetchPies() {
     const req = await fetch("/pies");
@@ -107,8 +107,10 @@
       modal.style.display = "block"
     }
     if (e.target.dataset.dismiss == "modal") {
-      let modal = document.querySelector(".modal");
-      modal.style.display = "none"
+      let modals = document.querySelectorAll(".modal");
+      modals.forEach(function(modal){
+          modal.style.display = "none"
+      })
     }
     if (e.target.classList.contains("modal")) {
       e.target.style.display = "none"
@@ -129,10 +131,12 @@
     return resp;
   }
 
-  document.addEventListener("submit", function(e) {
+  document.addEventListener("submit", async function(e) {
     e.preventDefault();
-    sendPie(selectedPieId);
-    location.reload(); // get rid of this
+    await sendPie(selectedPieId);
+    pieData = await fetchPies();
+    drawData(pieData.total, pieData.claimed);
+    drawMap(pieData.pies);
   });
   
 })(document);
