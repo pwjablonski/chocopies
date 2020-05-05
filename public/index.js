@@ -4,7 +4,7 @@
 (async function(d) {
   let pieData = await fetchPies();
   let selectedPieId = null;
-  
+
   drawData(pieData.total, pieData.claimed);
   drawMap(pieData.pies);
 
@@ -89,9 +89,9 @@
 
         pieRect.style.fill = "#0080ff";
         pieRect.parentElement.appendChild(text);
-      } else{
-        pieRect.dataset.toggle="modal"
-        pieRect.dataset.target="#sendPie"
+      } else {
+        pieRect.dataset.toggle = "modal";
+        pieRect.dataset.target = "#sendPie";
       }
     });
 
@@ -99,27 +99,25 @@
     map.appendChild(mapgroup);
   }
 
-
   d.addEventListener("click", function(e) {
-    console.log(e)
+    console.log(e);
     if (e.target.dataset.toggle == "modal") {
       let modal = document.querySelector(e.target.dataset.target);
-      modal.style.display = "block"
+      modal.style.display = "block";
     }
     if (e.target.dataset.dismiss == "modal") {
       let modals = document.querySelectorAll(".modal");
-      modals.forEach(function(modal){
-          modal.style.display = "none"
-      })
+      modals.forEach(function(modal) {
+        modal.style.display = "none";
+      });
     }
     if (e.target.classList.contains("modal")) {
-      e.target.style.display = "none"
+      e.target.style.display = "none";
     }
     if (e.target.classList.contains("pie")) {
-      selectedPieId = e.target.id
+      selectedPieId = e.target.id;
     }
   });
-  
 
   async function sendPie(pieId) {
     const req = await fetch("/pies", {
@@ -133,10 +131,46 @@
 
   document.addEventListener("submit", async function(e) {
     e.preventDefault();
-    await sendPie(selectedPieId);
-    pieData = await fetchPies();
-    drawData(pieData.total, pieData.claimed);
-    drawMap(pieData.pies);
+
+    const pie = await sendPie(selectedPieId);
+    console.log(pie)
+    console.log(pie)
+    let pieRect = document.querySelectorAll(`#${selectedPieId}`);
+    const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    const title = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "tspan"
+    );
+    const name = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "tspan"
+    );
+    const date = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "tspan"
+    );
+    title.textContent = "SHARED BY";
+    name.textContent = "PETER";
+    date.textContent = "4-20-20";
+
+    title.setAttribute("dy", "0em");
+    title.setAttribute("x", 1 * pie.x + 0.5);
+    name.setAttribute("dy", "2em");
+    name.setAttribute("x", 1 * pie.x + 0.5);
+    date.setAttribute("dy", "2em");
+    date.setAttribute("x", 1 * pie.x + 0.5);
+
+    text.style.fill = "white";
+    text.setAttribute("x", 1 * pie.x);
+    text.setAttribute("y", 1 * pie.y + 0.3);
+    text.setAttribute("text-anchor", "middle");
+    text.setAttribute("font-size", "0.005em");
+
+    text.appendChild(title);
+    text.appendChild(name);
+    text.appendChild(date);
+
+    pieRect.style.fill = "#0080ff";
+    pieRect.parentElement.appendChild(text);
   });
-  
 })(document);
