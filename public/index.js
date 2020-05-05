@@ -49,25 +49,24 @@
       //   "http://www.w3.org/2000/svg",
       //   "rect"
       // );
-      const pieObject = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "image"
-      );
+//       const pieObject = document.createElementNS(
+//         "http://www.w3.org/2000/svg",
+//         "image"
+//       );
       
-      const pieGroup = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "g"
-      );
+//       const pieGroup = document.createElementNS(
+//         "http://www.w3.org/2000/svg",
+//         "g"
+//       );
       
-      pieObject.setAttribute("href", "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fchocopie-transparentpng.svg?v=1588715800345");
-      pieObject.setAttribute("type", "image/svg+xml");
-      pieObject.classList.add("pie");
-      pieObject.setAttribute("height", "0.98");
-      pieObject.setAttribute("width", "0.98");
-      // pieObject.setAttribute("x", 1 * pie.x);
-      // pieObject.setAttribute("y", 1 * pie.y);
-      pieObject.id = pie.id;
-      pieGroup.appendChild(pieObject);
+//       pieObject.setAttribute("href", "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-04-30%20at%209.40.37%20AM.png?v=1588257676068");
+//       pieObject.classList.add("pie");
+//       pieObject.setAttribute("height", "0.98");
+//       pieObject.setAttribute("width", "0.98");
+//       // pieObject.setAttribute("x", 1 * pie.x);
+//       // pieObject.setAttribute("y", 1 * pie.y);
+//       pieObject.id = pie.id;
+//       pieGroup.appendChild(pieObject);
       
 
       // pieRect.classList.add("pie");
@@ -77,7 +76,7 @@
       // pieRect.setAttribute("y", 1 * pie.y);
       // pieRect.id = pie.id;
       // pieGroup.appendChild(pieRect);
-      mapgroup.appendChild(pieGroup);
+      // mapgroup.appendChild(pieGroup);
 
       // if (pie.isClaimed) {
       //   drawClaimedPie(pieRect);
