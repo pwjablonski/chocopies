@@ -12,8 +12,7 @@
     "body-parser": "^1.19.0",
     "sequelize": "*",
     "sqlite3": "*",
-    "nodemailer": "^6.4.6",
-    "nodemailer-mandrill-transport": "^1.2.0"
+    "@sendgrid/mail": "^7.1.0"
   },
   "engines": {
     "node": "12.x"

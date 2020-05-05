@@ -2,25 +2,13 @@ const express = require("express");
 const Sequelize = require("sequelize");
 const Jimp = require("jimp");
 const bodyParser = require("body-parser");
-const nodemailer = require("nodemailer");
-var mandrillTransport = require("nodemailer-mandrill-transport");
+const sgMail = require("@sendgrid/mail");
 
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
-
-// email
-// async function createTransporter() {
-//   return nodemailer.createTransport(
-//     mandrillTransport({
-//       auth: {
-//         apiKey: "4c379df82e6e68cd940e861d01d89496-us8"
-//       }
-//     })
-//   );
-// }
 
 // Database
 let Pie;
@@ -88,6 +76,17 @@ async function setup() {
   }
 }
 
+// email
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const msg = {
+  to: "pwjablonski@gmail.com",
+  from: "pwjablonski@gmail.com",
+  subject: "Sending with Twilio SendGrid is Fun",
+  text: "and easy to do anywhere, even with Node.js",
+  html: "<strong>and easy to do anywhere, even with Node.js</strong>"
+};
+sgMail.send(msg);
+
 // ROUTES
 
 app.get("/", function(request, response) {
@@ -130,17 +129,15 @@ app.post("/pies", async function(request, response) {
     }
   );
 
-//   const transporter = await createTransporter();
-//   let info = await transporter.sendMail({
-//     from: '"Fred Foo 👻" <foo@example.com>', // sender address
-//     to: "pwjablonski@gmail.com, baz@example.com", // list of receivers
-//     subject: "Hello ✔", // Subject line
-//     text: "Hello world?", // plain text body
-//     html: "<b>Hello world?</b>" // html body
-//   });
-
-//   console.log("Message sent: %s", info.messageId);
-//   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  // email
+  const msg = {
+    to: "pwjablonski@gmail.com",
+    from: "pwjablonski@gmail.com",
+    subject: "Sending with Twilio SendGrid is Fun",
+    text: "and easy to do anywhere, even with Node.js",
+    html: "<strong>and easy to do anywhere, even with Node.js</strong>"
+  };
+  sgMail.send(msg);
 });
 
 app.get("/chocopie/:id", async function(request, response) {
