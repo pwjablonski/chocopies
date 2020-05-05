@@ -78,14 +78,9 @@ async function setup() {
 
 // email
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-const msg = {
-  to: "pwjablonski@gmail.com",
-  from: "pwjablonski@gmail.com",
-  subject: "Sending with Twilio SendGrid is Fun",
-  text: "and easy to do anywhere, even with Node.js",
-  html: "<strong>and easy to do anywhere, even with Node.js</strong>"
-};
-sgMail.send(msg);
+
+console.log(process.env.SENDGRID_API_KEY)
+console.log(sgMail)
 
 // ROUTES
 
@@ -137,7 +132,12 @@ app.post("/pies", async function(request, response) {
     text: "and easy to do anywhere, even with Node.js",
     html: "<strong>and easy to do anywhere, even with Node.js</strong>"
   };
-  sgMail.send(msg);
+  try{
+    sgMail.send(msg);
+  } catch(e){
+      console.log(e);
+  }
+
 });
 
 app.get("/chocopie/:id", async function(request, response) {
