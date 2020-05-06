@@ -7,24 +7,17 @@
   let total = pieData.total;
   let pies = pieData.pies;
   let selectedPieId = null;
-  
-  mbGL.accessToken = 'pk.eyJ1IjoicHdqYWJsb25za2kiLCJhIjoiY2s5dW5wdnh0MDBzYTNtbHFtZWRtbmw3YSJ9.eHxCyVJuJmXzblybi0S9_w';
-  var map = new mbGL.Map({
-  container: 'map',
-  style: 'mapbox://styles/mapbox/streets-v11'
+
+  mbGL.accessToken =
+    "pk.eyJ1IjoicHdqYWJsb25za2kiLCJhIjoiY2s5dW5wdnh0MDBzYTNtbHFtZWRtbmw3YSJ9.eHxCyVJuJmXzblybi0S9_w";
+  const map = new mbGL.Map({
+    container: "map",
+    // style: "mapbox://styles/mapbox/streets-v11",
+    center: [127, 38],
+    zoom: 4.45,
   });
 
   drawData(total, claimed);
-  
-  const panZoomInstance = sPZ('.map-svg', {
-    zoomEnabled: true,
-    controlIconsEnabled: true,
-    fit: true,
-    center: true,
-    minZoom: 0.1,
-    maxZoom:30,
-  });
-  
 
   async function fetchPies() {
     const req = await fetch("/pies");
@@ -40,7 +33,6 @@
     claimedDiv.innerHTML = claimed;
     moneyDiv.innerHTML = `$ ${claimed}`;
   }
-
 
   d.addEventListener("click", function(e) {
     if (e.target.dataset.toggle == "modal") {
@@ -80,11 +72,10 @@
     data.recipientEmail = e.target[3].value;
     data.message = e.target[4].value;
     data.signUp = e.target[5].checked;
-    
+
     await sendPie(selectedPieId, data);
     let pieRect = document.getElementById(selectedPieId);
     claimed += 1;
     drawData(total, claimed);
-
   });
 })(document, mapboxgl);
