@@ -19,16 +19,42 @@
   });
 
   map.on("load", function() {
-    map.addSource("some id", {
-      type: "image",
-      url: "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fchocopie-small.png?v=1588725461413",
-      coordinates: [
-        [-76.54, 39.18],
-        [-76.52, 39.18],
-        [-76.52, 39.17],
-        [-76.54, 39.17]
-      ]
+    // Add GeoJSON data
+    map.addSource("source", {
+      type: "geojson",
+      data: {
+        type: "Feature",
+        properties: {},
+        geometry: {
+          type: "Polygon",
+          coordinates: [
+            [[-30, -25], [-30, 35], [30, 35], [30, -25], [-30, -25]]
+          ]
+        }
+      }
     });
+
+    // Load an image to use as the pattern
+    map.loadImage(
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Cat_silhouette.svg/64px-Cat_silhouette.svg.png",
+      function(err, image) {
+        // Throw an error if something went wrong
+        if (err) throw err;
+
+        // Declare the image
+        map.addImage("pattern", image);
+
+        // Use it
+        map.addLayer({
+          id: "pattern-layer",
+          type: "fill",
+          source: "source",
+          paint: {
+            "fill-pattern": "pattern"
+          }
+        });
+      }
+    );
   });
 
   drawData(total, claimed);
