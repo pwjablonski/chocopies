@@ -85,6 +85,10 @@ app.get("/", function(request, response) {
   response.sendFile(__dirname + "/views/index.html");
 });
 
+app.get("/mapbox", function(request, response) {
+  response.sendFile(__dirname + "/views/mapbox.html");
+});
+
 app.get("/pies", async function(request, response) {
   const data = {
     claimed: 0,
