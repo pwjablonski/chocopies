@@ -19,37 +19,16 @@
   });
 
   map.on("load", function() {
-    map.loadImage(
-      "https://upload.wikimedia.org/wikipedia/commons/7/7c/201408_cat.png",
-      function(error, image) {
-        if (error) throw error;
-        map.addImage("cat", image);
-        map.addSource("point", {
-          type: "geojson",
-          data: {
-            type: "FeatureCollection",
-            features: [
-              {
-                type: "Feature",
-                geometry: {
-                  type: "Point",
-                  coordinates: [127, 38]
-                }
-              }
-            ]
-          }
-        });
-        map.addLayer({
-          id: "pies",
-          type: "symbol",
-          source: "point",
-          layout: {
-            "icon-image": "cat",
-            "icon-size": 0.25
-          }
-        });
-      }
-    );
+    map.addSource("some id", {
+      type: "image",
+      url: "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fchocopie-small.png?v=1588725461413",
+      coordinates: [
+        [-76.54, 39.18],
+        [-76.52, 39.18],
+        [-76.52, 39.17],
+        [-76.54, 39.17]
+      ]
+    });
   });
 
   drawData(total, claimed);
