@@ -27,9 +27,7 @@
         properties: {},
         geometry: {
           type: "Polygon",
-          coordinates: [
-            [[-30, -25], [-30, 35], [30, 35], [30, -25]]
-          ]
+          coordinates: [[[-30, -25], [-30, 35], [30, 35], [30, -25]]]
         }
       }
     });
@@ -47,11 +45,9 @@
         // Use it
         map.addLayer({
           id: "pattern-layer",
-          type: "fill",
+          type: "raster",
           source: "source",
-          paint: {
-            "fill-pattern": "pattern"
-          }
+          paint: { "raster-opacity": 0.85 }
         });
       }
     );
