@@ -21,36 +21,23 @@
   map.on("load", function() {
     // Add GeoJSON data
     map.addSource("source", {
-      type: "geojson",
-      data: {
-        type: "Feature",
-        properties: {},
-        geometry: {
-          type: "Polygon",
-          coordinates: [[[-30, -25], [-30, 35], [30, 35], [30, -25]]]
-        }
-      }
+      type: "image",
+      url: "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-04-30%20at%209.40.37%20AM.png?v=1588257676068",
+      coordinates: [
+        [127, 38],
+        [127, 37],
+        [128, 37],
+        [128, 38]
+      ]
     });
 
     // Load an image to use as the pattern
-    map.loadImage(
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Cat_silhouette.svg/64px-Cat_silhouette.svg.png",
-      function(err, image) {
-        // Throw an error if something went wrong
-        if (err) throw err;
-
-        // Declare the image
-        map.addImage("pattern", image);
-
-        // Use it
-        map.addLayer({
-          id: "pattern-layer",
-          type: "raster",
-          source: "source",
-          paint: { "raster-opacity": 0.85 }
-        });
-      }
-    );
+    map.addLayer({
+      id: "pattern-layer",
+      type: "raster",
+      source: "source",
+      paint: { "raster-opacity": 0.85 }
+    });
   });
 
   drawData(total, claimed);
