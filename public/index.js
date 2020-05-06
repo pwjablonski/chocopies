@@ -18,7 +18,6 @@
     center: true,
     minZoom: 0.1,
     maxZoom:30,
-    refreshRate:100,
   });
   
 
