@@ -22,15 +22,11 @@
     // Add GeoJSON data
     map.addSource("source", {
       type: "image",
-      url: "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-04-30%20at%209.40.37%20AM.png?v=1588257676068",
-      coordinates: [
-        [127, 38],
-        [127, 37],
-        [128, 37],
-        [128, 38]
-      ]
+      url:
+        "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-04-30%20at%209.40.37%20AM.png?v=1588257676068",
+      coordinates: [[128, 38], [127, 38],[127, 37], [128, 37],]
     });
-
+    
     // Load an image to use as the pattern
     map.addLayer({
       id: "pattern-layer",
