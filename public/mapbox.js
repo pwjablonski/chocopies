@@ -40,7 +40,7 @@
           }
         });
         map.addLayer({
-          id: "points",
+          id: "pies",
           type: "symbol",
           source: "point",
           layout: {
