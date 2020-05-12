@@ -18,40 +18,40 @@
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
+    <header>
+      <div data-toggle="modal" data-target="#shareNow">
+        Share Now&#x203A;
+      </div>
+      <div data-toggle="modal" data-target="#aboutChocopie">
+        About Choco Pie &#x203A;
+      </div>
+      <div data-toggle="modal" data-target="#aboutArtist">
+        About the Artist &#x203A;
+      </div>
+      <div data-toggle="modal" data-target="#aboutTriennial">
+        About Triennial &#x203A;
+      </div>
+    </header>
     <main>
       <div class="container">
-        <div class="row overview">
-          <div class="overview__left">
-            <h2>
-              Chocopies Shared
-            </h2>
-            <h1><span id="piesClaimed"></span>/<span id="totalPies"></span></h1>
-          </div>
-          <div class="overview__right">
-            <h2>
-              Raised For Charity
-            </h2>
-            <h1>
-              <span id="moneyRaised"></span>
-            </h1>
-          </div>
-        </div>
         <div class="row main">
           <div class="menu">
-            <ul>
-              <li data-toggle="modal" data-target="#shareNow">
-                Share Now&#x203A;
-              </li>
-              <li data-toggle="modal" data-target="#aboutChocopie">
-                About Choco Pie &#x203A;
-              </li>
-              <li data-toggle="modal" data-target="#aboutArtist">
-                About the Artist &#x203A;
-              </li>
-              <li data-toggle="modal" data-target="#aboutTriennial">
-                About Triennial &#x203A;
-              </li>
-            </ul>
+            <div class="overview__left">
+              <h2>
+                Chocopies Shared
+              </h2>
+              <h1>
+                <span id="piesClaimed"></span>/<span id="totalPies"></span>
+              </h1>
+            </div>
+            <div class="overview__right">
+              <h2>
+                Raised For Charity
+              </h2>
+              <h1>
+                <span id="moneyRaised"></span>
+              </h1>
+            </div>
           </div>
           <div class="map" data-toggle="modal" data-target="#myModal">
             <svg
@@ -61,7 +61,9 @@
             >
               <defs>
                 <filter id="image">
-                  <feImage xlink:href="https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fchocopie-small.png?v=1588725461413" />
+                  <feImage
+                    xlink:href="https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fchocopie-small.png?v=1588725461413"
+                  />
                 </filter>
               </defs>
             </svg>

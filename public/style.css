@@ -21,31 +21,6 @@ header {
   width:100%;
 }
 
-h1 {
-  text-transform: uppercase;
-  margin: 0;
-}
-
-h2 {
-  text-transform: uppercase;
-  margin: 0;
-}
-
-ul {
-  margin:0;
-  list-style:none;
-  padding-inline-start: 0;
-  text-decoration:underline;
-}
-
-li {
-  margin-bottom: 1em;
-}
-
-a {
-  color:black;
-}
-
 main {
   height:100%;
   font-size:1.5em;
@@ -57,21 +32,10 @@ main {
   text-align:center;
 }
 
-.row{
-  display:flex;
-}
-
 .overview {
   justify-content: space-around;
 }
 
-.overview__left{
-  text-align:center;
-}
-
-.overview__right{
-  text-align:center;
-}
 
 .main {
   display:flex;
