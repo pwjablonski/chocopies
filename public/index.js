@@ -115,7 +115,7 @@
   }
 
   d.addEventListener("click", function(e) {
-    console.log(e)
+
     if (e.target.dataset.toggle == "modal") {
       let modal = document.querySelector(e.target.dataset.target);
       modal.style.display = "block";
