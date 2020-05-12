@@ -66,8 +66,8 @@
       if (pie.isClaimed) {
         drawClaimedPie(pieRect);
       } else {
-        pieRect.dataset.toggle = "modal";
-        pieRect.dataset.target = "#sendPie";
+        // pieRect.dataset.toggle = "modal";
+        // pieRect.dataset.target = "#sendPie";
       }
     });
 
@@ -115,6 +115,7 @@
   }
 
   d.addEventListener("click", function(e) {
+    console.log(e)
     if (e.target.dataset.toggle == "modal") {
       let modal = document.querySelector(e.target.dataset.target);
       modal.style.display = "block";
