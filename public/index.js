@@ -11,14 +11,14 @@
   drawData(total, claimed);
   drawMap(pies);
   
-  const panZoomInstance = sPZ('.map-svg', {
-    zoomEnabled: true,
-    controlIconsEnabled: true,
-    fit: true,
-    center: true,
-    minZoom: 0.1,
-    maxZoom:30,
-  });
+  // const panZoomInstance = sPZ('.map-svg', {
+  //   zoomEnabled: true,
+  //   controlIconsEnabled: true,
+  //   fit: true,
+  //   center: true,
+  //   minZoom: 0.1,
+  //   maxZoom:30,
+  // });
   
 
   async function fetchPies() {
