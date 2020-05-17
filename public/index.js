@@ -9,9 +9,9 @@
   let selectedPieId = null;
 
   drawData(total, claimed);
-  drawMap(pies);
+  drawMap(pies, ".map-svg");
   
-  // const panZoomInstance = sPZ('.map-svg', {
+  // const panZoomInstance = sPZ('.zoom-map-svg', {
   //   zoomEnabled: true,
   //   controlIconsEnabled: true,
   //   fit: true,
@@ -19,6 +19,8 @@
   //   minZoom: 0.1,
   //   maxZoom:30,
   // });
+  
+  // panZoomInstance.zoomAtPoint(2, {x: 50, y: 50})
   
 
   async function fetchPies() {
@@ -36,8 +38,8 @@
     moneyDiv.innerHTML = `$ ${claimed}`;
   }
 
-  function drawMap(pies) {
-    const map = document.querySelector(".map-svg");
+  function drawMap(pies, selector) {
+    const map = document.querySelector(selector);
 
     const mapgroup = document.createElementNS(
       "http://www.w3.org/2000/svg",
@@ -133,6 +135,7 @@
     }
     if (e.target.classList.contains("pie")) {
       selectedPieId = e.target.id;
+      drawMap(pies, ".zoom-map-svg");
     }
   });
 
