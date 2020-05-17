@@ -54,6 +54,11 @@ main {
   height:100%;
 }
 
+.zoom-map {
+  height:100%;
+  width:100%;
+}
+
 .cta {
   text-align: right;
   flex:1;

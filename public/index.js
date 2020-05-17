@@ -11,16 +11,16 @@
   drawData(total, claimed);
   drawMap(pies, ".map-svg");
   
-  // const panZoomInstance = sPZ('.zoom-map-svg', {
-  //   zoomEnabled: true,
-  //   controlIconsEnabled: true,
-  //   fit: true,
-  //   center: true,
-  //   minZoom: 0.1,
-  //   maxZoom:30,
-  // });
+//   const panZoomInstance = sPZ('.zoom-map-svg', {
+//     zoomEnabled: true,
+//     controlIconsEnabled: true,
+//     fit: true,
+//     center: true,
+//     minZoom: 0.1,
+//     maxZoom:30,
+//   });
   
-  // panZoomInstance.zoomAtPoint(2, {x: 50, y: 50})
+  // panZoomInstance.zoomAtPoint(10, {x: 50, y: 50})
   
 
   async function fetchPies() {
@@ -40,6 +40,8 @@
 
   function drawMap(pies, selector) {
     const map = document.querySelector(selector);
+    
+    // map.innerHTML = "";
 
     const mapgroup = document.createElementNS(
       "http://www.w3.org/2000/svg",
