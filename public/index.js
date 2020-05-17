@@ -9,8 +9,8 @@
   let selectedPieId = null;
 
   drawData(total, claimed);
-  drawMap(pies, ".map-svg");
-  drawMap(pies, ".zoom-map-svg");
+  drawMap(pies, "map-svg");
+  drawMap(pies, "zoom-map-svg");
 
   async function fetchPies() {
     const req = await fetch("/pies");
@@ -28,7 +28,7 @@
   }
 
   function drawMap(pies, selector) {
-    const map = document.querySelector(selector);
+    const map = document.querySelector(`.${selector}`);
 
     const mapgroup = document.createElementNS(
       "http://www.w3.org/2000/svg",
@@ -45,8 +45,7 @@
         "http://www.w3.org/2000/svg",
         "g"
       );
-      pieRect.dataset.target = "#viewPies";
-      pieRect.dataset.toggle = "modal";
+
       pieRect.classList.add("pie");
       pieRect.classList.add(`${selector}-pie`);
       pieRect.setAttribute("height", "0.98");
@@ -122,14 +121,16 @@
     if (e.target.classList.contains("modal")) {
       e.target.style.display = "none";
     }
-    if (e.target.classList.contains("pie")) {
+    if (e.target.classList.contains("map-svg-pie")) {
+      let modal = document.querySelector("#viewPies");
+      modal.style.display = "block";
       selectedPieId = e.target.id;
+      console.log(e.target.getAttribute('x'), e.target.getAttribute('y'))
       const panZoomInstance = sPZ(".zoom-map-svg", {
-        zoomEnabled: true,
-        controlIconsEnabled: true,
-        maxZoom: 30
+        maxZoom: 30,
+        fit:true,
       });
-      panZoomInstance.zoom(50)
+      panZoomInstance.zoomAtPoint(30, {x: e.target.getAttribute('x'), y: e.target.getAttribute('y')})
     }
   });
 
