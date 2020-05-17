@@ -121,6 +121,12 @@
     if (e.target.classList.contains("modal")) {
       e.target.style.display = "none";
     }
+    
+    if (e.target.classList.contains("zoom-map-svg-pie")) {
+      let modal = document.querySelector("#sendPie");
+      modal.style.display = "block";
+    }
+    
     if (e.target.classList.contains("map-svg-pie")) {
       let modal = document.querySelector("#viewPies");
       modal.style.display = "block";
@@ -138,7 +144,7 @@
       const zoomY = (sizes.height / sizes.viewBox.height) * e.target.getAttribute('y')
       console.log(zoomX, zoomY)
       
-      panZoomInstance.zoomAtPoint(20, {x: zoomX, y: zoomY})
+      panZoomInstance.zoomAtPoint(20, {x: zoomX, y: zoomY});
       
       console.log(panZoomInstance.getSizes())
 
