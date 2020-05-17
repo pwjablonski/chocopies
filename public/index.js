@@ -7,9 +7,19 @@
   let total = pieData.total;
   let pies = pieData.pies;
   let selectedPieId = null;
-
+  
   drawData(total, claimed);
   drawMap(pies, ".map-svg");
+  drawMap(pies, ".zoom-map-svg");
+  
+  let panZoomInstance = sPZ(".map-svg", {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.1,
+        maxZoom: 30
+      });
 
   async function fetchPies() {
     const req = await fetch("/pies");
@@ -122,17 +132,6 @@
     }
     if (e.target.classList.contains("pie")) {
       selectedPieId = e.target.id;
-      drawMap(pies, ".zoom-map-svg");
-      const panZoomInstance = sPZ(".zoom-map-svg", {
-        zoomEnabled: true,
-        controlIconsEnabled: true,
-        fit: true,
-        center: true,
-        minZoom: 0.1,
-        maxZoom: 30
-      });
-
-      panZoomInstance.zoomAtPoint(9, { x: 150, y: 150 });
     }
   });
 
