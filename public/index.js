@@ -138,7 +138,7 @@
       const zoomY = (sizes.height / sizes.viewBox.height) * e.target.getAttribute('y')
       console.log(zoomX, zoomY)
       
-      panZoomInstance.zoomAtPoint(30, {x: zoomX, y: zoomY})
+      panZoomInstance.zoomAtPoint(20, {x: zoomX, y: zoomY})
       
       console.log(panZoomInstance.getSizes())
 
