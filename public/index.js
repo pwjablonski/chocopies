@@ -135,19 +135,13 @@
       const panZoomInstance = sPZ(".zoom-map-svg", {
         maxZoom: 30,
       });
-      panZoomInstance.fit();
-      panZoomInstance.center();
-      // panZoomInstance.zoom(30)
-      console.log(panZoomInstance.getSizes())
-      const sizes = panZoomInstance.getSizes()
-      const zoomX = (sizes.width / sizes.viewBox.width) * e.target.getAttribute('x')
-      const zoomY = (sizes.height / sizes.viewBox.height) * e.target.getAttribute('y')
-      console.log(zoomX, zoomY)
-      
-      panZoomInstance.zoomAtPoint(20, {x: zoomX, y: zoomY});
-      
-      console.log(panZoomInstance.getSizes())
 
+      panZoomInstance.zoom(20)
+      // const sizes = panZoomInstance.getSizes()
+      // const zoomX = (sizes.width / sizes.viewBox.width) * e.target.getAttribute('x')
+      // const zoomY = (sizes.height / sizes.viewBox.height) * e.target.getAttribute('y')      
+      // panZoomInstance.zoomAtPoint(20, {x: zoomX, y: zoomY});
+      
     }
   });
 
@@ -176,5 +170,7 @@
     claimed += 1;
     drawData(total, claimed);
     drawClaimedPie(pieRect);
+    let modal = document.querySelector("#confirmation");
+    modal.style.display = "block";
   });
 })(document, svgPanZoom);
