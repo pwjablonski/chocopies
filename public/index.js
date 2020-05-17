@@ -131,8 +131,14 @@
       });
       panZoomInstance.fit();
       panZoomInstance.center();
-      panZoomInstance.zoom(30)
-      panZoomInstance.zoomAtPoint(30, {x: 300, y: 300})
+      // panZoomInstance.zoom(30)
+      console.log(panZoomInstance.getSizes())
+      const sizes = panZoomInstance.getSizes()
+      const zoomX = (sizes.width / sizes.viewBox.width) * e.target.getAttribute('x')
+      const zoomY = (sizes.height / sizes.viewBox.height) * e.target.getAttribute('y')
+      console.log(zoomX, zoomY)
+      
+      panZoomInstance.zoomAtPoint(30, {x: zoomX, y: zoomY})
       
       console.log(panZoomInstance.getSizes())
 
