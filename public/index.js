@@ -121,27 +121,35 @@
     if (e.target.classList.contains("modal")) {
       e.target.style.display = "none";
     }
-    
-    if (e.target.classList.contains("zoom-map-svg-pie")) {
-      let modal = document.querySelector("#sendPie");
-      modal.style.display = "block";
-    }
-    
+
+    // if (e.target.classList.contains("zoom-map-svg-pie")) {
+    //   let modal = document.querySelector("#sendPie");
+    //   modal.style.display = "block";
+    //   selectedPieId = e.target.id;
+    // }
+
     if (e.target.classList.contains("map-svg-pie")) {
       let modal = document.querySelector("#viewPies");
       modal.style.display = "block";
-      selectedPieId = e.target.id;
-      console.log(e.target.getAttribute('x'), e.target.getAttribute('y'))
+      console.log(e.target.getAttribute("x"), e.target.getAttribute("y"));
       const panZoomInstance = sPZ(".zoom-map-svg", {
         maxZoom: 30,
+        zoomEnabled: false,
       });
 
-      panZoomInstance.zoom(20)
+      panZoomInstance.zoom(20);
       // const sizes = panZoomInstance.getSizes()
       // const zoomX = (sizes.width / sizes.viewBox.width) * e.target.getAttribute('x')
-      // const zoomY = (sizes.height / sizes.viewBox.height) * e.target.getAttribute('y')      
+      // const zoomY = (sizes.height / sizes.viewBox.height) * e.target.getAttribute('y')
       // panZoomInstance.zoomAtPoint(20, {x: zoomX, y: zoomY});
-      
+    }
+  });
+
+  d.addEventListener("dblclick", function(e) {
+    if (e.target.classList.contains("zoom-map-svg-pie")) {
+      let modal = document.querySelector("#sendPie");
+      modal.style.display = "block";
+      selectedPieId = e.target.id;
     }
   });
 
