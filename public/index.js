@@ -128,9 +128,13 @@
       console.log(e.target.getAttribute('x'), e.target.getAttribute('y'))
       const panZoomInstance = sPZ(".zoom-map-svg", {
         maxZoom: 30,
-        fit:true,
       });
-      panZoomInstance.zoomAtPoint(30, {x: e.target.getAttribute('x'), y: e.target.getAttribute('y')})
+      panZoomInstance.fit();
+      panZoomInstance.center();
+      panZoomInstance.zoom(30)
+
+
+      // panZoomInstance.zoomAtPoint(30, {x: e.target.getAttribute('x'), y: e.target.getAttribute('y')})
     }
   });
 
