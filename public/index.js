@@ -7,17 +7,10 @@
   let total = pieData.total;
   let pies = pieData.pies;
   let selectedPieId = null;
-  
+
   drawData(total, claimed);
   drawMap(pies, ".map-svg");
   drawMap(pies, ".zoom-map-svg");
-  
-  const panZoomInstance = sPZ(".zoom-map-svg", {
-        zoomEnabled: true,
-        controlIconsEnabled: true,
-        minZoom: 0.1,
-        maxZoom: 30
-      });
 
   async function fetchPies() {
     const req = await fetch("/pies");
@@ -36,6 +29,24 @@
 
   function drawMap(pies, selector) {
     const map = document.querySelector(selector);
+
+    const defs =  document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "defs"
+    );
+    const filter =  document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "filter"
+    );
+    filter.id = "image";
+    const feImage =  document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "feImage"
+    );
+    feImage.setAttribute("xlink:href", "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fchocopie-small.png?v=1588725461413");
+    filter.appendChild(feImage)
+    defs.appendChild(filter)
+    
 
     const mapgroup = document.createElementNS(
       "http://www.w3.org/2000/svg",
@@ -130,6 +141,12 @@
     }
     if (e.target.classList.contains("pie")) {
       selectedPieId = e.target.id;
+      const panZoomInstance = sPZ(".zoom-map-svg", {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        minZoom: 0.1,
+        maxZoom: 30
+      });
     }
   });
 
