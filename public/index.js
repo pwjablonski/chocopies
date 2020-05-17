@@ -132,9 +132,10 @@
       panZoomInstance.fit();
       panZoomInstance.center();
       panZoomInstance.zoom(30)
+      panZoomInstance.zoomAtPoint(30, {x: 300, y: 300})
+      
+      console.log(panZoomInstance.getSizes())
 
-
-      // panZoomInstance.zoomAtPoint(30, {x: e.target.getAttribute('x'), y: e.target.getAttribute('y')})
     }
   });
 
