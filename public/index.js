@@ -10,18 +10,6 @@
 
   drawData(total, claimed);
   drawMap(pies, ".map-svg");
-  
-//   const panZoomInstance = sPZ('.zoom-map-svg', {
-//     zoomEnabled: true,
-//     controlIconsEnabled: true,
-//     fit: true,
-//     center: true,
-//     minZoom: 0.1,
-//     maxZoom:30,
-//   });
-  
-  // panZoomInstance.zoomAtPoint(10, {x: 50, y: 50})
-  
 
   async function fetchPies() {
     const req = await fetch("/pies");
@@ -40,20 +28,18 @@
 
   function drawMap(pies, selector) {
     const map = document.querySelector(selector);
-    
-    // map.innerHTML = "";
 
     const mapgroup = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "g"
     );
-    
+
     pies.forEach(pie => {
       const pieRect = document.createElementNS(
         "http://www.w3.org/2000/svg",
         "rect"
       );
-      
+
       const pieGroup = document.createElementNS(
         "http://www.w3.org/2000/svg",
         "g"
@@ -121,7 +107,6 @@
   }
 
   d.addEventListener("click", function(e) {
-
     if (e.target.dataset.toggle == "modal") {
       let modal = document.querySelector(e.target.dataset.target);
       modal.style.display = "block";
@@ -138,6 +123,16 @@
     if (e.target.classList.contains("pie")) {
       selectedPieId = e.target.id;
       drawMap(pies, ".zoom-map-svg");
+      const panZoomInstance = sPZ(".zoom-map-svg", {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true,
+        minZoom: 0.1,
+        maxZoom: 30
+      });
+
+      panZoomInstance.zoomAtPoint(9, { x: 150, y: 150 });
     }
   });
 
@@ -160,7 +155,7 @@
     data.recipientEmail = e.target[3].value;
     data.message = e.target[4].value;
     data.signUp = e.target[5].checked;
-    
+
     await sendPie(selectedPieId, data);
     let pieRect = document.getElementById(selectedPieId);
     claimed += 1;
