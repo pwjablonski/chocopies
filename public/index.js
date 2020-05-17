@@ -54,6 +54,8 @@
         "http://www.w3.org/2000/svg",
         "g"
       );
+      pieRect.dataset.target = "#viewPies";
+      pieRect.dataset.toggle = "modal";
       pieRect.classList.add("pie");
       pieRect.setAttribute("height", "0.98");
       pieRect.setAttribute("width", "0.98");
