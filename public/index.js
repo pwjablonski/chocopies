@@ -12,11 +12,9 @@
   drawMap(pies, ".map-svg");
   drawMap(pies, ".zoom-map-svg");
   
-  let panZoomInstance = sPZ(".map-svg", {
+  const panZoomInstance = sPZ(".zoom-map-svg", {
         zoomEnabled: true,
         controlIconsEnabled: true,
-        fit: true,
-        center: true,
         minZoom: 0.1,
         maxZoom: 30
       });
