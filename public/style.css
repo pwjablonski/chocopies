@@ -65,8 +65,6 @@ main {
 }
 
 .pie {
-  stroke-width: .02;
-  stroke: black;
   filter:url(#image);
 }
 
