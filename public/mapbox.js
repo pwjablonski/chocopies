@@ -19,33 +19,63 @@
     attributionControl: false
   });
 
-  function xyToCoordinates(x, y){
-    
-    
-    return [[124, 43], [123, 43],[123, 42], [124, 42],]
+  function xyToCoordinates(x, y) {
+    const topLeft = 124;
+    const topRight = 43;
+
+    const xOffset = x * -0.5;
+    const yOffset = y * -0.5;
+
+    const width = -0.5;
+    const height = -0.5;
+
+    return [
+      [topLeft + xOffset, topRight + yOffset],
+      [topLeft + xOffset + width, topRight + yOffset],
+      [topLeft + xOffset + width, topRight + yOffset + height],
+      [topLeft + xOffset, topRight + yOffset + height]
+    ];
   }
-  
+
   map.on("load", function() {
     // Add GeoJSON data
-    
-    const coordinates = xyToCoordinates(0,0)
-    
-    map.addSource("source", {
-      type: "image",
-      url:
-        "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-04-30%20at%209.40.37%20AM.png?v=1588257676068",
-      coordinates: coordinates,
+    pies.forEach(pie => {
+      const coordinates = xyToCoordinates(pie.x, pie.y);
+
+      console.log(coordinates);
+      map.addSource(pie.id.toString(), {
+        type: "image",
+        url:
+          "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-04-30%20at%209.40.37%20AM.png?v=1588257676068",
+        coordinates: coordinates
+      });
+
+      // Load an image to use as the pattern
+      map.addLayer({
+        id: pie.id.toString(),
+        type: "raster",
+        source: pie.id.toString(),
+        paint: { "raster-opacity": 0.85 }
+      });
     });
 
-    // Load an image to use as the pattern
-    map.addLayer({
-      id: "pattern-layer",
-      type: "raster",
-      source: "source",
-      paint: { "raster-opacity": 0.85 }
-    });
+    //     const coordinates = xyToCoordinates(0,0)
+
+    //     map.addSource("source", {
+    //       type: "image",
+    //       url:
+    //         "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-04-30%20at%209.40.37%20AM.png?v=1588257676068",
+    //       coordinates: coordinates,
+    //     });
+
+    //     // Load an image to use as the pattern
+    //     map.addLayer({
+    //       id: "pattern-layer",
+    //       type: "raster",
+    //       source: "source",
+    //       paint: { "raster-opacity": 0.85 }
+    //     });
   });
-
 
   drawData(total, claimed);
 
