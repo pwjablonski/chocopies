@@ -19,99 +19,33 @@
     attributionControl: false
   });
 
-  //   map.on("load", function() {
-  //     // Add GeoJSON data
-  //     map.addSource("source", {
-  //       type: "image",
-  //       url:
-  //         "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-04-30%20at%209.40.37%20AM.png?v=1588257676068",
-  //       coordinates: [[128, 38], [127, 38],[127, 37], [128, 37],]
-  //     });
-
-  //     // Load an image to use as the pattern
-  //     map.addLayer({
-  //       id: "pattern-layer",
-  //       type: "raster",
-  //       source: "source",
-  //       paint: { "raster-opacity": 0.85 }
-  //     });
-  //   });
-
+  function xyToCoordinates(x, y){
+    
+    
+    return [[124, 43], [123, 43],[123, 42], [124, 42],]
+  }
+  
   map.on("load", function() {
-    // map.addSource("maine", {
-    //   type: "geojson",
-    //   data: {
-    //     type: "Feature",
-    //     geometry: {
-    //       type: "Polygon",
-    //       coordinates: [[[128, 38], [127, 38], [127, 37], [128, 37]]]
-    //     }
-    //   }
-    // });
-    // map.addLayer({
-    //   id: "maine",
-    //   type: "raster",
-    //   source: "maine",
-    //   // layout: {},
-    //   // paint: {
-    //   //   "fill-color": "#088",
-    //   //   "fill-opacity": 0.8
-    //   // }
-    // });
-    // map.loadImage(
-    //   "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-04-30%20at%209.40.37%20AM.png?v=1588257676068",
-    //   function(error, image) {
-    //     if (error) throw error;
-    //     map.addImage("cat", image);
-    //     map.addSource("pies", {
-    //       type: "geojson",
-    //       data: {
-    //         type: "FeatureCollection",
-    //         features: [
-    //           {
-    //             type: "Feature",
-    //             geometry: {
-    //               type: "Polygon",
-    //               coordinates: [[128, 38], [127, 38], [127, 37], [128, 37]]
-    //             }
-    //           }
-    //         ]
-    //       }
-    //     });
-    //     // map.addLayer({
-    //     //   id: "points",
-    //     //   type: "raster",
-    //     //   source: "point",
-    //     // });
-    //     map.addLayer({
-    //       id: "maine",
-    //       type: "fill",
-    //       source: "pies",
-    //       layout: {},
-    //       paint: {
-    //         "fill-color": "#088",
-    //         "fill-opacity": 0.8
-    //       }
-    //     });
-    //   }
-    // );
+    // Add GeoJSON data
+    
+    const coordinates = xyToCoordinates(0,0)
+    
+    map.addSource("source", {
+      type: "image",
+      url:
+        "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-04-30%20at%209.40.37%20AM.png?v=1588257676068",
+      coordinates: coordinates,
+    });
 
-    //         // Add GeoJSON data
-    //     map.addSource("source", {
-    //       type: "image",
-    //       url:
-    //         "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-04-30%20at%209.40.37%20AM.png?v=1588257676068",
-    //       coordinates: [[128, 38], [127, 38],[127, 37], [128, 37],]
-    //     });
-
-    //     // Load an image to use as the pattern
-    //     map.addLayer({
-    //       id: "pattern-layer",
-    //       type: "raster",
-    //       source: "source",
-    //       paint: { "raster-opacity": 0.85 }
-    //     });
+    // Load an image to use as the pattern
+    map.addLayer({
+      id: "pattern-layer",
+      type: "raster",
+      source: "source",
+      paint: { "raster-opacity": 0.85 }
+    });
   });
+
 
   drawData(total, claimed);
 
