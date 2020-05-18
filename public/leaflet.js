@@ -8,7 +8,7 @@
   let pies = pieData.pies;
   let selectedPieId = null;
 
-  var mymap = L.map("mapid",  { zoomControl: false } ).setView([38, 127], 6);
+  var mymap = L.map("mapid",  { zoomControl: false, attributionControl:false } ).setView([38, 127], 6);
 
   // L.tileLayer(
   //   "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
