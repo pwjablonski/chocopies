@@ -89,6 +89,10 @@ app.get("/mapbox", function(request, response) {
   response.sendFile(__dirname + "/views/mapbox.html");
 });
 
+app.get("/leaflet", function(request, response) {
+  response.sendFile(__dirname + "/views/leaflet.html");
+});
+
 app.get("/pies", async function(request, response) {
   const data = {
     claimed: 0,
