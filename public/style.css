@@ -3,6 +3,10 @@
 
 #mapid { height: 100%; width: 100% }
 
+.leaflet-container {
+    background-color:rgba(255,0,0,0.0);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -67,12 +71,14 @@ main {
 }
 
 .pie {
-  filter:url(#image);
+/*   border: 0.05px solid yellow; */
+/*   filter:url(#image); */
 }
 
 .pie:hover {
-  stroke: yellow;
-  stroke-width: 0.02;
+  border: 1px solid yellow;
+/*   stroke: yellow;
+  stroke-width: 0.02; */
 }
 
 

@@ -8,21 +8,21 @@
   let pies = pieData.pies;
   let selectedPieId = null;
 
-  var mymap = L.map("mapid").setView([38, 127], 5);
+  var mymap = L.map("mapid",  { zoomControl: false } ).setView([38, 127], 6);
 
-  L.tileLayer(
-    "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
-    {
-      attribution:
-        'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-      maxZoom: 18,
-      id: "mapbox/streets-v11",
-      tileSize: 512,
-      zoomOffset: -1,
-      accessToken:
-        "pk.eyJ1IjoicHdqYWJsb25za2kiLCJhIjoiY2s5dW5wdnh0MDBzYTNtbHFtZWRtbmw3YSJ9.eHxCyVJuJmXzblybi0S9_w"
-    }
-  ).addTo(mymap);
+  // L.tileLayer(
+  //   "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
+  //   {
+  //     attribution:
+  //       'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+  //     maxZoom: 18,
+  //     id: "mapbox/streets-v11",
+  //     tileSize: 512,
+  //     zoomOffset: -1,
+  //     accessToken:
+  //       "pk.eyJ1IjoicHdqYWJsb25za2kiLCJhIjoiY2s5dW5wdnh0MDBzYTNtbHFtZWRtbmw3YSJ9.eHxCyVJuJmXzblybi0S9_w"
+  //   }
+  // ).addTo(mymap);
 
   drawData(total, claimed);
   drawMap(pies);
@@ -57,7 +57,7 @@
       var off = 0.08
       var imageUrl = 'https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fchocopie-small.png?v=1588725461413',
       imageBounds = [[43- (pie.y * off), 125+ (pie.x * off)], [43- (pie.y * off)- off, 125 + (pie.x * off)+off]];
-      L.imageOverlay(imageUrl, imageBounds).addTo(mymap);
+      L.imageOverlay(imageUrl, imageBounds, {className: "pie"}).addTo(mymap);
 //       const pieRect = document.createElementNS(
 //         "http://www.w3.org/2000/svg",
 //         "rect"
