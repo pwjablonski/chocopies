@@ -50,13 +50,13 @@
     });
     map.addLayer({
       id: "maine",
-      type: "fill",
+      type: "raster",
       source: "maine",
-      layout: {},
-      paint: {
-        "fill-color": "#088",
-        "fill-opacity": 0.8
-      }
+      // layout: {},
+      // paint: {
+      //   "fill-color": "#088",
+      //   "fill-opacity": 0.8
+      // }
     });
     // map.loadImage(
     //   "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-04-30%20at%209.40.37%20AM.png?v=1588257676068",
