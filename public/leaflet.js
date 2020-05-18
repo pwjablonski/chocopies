@@ -44,8 +44,34 @@
   }
 
   function drawMap(pies) {
-    // const map = document.querySelector(`.${selector}`);
-
+    var svgElement = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "svg"
+    );
+    
+    const defs = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "defs"
+    );
+    
+    const filter = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "filter"
+    );
+    
+    const feImage = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "feImage"
+    );
+    
+    svgElement.appendChild(defs)
+    defs.appendChild(filter)
+    filter.appendChild(feImage)
+    
+    filter.setAttribute("id","image")
+    feImage.setAttributeNS("http://www.w3.org/2000/svg","xlink:href", "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fchocopie-small.png?v=1588725461413");
+    
+    
     const mapgroup = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "g"
@@ -80,10 +106,6 @@
     });
 
 
-    var svgElement = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "svg"
-    );
     svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
     svgElement.setAttribute("viewBox", "0 0 200 200");
     svgElement.appendChild(mapgroup);
