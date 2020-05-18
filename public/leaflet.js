@@ -68,9 +68,10 @@
     defs.appendChild(filter)
     filter.appendChild(feImage)
     
+    svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg")
+    svgElement.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink")
     filter.setAttribute("id","image")
     feImage.setAttributeNS("http://www.w3.org/2000/svg","xlink:href", "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fchocopie-small.png?v=1588725461413");
-    
     
     const mapgroup = document.createElementNS(
       "http://www.w3.org/2000/svg",
@@ -93,6 +94,7 @@
       pieRect.setAttribute("width", "0.98");
       pieRect.setAttribute("x", 1 * pie.x);
       pieRect.setAttribute("y", 1 * pie.y);
+      pieRect.setAttribute("filter", "url(#image)")
       pieRect.id = pie.id;
       pieGroup.appendChild(pieRect);
       mapgroup.appendChild(pieGroup);
