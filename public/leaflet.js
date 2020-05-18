@@ -54,9 +54,9 @@
     );
 
     pies.forEach(pie => {
-      
+      var off = 0.08
       var imageUrl = 'https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fchocopie-small.png?v=1588725461413',
-      imageBounds = [[42- (pie.y * 0.5), 123+ (pie.x * 0.5)], [42- (pie.y * 0.5)- 0.5, 123 + (pie.x * 0.5)+0.5]];
+      imageBounds = [[43- (pie.y * off), 125+ (pie.x * off)], [43- (pie.y * off)- off, 125 + (pie.x * off)+off]];
       L.imageOverlay(imageUrl, imageBounds).addTo(mymap);
 //       const pieRect = document.createElementNS(
 //         "http://www.w3.org/2000/svg",
