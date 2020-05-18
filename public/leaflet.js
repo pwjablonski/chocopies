@@ -8,10 +8,6 @@
   let pies = pieData.pies;
   let selectedPieId = null;
 
-  drawData(total, claimed);
-  // drawMap(pies, "map-svg");
-  // drawMap(pies, "zoom-map-svg");
-
   var mymap = L.map("mapid").setView([38, 127], 5);
 
   L.tileLayer(
@@ -27,16 +23,10 @@
         "pk.eyJ1IjoicHdqYWJsb25za2kiLCJhIjoiY2s5dW5wdnh0MDBzYTNtbHFtZWRtbmw3YSJ9.eHxCyVJuJmXzblybi0S9_w"
     }
   ).addTo(mymap);
-  var svgElement = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "svg"
-  );
-  svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-  svgElement.setAttribute("viewBox", "0 0 200 200");
-  svgElement.innerHTML =
-    '<rect width="200" height="200"/><rect x="75" y="23" width="50" height="50" style="fill:red"/><rect x="75" y="123" width="50" height="50" style="fill:#0013ff"/>';
-  var svgElementBounds = [[46, 123], [27, 130]];
-  L.svgOverlay(svgElement, svgElementBounds).addTo(mymap);
+  
+  
+  drawData(total, claimed);
+  drawMap(pies);
 
   async function fetchPies() {
     const req = await fetch("/pies");
@@ -53,45 +43,55 @@
     moneyDiv.innerHTML = `$ ${claimed}`;
   }
 
-  //   function drawMap(pies, selector) {
-  //     const map = document.querySelector(`.${selector}`);
+  function drawMap(pies) {
+    // const map = document.querySelector(`.${selector}`);
 
-  //     const mapgroup = document.createElementNS(
-  //       "http://www.w3.org/2000/svg",
-  //       "g"
-  //     );
+    const mapgroup = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "g"
+    );
 
-  //     pies.forEach(pie => {
-  //       const pieRect = document.createElementNS(
-  //         "http://www.w3.org/2000/svg",
-  //         "rect"
-  //       );
+    pies.forEach(pie => {
+      const pieRect = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "rect"
+      );
 
-  //       const pieGroup = document.createElementNS(
-  //         "http://www.w3.org/2000/svg",
-  //         "g"
-  //       );
+      const pieGroup = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "g"
+      );
 
-  //       pieRect.classList.add("pie");
-  //       pieRect.classList.add(`${selector}-pie`);
-  //       pieRect.setAttribute("height", "0.98");
-  //       pieRect.setAttribute("width", "0.98");
-  //       pieRect.setAttribute("x", 1 * pie.x);
-  //       pieRect.setAttribute("y", 1 * pie.y);
-  //       pieRect.id = pie.id;
-  //       pieGroup.appendChild(pieRect);
-  //       mapgroup.appendChild(pieGroup);
+      pieRect.classList.add("pie");
+      pieRect.setAttribute("height", "0.98");
+      pieRect.setAttribute("width", "0.98");
+      pieRect.setAttribute("x", 1 * pie.x);
+      pieRect.setAttribute("y", 1 * pie.y);
+      pieRect.id = pie.id;
+      pieGroup.appendChild(pieRect);
+      mapgroup.appendChild(pieGroup);
 
-  //       if (pie.isClaimed) {
-  //         drawClaimedPie(pieRect);
-  //       } else {
-  //         // pieRect.dataset.toggle = "modal";
-  //         // pieRect.dataset.target = "#sendPie";
-  //       }
-  //     });
+      if (pie.isClaimed) {
+        // drawClaimedPie(pieRect);
+      } else {
+        // pieRect.dataset.toggle = "modal";
+        // pieRect.dataset.target = "#sendPie";
+      }
+    });
 
-  //     map.appendChild(mapgroup);
-  //   }
+
+    var svgElement = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "svg"
+    );
+    svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    svgElement.setAttribute("viewBox", "0 0 200 200");
+    svgElement.appendChild(mapgroup);
+    // svgElement.innerHTML =
+    //   '<rect width="200" height="200"/><rect x="75" y="23" width="50" height="50" style="fill:red"/><rect x="75" y="123" width="50" height="50" style="fill:#0013ff"/>';
+    var svgElementBounds = [[42, 123], [34, 131]];
+    L.svgOverlay(svgElement, svgElementBounds).addTo(mymap);
+  }
 
   //   function drawClaimedPie(pieRect) {
   //     const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
