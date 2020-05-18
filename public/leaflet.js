@@ -48,69 +48,55 @@
       "svg"
     );
 
-    //     const defs = document.createElementNS(
-    //       "http://www.w3.org/2000/svg",
-    //       "defs"
-    //     );
-
-    //     const filter = document.createElementNS(
-    //       "http://www.w3.org/2000/svg",
-    //       "filter"
-    //     );
-
-    //     const feImage = document.createElementNS(
-    //       "http://www.w3.org/2000/svg",
-    //       "feImage"
-    //     );
-
-    //     svgElement.appendChild(defs)
-    //     defs.appendChild(filter)
-    //     filter.appendChild(feImage)
-
-    //     svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg")
-    //     svgElement.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink")
-    //     filter.setAttribute("id","image")
-    //     feImage.setAttributeNS("http://www.w3.org/2000/svg","xlink:href", "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fchocopie-small.png?v=1588725461413");
-
     const mapgroup = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "g"
     );
 
     pies.forEach(pie => {
-      const pieRect = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "rect"
-      );
+      
+      var imageUrl = 'https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fchocopie-small.png?v=1588725461413',
+      imageBounds = [[42- (pie.y * 0.5), 123+ (pie.x * 0.5)], [42- (pie.y * 0.5)- 0.5, 123 + (pie.x * 0.5)+0.5]];
+      L.imageOverlay(imageUrl, imageBounds).addTo(mymap);
+//       const pieRect = document.createElementNS(
+//         "http://www.w3.org/2000/svg",
+//         "rect"
+//       );
 
-      const pieGroup = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "g"
-      );
+//       const pieGroup = document.createElementNS(
+//         "http://www.w3.org/2000/svg",
+//         "g"
+//       );
 
-      pieRect.classList.add("pie");
-      pieRect.setAttribute("height", "0.98");
-      pieRect.setAttribute("width", "0.98");
-      pieRect.setAttribute("x", 1 * pie.x);
-      pieRect.setAttribute("y", 1 * pie.y);
-      pieRect.setAttribute("filter", "url(#image)");
-      pieRect.id = pie.id;
-      pieGroup.appendChild(pieRect);
-      mapgroup.appendChild(pieGroup);
+//       pieRect.classList.add("pie");
+//       pieRect.setAttribute("height", "0.98");
+//       pieRect.setAttribute("width", "0.98");
+//       pieRect.setAttribute("x", 1 * pie.x);
+//       pieRect.setAttribute("y", 1 * pie.y);
+//       pieRect.setAttribute("filter", "url(#image)");
+//       pieRect.id = pie.id;
+//       pieGroup.appendChild(pieRect);
+//       mapgroup.appendChild(pieGroup);
 
-      if (pie.isClaimed) {
-        // drawClaimedPie(pieRect);
-      } else {
-        // pieRect.dataset.toggle = "modal";
-        // pieRect.dataset.target = "#sendPie";
-      }
+//       if (pie.isClaimed) {
+//         // drawClaimedPie(pieRect);
+//       } else {
+//         // pieRect.dataset.toggle = "modal";
+//         // pieRect.dataset.target = "#sendPie";
+//       }
     });
 
-    svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-    svgElement.setAttribute("viewBox", "0 0 200 200");
-    svgElement.appendChild(mapgroup);
-    var svgElementBounds = [[42, 123], [34, 131]];
-    L.svgOverlay(svgElement, svgElementBounds).addTo(mymap);
+    
+//     var imageUrl = 'https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fchocopie-small.png?v=1588725461413',
+//     imageBounds = [[42, 123], [34, 131]];
+//     L.imageOverlay(imageUrl, imageBounds).addTo(mymap);
+    
+    
+    // svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    // svgElement.setAttribute("viewBox", "0 0 200 200");
+    // svgElement.appendChild(mapgroup);
+    // var svgElementBounds = [[42, 123], [34, 131]];
+    // L.svgOverlay(svgElement, svgElementBounds).addTo(mymap);
   }
 
   //   function drawClaimedPie(pieRect) {
