@@ -23,8 +23,7 @@
         "pk.eyJ1IjoicHdqYWJsb25za2kiLCJhIjoiY2s5dW5wdnh0MDBzYTNtbHFtZWRtbmw3YSJ9.eHxCyVJuJmXzblybi0S9_w"
     }
   ).addTo(mymap);
-  
-  
+
   drawData(total, claimed);
   drawMap(pies);
 
@@ -48,31 +47,31 @@
       "http://www.w3.org/2000/svg",
       "svg"
     );
-    
-    const defs = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "defs"
-    );
-    
-    const filter = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "filter"
-    );
-    
-    const feImage = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "feImage"
-    );
-    
-    svgElement.appendChild(defs)
-    defs.appendChild(filter)
-    filter.appendChild(feImage)
-    
-    svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg")
-    svgElement.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink")
-    filter.setAttribute("id","image")
-    feImage.setAttributeNS("http://www.w3.org/2000/svg","xlink:href", "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fchocopie-small.png?v=1588725461413");
-    
+
+    //     const defs = document.createElementNS(
+    //       "http://www.w3.org/2000/svg",
+    //       "defs"
+    //     );
+
+    //     const filter = document.createElementNS(
+    //       "http://www.w3.org/2000/svg",
+    //       "filter"
+    //     );
+
+    //     const feImage = document.createElementNS(
+    //       "http://www.w3.org/2000/svg",
+    //       "feImage"
+    //     );
+
+    //     svgElement.appendChild(defs)
+    //     defs.appendChild(filter)
+    //     filter.appendChild(feImage)
+
+    //     svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg")
+    //     svgElement.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink")
+    //     filter.setAttribute("id","image")
+    //     feImage.setAttributeNS("http://www.w3.org/2000/svg","xlink:href", "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fchocopie-small.png?v=1588725461413");
+
     const mapgroup = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "g"
@@ -94,7 +93,7 @@
       pieRect.setAttribute("width", "0.98");
       pieRect.setAttribute("x", 1 * pie.x);
       pieRect.setAttribute("y", 1 * pie.y);
-      pieRect.setAttribute("filter", "url(#image)")
+      pieRect.setAttribute("filter", "url(#image)");
       pieRect.id = pie.id;
       pieGroup.appendChild(pieRect);
       mapgroup.appendChild(pieGroup);
@@ -107,12 +106,9 @@
       }
     });
 
-
     svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
     svgElement.setAttribute("viewBox", "0 0 200 200");
     svgElement.appendChild(mapgroup);
-    // svgElement.innerHTML =
-    //   '<rect width="200" height="200"/><rect x="75" y="23" width="50" height="50" style="fill:red"/><rect x="75" y="123" width="50" height="50" style="fill:#0013ff"/>';
     var svgElementBounds = [[42, 123], [34, 131]];
     L.svgOverlay(svgElement, svgElementBounds).addTo(mymap);
   }
