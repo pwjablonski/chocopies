@@ -23,11 +23,11 @@
     const topLeft = 124;
     const topRight = 43;
 
-    const xOffset = x * -0.5;
-    const yOffset = y * -0.5;
+    const xOffset = x * 0.05;
+    const yOffset = y * -0.05;
 
-    const width = -0.5;
-    const height = -0.5;
+    const width = 0.05;
+    const height = -0.05;
 
     return [
       [topLeft + xOffset, topRight + yOffset],
@@ -41,8 +41,6 @@
     // Add GeoJSON data
     pies.forEach(pie => {
       const coordinates = xyToCoordinates(pie.x, pie.y);
-
-      console.log(coordinates);
       map.addSource(pie.id.toString(), {
         type: "image",
         url:
