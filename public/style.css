@@ -70,9 +70,24 @@ main {
   flex:1;
 }
 
-.pie {
-/*   border: 0.05px solid yellow; */
-/*   filter:url(#image); */
+.pie.eat {
+  filter:url(#eat);
+}
+
+.pie.unite {
+  filter:url(#unite);
+}
+
+.pie.love {
+  filter:url(#love);
+}
+
+.pie.peace {
+  filter:url(#peace);
+}
+
+.pie.share {
+  filter:url(#share);
 }
 
 .pie:hover {

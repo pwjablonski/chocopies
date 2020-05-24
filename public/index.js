@@ -55,7 +55,19 @@
       pieRect.id = pie.id;
       pieGroup.appendChild(pieRect);
       mapgroup.appendChild(pieGroup);
-
+      
+      if(pie.id % 0){
+        pieRect.classList.add("eat");
+      } else if (pie.id % 1){
+        pieRect.classList.add("unite");
+      } else if (pie.id % 1){
+        pieRect.classList.add("love");
+      } else if (pie.id % 1){
+        pieRect.classList.add("peace");
+      } else if (pie.id % 1){
+        pieRect.classList.add("share");
+      }       
+      
       if (pie.isClaimed) {
         drawClaimedPie(pieRect);
       } else {
