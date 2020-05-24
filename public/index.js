@@ -11,7 +11,7 @@
 
   drawData(total, claimed);
   drawMap(pies, "map-svg");
-  // drawMap(pies, "zoom-map-svg");
+  drawMap(pies, "zoom-map-svg");
   // drawMap(pies, "thumb-map-svg");
 
   async function fetchPies() {
@@ -147,19 +147,17 @@
     if (e.target.classList.contains("map-svg-pie")) {
       let modal = document.querySelector("#viewPies");
       modal.style.display = "block";
-      let svg = document.querySelector(".zoom-map-svg");
-      svg.innerHTML = "";
-      drawMap(pies, "zoom-map-svg");
-      panZoomInstance = sPZ(".zoom-map-svg", {
-        maxZoom: 40,
-        zoomEnabled: false
-      });
-
+      if (!panZoomInstance) {
+        panZoomInstance = sPZ(".zoom-map-svg", {
+          maxZoom: 40,
+          zoomEnabled: false
+        });
+      }
       const sizes = panZoomInstance.getSizes();
       const zoomX = sizes.width * (e.target.getAttribute("x") / 100);
       const zoomY = sizes.height * (e.target.getAttribute("y") / 125);
 
-      panZoomInstance.zoomAtPoint(15, { x: zoomX + 15, y: zoomY +15});
+      panZoomInstance.zoomAtPoint(15, { x: zoomX + 15, y: zoomY + 15 });
     }
   });
 
