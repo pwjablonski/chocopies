@@ -11,6 +11,7 @@
   drawData(total, claimed);
   drawMap(pies, "map-svg");
   drawMap(pies, "zoom-map-svg");
+  drawMap(pies, "thumb-map-svg");
 
   async function fetchPies() {
     const req = await fetch("/pies");
@@ -146,14 +147,14 @@
       let modal = document.querySelector("#viewPies");
       modal.style.display = "block";
       console.log(e.target.getAttribute("x"), e.target.getAttribute("y"));
-      const panZoomInstance = sPZ(".zoom-map-svg", {
-        maxZoom: 30,
-        zoomEnabled: false
-      });
+//       const panZoomInstance = sPZ(".zoom-map-svg", {
+//         maxZoom: 30,
+//         zoomEnabled: false
+//       });
 
-      panZoomInstance.zoom(20);
+//       panZoomInstance.zoom(20);
       
-      thumbnailViewer({mainViewId: 'mainView', thumbViewId: 'thumbView'});
+      tV({mainViewId: 'mainView', thumbViewId: 'thumbView'});
       // const sizes = panZoomInstance.getSizes()
       // const zoomX = (sizes.width / sizes.viewBox.width) * e.target.getAttribute('x')
       // const zoomY = (sizes.height / sizes.viewBox.height) * e.target.getAttribute('y')
