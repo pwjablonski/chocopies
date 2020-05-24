@@ -77,6 +77,10 @@ main {
   flex: 1;
 }
 
+.pie {
+  cursor:pointer;
+}
+
 .pie.eat {
   filter: url(#eat);
 }
@@ -308,6 +312,7 @@ main {
   color: lightgray;
   font-size: 24px;
   font-weight: bold;
+  cursor:pointer;
 }
 .close-btn:hover {
   color: darkgray;

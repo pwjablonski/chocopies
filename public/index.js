@@ -1,7 +1,7 @@
 // client-side js
 // run by the browser each time your view template is loaded
 
-(async function(d, sPZ) {
+(async function(d, sPZ, tV) {
   let pieData = await fetchPies();
   let claimed = pieData.claimed;
   let total = pieData.total;
@@ -152,6 +152,8 @@
       });
 
       panZoomInstance.zoom(20);
+      
+      thumbnailViewer({mainViewId: 'mainView', thumbViewId: 'thumbView'});
       // const sizes = panZoomInstance.getSizes()
       // const zoomX = (sizes.width / sizes.viewBox.width) * e.target.getAttribute('x')
       // const zoomY = (sizes.height / sizes.viewBox.height) * e.target.getAttribute('y')
@@ -216,4 +218,4 @@
     let modal = document.querySelector("#confirmation");
     modal.style.display = "block";
   });
-})(document, svgPanZoom);
+})(document, svgPanZoom, thumbnailViewer);
