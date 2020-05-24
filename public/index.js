@@ -152,11 +152,13 @@
         zoomEnabled: false
       });
 
-      panZoomInstance.zoom(40);
-      // tV({mainViewId: 'mainView', thumbViewId: 'thumbView'});
+      // panZoomInstance.zoom(40);
       // const sizes = panZoomInstance.getSizes()
       // const zoomX = (sizes.width / sizes.viewBox.width) * e.target.getAttribute('x')
       // const zoomY = (sizes.height / sizes.viewBox.height) * e.target.getAttribute('y')
+      const zoomX = e.target.getAttribute("x")
+      const zoomY = e.target.getAttribute("y")
+      panZoomInstance.pan({x: 100, y: -250});
       // panZoomInstance.zoomAtPoint(20, {x: zoomX, y: zoomY});
     }
   });
