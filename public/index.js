@@ -169,20 +169,20 @@
 
       const idModFive = selectedPieId % 5;
       if (idModFive === 0) {
-        pieImgSend.classList.add("eat");
-        pieImgShare.classList.add("eat");
+        pieImgSend.src = "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.08%20PM.png?v=1590350234801";
+        pieImgShare.src = "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.08%20PM.png?v=1590350234801";
       } else if (idModFive == 1) {
-        pieImgSend.classList.add("unite");
-        pieImgShare.classList.add("eat");
+        pieImgSend.src = "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.35%20PM.png?v=1590350235533";
+        pieImgShare.src = "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.35%20PM.png?v=1590350235533";
       } else if (idModFive === 2) {
-        pieImgSend.classList.add("love");
-        pieImgShare.classList.add("eat");
+        pieImgSend.src = "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.03%20PM.png?v=1590350237318";
+        pieImgShare.src = "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.03%20PM.png?v=1590350237318";
       } else if (idModFive === 3) {
-        pieImgSend.classList.add("peace");
-        pieImgShare.classList.add("eat");
+        pieImgSend.src = 'https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.36%20PM.png?v=1590350242771';
+        pieImgShare.src = 'https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.36%20PM.png?v=1590350242771';
       } else if (idModFive === 4) {
-        pieImgSend.classList.add("share");
-        pieImgShare.classList.add("eat");
+        pieImgSend.src = "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.48%20PM.png?v=1590350247939";
+        pieImgShare.src ='https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.48%20PM.png?v=1590350247939';
       }
       
     }
