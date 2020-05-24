@@ -164,9 +164,27 @@
       let modal = document.querySelector("#sendPie");
       modal.style.display = "block";
       selectedPieId = e.target.id;
-      let pieI = document.querySelector("#sendPie");
+      let pieImgSend = document.querySelector(".share_choco");
+      let pieImgShare = document.querySelector(".send_choco");
 
-      customize_choco
+      const idModFive = selectedPieId % 5;
+      if (idModFive === 0) {
+        pieImgSend.classList.add("eat");
+        pieImgShare.classList.add("eat");
+      } else if (idModFive == 1) {
+        pieImgSend.classList.add("unite");
+        pieImgShare.classList.add("eat");
+      } else if (idModFive === 2) {
+        pieImgSend.classList.add("love");
+        pieImgShare.classList.add("eat");
+      } else if (idModFive === 3) {
+        pieImgSend.classList.add("peace");
+        pieImgShare.classList.add("eat");
+      } else if (idModFive === 4) {
+        pieImgSend.classList.add("share");
+        pieImgShare.classList.add("eat");
+      }
+      
     }
   });
 

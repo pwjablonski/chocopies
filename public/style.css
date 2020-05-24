@@ -162,9 +162,30 @@ main {
   align-items: center;
 }
 
-.customize_choco{
-  width:200px;
+.send_choco,
+.share_choco {
+  width:300px;
   height:200px;
+}
+
+.send_choco.eat,
+.share_choco
+{
+  background: url("https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.08%20PM.png?v=1590350234801");
+  background-size: cover;
+}
+.send_choco.unite
+.share_choco.unit{
+  background: url();
+}
+.send_choco.love{
+  background: url();
+}
+.send_choco.peace{
+  background: url();
+}
+.send_choco.share{
+  background: url();
 }
 
 .social {
