@@ -55,19 +55,21 @@
       pieRect.id = pie.id;
       pieGroup.appendChild(pieRect);
       mapgroup.appendChild(pieGroup);
-      
-      if(pie.id % 0){
+
+      const idModFive = pie.id % 5;
+
+      if (idModFive === 0) {
         pieRect.classList.add("eat");
-      } else if (pie.id % 1){
+      } else if (idModFive == 1) {
         pieRect.classList.add("unite");
-      } else if (pie.id % 1){
+      } else if (idModFive === 2) {
         pieRect.classList.add("love");
-      } else if (pie.id % 1){
+      } else if (idModFive === 3) {
         pieRect.classList.add("peace");
-      } else if (pie.id % 1){
+      } else if (idModFive === 4) {
         pieRect.classList.add("share");
-      }       
-      
+      }
+
       if (pie.isClaimed) {
         drawClaimedPie(pieRect);
       } else {
@@ -146,7 +148,7 @@
       console.log(e.target.getAttribute("x"), e.target.getAttribute("y"));
       const panZoomInstance = sPZ(".zoom-map-svg", {
         maxZoom: 30,
-        zoomEnabled: false,
+        zoomEnabled: false
       });
 
       panZoomInstance.zoom(20);
@@ -162,6 +164,9 @@
       let modal = document.querySelector("#sendPie");
       modal.style.display = "block";
       selectedPieId = e.target.id;
+      let pieI = document.querySelector("#sendPie");
+
+      customize_choco
     }
   });
 
