@@ -1,7 +1,7 @@
 // client-side js
 // run by the browser each time your view template is loaded
 
-(async function(d, sPZ, tV) {
+(async function(d, sPZ) {
   let pieData = await fetchPies();
   let claimed = pieData.claimed;
   let total = pieData.total;
@@ -11,7 +11,7 @@
   drawData(total, claimed);
   drawMap(pies, "map-svg");
   drawMap(pies, "zoom-map-svg");
-  drawMap(pies, "thumb-map-svg");
+  // drawMap(pies, "thumb-map-svg");
 
   async function fetchPies() {
     const req = await fetch("/pies");
@@ -147,13 +147,13 @@
       let modal = document.querySelector("#viewPies");
       modal.style.display = "block";
       console.log(e.target.getAttribute("x"), e.target.getAttribute("y"));
-      const panZoomInstance = sPZ("#mainView", {
+      const panZoomInstance = sPZ(".zoom-map-svg", {
         maxZoom: 30,
         zoomEnabled: false
       });
 
       panZoomInstance.zoom(20);
-      tV({mainViewId: 'mainView', thumbViewId: 'thumbView'});
+      // tV({mainViewId: 'mainView', thumbViewId: 'thumbView'});
       // const sizes = panZoomInstance.getSizes()
       // const zoomX = (sizes.width / sizes.viewBox.width) * e.target.getAttribute('x')
       // const zoomY = (sizes.height / sizes.viewBox.height) * e.target.getAttribute('y')
@@ -218,4 +218,4 @@
     let modal = document.querySelector("#confirmation");
     modal.style.display = "block";
   });
-})(document, svgPanZoom, thumbnailViewer);
+})(document, svgPanZoom);
