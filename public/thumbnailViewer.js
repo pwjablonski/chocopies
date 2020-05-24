@@ -1,4 +1,5 @@
 var thumbnailViewer = function(options) {
+  
   var getSVGDocument = function(objectElem) {
     var svgDoc = objectElem.contentDocument;
     if (!svgDoc) {
@@ -132,9 +133,9 @@ var thumbnailViewer = function(options) {
   };
 
   var mainViewObjectElem = document.getElementById(options.mainViewId);
-  // mainViewObjectElem.addEventListener(
-  //   "load",
-  //   function() {
+  mainViewObjectElem.addEventListener(
+    "load",
+    function() {
       var mainViewSVGDoc = getSVGDocument(mainViewObjectElem);
       if (options.onMainViewSVGLoaded) {
         options.onMainViewSVGLoaded(mainViewSVGDoc);
@@ -175,9 +176,9 @@ var thumbnailViewer = function(options) {
       if (options.onMainViewShown) {
         options.onMainViewShown(mainViewSVGDoc, main);
       }
-    // },
-  //   false
-  // );
+    },
+    false
+  );
 
   var thumbViewObjectElem = document.getElementById(options.thumbViewId);
   thumbViewObjectElem.addEventListener(
@@ -195,7 +196,7 @@ var thumbnailViewer = function(options) {
         dblClickZoomEnabled: false,
         preventMouseEventsDefault: true
       });
-
+      console.log(thumb)
       bindThumbnail(undefined, thumb);
       if (options.onThumbnailShown) {
         options.onThumbnailShown(thumbViewSVGDoc, thumb);
