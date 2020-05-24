@@ -7,10 +7,11 @@
   let total = pieData.total;
   let pies = pieData.pies;
   let selectedPieId = null;
+  let panZoomInstance;
 
   drawData(total, claimed);
   drawMap(pies, "map-svg");
-  drawMap(pies, "zoom-map-svg");
+  // drawMap(pies, "zoom-map-svg");
   // drawMap(pies, "thumb-map-svg");
 
   async function fetchPies() {
@@ -146,7 +147,10 @@
     if (e.target.classList.contains("map-svg-pie")) {
       let modal = document.querySelector("#viewPies");
       modal.style.display = "block";
-      const panZoomInstance = sPZ(".zoom-map-svg", {
+      let svg = document.querySelector(".zoom-map-svg");
+      svg.innerHTML = "";
+      drawMap(pies, "zoom-map-svg");
+      panZoomInstance = sPZ(".zoom-map-svg", {
         maxZoom: 40,
         zoomEnabled: false
       });
