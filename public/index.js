@@ -49,8 +49,8 @@
       pieRect.classList.add("pie");
       pieRect.classList.add(`${selector}-pie`);
       pieRect.setAttribute("height", "0.98");
-      pieRect.setAttribute("width", "0.98");
-      pieRect.setAttribute("x", 1 * pie.x);
+      pieRect.setAttribute("width", "1.48");
+      pieRect.setAttribute("x", 1.5 * pie.x);
       pieRect.setAttribute("y", 1 * pie.y);
       pieRect.id = pie.id;
       pieGroup.appendChild(pieRect);
