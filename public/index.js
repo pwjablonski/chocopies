@@ -153,7 +153,6 @@
 //       });
 
 //       panZoomInstance.zoom(20);
-      
       tV({mainViewId: 'mainView', thumbViewId: 'thumbView'});
       // const sizes = panZoomInstance.getSizes()
       // const zoomX = (sizes.width / sizes.viewBox.width) * e.target.getAttribute('x')
