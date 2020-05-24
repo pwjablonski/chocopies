@@ -155,7 +155,7 @@
       const zoomX = sizes.width * (e.target.getAttribute("x") / 100);
       const zoomY = sizes.height * (e.target.getAttribute("y") / 125);
 
-      panZoomInstance.zoomAtPoint(15, { x: zoomX - (sizes.width/15) , y: zoomY });
+      panZoomInstance.zoomAtPoint(15, { x: zoomX + 15, y: zoomY +15});
     }
   });
 
