@@ -146,23 +146,16 @@
     if (e.target.classList.contains("map-svg-pie")) {
       let modal = document.querySelector("#viewPies");
       modal.style.display = "block";
-      console.log(e.target.getAttribute("x"), e.target.getAttribute("y"));
       const panZoomInstance = sPZ(".zoom-map-svg", {
         maxZoom: 40,
         zoomEnabled: false
       });
 
-      // panZoomInstance.zoom(40);
-      // const sizes = panZoomInstance.getSizes()
-      // const zoomX = (sizes.width / sizes.viewBox.width) * e.target.getAttribute('x')
-      // const zoomY = (sizes.height / sizes.viewBox.height) * e.target.getAttribute('y')
-      const zoomX = e.target.getAttribute("x")
-      const zoomY = e.target.getAttribute("y")
-      console.log(panZoomInstance.getSizes())
-      // panZoomInstance.pan({x: zoomX, y: -zoomY});
-      panZoomInstance.zoomAtPoint(15, {x: 518, y: 583});
-      panZoomInstance.fit();
-panZoomTiger.center();
+      const sizes = panZoomInstance.getSizes();
+      const zoomX = sizes.width * (e.target.getAttribute("x") / 100);
+      const zoomY = sizes.height * (e.target.getAttribute("y") / 125);
+
+      panZoomInstance.zoomAtPoint(15, { x: zoomX - (sizes.width/15) , y: zoomY });
     }
   });
 
@@ -176,22 +169,31 @@ panZoomTiger.center();
 
       const idModFive = selectedPieId % 5;
       if (idModFive === 0) {
-        pieImgSend.src = "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.08%20PM.png?v=1590350234801";
-        pieImgShare.src = "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.08%20PM.png?v=1590350234801";
+        pieImgSend.src =
+          "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.08%20PM.png?v=1590350234801";
+        pieImgShare.src =
+          "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.08%20PM.png?v=1590350234801";
       } else if (idModFive == 1) {
-        pieImgSend.src = "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.35%20PM.png?v=1590350235533";
-        pieImgShare.src = "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.35%20PM.png?v=1590350235533";
+        pieImgSend.src =
+          "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.35%20PM.png?v=1590350235533";
+        pieImgShare.src =
+          "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.35%20PM.png?v=1590350235533";
       } else if (idModFive === 2) {
-        pieImgSend.src = "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.03%20PM.png?v=1590350237318";
-        pieImgShare.src = "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.03%20PM.png?v=1590350237318";
+        pieImgSend.src =
+          "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.03%20PM.png?v=1590350237318";
+        pieImgShare.src =
+          "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.03%20PM.png?v=1590350237318";
       } else if (idModFive === 3) {
-        pieImgSend.src = 'https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.36%20PM.png?v=1590350242771';
-        pieImgShare.src = 'https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.36%20PM.png?v=1590350242771';
+        pieImgSend.src =
+          "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.36%20PM.png?v=1590350242771";
+        pieImgShare.src =
+          "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.36%20PM.png?v=1590350242771";
       } else if (idModFive === 4) {
-        pieImgSend.src = "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.48%20PM.png?v=1590350247939";
-        pieImgShare.src ='https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.48%20PM.png?v=1590350247939';
+        pieImgSend.src =
+          "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.48%20PM.png?v=1590350247939";
+        pieImgShare.src =
+          "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.48%20PM.png?v=1590350247939";
       }
-      
     }
   });
 
