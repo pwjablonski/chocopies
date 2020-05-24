@@ -148,11 +148,11 @@
       modal.style.display = "block";
       console.log(e.target.getAttribute("x"), e.target.getAttribute("y"));
       const panZoomInstance = sPZ(".zoom-map-svg", {
-        maxZoom: 30,
+        maxZoom: 40,
         zoomEnabled: false
       });
 
-      panZoomInstance.zoom(30);
+      panZoomInstance.zoom(40);
       // tV({mainViewId: 'mainView', thumbViewId: 'thumbView'});
       // const sizes = panZoomInstance.getSizes()
       // const zoomX = (sizes.width / sizes.viewBox.width) * e.target.getAttribute('x')
