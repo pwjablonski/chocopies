@@ -36,6 +36,11 @@ main {
   font-size: 1.5em;
 }
 
+.header__link {
+  cursor:pointer;
+  text-decoration:underline;
+}
+
 .container {
   padding: 4em;
   height: 100%;
