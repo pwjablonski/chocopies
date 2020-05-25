@@ -6,6 +6,11 @@
   width: 100%;
 }
 
+#zoom-map {
+  height: 100%;
+  width: 100%;
+}
+
 .leaflet-container {
   background-color: rgba(255, 0, 0, 0);
 }

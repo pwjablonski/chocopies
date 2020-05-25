@@ -109,11 +109,13 @@
   
   
   mymap.on('click', function(e) {
-    mymap.setView(e.latlng, 10)
+    // mymap.setView(e.latlng, 10)
+      let modal = document.querySelector("#viewPies");
+      modal.style.display = "block";
   });
   
   mymap.on('dblclick', function(e) {
-    
+    selectedPieId = e.target.id;
   });
 
   d.addEventListener("click", function(e) {
@@ -137,14 +139,6 @@
     //   modal.style.display = "block";
     // }
     // console.log(e.target.id)
-  });
-
-  d.addEventListener("dblclick", function(e) {
-    if (e.target.classList.contains("zoom-map-svg-pie")) {
-      let modal = document.querySelector("#sendPie");
-      modal.style.display = "block";
-      selectedPieId = e.target.id;
-    }
   });
 
   async function sendPie(pieId, data) {
