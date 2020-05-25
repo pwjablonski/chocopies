@@ -14,21 +14,22 @@
     maxBounds: [[43,124],[27, 130]],
     maxZoom: 6,
     minZoom: 6,
+    dragging:false,
   }).setView([38, 127], 6);
 
-  // L.tileLayer(
-  //   "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
-  //   {
-  //     attribution:
-  //       'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-  //     maxZoom: 18,
-  //     id: "mapbox/streets-v11",
-  //     tileSize: 512,
-  //     zoomOffset: -1,
-  //     accessToken:
-  //       "pk.eyJ1IjoicHdqYWJsb25za2kiLCJhIjoiY2s5dW5wdnh0MDBzYTNtbHFtZWRtbmw3YSJ9.eHxCyVJuJmXzblybi0S9_w"
-  //   }
-  // ).addTo(mymap);
+  L.tileLayer(
+    "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
+    {
+      attribution:
+        'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      maxZoom: 18,
+      id: "mapbox/streets-v11",
+      tileSize: 512,
+      zoomOffset: -1,
+      accessToken:
+        "pk.eyJ1IjoicHdqYWJsb25za2kiLCJhIjoiY2s5dW5wdnh0MDBzYTNtbHFtZWRtbmw3YSJ9.eHxCyVJuJmXzblybi0S9_w"
+    }
+  ).addTo(mymap);
 
   drawData(total, claimed);
   drawMap(pies);
@@ -49,15 +50,15 @@
   }
 
   function drawMap(pies) {
-    var svgElement = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "svg"
-    );
+//     var svgElement = document.createElementNS(
+//       "http://www.w3.org/2000/svg",
+//       "svg"
+//     );
 
-    const mapgroup = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "g"
-    );
+//     const mapgroup = document.createElementNS(
+//       "http://www.w3.org/2000/svg",
+//       "g"
+//     );
 
     pies.forEach(pie => {
       let yOff = 0.08;
@@ -87,10 +88,31 @@
           "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.03%20PM.png?v=1590357838973";
       }
 
-      L.imageOverlay(imageUrl, imageBounds, { className: "pie" }).addTo(mymap);
+      L.imageOverlay(imageUrl, imageBounds, { className: "pie map-svg-pie" }).addTo(mymap);
     });
   }
 
+    d.addEventListener("click", function(e) {
+    if (e.target.dataset.toggle == "modal") {
+      let modal = document.querySelector(e.target.dataset.target);
+      modal.style.display = "block";
+    }
+    if (e.target.dataset.dismiss == "modal") {
+      let modals = document.querySelectorAll(".modal");
+      modals.forEach(function(modal) {
+        modal.style.display = "none";
+      });
+    }
+    if (e.target.classList.contains("modal")) {
+      e.target.style.display = "none";
+    }
+
+    if (e.target.classList.contains("map-svg-pie")) {
+
+    }
+  });
+  
+  
   d.addEventListener("dblclick", function(e) {
     if (e.target.classList.contains("zoom-map-svg-pie")) {
       let modal = document.querySelector("#sendPie");
