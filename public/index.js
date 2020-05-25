@@ -85,10 +85,17 @@
       
       var svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
       svgElement.setAttribute('xmlns', "http://www.w3.org/2000/svg");
-      svgElement.setAttribute('viewBox', "0 0 200 200");
+      svgElement.setAttribute('id', pie.id);
+      svgElement.setAttribute('viewBox', "0 0 300 500");
       svgElement.innerHTML = '<image href="https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.08%20PM.png?v=1590353733200"/>';
-      // var svgElementBounds = [ [ 32, -130 ], [ 13, -100 ] ];
       L.svgOverlay(svgElement, imageBounds).addTo(mymap);
+      
+      var svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svgElement.setAttribute('xmlns', "http://www.w3.org/2000/svg");
+      svgElement.setAttribute('id', pie.id);
+      svgElement.setAttribute('viewBox', "0 0 300 500");
+      svgElement.innerHTML = `<image id=${pie.id}href="https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.08%20PM.png?v=1590353733200"/>`;
+      L.svgOverlay(svgElement, imageBounds, {interactive:true}).addTo(zoommap);
     });
   }
 
