@@ -28,7 +28,6 @@
     dragging: false
   }).setView([38, 127], 6);
   
-  console.log(mymap.getPanes())
   mymap.getPane('mapPane').style.zIndex = 0;
 
   var zoommap = L.map("zoom-map", {
@@ -101,7 +100,32 @@
       svgElement.setAttribute('id', pie.id);
       svgElement.setAttribute('viewBox', "0 0 300 500");
       svgElement.innerHTML = `<image id=${pie.id} href=${imageUrl}/>`;
-      L.svgOverlay(svgElement, imageBounds, {interactive:true}).addTo(zoommap);
+      var el = L.svgOverlay(svgElement, imageBounds, {interactive:true}).addTo(zoommap);
+      el.on("click", function(e) {
+            let modal = document.querySelector("#sendPie");
+            modal.style.display = "block";
+            selectedPieId = pie.id;
+            let pieImgSend = document.querySelector(".share_choco");
+            let pieImgShare = document.querySelector(".send_choco");
+
+            const idModFive = selectedPieId % 5;
+            if (idModFive === 0) {
+              pieImgSend.src = EAT;
+              pieImgShare.src = EAT;
+            } else if (idModFive == 1) {
+              pieImgSend.src = UNITE;
+              pieImgShare.src = UNITE;
+            } else if (idModFive === 2) {
+              pieImgSend.src = PEACE;
+              pieImgShare.src = PEACE;
+            } else if (idModFive === 3) {
+              pieImgSend.src = SHARE;
+              pieImgShare.src = SHARE;
+            } else if (idModFive === 4) {
+              pieImgSend.src = LOVE;
+              pieImgShare.src = LOVE;
+            }
+      });
     });
   }
 
@@ -111,32 +135,6 @@
     modal.style.display = "block";
   });
 
-  zoommap.on("dblclick", function(e) {
-
-    let modal = document.querySelector("#sendPie");
-    modal.style.display = "block";
-    selectedPieId = e.originalEvent.target.id;
-    let pieImgSend = document.querySelector(".share_choco");
-    let pieImgShare = document.querySelector(".send_choco");
-
-    const idModFive = selectedPieId % 5;
-    if (idModFive === 0) {
-      pieImgSend.src = EAT
-      pieImgShare.src = EAT
-    } else if (idModFive == 1) {
-      pieImgSend.src = UNITE
-      pieImgShare.src = UNITE
-    } else if (idModFive === 2) {
-      pieImgSend.src = PEACE
-      pieImgShare.src = PEACE
-    } else if (idModFive === 3) {
-      pieImgSend.src = SHARE
-      pieImgShare.src = SHARE
-    } else if (idModFive === 4) {
-      pieImgSend.src = LOVE
-      pieImgShare.src = LOVE
-    }
-  });
 
   d.addEventListener("click", function(e) {
     if (e.target.dataset.toggle == "modal") {
