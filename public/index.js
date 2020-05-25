@@ -234,6 +234,7 @@
   
   // We select the SVG into the page
 var svg = document.querySelector(".zoom-map-svg");
+  console.log(svg)
 
 // If browser supports pointer events
 if (window.PointerEvent) {
@@ -282,7 +283,7 @@ var pointerOrigin;
 // Function called by the event listeners when user start pressing/touching
 function onPointerDown(event) {
   isPointerDown = true; // We set the pointer as down
-
+  console.log(event)
   // We get the pointer position on click/touchdown so we can get the value once the user starts to drag
   pointerOrigin = getPointFromEvent(event);
 }
