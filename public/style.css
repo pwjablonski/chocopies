@@ -86,6 +86,11 @@ main {
   cursor: pointer;
 }
 
+.pie:hover {
+  stroke: yellow;
+  stroke-width: .02
+}
+
 .pie.eat {
   filter: url(#eat);
 }
