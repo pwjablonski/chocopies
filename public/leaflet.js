@@ -99,13 +99,16 @@
 
       L.imageOverlay(imageUrl, imageBounds, {
         className: "pie map-svg-pie"
-      }).addTo(mymap);
+      }).addTo(mymap)
       
       L.imageOverlay(imageUrl, imageBounds, {
         className: "pie map-svg-pie"
       }).addTo(zoommap);
     });
   }
+  
+  
+  mymap.on('click', function(e) { console.log(e) });
 
   d.addEventListener("click", function(e) {
     if (e.target.dataset.toggle == "modal") {
@@ -122,12 +125,12 @@
       e.target.style.display = "none";
     }
 
-    if (e.target.id === "mapid") {
-      console.log('test')
-      let modal = document.querySelector("#viewPies");
-      modal.style.display = "block";
-    }
-    console.log(e.target.id)
+    // if (e.target.id === "mapid") {
+    //   console.log('test')
+    //   let modal = document.querySelector("#viewPies");
+    //   modal.style.display = "block";
+    // }
+    // console.log(e.target.id)
   });
 
   d.addEventListener("dblclick", function(e) {
