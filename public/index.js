@@ -38,8 +38,12 @@
     minZoom: 11
   }).setView([38, 127], 11);
   
-  // var osm2 = new L.TileLayer(osmUrl, {minZoom: 0, maxZoom: 13, attribution: osmAttrib});
-  var miniMap = new L.Control.MiniMap().addTo(zoommap);
+  var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+  var osmAttrib='Map data &copy; OpenStreetMap contributors';
+		
+  //Plugin magic goes here! Note that you cannot use the same layer object again, as that will confuse the two map controls
+  var osm2 = new L.TileLayer(osmUrl, {minZoom: 6, maxZoom: 6, zoomLevelOffset: -10, attribution: osmAttrib });
+  var miniMap = new L.Control.MiniMap(osm2).addTo(zoommap);
 
   drawData(total, claimed);
   drawMap(pies);
