@@ -17,7 +17,6 @@
     dragging: false
   }).setView([38, 127], 6);
   
-  mymap.getPane()
   
   var zoommap = L.map("zoom-map", {
     zoomControl: false,
@@ -127,6 +126,7 @@
       console.log('test')
       let modal = document.querySelector("#viewPies");
       modal.style.display = "block";
+      zoommap.invalidateSize();
     }
     console.log(e.target.id)
   });
