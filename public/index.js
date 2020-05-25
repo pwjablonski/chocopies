@@ -136,6 +136,7 @@
           interactive: true
         }).addTo(zoommap);
         el.on("click", function(e) {
+          console.log(e)
           let modal = document.querySelector("#sendPie");
           modal.style.display = "block";
           selectedPieId = pie.id;
@@ -165,6 +166,7 @@
   }
 
   mymap.on("click", function(e) {
+    console.log(e)
     zoommap.panTo(e.latlng);
     let modal = document.querySelector("#viewPies");
     modal.style.display = "block";
