@@ -1,18 +1,35 @@
 // client-side js
 // run by the browser each time your view template is loaded
 
-(async function(d, sPZ) {
+(async function(d, sPZ, L) {
   let pieData = await fetchPies();
   let claimed = pieData.claimed;
   let total = pieData.total;
   let pies = pieData.pies;
   let selectedPieId = null;
-  let panZoomInstance;
+
+  var mymap = L.map("mapid", {
+    zoomControl: false,
+    attributionControl: false,
+    maxBounds: [[43, 124], [27, 130]],
+    maxZoom: 10,
+    minZoom: 6,
+    dragging: false
+  }).setView([38, 127], 6);
+  
+  console.log(mymap.getPanes())
+  mymap.getPane('mapPane').style.zIndex = 0;
+
+  var zoommap = L.map("zoom-map", {
+    zoomControl: false,
+    attributionControl: false,
+    maxBounds: [[43, 124], [27, 130]],
+    maxZoom: 10,
+    minZoom: 10
+  }).setView([38, 127], 10);
 
   drawData(total, claimed);
-  drawMap(pies, "map-svg");
-  drawMap(pies, "zoom-map-svg");
-  // drawMap(pies, "thumb-map-svg");
+  drawMap(pies);
 
   async function fetchPies() {
     const req = await fetch("/pies");
@@ -29,99 +46,96 @@
     moneyDiv.innerHTML = `$ ${claimed}`;
   }
 
-  function drawMap(pies, selector) {
-    const map = document.querySelector(`.${selector}`);
-
-    const mapgroup = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "g"
-    );
-
+  function drawMap(pies) {
     pies.forEach(pie => {
-      const pieRect = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "rect"
-      );
+      let yOff = 0.08;
+      let xOff = 0.105;
 
-      const pieGroup = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "g"
-      );
+      let imageBounds = [
+        [43 - pie.y * yOff, 124 + pie.x * xOff],
+        [43 - pie.y * yOff - yOff, 124 + pie.x * xOff + xOff]
+      ];
+//       let imageUrl;
+//       const idModFive = pie.id % 5;
 
-      pieRect.classList.add("pie");
-      pieRect.classList.add(`${selector}-pie`);
-      pieRect.setAttribute("height", "1");
-      pieRect.setAttribute("width", "1.25");
-      pieRect.setAttribute("x", 1.5 * pie.x);
-      pieRect.setAttribute("y", 1 * pie.y);
-      pieRect.id = pie.id;
-      pieGroup.appendChild(pieRect);
-      mapgroup.appendChild(pieGroup);
+//       if (idModFive === 0) {
+//         imageUrl =
+//           "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.08%20PM.png?v=1590353733200";
+//       } else if (idModFive == 1) {
+//         imageUrl =
+//           "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.35%20PM.png?v=1590357736162";
+//       } else if (idModFive === 2) {
+//         imageUrl =
+//           "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.36%20PM.png?v=1590357805566";
+//       } else if (idModFive === 3) {
+//         imageUrl =
+//           "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.48%20PM.png?v=1590357768554";
+//       } else if (idModFive === 4) {
+//         imageUrl =
+//           "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.03%20PM.png?v=1590357838973";
+//       }
 
-      const idModFive = pie.id % 5;
+//       L.imageOverlay(imageUrl, imageBounds, {
+//         className: "pie map-svg-pie"
+//       }).addTo(mymap);
 
-      if (idModFive === 0) {
-        pieRect.classList.add("eat");
-      } else if (idModFive == 1) {
-        pieRect.classList.add("unite");
-      } else if (idModFive === 2) {
-        pieRect.classList.add("love");
-      } else if (idModFive === 3) {
-        pieRect.classList.add("peace");
-      } else if (idModFive === 4) {
-        pieRect.classList.add("share");
-      }
-
-      if (pie.isClaimed) {
-        drawClaimedPie(pieRect);
-      } else {
-        // pieRect.dataset.toggle = "modal";
-        // pieRect.dataset.target = "#sendPie";
-      }
+//       L.imageOverlay(imageUrl, imageBounds, {
+//         className: "pie map-svg-pie", id: pie.id
+//       }).addTo(zoommap);
+      
+      var svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svgElement.setAttribute('xmlns', "http://www.w3.org/2000/svg");
+      svgElement.setAttribute('viewBox', "0 0 200 200");
+      svgElement.innerHTML = '<image href="https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.08%20PM.png?v=1590353733200"/>';
+      // var svgElementBounds = [ [ 32, -130 ], [ 13, -100 ] ];
+      L.svgOverlay(svgElement, imageBounds).addTo(mymap);
     });
-
-    map.appendChild(mapgroup);
   }
 
-  function drawClaimedPie(pieRect) {
-    const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    const title = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "tspan"
-    );
-    const name = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "tspan"
-    );
-    const date = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "tspan"
-    );
-    title.textContent = "SHARED BY";
-    name.textContent = "PETER";
-    date.textContent = "4-20-20";
+  mymap.on("click", function(e) {
+    zoommap.panTo(e.latlng);
+    let modal = document.querySelector("#viewPies");
+    modal.style.display = "block";
+  });
 
-    title.setAttribute("dy", "0em");
-    title.setAttribute("x", 1 * pieRect.getAttribute("x") + 0.5);
-    name.setAttribute("dy", "2em");
-    name.setAttribute("x", 1 * pieRect.getAttribute("x") + 0.5);
-    date.setAttribute("dy", "2em");
-    date.setAttribute("x", 1 * pieRect.getAttribute("x") + 0.5);
+  zoommap.on("dblclick", function(e) {
+    console.log(e);
+    selectedPieId = e.target.id;
 
-    text.style.fill = "white";
-    text.setAttribute("x", 1 * pieRect.getAttribute("y"));
-    text.setAttribute("y", 1 * pieRect.getAttribute("y") + 0.3);
-    text.setAttribute("text-anchor", "middle");
-    text.setAttribute("font-size", "0.005em");
+    let modal = document.querySelector("#sendPie");
+    modal.style.display = "block";
+    selectedPieId = e.target.id;
+    let pieImgSend = document.querySelector(".share_choco");
+    let pieImgShare = document.querySelector(".send_choco");
 
-    text.appendChild(title);
-    text.appendChild(name);
-    text.appendChild(date);
-
-    pieRect.style.filter = "none";
-    pieRect.style.fill = "#0080ff";
-    pieRect.parentElement.appendChild(text);
-  }
+    // const idModFive = selectedPieId % 5;
+    // if (idModFive === 0) {
+    //   pieImgSend.src =
+    //     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.08%20PM.png?v=1590350234801";
+    //   pieImgShare.src =
+    //     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.08%20PM.png?v=1590350234801";
+    // } else if (idModFive == 1) {
+    //   pieImgSend.src =
+    //     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.35%20PM.png?v=1590350235533";
+    //   pieImgShare.src =
+    //     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.35%20PM.png?v=1590350235533";
+    // } else if (idModFive === 2) {
+    //   pieImgSend.src =
+    //     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.03%20PM.png?v=1590350237318";
+    //   pieImgShare.src =
+    //     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.03%20PM.png?v=1590350237318";
+    // } else if (idModFive === 3) {
+    //   pieImgSend.src =
+    //     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.36%20PM.png?v=1590350242771";
+    //   pieImgShare.src =
+    //     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.36%20PM.png?v=1590350242771";
+    // } else if (idModFive === 4) {
+    //   pieImgSend.src =
+    //     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.48%20PM.png?v=1590350247939";
+    //   pieImgShare.src =
+    //     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.48%20PM.png?v=1590350247939";
+    // }
+  });
 
   d.addEventListener("click", function(e) {
     if (e.target.dataset.toggle == "modal") {
@@ -136,66 +150,6 @@
     }
     if (e.target.classList.contains("modal")) {
       e.target.style.display = "none";
-    }
-
-    // if (e.target.classList.contains("zoom-map-svg-pie")) {
-    //   let modal = document.querySelector("#sendPie");
-    //   modal.style.display = "block";
-    //   selectedPieId = e.target.id;
-    // }
-
-    if (e.target.classList.contains("map-svg-pie")) {
-      let modal = document.querySelector("#viewPies");
-      modal.style.display = "block";
-      if (!panZoomInstance) {
-        panZoomInstance = sPZ(".zoom-map-svg", {
-          maxZoom: 40,
-          zoomEnabled: false
-        });
-      }
-      const sizes = panZoomInstance.getSizes();
-      const zoomX = sizes.width * (e.target.getAttribute("x") / 100);
-      const zoomY = sizes.height * (e.target.getAttribute("y") / 125);
-      
-      panZoomInstance.zoomAtPoint(15, { x: zoomX - (sizes.width/100), y: zoomY + (sizes.height/125) });
-    }
-  });
-
-  d.addEventListener("dblclick", function(e) {
-    if (e.target.classList.contains("zoom-map-svg-pie")) {
-      let modal = document.querySelector("#sendPie");
-      modal.style.display = "block";
-      selectedPieId = e.target.id;
-      let pieImgSend = document.querySelector(".share_choco");
-      let pieImgShare = document.querySelector(".send_choco");
-
-      const idModFive = selectedPieId % 5;
-      if (idModFive === 0) {
-        pieImgSend.src =
-          "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.08%20PM.png?v=1590350234801";
-        pieImgShare.src =
-          "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.08%20PM.png?v=1590350234801";
-      } else if (idModFive == 1) {
-        pieImgSend.src =
-          "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.35%20PM.png?v=1590350235533";
-        pieImgShare.src =
-          "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.35%20PM.png?v=1590350235533";
-      } else if (idModFive === 2) {
-        pieImgSend.src =
-          "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.03%20PM.png?v=1590350237318";
-        pieImgShare.src =
-          "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.03%20PM.png?v=1590350237318";
-      } else if (idModFive === 3) {
-        pieImgSend.src =
-          "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.36%20PM.png?v=1590350242771";
-        pieImgShare.src =
-          "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.36%20PM.png?v=1590350242771";
-      } else if (idModFive === 4) {
-        pieImgSend.src =
-          "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.48%20PM.png?v=1590350247939";
-        pieImgShare.src =
-          "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.48%20PM.png?v=1590350247939";
-      }
     }
   });
 
@@ -223,8 +177,8 @@
     let pieRect = document.getElementById(selectedPieId);
     claimed += 1;
     drawData(total, claimed);
-    drawClaimedPie(pieRect);
+    // drawClaimedPie(pieRect);
     let modal = document.querySelector("#confirmation");
     modal.style.display = "block";
   });
-})(document, svgPanZoom);
+})(document, svgPanZoom, L);
