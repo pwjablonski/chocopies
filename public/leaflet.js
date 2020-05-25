@@ -99,6 +99,10 @@
       L.imageOverlay(imageUrl, imageBounds, {
         className: "pie map-svg-pie"
       }).addTo(mymap);
+      
+      L.imageOverlay(imageUrl, imageBounds, {
+        className: "pie map-svg-pie"
+      }).addTo(zoommap);
     });
   }
 
