@@ -12,7 +12,7 @@
     zoomControl: false,
     attributionControl: false,
     maxBounds: [[43, 124], [27, 130]],
-    maxZoom: 6,
+    maxZoom: 10,
     minZoom: 6,
     dragging: false
   }).setView([38, 127], 6);
@@ -22,7 +22,7 @@
     zoomControl: false,
     attributionControl: false,
     maxBounds: [[43, 124], [27, 130]],
-    maxZoom: 6,
+    maxZoom: 20,
     minZoom: 6,
   }).setView([38, 127], 6);
 
@@ -108,7 +108,13 @@
   }
   
   
-  mymap.on('click', function(e) { console.log(e) });
+  mymap.on('click', function(e) {
+    mymap.setView(e.latlng, 10)
+  });
+  
+  mymap.on('dblclick', function(e) {
+    
+  });
 
   d.addEventListener("click", function(e) {
     if (e.target.dataset.toggle == "modal") {
