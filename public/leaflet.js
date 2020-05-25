@@ -22,9 +22,9 @@
     zoomControl: false,
     attributionControl: false,
     maxBounds: [[43, 124], [27, 130]],
-    maxZoom: 20,
-    minZoom: 6,
-  }).setView([38, 127], 6);
+    maxZoom: 10,
+    minZoom: 10,
+  }).setView([38, 127], 10);
 
   // L.tileLayer(
   //   "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
@@ -112,9 +112,12 @@
     // mymap.setView(e.latlng, 10)
       let modal = document.querySelector("#viewPies");
       modal.style.display = "block";
+      mymap.remove();
+      zoommap.
   });
   
-  mymap.on('dblclick', function(e) {
+  zoommap.on('dblclick', function(e) {
+    console.log(e)
     selectedPieId = e.target.id;
   });
 
@@ -132,13 +135,6 @@
     if (e.target.classList.contains("modal")) {
       e.target.style.display = "none";
     }
-
-    // if (e.target.id === "mapid") {
-    //   console.log('test')
-    //   let modal = document.querySelector("#viewPies");
-    //   modal.style.display = "block";
-    // }
-    // console.log(e.target.id)
   });
 
   async function sendPie(pieId, data) {
