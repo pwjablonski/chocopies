@@ -33,7 +33,7 @@
   var zoommap = L.map("zoom-map", {
     zoomControl: false,
     attributionControl: false,
-    maxBounds: [[43, 124], [27, 130]],
+    maxBounds: [[43, 124], [27, 134]],
     maxZoom: 11,
     minZoom: 11
   }).setView([38, 127], 11);
@@ -120,8 +120,8 @@
         );
         svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
         svgElement.setAttribute("id", pie.id);
-        svgElement.setAttribute("viewBox", "0 0 300 500");
-        svgElement.innerHTML = `<image id=${pie.id} href=${imageUrl}/>`;
+        svgElement.setAttribute("viewBox", "0 0 150 100");
+        svgElement.innerHTML = `<image id=${pie.id} href=${imageUrl} width="150" height="100"/>`;
         L.svgOverlay(svgElement, imageBounds).addTo(mymap);
 
         var svgElement = document.createElementNS(
@@ -130,8 +130,8 @@
         );
         svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
         svgElement.setAttribute("id", pie.id);
-        svgElement.setAttribute("viewBox", "0 0 300 500");
-        svgElement.innerHTML = `<image id=${pie.id} href=${imageUrl}/>`;
+        svgElement.setAttribute("viewBox", "0 0 150 100");
+        svgElement.innerHTML = `<image id=${pie.id} href=${imageUrl} width="150" height="100"/>`;
         var el = L.svgOverlay(svgElement, imageBounds, {
           interactive: true
         }).addTo(zoommap);
