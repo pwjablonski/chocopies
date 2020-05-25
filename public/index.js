@@ -37,13 +37,13 @@
     maxZoom: 11,
     minZoom: 11
   }).setView([38, 127], 11);
-  
-//   var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-//   var osmAttrib='Map data &copy; OpenStreetMap contributors';
-		
-//   //Plugin magic goes here! Note that you cannot use the same layer object again, as that will confuse the two map controls
-//   var osm2 = new L.TileLayer(osmUrl, {minZoom: 4, maxZoom: 4, attribution: osmAttrib });
-//   var miniMap = new L.Control.MiniMap(osm2, {zoomLevelFixed: 6, toggleDisplay: true}).addTo(zoommap);
+
+  //   var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+  //   var osmAttrib='Map data &copy; OpenStreetMap contributors';
+
+  //   //Plugin magic goes here! Note that you cannot use the same layer object again, as that will confuse the two map controls
+  //   var osm2 = new L.TileLayer(osmUrl, {minZoom: 4, maxZoom: 4, attribution: osmAttrib });
+  //   var miniMap = new L.Control.MiniMap(osm2, {zoomLevelFixed: 6, toggleDisplay: true}).addTo(zoommap);
 
   drawData(total, claimed);
   drawMap(pies);
@@ -136,7 +136,7 @@
           interactive: true
         }).addTo(zoommap);
         el.on("click", function(e) {
-          console.log(e)
+          console.log(e);
           let modal = document.querySelector("#sendPie");
           modal.style.display = "block";
           selectedPieId = pie.id;
@@ -166,8 +166,8 @@
   }
 
   mymap.on("click", function(e) {
-    console.log(e)
-    zoommap.panTo(e.latlng);
+    console.log(e);
+    zoommap.panTo([e.latlng.lat + 0.1, e.latlng.lng - 0.3]);
     let modal = document.querySelector("#viewPies");
     modal.style.display = "block";
   });
