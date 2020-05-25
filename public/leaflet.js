@@ -17,6 +17,8 @@
     dragging: false
   }).setView([38, 127], 6);
   
+  mymap.getPane()
+  
   var zoommap = L.map("zoom-map", {
     zoomControl: false,
     attributionControl: false,
