@@ -1,18 +1,18 @@
 // client-side js
 // run by the browser each time your view template is loaded
 
-
-
-
 (async function(d, sPZ, L) {
-  
-  const EAT = "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.08%20PM.png?v=1590353733200"
-  const UNITE = "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.35%20PM.png?v=1590357736162"
-  const SHARE = "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.48%20PM.png?v=1590357768554"
-  const PEACE = "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.36%20PM.png?v=1590357805566"
-  const LOVE = "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.03%20PM.png?v=1590357838973"
-  
-  
+  const EAT =
+    "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.08%20PM.png?v=1590353733200";
+  const UNITE =
+    "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.35%20PM.png?v=1590357736162";
+  const SHARE =
+    "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.48%20PM.png?v=1590357768554";
+  const PEACE =
+    "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.36%20PM.png?v=1590357805566";
+  const LOVE =
+    "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.03%20PM.png?v=1590357838973";
+
   let pieData = await fetchPies();
   let claimed = pieData.claimed;
   let total = pieData.total;
@@ -27,8 +27,8 @@
     minZoom: 6,
     dragging: false
   }).setView([38, 127], 6);
-  
-  mymap.getPane('mapPane').style.zIndex = 0;
+
+  mymap.getPane("mapPane").style.zIndex = 0;
 
   var zoommap = L.map("zoom-map", {
     zoomControl: false,
@@ -65,67 +65,95 @@
         [43 - pie.y * yOff, 124 + pie.x * xOff],
         [43 - pie.y * yOff - yOff, 124 + pie.x * xOff + xOff]
       ];
-      let imageUrl;
-      const idModFive = pie.id % 5;
 
-      if (idModFive === 0) {
-        imageUrl = EAT
-      } else if (idModFive == 1) {
-        imageUrl = UNITE
-      } else if (idModFive === 2) {
-        imageUrl = PEACE
-      } else if (idModFive === 3) {
-        imageUrl = SHARE
-      } else if (idModFive === 4) {
-        imageUrl = LOVE
+      if (pie.isClaimed) {
+        var svgElement = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "svg"
+        );
+        svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+        svgElement.setAttribute("viewBox", "0 0 300 500");
+        svgElement.innerHTML = `<rect width=500 height=300 style="fill:#0013ff"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">TEXT</text>  `;
+        L.svgOverlay(svgElement, imageBounds).addTo(mymap);
+        var svgElement = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "svg"
+        );
+        svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+        svgElement.setAttribute("viewBox", "0 0 300 500");
+        svgElement.innerHTML = `<rect width=500 height=300 style="fill:#0013ff"/>`;
+        L.svgOverlay(svgElement, imageBounds).addTo(zoommap);
+      } else {
+        let imageUrl;
+        const idModFive = pie.id % 5;
+
+        if (idModFive === 0) {
+          imageUrl = EAT;
+        } else if (idModFive == 1) {
+          imageUrl = UNITE;
+        } else if (idModFive === 2) {
+          imageUrl = PEACE;
+        } else if (idModFive === 3) {
+          imageUrl = SHARE;
+        } else if (idModFive === 4) {
+          imageUrl = LOVE;
+        }
+
+        //       L.imageOverlay(imageUrl, imageBounds, {
+        //         className: "pie map-svg-pie"
+        //       }).addTo(mymap);
+
+        //       L.imageOverlay(imageUrl, imageBounds, {
+        //         className: "pie map-svg-pie", id: pie.id
+        //       }).addTo(zoommap);
+
+        var svgElement = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "svg"
+        );
+        svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+        svgElement.setAttribute("id", pie.id);
+        svgElement.setAttribute("viewBox", "0 0 300 500");
+        svgElement.innerHTML = `<image id=${pie.id} href=${imageUrl}/>`;
+        L.svgOverlay(svgElement, imageBounds).addTo(mymap);
+
+        var svgElement = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "svg"
+        );
+        svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+        svgElement.setAttribute("id", pie.id);
+        svgElement.setAttribute("viewBox", "0 0 300 500");
+        svgElement.innerHTML = `<image id=${pie.id} href=${imageUrl}/>`;
+        var el = L.svgOverlay(svgElement, imageBounds, {
+          interactive: true
+        }).addTo(zoommap);
+        el.on("click", function(e) {
+          let modal = document.querySelector("#sendPie");
+          modal.style.display = "block";
+          selectedPieId = pie.id;
+          let pieImgSend = document.querySelector(".share_choco");
+          let pieImgShare = document.querySelector(".send_choco");
+
+          const idModFive = selectedPieId % 5;
+          if (idModFive === 0) {
+            pieImgSend.src = EAT;
+            pieImgShare.src = EAT;
+          } else if (idModFive == 1) {
+            pieImgSend.src = UNITE;
+            pieImgShare.src = UNITE;
+          } else if (idModFive === 2) {
+            pieImgSend.src = PEACE;
+            pieImgShare.src = PEACE;
+          } else if (idModFive === 3) {
+            pieImgSend.src = SHARE;
+            pieImgShare.src = SHARE;
+          } else if (idModFive === 4) {
+            pieImgSend.src = LOVE;
+            pieImgShare.src = LOVE;
+          }
+        });
       }
-
-//       L.imageOverlay(imageUrl, imageBounds, {
-//         className: "pie map-svg-pie"
-//       }).addTo(mymap);
-
-//       L.imageOverlay(imageUrl, imageBounds, {
-//         className: "pie map-svg-pie", id: pie.id
-//       }).addTo(zoommap);
-      
-      var svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-      svgElement.setAttribute('xmlns', "http://www.w3.org/2000/svg");
-      svgElement.setAttribute('id', pie.id);
-      svgElement.setAttribute('viewBox', "0 0 300 500");
-      svgElement.innerHTML = `<image id=${pie.id} href=${imageUrl}/>`;
-      L.svgOverlay(svgElement, imageBounds).addTo(mymap);
-      
-      var svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-      svgElement.setAttribute('xmlns', "http://www.w3.org/2000/svg");
-      svgElement.setAttribute('id', pie.id);
-      svgElement.setAttribute('viewBox', "0 0 300 500");
-      svgElement.innerHTML = `<image id=${pie.id} href=${imageUrl}/>`;
-      var el = L.svgOverlay(svgElement, imageBounds, {interactive:true}).addTo(zoommap);
-      el.on("click", function(e) {
-            let modal = document.querySelector("#sendPie");
-            modal.style.display = "block";
-            selectedPieId = pie.id;
-            let pieImgSend = document.querySelector(".share_choco");
-            let pieImgShare = document.querySelector(".send_choco");
-
-            const idModFive = selectedPieId % 5;
-            if (idModFive === 0) {
-              pieImgSend.src = EAT;
-              pieImgShare.src = EAT;
-            } else if (idModFive == 1) {
-              pieImgSend.src = UNITE;
-              pieImgShare.src = UNITE;
-            } else if (idModFive === 2) {
-              pieImgSend.src = PEACE;
-              pieImgShare.src = PEACE;
-            } else if (idModFive === 3) {
-              pieImgSend.src = SHARE;
-              pieImgShare.src = SHARE;
-            } else if (idModFive === 4) {
-              pieImgSend.src = LOVE;
-              pieImgShare.src = LOVE;
-            }
-      });
     });
   }
 
@@ -134,7 +162,6 @@
     let modal = document.querySelector("#viewPies");
     modal.style.display = "block";
   });
-
 
   d.addEventListener("click", function(e) {
     if (e.target.dataset.toggle == "modal") {

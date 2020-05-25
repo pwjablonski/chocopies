@@ -85,12 +85,8 @@ app.get("/", function(request, response) {
   response.sendFile(__dirname + "/views/index.html");
 });
 
-app.get("/mapbox", function(request, response) {
-  response.sendFile(__dirname + "/views/mapbox.html");
-});
-
-app.get("/leaflet", function(request, response) {
-  response.sendFile(__dirname + "/views/leaflet.html");
+app.get("/old", function(request, response) {
+  response.sendFile(__dirname + "/views/old.html");
 });
 
 app.get("/pies", async function(request, response) {
