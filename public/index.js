@@ -23,7 +23,7 @@
     zoomControl: false,
     attributionControl: false,
     maxBounds: [[43, 124], [27, 130]],
-    maxZoom: 10,
+    maxZoom: 6,
     minZoom: 6,
     dragging: false
   }).setView([38, 127], 6);
@@ -34,9 +34,9 @@
     zoomControl: false,
     attributionControl: false,
     maxBounds: [[43, 124], [27, 130]],
-    maxZoom: 10,
-    minZoom: 10
-  }).setView([38, 127], 10);
+    maxZoom: 11,
+    minZoom: 11
+  }).setView([38, 127], 11);
 
   drawData(total, claimed);
   drawMap(pies);
@@ -72,16 +72,16 @@
           "svg"
         );
         svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-        svgElement.setAttribute("viewBox", "0 0 300 500");
-        svgElement.innerHTML = `<rect width=500 height=300 style="fill:#0013ff"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">TEXT</text>  `;
+        svgElement.setAttribute("viewBox", "0 0 150 100");
+        svgElement.innerHTML = `<rect width=150 height=100 style="fill:#0013ff"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">TEXT</text>`;
         L.svgOverlay(svgElement, imageBounds).addTo(mymap);
         var svgElement = document.createElementNS(
           "http://www.w3.org/2000/svg",
           "svg"
         );
         svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-        svgElement.setAttribute("viewBox", "0 0 300 500");
-        svgElement.innerHTML = `<rect width=500 height=300 style="fill:#0013ff"/>`;
+        svgElement.setAttribute("viewBox", "0 0 150 100");
+        svgElement.innerHTML = `<rect width=150 height=100 style="fill:#0013ff"/> <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" style="fill:#FFF">TEXT</text>`;
         L.svgOverlay(svgElement, imageBounds).addTo(zoommap);
       } else {
         let imageUrl;
