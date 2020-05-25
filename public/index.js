@@ -1,7 +1,7 @@
 // client-side js
 // run by the browser each time your view template is loaded
 
-(async function(d, sPZ, L) {
+(async function(d, L) {
   const EAT =
     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.08%20PM.png?v=1590353733200";
   const UNITE =
@@ -37,6 +37,9 @@
     maxZoom: 11,
     minZoom: 11
   }).setView([38, 127], 11);
+  
+  // var osm2 = new L.TileLayer(osmUrl, {minZoom: 0, maxZoom: 13, attribution: osmAttrib});
+  var miniMap = new L.Control.MiniMap().addTo(zoommap);
 
   drawData(total, claimed);
   drawMap(pies);
@@ -207,4 +210,4 @@
     let modal = document.querySelector("#confirmation");
     modal.style.display = "block";
   });
-})(document, svgPanZoom, L);
+})(document, L);
