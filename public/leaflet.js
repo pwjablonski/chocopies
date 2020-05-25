@@ -126,7 +126,6 @@
       console.log('test')
       let modal = document.querySelector("#viewPies");
       modal.style.display = "block";
-      zoommap.invalidateSize();
     }
     console.log(e.target.id)
   });
