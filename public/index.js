@@ -47,6 +47,10 @@
 
   drawData(total, claimed);
   drawMap(pies);
+  
+  mymap.eachLayer(function(layer){
+    console.log(layer);
+  });
 
   async function fetchPies() {
     const req = await fetch("/pies");
@@ -125,7 +129,7 @@
         var elMain = L.svgOverlay(svgElement, imageBounds, {
           interactive: true
         }).addTo(mymap);
-        console.log(elMain);
+
         elMain.on("click", function(e) {
           zoommap.panTo([e.latlng.lat + 0.1, e.latlng.lng - 0.3]);
           let modal = document.querySelector("#viewPies");
