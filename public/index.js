@@ -23,7 +23,7 @@
     zoomControl: false,
     attributionControl: false,
     maxBounds: [[43, 124], [27, 130]],
-    maxZoom: 6,
+    maxZoom: 10,
     minZoom: 6,
     dragging: false
   }).setView([38, 127], 6);
@@ -38,22 +38,32 @@
     minZoom: 11
   }).setView([38, 127], 11);
 
-  var CanvasLayer = L.GridLayer.extend({
-    createTile: function(coords) {
-      // create a <canvas> element for drawing
-      var tile = L.DomUtil.create("canvas", "leaflet-tile");
-      // setup tile width and height according to the options
-      var size = this.getTileSize();
-      tile.width = size.x;
-      tile.height = size.y;
-      // get a canvas context and draw something on it using coords.x, coords.y and coords.z
-      var ctx = tile.getContext("2d");
-      // return the tile so it can be rendered on screen
-      return tile;
-    }
-  });
-  
-  CanvasLayer.addTo(mymap)
+  var tiles = new L.GridLayer();
+  tiles.createTile = function(coords) {
+    var tile = L.DomUtil.create("canvas", "leaflet-tile");
+    var ctx = tile.getContext("2d");
+    var size = this.getTileSize();
+    tile.width = size.x;
+    tile.height = size.y;
+
+
+    ctx.strokeStyle = "red";
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(size.x - 1, 0);
+    ctx.lineTo(size.x - 1, size.y - 1);
+    ctx.lineTo(0, size.y - 1);
+    ctx.closePath();
+    ctx.stroke();
+    return tile;
+  };
+
+  L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution:
+      'Map data &copy; <a href="http://www.osm.org">OpenStreetMap</a>'
+  }).addTo(mymap);
+
+  tiles.addTo(mymap);
   //   var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
   //   var osmAttrib='Map data &copy; OpenStreetMap contributors';
 
