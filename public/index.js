@@ -138,7 +138,7 @@
         el.on("click", function(e) {
           console.log(e);
           let modal = document.querySelector("#sendPie");
-          modal.style.display = "block";
+          modal.classList.add("is-active")
           selectedPieId = pie.id;
           let pieImgSend = document.querySelector(".share_choco");
           let pieImgShare = document.querySelector(".send_choco");
@@ -225,6 +225,6 @@
     drawData(total, claimed);
     // drawClaimedPie(pieRect);
     let modal = document.querySelector("#confirmation");
-    modal.style.display = "block";
+    modal.classList.add("is-active")
   });
 })(document, L);
