@@ -60,7 +60,7 @@ async function setup() {
   await Pie.sync({ force: true });
 
   const image = await Jimp.read(
-    "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fpixil-frame-3.png?v=1590523520355"
+    "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fpixil-frame-4.png?v=1590524003099"
   );
 
   const width = image.bitmap.width;
