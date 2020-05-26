@@ -4,9 +4,6 @@
 #mapid {
   min-height: 600px;
   width: 100%;
-  background: url("https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fpixil-frame-0.png?v=1588042676267");
-  background-repeat: no-repeat;
-  background-size: contain;
 }
 
 #zoom-map {
