@@ -29,6 +29,8 @@
   }).setView([38, 127], 6);
 
   mymap.getPane("mapPane").style.zIndex = 0;
+  const mainPiesLayerGroup = L.layerGroup()
+  mainPiesLayerGroup.addTo(mymap)
 
   var zoommap = L.map("zoom-map", {
     zoomControl: false,
@@ -45,13 +47,11 @@
   //   var osm2 = new L.TileLayer(osmUrl, {minZoom: 4, maxZoom: 4, attribution: osmAttrib });
   //   var miniMap = new L.Control.MiniMap(osm2, {zoomLevelFixed: 6, toggleDisplay: true}).addTo(zoommap);
 
-//   drawData(total, claimed);
-//   drawMap(pies);
-  
-//   mymap.eachLayer(function(layer){
-//     console.log(layer);
-//   });
+  drawData(total, claimed);
+  drawMap(pies);
 
+  console.log(mainPiesLayerGroup.getLayers())
+  
   async function fetchPies() {
     const req = await fetch("/pies");
     const resp = await req.json();
@@ -128,7 +128,7 @@
         svgElement.innerHTML = `<image id=${pie.id} href=${imageUrl} width="150" height="100"/>`;
         var elMain = L.svgOverlay(svgElement, imageBounds, {
           interactive: true
-        }).addTo(mymap);
+        }).addTo(mainPiesLayerGroup);
 
         elMain.on("click", function(e) {
           zoommap.panTo([e.latlng.lat + 0.1, e.latlng.lng - 0.3]);
