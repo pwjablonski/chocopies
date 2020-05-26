@@ -18,8 +18,11 @@
   let total = pieData.total;
   let pies = pieData.pies;
   let selectedPieId = null;
+  
+  const mainPiesLayerGroup = L.layerGroup()
+  const zoomPiesLayerGroup = L.layerGroup()
 
-  var mymap = L.map("main-map", {
+  let mymap = L.map("main-map", {
     zoomControl: false,
     attributionControl: false,
     maxBounds: [[43, 124], [27, 130]],
@@ -28,11 +31,7 @@
     dragging: false
   }).setView([38, 127], 6);
 
-  mymap.getPane("mapPane").style.zIndex = 0;
-  const mainPiesLayerGroup = L.layerGroup()
-  mainPiesLayerGroup.addTo(mymap)
-
-  var zoommap = L.map("zoom-map", {
+  let zoommap = L.map("zoom-map", {
     zoomControl: false,
     attributionControl: false,
     maxBounds: [[43, 124], [27, 134]],
@@ -40,6 +39,12 @@
     minZoom: 11
   }).setView([38, 127], 11);
 
+  
+  
+  mymap.getPane("mapPane").style.zIndex = 0;
+  
+  mainPiesLayerGroup.addTo(mymap)
+  zoomPiesLayerGroup.addTo(zoommap)
 
   drawData(total, claimed);
   drawMap(pies);
