@@ -23,7 +23,7 @@
     zoomControl: false,
     attributionControl: false,
     maxBounds: [[43, 124], [27, 130]],
-    maxZoom: 10,
+    maxZoom: 6,
     minZoom: 6,
     dragging: false
   }).setView([38, 127], 6);
@@ -38,32 +38,6 @@
     minZoom: 11
   }).setView([38, 127], 11);
 
-  var tiles = new L.GridLayer();
-  tiles.createTile = function(coords) {
-    var tile = L.DomUtil.create("canvas", "leaflet-tile");
-    var ctx = tile.getContext("2d");
-    var size = this.getTileSize();
-    tile.width = size.x;
-    tile.height = size.y;
-
-
-    ctx.strokeStyle = "red";
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.lineTo(size.x - 1, 0);
-    ctx.lineTo(size.x - 1, size.y - 1);
-    ctx.lineTo(0, size.y - 1);
-    ctx.closePath();
-    ctx.stroke();
-    return tile;
-  };
-
-  L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution:
-      'Map data &copy; <a href="http://www.osm.org">OpenStreetMap</a>'
-  }).addTo(mymap);
-
-  tiles.addTo(mymap);
   //   var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
   //   var osmAttrib='Map data &copy; OpenStreetMap contributors';
 
@@ -71,12 +45,12 @@
   //   var osm2 = new L.TileLayer(osmUrl, {minZoom: 4, maxZoom: 4, attribution: osmAttrib });
   //   var miniMap = new L.Control.MiniMap(osm2, {zoomLevelFixed: 6, toggleDisplay: true}).addTo(zoommap);
 
-  //   drawData(total, claimed);
-  //   drawMap(pies);
-
-  //   mymap.eachLayer(function(layer){
-  //     console.log(layer);
-  //   });
+//   drawData(total, claimed);
+//   drawMap(pies);
+  
+//   mymap.eachLayer(function(layer){
+//     console.log(layer);
+//   });
 
   async function fetchPies() {
     const req = await fetch("/pies");
@@ -201,6 +175,8 @@
       }
     });
   }
+
+
 
   d.addEventListener("click", function(e) {
     if (e.target.classList.contains("navbar-burger")) {
