@@ -188,12 +188,12 @@
     //   let modal = document.querySelector(e.target.dataset.target);
     //   modal.style.display = "block";
     // }
-    // if (e.target.dataset.dismiss == "modal") {
-    //   let modals = document.querySelectorAll(".modal");
-    //   modals.forEach(function(modal) {
-    //     modal.style.display = "none";
-    //   });
-    // }
+    if (e.target.classLisat.contains("")) {
+      let modals = document.querySelectorAll(".modal");
+      modals.forEach(function(modal) {
+        modal.classList.remove("is-active");
+      });
+    }
     // if (e.target.classList.contains("modal")) {
     //   e.target.style.display = "none";
     // }
