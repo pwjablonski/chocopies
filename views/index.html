@@ -15,13 +15,19 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--     <link rel="stlyesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" />
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
       integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
       crossorigin=""
     />
-    <link rel="shortcut icon" href="https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.48%20PM.png?v=1590357768554" type="image/x-icon">
+    <link
+      rel="shortcut icon"
+      href="https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.48%20PM.png?v=1590357768554"
+      type="image/x-icon"
+    />
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
@@ -48,8 +54,19 @@
       </div>
     </header>
     <main>
-      <div class="container">
-        <div class="row main">
+        <div class="columns">
+          <div class="column">
+            First column
+          </div>
+          <div class="column is-two-thirds">
+            Second column
+          </div>
+          <div class="column">
+            Third column
+          </div>
+        </div>
+<!--       <div class="container"> -->
+        <!--         <div class="row main">
           <div class="menu">
             <h2>
               Chocopies Shared
@@ -74,8 +91,8 @@
               donated to Charity ABC
             </p>
           </div>
-        </div>
-      </div>
+        </div> -->
+<!--       </div> -->
     </main>
 
     <div class="modal" id="viewPies">
