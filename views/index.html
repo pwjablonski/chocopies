@@ -39,7 +39,7 @@
         <div class="navbar-brand">
           <a
             role="button"
-            class="navbar-burger burger is-active"
+            class="navbar-burger burger"
             aria-label="menu"
             aria-expanded="false"
             data-target="navbarBasicExample"
@@ -50,49 +50,67 @@
           </a>
         </div>
 
-        <div id="navbarBasicExample" class="navbar-menu is-active">
+        <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
-            <a class="navbar-item">
-              Home
-            </a>
-
-            <a class="navbar-item">
-              Documentation
-            </a>
+            <div
+              class="header__link"
+              data-toggle="modal"
+              data-target="#shareNow"
+            >
+              Share Now&#x203A;
+            </div>
+            <div
+              class="header__link"
+              data-toggle="modal"
+              data-target="#aboutChocopie"
+            >
+              About Choco Pie &#x203A;
+            </div>
+            <div
+              class="header__link"
+              data-toggle="modal"
+              data-target="#aboutArtist"
+            >
+              About the Artist &#x203A;
+            </div>
+            <div
+              class="header__link"
+              data-toggle="modal"
+              data-target="#aboutTriennial"
+            >
+              About Triennial &#x203A;
+            </div>
           </div>
         </div>
       </nav>
-      <!--       <div class="header__link" data-toggle="modal" data-target="#shareNow">
-        Share Now&#x203A;
-      </div>
-      <div
-        class="header__link"
-        data-toggle="modal"
-        data-target="#aboutChocopie"
-      >
-        About Choco Pie &#x203A;
-      </div>
-      <div class="header__link" data-toggle="modal" data-target="#aboutArtist">
-        About the Artist &#x203A;
-      </div>
-      <div
-        class="header__link"
-        data-toggle="modal"
-        data-target="#aboutTriennial"
-      >
-        About Triennial &#x203A;
-      </div> -->
     </header>
     <main>
-      <div class="columns">
-        <div class="column">
-          First column
-        </div>
-        <div class="column is-two-thirds">
-          Second column
-        </div>
-        <div class="column">
-          Third column
+      <div class="container">
+        <div class="columns">
+          <div class="column">
+            <h2>
+              Chocopies Shared
+            </h2>
+            <h1><span id="piesClaimed"></span>/<span id="totalPies"></span></h1>
+            <h2>
+              Raised For Charity
+            </h2>
+            <h1>
+              <span id="moneyRaised"></span>
+            </h1>
+          </div>
+          <div class="column is-two-thirds">
+            <div id="mapid"></div>
+          </div>
+          <div class="column">
+            <h3>
+              Spread Love!
+            </h3>
+            <p>
+              Share a choco pie with a friend! For every one shared, $1 will be
+              donated to Charity ABC
+            </p>
+          </div>
         </div>
       </div>
       <!--       <div class="container"> -->
