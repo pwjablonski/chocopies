@@ -15,8 +15,11 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-<!--     <link rel="stlyesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css" /> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" />
+    <!--     <link rel="stlyesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css" /> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"
+    />
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
@@ -32,7 +35,34 @@
   </head>
   <body>
     <header>
-      <div class="header__link" data-toggle="modal" data-target="#shareNow">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a
+            role="button"
+            class="navbar-burger burger is-active"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu is-active">
+          <div class="navbar-start">
+            <a class="navbar-item">
+              Home
+            </a>
+
+            <a class="navbar-item">
+              Documentation
+            </a>
+          </div>
+        </div>
+      </nav>
+      <!--       <div class="header__link" data-toggle="modal" data-target="#shareNow">
         Share Now&#x203A;
       </div>
       <div
@@ -51,22 +81,22 @@
         data-target="#aboutTriennial"
       >
         About Triennial &#x203A;
-      </div>
+      </div> -->
     </header>
     <main>
-        <div class="columns">
-          <div class="column">
-            First column
-          </div>
-          <div class="column is-two-thirds">
-            Second column
-          </div>
-          <div class="column">
-            Third column
-          </div>
+      <div class="columns">
+        <div class="column">
+          First column
         </div>
-<!--       <div class="container"> -->
-        <!--         <div class="row main">
+        <div class="column is-two-thirds">
+          Second column
+        </div>
+        <div class="column">
+          Third column
+        </div>
+      </div>
+      <!--       <div class="container"> -->
+      <!--         <div class="row main">
           <div class="menu">
             <h2>
               Chocopies Shared
@@ -92,7 +122,7 @@
             </p>
           </div>
         </div> -->
-<!--       </div> -->
+      <!--       </div> -->
     </main>
 
     <div class="modal" id="viewPies">
