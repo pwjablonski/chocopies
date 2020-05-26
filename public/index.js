@@ -49,8 +49,6 @@
 
   drawData(total, claimed);
   drawMap(pies);
-
-  console.log(mainPiesLayerGroup.getLayers())
   
   async function fetchPies() {
     const req = await fetch("/pies");
