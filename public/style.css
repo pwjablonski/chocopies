@@ -320,7 +320,7 @@ main {
 .modal-header {
   text-align: center;
 }
-.close-btn {
+/* .close-btn {
   float: right;
   color: lightgray;
   font-size: 24px;
@@ -349,7 +349,7 @@ main {
     top: 0;
     opacity: 1;
   }
-}
+} */
 
 #mainViewContainer {
   width: 95%;

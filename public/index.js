@@ -166,10 +166,9 @@
   }
 
   mymap.on("click", function(e) {
-    console.log(e);
     zoommap.panTo([e.latlng.lat + 0.1, e.latlng.lng - 0.3]);
     let modal = document.querySelector("#viewPies");
-    modal.style.display = "block";
+    modal.classList.add("is-active");
   });
 
   d.addEventListener("click", function(e) {
@@ -184,19 +183,19 @@
         dropdown.classList.add("is-active")
       }
     }
-    // if (e.target.dataset.toggle == "modal") {
-    //   let modal = document.querySelector(e.target.dataset.target);
-    //   modal.style.display = "block";
-    // }
-    if (e.target.classLisat.contains("")) {
+    if (e.target.dataset.toggle == "modal") {
+      let modal = document.querySelector(e.target.dataset.target);
+      modal.classList.add("is-active");
+    }
+    if (e.target.classList.contains("modal-close")) {
       let modals = document.querySelectorAll(".modal");
       modals.forEach(function(modal) {
         modal.classList.remove("is-active");
       });
     }
-    // if (e.target.classList.contains("modal")) {
-    //   e.target.style.display = "none";
-    // }
+    if (e.target.classList.contains("modal-background")) {
+      e.target.classList.remove("is-active");
+    }
   });
 
   async function sendPie(pieId, data) {
