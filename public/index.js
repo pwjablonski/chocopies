@@ -19,7 +19,7 @@
   let pies = pieData.pies;
   let selectedPieId = null;
 
-  var mymap = L.map("mapid", {
+  var mymap = L.map("main-map", {
     zoomControl: false,
     attributionControl: false,
     maxBounds: [[43, 124], [27, 130]],
@@ -122,8 +122,15 @@
         svgElement.setAttribute("id", pie.id);
         svgElement.setAttribute("viewBox", "0 0 150 100");
         svgElement.innerHTML = `<image id=${pie.id} href=${imageUrl} width="150" height="100"/>`;
-        L.svgOverlay(svgElement, imageBounds).addTo(mymap);
-
+        var elMain = L.svgOverlay(svgElement, imageBounds, {
+          interactive: true
+        }).addTo(mymap);
+        console.log(elMain);
+        elMain.on("click", function(e) {
+          zoommap.panTo([e.latlng.lat + 0.1, e.latlng.lng - 0.3]);
+          let modal = document.querySelector("#viewPies");
+          modal.classList.add("is-active");
+        });
         var svgElement = document.createElementNS(
           "http://www.w3.org/2000/svg",
           "svg"
@@ -132,13 +139,13 @@
         svgElement.setAttribute("id", pie.id);
         svgElement.setAttribute("viewBox", "0 0 150 100");
         svgElement.innerHTML = `<image id=${pie.id} href=${imageUrl} width="150" height="100"/>`;
-        var el = L.svgOverlay(svgElement, imageBounds, {
+        var elZoom = L.svgOverlay(svgElement, imageBounds, {
           interactive: true
         }).addTo(zoommap);
-        el.on("click", function(e) {
+        elZoom.on("click", function(e) {
           console.log(e);
           let modal = document.querySelector("#sendPie");
-          modal.classList.add("is-active")
+          modal.classList.add("is-active");
           selectedPieId = pie.id;
           let pieImgSend = document.querySelector(".share_choco");
           let pieImgShare = document.querySelector(".send_choco");
@@ -165,22 +172,22 @@
     });
   }
 
-  mymap.on("click", function(e) {
-    zoommap.panTo([e.latlng.lat + 0.1, e.latlng.lng - 0.3]);
-    let modal = document.querySelector("#viewPies");
-    modal.classList.add("is-active");
-  });
+  // mymap.on("click", function(e) {
+  //   zoommap.panTo([e.latlng.lat + 0.1, e.latlng.lng - 0.3]);
+  //   let modal = document.querySelector("#viewPies");
+  //   modal.classList.add("is-active");
+  // });
 
   d.addEventListener("click", function(e) {
-    if(e.target.classList.contains("navbar-burger")){
-      console.log(e.target)
+    if (e.target.classList.contains("navbar-burger")) {
+      console.log(e.target);
       let dropdown = document.querySelector(`#${e.target.dataset.target}`);
-      if(e.target.classList.contains("is-active")){
-        e.target.classList.remove("is-active")
-        dropdown.classList.remove("is-active")
+      if (e.target.classList.contains("is-active")) {
+        e.target.classList.remove("is-active");
+        dropdown.classList.remove("is-active");
       } else {
-        e.target.classList.add("is-active")
-        dropdown.classList.add("is-active")
+        e.target.classList.add("is-active");
+        dropdown.classList.add("is-active");
       }
     }
     if (e.target.dataset.toggle == "modal") {
@@ -208,7 +215,6 @@
     return resp;
   }
 
-
   document.addEventListener("submit", async function(e) {
     e.preventDefault();
     const data = {};
@@ -225,6 +231,6 @@
     drawData(total, claimed);
     // drawClaimedPie(pieRect);
     let modal = document.querySelector("#confirmation");
-    modal.classList.add("is-active")
+    modal.classList.add("is-active");
   });
 })(document, L);

@@ -1,7 +1,7 @@
 /* styles */
 /* called by your view template */
 
-#mapid {
+#main-map {
   min-height: 600px;
   width: 100%;
 }
