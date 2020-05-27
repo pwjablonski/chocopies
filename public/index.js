@@ -26,9 +26,9 @@
     zoomControl: false,
     attributionControl: false,
     maxBounds: [[43, 124], [27, 130]],
-    maxZoom: 6,
-    minZoom: 6,
-    dragging: false
+    maxZoom: 10,
+    minZoom: 10,
+    // dragging: false
   }).setView([38, 127], 6);
 
   let zoommap = L.map("zoom-map", {
@@ -41,9 +41,9 @@
 
   mymap.getPane("mapPane").style.zIndex = 0;
   
-  // L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  //   maxZoom: 18
-  // }).addTo(mymap);
+  L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 18
+  }).addTo(mymap);
 
   mainPiesLayerGroup.addTo(mymap);
   mainPiesLayerGroup.on("click", function(e) {
@@ -53,9 +53,9 @@
 
   drawData(total, claimed);
   // addPiesToGroup(pies, mainPiesLayerGroup);
-  drawMap(pies)
+  // drawMap(pies)
   // d3Map(pies, zoommap, "zoom", zoomPieClicked);
-  // d3Map(pies, mymap, "main", mainPieClicked);
+  d3Map(pies, mymap, "main", mainPieClicked);
 
   async function fetchPies() {
     const req = await fetch("/pies");
