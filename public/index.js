@@ -97,34 +97,41 @@
 
   function d3Map(pies) {
     pies.forEach(function(d) {
-      d.LatLng = xyToLatLng(d.x, d.y)
-		})
+      d.LatLng = xyToLatLng(d.x, d.y);
+    });
 
     const svg = d3.select(mymap.getPanes().overlayPane).append("svg");
+    svg.style("width", '600px')
+    svg.style("height", '600px')
     const g = svg.append("g").attr("class", "leaflet-zoom-hide");
 
-    let feature = g.selectAll("circle")
-			.data(pies)
-			.enter().append("circle")
-      .attr("cx", function(d){ return mymap.latLngToLayerPoint([d.lat, d.long]).x })
-      .attr("cy", function(d){ return mymap.latLngToLayerPoint([d.lat, d.long]).y })
-			.style("stroke", "black")  
-			.style("opacity", .6) 
-			.style("fill", "red")
-			.attr("r", 20); 
-    
-//     mymap.on("viewreset", update);
-// 		update();
+    let feature = g
+      .selectAll("circle")
+      .data(pies)
+      .enter()
+      .append("circle")
+      .attr("x", function(d) {
+        return mymap.latLngToLayerPoint(d.LatLng[0]).x;
+      })
+      .attr("y", function(d) {
+        return mymap.latLngToLayerPoint(d.LatLng[0]).y;
+      })
+      .style("stroke", "black")
+      .style("opacity", 0.6)
+      .style("fill", "red")
+      .attr("r", 1);
 
-// 		function update() {
-// 			feature.attr("transform", 
-// 			function(d) { 
-// 				return "translate("+ 
-// 					mymap.latLngToLayerPoint(d.LatLng).x +","+ 
-// 					mymap.latLngToLayerPoint(d.LatLng).y +")";
-// 				}
-// 			)
-// 		}
+    function update() {
+      d3.selectAll("circle")
+        .attr("cx", function(d) {
+          return mymap.latLngToLayerPoint([d.lat, d.long]).x;
+        })
+        .attr("cy", function(d) {
+          return mymap.latLngToLayerPoint([d.lat, d.long]).y;
+        });
+    }
+
+    mymap.on("moveend", update);
   }
 
   function addPiesToGroup(pies, mainPiesLayerGroup) {
