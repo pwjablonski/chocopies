@@ -26,7 +26,7 @@
     zoomControl: false,
     attributionControl: false,
     maxBounds: [[43, 124], [27, 130]],
-    maxZoom: 10,
+    maxZoom: 6,
     minZoom: 6,
     dragging: false
   }).setView([38, 127], 6);
@@ -53,7 +53,8 @@
   drawData(total, claimed);
   // addPiesToGroup(pies, mainPiesLayerGroup);
   // drawMap(pies)
-  d3Map(pies, mymap);
+  d3Map(pies, zoommap, "zoom");
+  d3Map(pies, mymap, "main");
 
   async function fetchPies() {
     const req = await fetch("/pies");
@@ -97,7 +98,7 @@
     return imageURL;
   }
 
-  function d3Map(pies, map) {
+  function d3Map(pies, map, mapname) {
     pies.forEach(function(d) {
       d.LatLng = xyToLatLng(d.x, d.y);
     });
@@ -105,10 +106,10 @@
     const svg = d3.select(map.getPanes().overlayPane).append("svg");
     svg.style("width", "600px");
     svg.style("height", "600px");
-    const g = svg.append("g").attr("class", "leaflet-zoom-hide");
+    const g = svg.append("g").attr("class", mapname);
 
     let feature = g
-      .selectAll("image")
+      .selectAll(`.${mapname} image`)
       .data(pies)
       .enter()
       .append("image")
@@ -135,13 +136,13 @@
       })
       .on("click", function(e) {
           console.log(e)
-          zoommap.panTo([e.LatLng[] + 0.1, e.latlng.lng - 0.3]);
+          zoommap.panTo([e.LatLng[0][0], e.LatLng[0][1]]);
           let modal = document.querySelector("#viewPies");
           modal.classList.add("is-active");
       });
 
     function update() {
-      d3.selectAll("image")
+      d3.selectAll(`.${mapname} image`)
         .attr("x", function(d) {
           return map.latLngToLayerPoint(d.LatLng[0]).x;
         })
