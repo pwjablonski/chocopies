@@ -18,9 +18,9 @@
   let total = pieData.total;
   let pies = pieData.pies;
   let selectedPieId = null;
-  
-  const mainPiesLayerGroup = L.layerGroup()
-  const zoomPiesLayerGroup = L.layerGroup()
+
+  const mainPiesLayerGroup = L.layerGroup();
+  const zoomPiesLayerGroup = L.layerGroup();
 
   let mymap = L.map("main-map", {
     zoomControl: false,
@@ -39,18 +39,14 @@
     minZoom: 11
   }).setView([38, 127], 11);
 
-  
-  
   mymap.getPane("mapPane").style.zIndex = 0;
-  
-  mainPiesLayerGroup.addTo(mymap)
-  zoomPiesLayerGroup.addTo(zoommap)
+
+  mainPiesLayerGroup.addTo(mymap);
+  zoomPiesLayerGroup.addTo(zoommap);
 
   drawData(total, claimed);
-  drawMap(pies);
-  
-  
-  
+  drawMap(pies, mainPiesLayerGroup);
+
   async function fetchPies() {
     const req = await fetch("/pies");
     const resp = await req.json();
@@ -66,15 +62,18 @@
     moneyDiv.innerHTML = `$ ${claimed}`;
   }
 
+  function xyToLatLng(x, y) {
+    const yOff = 0.08;
+    const xOff = 0.105;
+    return [
+      [43 - y * yOff, 124 + x * xOff],
+      [43 - y * yOff - yOff, 124 + x * xOff + xOff]
+    ];
+  }
+
   function drawMap(pies) {
     pies.forEach(pie => {
-      let yOff = 0.08;
-      let xOff = 0.105;
-
-      let imageBounds = [
-        [43 - pie.y * yOff, 124 + pie.x * xOff],
-        [43 - pie.y * yOff - yOff, 124 + pie.x * xOff + xOff]
-      ];
+      let imageBounds = xyToLatLng(pie.x, pie.y);
 
       if (pie.isClaimed) {
         var svgElement = document.createElementNS(
@@ -174,8 +173,6 @@
       }
     });
   }
-
-
 
   d.addEventListener("click", function(e) {
     if (e.target.classList.contains("navbar-burger")) {
