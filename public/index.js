@@ -154,27 +154,26 @@
       .on("click", onPieClick);
 
     function update(e) {
-        svg.attr
       
-      // d3.selectAll(`.${mapname} image`)
-      //   .attr("x", function(d) {
-      //     return map.latLngToLayerPoint(d.LatLng[0]).x;
-      //   })
-      //   .attr("y", function(d) {
-      //     return map.latLngToLayerPoint(d.LatLng[0]).y;
-      //   })
-      //   .attr("width", function(d) {
-      //     return (
-      //       map.latLngToLayerPoint(d.LatLng[1]).x -
-      //       map.latLngToLayerPoint(d.LatLng[0]).x
-      //     );
-      //   })
-      //   .attr("height", function(d) {
-      //     return (
-      //       map.latLngToLayerPoint(d.LatLng[1]).y -
-      //       map.latLngToLayerPoint(d.LatLng[0]).y
-      //     );
-      //   });
+      d3.selectAll(`.${mapname} image`)
+        .attr("x", function(d) {
+          return map.latLngToLayerPoint(d.LatLng[0]).x;
+        })
+        .attr("y", function(d) {
+          return map.latLngToLayerPoint(d.LatLng[0]).y;
+        })
+        .attr("width", function(d) {
+          return (
+            map.latLngToLayerPoint(d.LatLng[1]).x -
+            map.latLngToLayerPoint(d.LatLng[0]).x
+          );
+        })
+        .attr("height", function(d) {
+          return (
+            map.latLngToLayerPoint(d.LatLng[1]).y -
+            map.latLngToLayerPoint(d.LatLng[0]).y
+          );
+        });
       // 	console.log('test')
     }
 
