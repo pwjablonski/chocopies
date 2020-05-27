@@ -45,7 +45,9 @@
   zoomPiesLayerGroup.addTo(zoommap);
 
   drawData(total, claimed);
-  drawMap(pies, mainPiesLayerGroup);
+  console.time('label');
+  addPiesToGroup(pies, mainPiesLayerGroup);
+  console.timeEnd('label');
 
   async function fetchPies() {
     const req = await fetch("/pies");
@@ -71,108 +73,146 @@
     ];
   }
 
-  function drawMap(pies) {
+  function idToImageURL(id) {
+    let imageURL;
+    const idModFive = id % 5;
+
+    if (idModFive === 0) {
+      imageURL = EAT;
+    } else if (idModFive == 1) {
+      imageURL = UNITE;
+    } else if (idModFive === 2) {
+      imageURL = PEACE;
+    } else if (idModFive === 3) {
+      imageURL = SHARE;
+    } else if (idModFive === 4) {
+      imageURL = LOVE;
+    }
+    return imageURL;
+  }
+
+  function addPiesToGroup(pies, mainPiesLayerGroup) {
     pies.forEach(pie => {
-      let imageBounds = xyToLatLng(pie.x, pie.y);
-
-      if (pie.isClaimed) {
-        var svgElement = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "svg"
-        );
-        svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-        svgElement.setAttribute("viewBox", "0 0 150 100");
-        svgElement.innerHTML = `<rect width=150 height=100 style="fill:#0013ff"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">TEXT</text>`;
-        L.svgOverlay(svgElement, imageBounds).addTo(mymap);
-        var svgElement = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "svg"
-        );
-        svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-        svgElement.setAttribute("viewBox", "0 0 150 100");
-        svgElement.innerHTML = `<rect width=150 height=100 style="fill:#0013ff"/> <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" style="fill:#FFF">TEXT</text>`;
-        L.svgOverlay(svgElement, imageBounds).addTo(zoommap);
-      } else {
-        let imageUrl;
-        const idModFive = pie.id % 5;
-
-        if (idModFive === 0) {
-          imageUrl = EAT;
-        } else if (idModFive == 1) {
-          imageUrl = UNITE;
-        } else if (idModFive === 2) {
-          imageUrl = PEACE;
-        } else if (idModFive === 3) {
-          imageUrl = SHARE;
-        } else if (idModFive === 4) {
-          imageUrl = LOVE;
-        }
-
-        //       L.imageOverlay(imageUrl, imageBounds, {
-        //         className: "pie map-svg-pie"
-        //       }).addTo(mymap);
-
-        //       L.imageOverlay(imageUrl, imageBounds, {
-        //         className: "pie map-svg-pie", id: pie.id
-        //       }).addTo(zoommap);
-
-        var svgElement = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "svg"
-        );
-        svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-        svgElement.setAttribute("id", pie.id);
-        svgElement.setAttribute("viewBox", "0 0 150 100");
-        svgElement.innerHTML = `<image id=${pie.id} href=${imageUrl} width="150" height="100"/>`;
-        var elMain = L.svgOverlay(svgElement, imageBounds, {
-          interactive: true
-        }).addTo(mainPiesLayerGroup);
-
-        elMain.on("click", function(e) {
-          zoommap.panTo([e.latlng.lat + 0.1, e.latlng.lng - 0.3]);
-          let modal = document.querySelector("#viewPies");
-          modal.classList.add("is-active");
-        });
-        var svgElement = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "svg"
-        );
-        svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-        svgElement.setAttribute("id", pie.id);
-        svgElement.setAttribute("viewBox", "0 0 150 100");
-        svgElement.innerHTML = `<image id=${pie.id} href=${imageUrl} width="150" height="100"/>`;
-        var elZoom = L.svgOverlay(svgElement, imageBounds, {
-          interactive: true
-        }).addTo(zoommap);
-        elZoom.on("click", function(e) {
-          console.log(e);
-          let modal = document.querySelector("#sendPie");
-          modal.classList.add("is-active");
-          selectedPieId = pie.id;
-          let pieImgSend = document.querySelector(".share_choco");
-          let pieImgShare = document.querySelector(".send_choco");
-
-          const idModFive = selectedPieId % 5;
-          if (idModFive === 0) {
-            pieImgSend.src = EAT;
-            pieImgShare.src = EAT;
-          } else if (idModFive == 1) {
-            pieImgSend.src = UNITE;
-            pieImgShare.src = UNITE;
-          } else if (idModFive === 2) {
-            pieImgSend.src = PEACE;
-            pieImgShare.src = PEACE;
-          } else if (idModFive === 3) {
-            pieImgSend.src = SHARE;
-            pieImgShare.src = SHARE;
-          } else if (idModFive === 4) {
-            pieImgSend.src = LOVE;
-            pieImgShare.src = LOVE;
-          }
-        });
-      }
+      const imageBounds = xyToLatLng(pie.x, pie.y);
+      const imageURL = idToImageURL(pie.id);
+      // var svgElement = document.createElementNS(
+      //   "http://www.w3.org/2000/svg",
+      //   "svg"
+      // );
+      // svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+      // svgElement.setAttribute("id", pie.id);
+      // svgElement.setAttribute("viewBox", "0 0 150 100");
+      // svgElement.innerHTML = `<image id=${pie.id} href=${imageURL} width="150" height="100"/>`;
+      // var elMain = L.svgOverlay(svgElement, imageBounds, {
+      //   interactive: true
+      // }).addTo(mainPiesLayerGroup);
+      const imageOverlay = L.imageOverlay(imageURL, imageBounds, {
+        className: "pie map-svg-pie"
+      }).addTo(mainPiesLayerGroup);
     });
   }
+  //   function drawMap(pies) {
+  //     pies.forEach(pie => {
+  //       let imageBounds = xyToLatLng(pie.x, pie.y);
+
+  //       if (pie.isClaimed) {
+  //         var svgElement = document.createElementNS(
+  //           "http://www.w3.org/2000/svg",
+  //           "svg"
+  //         );
+  //         svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  //         svgElement.setAttribute("viewBox", "0 0 150 100");
+  //         svgElement.innerHTML = `<rect width=150 height=100 style="fill:#0013ff"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">TEXT</text>`;
+  //         L.svgOverlay(svgElement, imageBounds).addTo(mymap);
+  //         var svgElement = document.createElementNS(
+  //           "http://www.w3.org/2000/svg",
+  //           "svg"
+  //         );
+  //         svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  //         svgElement.setAttribute("viewBox", "0 0 150 100");
+  //         svgElement.innerHTML = `<rect width=150 height=100 style="fill:#0013ff"/> <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" style="fill:#FFF">TEXT</text>`;
+  //         L.svgOverlay(svgElement, imageBounds).addTo(zoommap);
+  //       } else {
+  //         let imageUrl;
+  //         const idModFive = pie.id % 5;
+
+  //         if (idModFive === 0) {
+  //           imageUrl = EAT;
+  //         } else if (idModFive == 1) {
+  //           imageUrl = UNITE;
+  //         } else if (idModFive === 2) {
+  //           imageUrl = PEACE;
+  //         } else if (idModFive === 3) {
+  //           imageUrl = SHARE;
+  //         } else if (idModFive === 4) {
+  //           imageUrl = LOVE;
+  //         }
+
+  //         //       L.imageOverlay(imageUrl, imageBounds, {
+  //         //         className: "pie map-svg-pie"
+  //         //       }).addTo(mymap);
+
+  //         //       L.imageOverlay(imageUrl, imageBounds, {
+  //         //         className: "pie map-svg-pie", id: pie.id
+  //         //       }).addTo(zoommap);
+
+  //         var svgElement = document.createElementNS(
+  //           "http://www.w3.org/2000/svg",
+  //           "svg"
+  //         );
+  //         svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  //         svgElement.setAttribute("id", pie.id);
+  //         svgElement.setAttribute("viewBox", "0 0 150 100");
+  //         svgElement.innerHTML = `<image id=${pie.id} href=${imageUrl} width="150" height="100"/>`;
+  //         var elMain = L.svgOverlay(svgElement, imageBounds, {
+  //           interactive: true
+  //         }).addTo(mainPiesLayerGroup);
+
+  //         elMain.on("click", function(e) {
+  //           zoommap.panTo([e.latlng.lat + 0.1, e.latlng.lng - 0.3]);
+  //           let modal = document.querySelector("#viewPies");
+  //           modal.classList.add("is-active");
+  //         });
+  //         var svgElement = document.createElementNS(
+  //           "http://www.w3.org/2000/svg",
+  //           "svg"
+  //         );
+  //         svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  //         svgElement.setAttribute("id", pie.id);
+  //         svgElement.setAttribute("viewBox", "0 0 150 100");
+  //         svgElement.innerHTML = `<image id=${pie.id} href=${imageUrl} width="150" height="100"/>`;
+  //         var elZoom = L.svgOverlay(svgElement, imageBounds, {
+  //           interactive: true
+  //         }).addTo(zoommap);
+  //         elZoom.on("click", function(e) {
+  //           console.log(e);
+  //           let modal = document.querySelector("#sendPie");
+  //           modal.classList.add("is-active");
+  //           selectedPieId = pie.id;
+  //           let pieImgSend = document.querySelector(".share_choco");
+  //           let pieImgShare = document.querySelector(".send_choco");
+
+  //           const idModFive = selectedPieId % 5;
+  //           if (idModFive === 0) {
+  //             pieImgSend.src = EAT;
+  //             pieImgShare.src = EAT;
+  //           } else if (idModFive == 1) {
+  //             pieImgSend.src = UNITE;
+  //             pieImgShare.src = UNITE;
+  //           } else if (idModFive === 2) {
+  //             pieImgSend.src = PEACE;
+  //             pieImgShare.src = PEACE;
+  //           } else if (idModFive === 3) {
+  //             pieImgSend.src = SHARE;
+  //             pieImgShare.src = SHARE;
+  //           } else if (idModFive === 4) {
+  //             pieImgSend.src = LOVE;
+  //             pieImgShare.src = LOVE;
+  //           }
+  //         });
+  //       }
+  //     });
+  //   }
 
   d.addEventListener("click", function(e) {
     if (e.target.classList.contains("navbar-burger")) {
