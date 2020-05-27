@@ -19,7 +19,7 @@
   let pies = pieData.pies;
   let selectedPieId = null;
 
-  const mainPiesLayerGroup = L.layerGroup();
+  const mainPiesLayerGroup = L.featureGroup();
   const zoomPiesLayerGroup = L.layerGroup();
 
   let mymap = L.map("main-map", {
@@ -42,6 +42,8 @@
   mymap.getPane("mapPane").style.zIndex = 0;
 
   mainPiesLayerGroup.addTo(mymap);
+  mainPiesLayerGroup.on('click', function(e) { console.log(e) })
+
   zoomPiesLayerGroup.addTo(zoommap);
 
   drawData(total, claimed);
@@ -107,7 +109,7 @@
       //   interactive: true
       // }).addTo(mainPiesLayerGroup);
       const imageOverlay = L.imageOverlay(imageURL, imageBounds, {
-        className: "pie map-svg-pie"
+        className: "pie map-svg-pie",  interactive: true
       }).addTo(mainPiesLayerGroup);
     });
   }
