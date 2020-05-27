@@ -154,9 +154,7 @@
       .on("click", onPieClick);
 
     function update(e) {
-      console.log(e)
-      g.attr("transform", "translate(" + -topLeft[0] + "," 
-      + topLeft[1] + ")");
+        svg.attr
       
       // d3.selectAll(`.${mapname} image`)
       //   .attr("x", function(d) {
