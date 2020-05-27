@@ -106,14 +106,17 @@
     const g = svg.append("g").attr("class", "leaflet-zoom-hide");
 
     let feature = g
-      .selectAll("circle")
+      .selectAll("image")
       .data(pies)
       .enter()
-      .append("circle")
-      .attr("x", function(d) {
+      .append("image")
+      .attr("href", EAT)
+      .attr("width", "10")
+      .attr("height", "10")
+      .attr("cx", function(d) {
         return mymap.latLngToLayerPoint(d.LatLng[0]).x;
       })
-      .attr("y", function(d) {
+      .attr("cy", function(d) {
         return mymap.latLngToLayerPoint(d.LatLng[0]).y;
       })
       .style("stroke", "black")
