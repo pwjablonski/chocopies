@@ -97,10 +97,34 @@
 
   function d3Map(pies) {
     pies.forEach(function(d) {
-          d.LatLng = xyToLatLng(d.x, d.y)
+      d.LatLng = xyToLatLng(d.x, d.y)
 		})
 
+    const svg = d3.select(mymap.getPanes().overlayPane).append("svg");
+    const g = svg.append("g").attr("class", "leaflet-zoom-hide");
+
+    let feature = g.selectAll("circle")
+			.data(pies)
+			.enter().append("circle")
+      .attr("cx", function(d){ return mymap.latLngToLayerPoint([d.lat, d.long]).x })
+      .attr("cy", function(d){ return mymap.latLngToLayerPoint([d.lat, d.long]).y })
+			.style("stroke", "black")  
+			.style("opacity", .6) 
+			.style("fill", "red")
+			.attr("r", 20); 
     
+//     mymap.on("viewreset", update);
+// 		update();
+
+// 		function update() {
+// 			feature.attr("transform", 
+// 			function(d) { 
+// 				return "translate("+ 
+// 					mymap.latLngToLayerPoint(d.LatLng).x +","+ 
+// 					mymap.latLngToLayerPoint(d.LatLng).y +")";
+// 				}
+// 			)
+// 		}
   }
 
   function addPiesToGroup(pies, mainPiesLayerGroup) {
