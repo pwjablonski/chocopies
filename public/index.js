@@ -153,29 +153,34 @@
       })
       .on("click", onPieClick);
 
-    function update() {
-      d3.selectAll(`.${mapname} image`)
-        .attr("x", function(d) {
-          return map.latLngToLayerPoint(d.LatLng[0]).x;
-        })
-        .attr("y", function(d) {
-          return map.latLngToLayerPoint(d.LatLng[0]).y;
-        })
-        .attr("width", function(d) {
-          return (
-            map.latLngToLayerPoint(d.LatLng[1]).x -
-            map.latLngToLayerPoint(d.LatLng[0]).x
-          );
-        })
-        .attr("height", function(d) {
-          return (
-            map.latLngToLayerPoint(d.LatLng[1]).y -
-            map.latLngToLayerPoint(d.LatLng[0]).y
-          );
-        });
+    function update(e) {
+      console.log(e)
+      g.attr("transform", "translate(" + -topLeft[0] + "," 
+      + topLeft[1] + ")");
+      
+      // d3.selectAll(`.${mapname} image`)
+      //   .attr("x", function(d) {
+      //     return map.latLngToLayerPoint(d.LatLng[0]).x;
+      //   })
+      //   .attr("y", function(d) {
+      //     return map.latLngToLayerPoint(d.LatLng[0]).y;
+      //   })
+      //   .attr("width", function(d) {
+      //     return (
+      //       map.latLngToLayerPoint(d.LatLng[1]).x -
+      //       map.latLngToLayerPoint(d.LatLng[0]).x
+      //     );
+      //   })
+      //   .attr("height", function(d) {
+      //     return (
+      //       map.latLngToLayerPoint(d.LatLng[1]).y -
+      //       map.latLngToLayerPoint(d.LatLng[0]).y
+      //     );
+      //   });
+      // 	console.log('test')
     }
 
-    map.on("viewreset", update);
+    map.on("move", update);
   }
 
     // function addPiesToGroup(pies, mainPiesLayerGroup) {
