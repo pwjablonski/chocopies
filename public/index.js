@@ -51,7 +51,7 @@
   drawData(total, claimed);
   // addPiesToGroup(pies, mainPiesLayerGroup);
   // drawMap(pies)
-  d3Map(pies)
+  d3Map(pies);
 
   async function fetchPies() {
     const req = await fetch("/pies");
@@ -95,13 +95,49 @@
     return imageURL;
   }
 
-  
   function d3Map(pies) {
-      console.log(d3)
+    console.log(d3);
+
+    const svg = d3.select(mymap.getPanes().overlayPane).append("svg");
+    const g = svg.append("g").attr("class", "leaflet-zoom-hide");
+
+    d3.json(pies, function(collection) {
+      // Add a LatLng object to each item in the dataset
+      console.log(collection)
+//       collection.objects.forEach(function(d) {
+//         d.LatLng = new L.LatLng(
+//           d.circle.coordinates[0],
+//           d.circle.coordinates[1]
+//         );
+//       });
+
+//       var feature = g
+//         .selectAll("circle")
+//         .data(collection.objects)
+//         .enter()
+//         .append("circle")
+//         .style("stroke", "black")
+//         .style("opacity", 0.6)
+//         .style("fill", "red")
+//         .attr("r", 20);
+
+//       map.on("viewreset", update);
+//       update();
+
+//       function update() {
+//         feature.attr("transform", function(d) {
+//           return (
+//             "translate(" +
+//             map.latLngToLayerPoint(d.LatLng).x +
+//             "," +
+//             map.latLngToLayerPoint(d.LatLng).y +
+//             ")"
+//           );
+//         });
+//       }
+    });
   }
-  
-  
-  
+
   function addPiesToGroup(pies, mainPiesLayerGroup) {
     pies.forEach(pie => {
       const imageBounds = xyToLatLng(pie.x, pie.y);
@@ -123,7 +159,7 @@
       }).addTo(mainPiesLayerGroup);
     });
   }
-  
+
   function drawMap(pies) {
     pies.forEach(pie => {
       let imageBounds = xyToLatLng(pie.x, pie.y);
