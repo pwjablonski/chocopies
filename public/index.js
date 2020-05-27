@@ -26,7 +26,7 @@
     zoomControl: false,
     attributionControl: false,
     maxBounds: [[43, 124], [27, 130]],
-    maxZoom: 6,
+    maxZoom: 10,
     minZoom: 6,
     dragging: false
   }).setView([38, 127], 6);
@@ -40,6 +40,10 @@
   }).setView([38, 127], 11);
 
   mymap.getPane("mapPane").style.zIndex = 0;
+  L.tileLayer(
+    'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    }).addTo(mymap);
 
   mainPiesLayerGroup.addTo(mymap);
   mainPiesLayerGroup.on("click", function(e) {
@@ -51,7 +55,7 @@
   drawData(total, claimed);
   // addPiesToGroup(pies, mainPiesLayerGroup);
   // drawMap(pies)
-  d3Map(pies);
+  d3Map(pies, mymap);
 
   async function fetchPies() {
     const req = await fetch("/pies");
@@ -95,12 +99,12 @@
     return imageURL;
   }
 
-  function d3Map(pies) {
+  function d3Map(pies, map) {
     pies.forEach(function(d) {
       d.LatLng = xyToLatLng(d.x, d.y);
     });
 
-    const svg = d3.select(mymap.getPanes().overlayPane).append("svg");
+    const svg = d3.select(map.getPanes().overlayPane).append("svg");
     svg.style("width", '600px')
     svg.style("height", '600px')
     const g = svg.append("g").attr("class", "leaflet-zoom-hide");
@@ -110,31 +114,29 @@
       .data(pies)
       .enter()
       .append("image")
-      .attr("href", EAT)
+      .attr("href", function (d){ return idToImageURL(d.id)})
       .attr("width", "10")
       .attr("height", "10")
-      .attr("cx", function(d) {
-        return mymap.latLngToLayerPoint(d.LatLng[0]).x;
+      .attr("x", function(d) {
+        return map.latLngToLayerPoint(d.LatLng[0]).x;
       })
-      .attr("cy", function(d) {
-        return mymap.latLngToLayerPoint(d.LatLng[0]).y;
-      })
-      .style("stroke", "black")
-      .style("opacity", 0.6)
-      .style("fill", "red")
-      .attr("r", 1);
+      .attr("y", function(d) {
+        return map.latLngToLayerPoint(d.LatLng[0]).y;
+      }).on("click", function(){
+          alert('test')
+      });
 
-    function update() {
-      d3.selectAll("circle")
-        .attr("cx", function(d) {
-          return mymap.latLngToLayerPoint([d.lat, d.long]).x;
-        })
-        .attr("cy", function(d) {
-          return mymap.latLngToLayerPoint([d.lat, d.long]).y;
-        });
-    }
+//     function update() {
+//       d3.selectAll("circle")
+//         .attr("x", function(d) {
+//           return map.latLngToLayerPoint([d.lat, d.long]).x;
+//         })
+//         .attr("y", function(d) {
+//           return map.latLngToLayerPoint([d.lat, d.long]).y;
+//         });
+//     }
 
-    mymap.on("moveend", update);
+//     map.on("moveend", update);
   }
 
   function addPiesToGroup(pies, mainPiesLayerGroup) {
