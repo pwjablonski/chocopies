@@ -35,8 +35,8 @@
     zoomControl: false,
     attributionControl: false,
     maxBounds: [[43, 124], [27, 134]],
-    maxZoom: 8,
-    minZoom: 8,
+    // maxZoom: 8,
+    // minZoom: 8,
   }).setView([38, 127], 8);
 
   mymap.getPane("mapPane").style.zIndex = 0;
@@ -62,7 +62,7 @@
   // addPiesToGroup(pies, mainPiesLayerGroup);
   // drawMap(pies)
   d3Map(pies, mymap, "main-map", mainPieClicked);
-  // d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
+  d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
 
   async function fetchPies() {
     const req = await fetch("/pies");
@@ -128,6 +128,7 @@
     
     zoommap.invalidateSize();
     zoommap.panTo([e.LatLng[0][0], e.LatLng[0][1]]);
+    
     d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
   }
 
