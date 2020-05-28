@@ -34,9 +34,9 @@
   let zoommap = L.map("zoom-map", {
     zoomControl: false,
     attributionControl: false,
-    maxBounds: [[43, 124], [27, 134]]
-    // maxZoom: 8,
-    // minZoom: 8,
+    maxBounds: [[43, 124], [27, 134]],
+    maxZoom: 8,
+    minZoom: 8,
   }).setView([38, 127], 8);
 
   mymap.getPane("mapPane").style.zIndex = 0;
@@ -112,9 +112,8 @@
     modal.classList.add("is-active");
 
     zoommap.invalidateSize();
-    zoommap.panTo([e.LatLng[0][0], e.LatLng[0][1]]);
+    // zoommap.panTo([e.LatLng[0][0], e.LatLng[0][1]]);
 
-    d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
   }
 
   function d3Map(pies, map, mapname, onPieClick) {
@@ -133,10 +132,11 @@
     
     let svgBounds;
     if(mapname === "zoom-map"){
-      svgBounds = [[43, 124], [27, 130]]
+      svgBounds = map.getBounds()
     } else{
       svgBounds = map.getBounds()
     }
+    console.log(svgBounds)
     
     const svg = L.svgOverlay(svgElement, svgBounds, {
       interactive: true
