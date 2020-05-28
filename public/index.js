@@ -19,14 +19,14 @@
   let pies = pieData.pies;
   let selectedPieId = null;
   
-  let mymap = L.map("main-map", {
-    zoomControl: false,
-    attributionControl: false,
-    maxBounds: [[43, 124], [27, 130]],
-    maxZoom: 6,
-    minZoom: 6,
-    dragging: false
-  }).setView([38, 127], 6);
+  // let mymap = L.map("main-map", {
+  //   zoomControl: false,
+  //   attributionControl: false,
+  //   maxBounds: [[43, 124], [27, 130]],
+  //   maxZoom: 6,
+  //   minZoom: 6,
+  //   dragging: false
+  // }).setView([38, 127], 6);
 
   let zoommap = L.map("zoom-map", {
     zoomControl: false,
@@ -36,7 +36,7 @@
     minZoom: 11,
   }).setView([38, 127], 11);
 
-  mymap.getPane("mapPane").style.zIndex = 0;
+  // mymap.getPane("mapPane").style.zIndex = 0;
 
 //   L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 //     maxZoom: 18
@@ -115,7 +115,29 @@
 
 
   function drawMainMap(){
-    
+    d3.select("#main-map")
+      .append("svg")
+      .attr("height", "inherit")
+      .attr("width", "inherit")
+      .attr("viewBox", "0 0 125 125")
+      .append("g")
+      .selectAll("image")
+      .data(pies)
+      .enter()
+      .append("image")
+      .attr("id", d => d.id)
+      .attr("href", function(d) {
+        return idToImageURL(d.id);
+      })
+      .attr("width", "1")
+      .attr("height", "1")
+      .attr("x", function(d) {
+        return d.x
+      })
+      .attr("y", function(d) {
+        return d.y;
+      })
+      .on("click", mainPieClicked);
   }
   
   function d3Map(pies, map, mapname, onPieClick) {
