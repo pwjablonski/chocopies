@@ -108,18 +108,16 @@
   }
 
   function mainPieClicked(e) {
+    
     let modal = document.querySelector("#viewPies");
     modal.classList.add("is-active");
 
     zoommap.invalidateSize();
+    // setBounds(zoommap.getBounds())
     // zoommap.panTo([e.LatLng[0][0], e.LatLng[0][1]]);
 
   }
-  
-  function projectPoint(x, y) {
-    var point = map.latLngToLayerPoint(new L.LatLng(y, x));
-    this.stream.point(point.x, point.y);
-  }
+
 
   function d3Map(pies, map, mapname, onPieClick) {
     pies.forEach(function(d) {
