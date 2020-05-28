@@ -164,7 +164,11 @@
       .attr("y", function(d) {
         return map.latLngToLayerPoint(d.LatLng[0]).y;
       })
-    
+      
+    map.on("viewreset", reset);
+    function reset(){
+      console.log('reset')
+    }
   }
 
   // function addPiesToGroup(pies, mainPiesLayerGroup) {
