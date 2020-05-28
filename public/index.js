@@ -41,9 +41,9 @@
 
   mymap.getPane("mapPane").style.zIndex = 0;
 
-  L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 18
-  }).addTo(mymap);
+  // L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  //   maxZoom: 18
+  // }).addTo(mymap);
 
   // mainPiesLayerGroup.addTo(mymap);
   // mainPiesLayerGroup.on("click", function(e) {
@@ -110,6 +110,7 @@
   }
 
   function mainPieClicked(e) {
+    console.log('test')
     zoommap.panTo([e.LatLng[0][0], e.LatLng[0][1]]);
     let modal = document.querySelector("#viewPies");
     modal.classList.add("is-active");
