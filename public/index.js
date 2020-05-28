@@ -125,6 +125,7 @@
 
     d3.select(`#${mapname}`)
       .select("svg")
+      .
       .selectAll(`#${mapname} image`)
       .data(pies)
       .enter()
