@@ -144,11 +144,7 @@
     );
     svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
     svgElement.innerHTML = "<g></g>"
-    const svg = L.svgOverlay(svgElement, map.getBounds(), {interactive:true}).addTo(map)
-    map.on('move', function(){
-      console.log('resize')
-      svg.setBounds(map.getBounds())
-    })
+    const svg = L.svgOverlay(svgElement, map.getBounds(), {interactive:true}).addTo(map)    
 
     d3.select(`#${mapname}`)
       .select("svg")
