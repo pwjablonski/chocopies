@@ -19,10 +19,6 @@
   let pies = pieData.pies;
   let selectedPieId = null;
   
-  d3.json("/pies", function(data) {
-    console.log(data);
-  });
-
   let mymap = L.map("main-map", {
     zoomControl: false,
     attributionControl: false,
@@ -52,7 +48,8 @@
 
   drawData(total, claimed);
 
-  const mainOverlay = d3Map(pies, mymap, "main-map", mainPieClicked);
+  // const mainOverlay = d3Map(pies, mymap, "main-map", mainPieClicked);
+  drawMainMap(pies)
   let zoomOverlay;
   
   async function fetchPies() {
@@ -117,6 +114,10 @@
   }
 
 
+  function drawMainMap(){
+    
+  }
+  
   function d3Map(pies, map, mapname, onPieClick) {
     pies.forEach(function(d) {
       d.LatLng = xyToLatLng(d.x, d.y);
