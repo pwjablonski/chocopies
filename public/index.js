@@ -42,6 +42,7 @@
   mymap.getPane("mapPane").style.zIndex = 0;
   
   mymap.on('click', function(e){
+    
     mainPieClicked(e)
     zoommap.invalidateSize();
   })
@@ -121,7 +122,7 @@
 
   function mainPieClicked(e) {
     console.log(e)
-    zoommap.panTo(e.latlng);
+    // zoommap.panTo(e.latlng);
     // zoommap.panTo([e.LatLng[0][0], e.LatLng[0][1]]);
     let modal = document.querySelector("#viewPies");
     modal.classList.add("is-active");
