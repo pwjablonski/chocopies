@@ -115,6 +115,11 @@
     // zoommap.panTo([e.LatLng[0][0], e.LatLng[0][1]]);
 
   }
+  
+  function projectPoint(x, y) {
+    var point = map.latLngToLayerPoint(new L.LatLng(y, x));
+    this.stream.point(point.x, point.y);
+  }
 
   function d3Map(pies, map, mapname, onPieClick) {
     pies.forEach(function(d) {
@@ -130,15 +135,8 @@
     svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
     svgElement.innerHTML = "<g></g>";
     
-    let svgBounds;
-    if(mapname === "zoom-map"){
-      svgBounds = map.getBounds()
-    } else{
-      svgBounds = map.getBounds()
-    }
-    console.log(svgBounds)
     
-    const svg = L.svgOverlay(svgElement, svgBounds, {
+    const svg = L.svgOverlay(svgElement, map.getBounds(), {
       interactive: true
     }).addTo(map);
 
