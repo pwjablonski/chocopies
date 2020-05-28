@@ -136,7 +136,15 @@
     );
     svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
     svgElement.innerHTML = "<g></g>";
-    const svg = L.svgOverlay(svgElement, map.getBounds(), {
+    
+    let svgBounds;
+    if(mapname === "zoom-map"){
+      svgBounds = [[43, 124], [27, 130]]
+    } else{
+      svgBounds = map.getBounds()
+    }
+    
+    const svg = L.svgOverlay(svgElement, svgBounds, {
       interactive: true
     }).addTo(map);
 
