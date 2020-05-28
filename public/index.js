@@ -41,8 +41,8 @@
 
   mymap.getPane("mapPane").style.zIndex = 0;
   
-  mymap.on('click', mainPieClicked)
-  zoommap.on('click', zoomPieClicked)
+  // mymap.on('click', mainPieClicked)
+  // zoommap.on('click', zoomPieClicked)
 
   L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 18,
@@ -62,6 +62,7 @@
   // addPiesToGroup(pies, mainPiesLayerGroup);
   // drawMap(pies)
   d3Map(pies, mymap, "main-map", mainPieClicked);
+  // d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
 
   async function fetchPies() {
     const req = await fetch("/pies");
@@ -122,10 +123,10 @@
     //   zoommap.removeLayer(layer)
     // })
     // zoommap.panTo([e.LatLng[0][0], e.LatLng[0][1]]);
-    // let modal = document.querySelector("#viewPies");
-    // modal.classList.add("is-active");
-    // d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
-    // zoommap.invalidateSize();
+    let modal = document.querySelector("#viewPies");
+    modal.classList.add("is-active");
+    zoommap.invalidateSize();
+    d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
   }
 
   function d3Map(pies, map, mapname, onPieClick) {
@@ -173,8 +174,8 @@
       .attr("y", function(d) {
         return map.latLngToLayerPoint(d.LatLng[0]).y;
       })
-      .on('click', function(){
-        console.log('click')
+      .on('click', function(e){
+        onPieClick(e)
       })
     
   }
