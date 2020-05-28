@@ -19,15 +19,6 @@
   let pies = pieData.pies;
   let selectedPieId = null;
   
-  // let mymap = L.map("main-map", {
-  //   zoomControl: false,
-  //   attributionControl: false,
-  //   maxBounds: [[43, 124], [27, 130]],
-  //   maxZoom: 6,
-  //   minZoom: 6,
-  //   dragging: false
-  // }).setView([38, 127], 6);
-
   let zoommap = L.map("zoom-map", {
     zoomControl: false,
     attributionControl: false,
@@ -36,19 +27,7 @@
     minZoom: 11,
   }).setView([38, 127], 11);
 
-  // mymap.getPane("mapPane").style.zIndex = 0;
-
-//   L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-//     maxZoom: 18
-//   }).addTo(mymap);
-
-//   L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-//     maxZoom: 18
-//   }).addTo(zoommap);
-
   drawData(total, claimed);
-
-  // const mainOverlay = d3Map(pies, mymap, "main-map", mainPieClicked);
   drawMainMap(pies)
   let zoomOverlay;
   
@@ -70,10 +49,7 @@
   function xyToLatLng(x, y) {
     const yOff = 0.08;
     const xOff = 0.105;
-    return [
-      [43 - y * yOff, 124 + x * xOff],
-      [43 - y * yOff - yOff, 124 + x * xOff + xOff]
-    ];
+    return [43 - y * yOff, 124 + x * xOff];
   }
 
   function idToImageURL(id) {
@@ -106,20 +82,21 @@
   }
 
   function mainPieClicked(e) {
-    let modal = document.querySelector("#viewPies");
-    modal.classList.add("is-active");
-    zoommap.invalidateSize();
-    zoommap.panTo([e.LatLng[0][0], e.LatLng[0][1]]);
-    zoomOverlay =  d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
+    console.log(e)
+    // let modal = document.querySelector("#viewPies");
+    // modal.classList.add("is-active");
+    // zoommap.invalidateSize();
+    // zoommap.panTo([e.LatLng[0][0], e.LatLng[0][1]]);
+    // zoomOverlay =  d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
   }
 
 
   function drawMainMap(){
     d3.select("#main-map")
       .append("svg")
-      .attr("height", "inherit")
-      .attr("width", "inherit")
-      .attr("viewBox", "0 0 125 125")
+      .attr("height", "50%")
+      .attr("width", "50%")
+      .attr("viewBox", "0 0 75 125")
       .append("g")
       .selectAll("image")
       .data(pies)
@@ -141,10 +118,6 @@
   }
   
   function d3Map(pies, map, mapname, onPieClick) {
-    pies.forEach(function(d) {
-      d.LatLng = xyToLatLng(d.x, d.y);
-    });
-
     const svg = L.svg().addTo(map);
     
     d3.selectAll("svg")
@@ -163,8 +136,8 @@
       })
       .attr("width", function(d) {
         return (
-          map.latLngToLayerPoint(d.LatLng[1]).x -
-          map.latLngToLayerPoint(d.LatLng[0]).x
+          map.latLngToLayerPoint(d.latlng[1]).x -
+          map.latLngToLayerPoint(d.latlng[0]).x
         );
       })
       .attr("height", function(d) {

@@ -44,6 +44,12 @@ sequelize
       y: {
         type: Sequelize.INTEGER
       },
+      lat: {
+        
+      },
+      lng: {
+        
+      },
       isClaimed: {
         type: Sequelize.BOOLEAN
       }
