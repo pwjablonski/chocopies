@@ -114,7 +114,6 @@
     modal.classList.add("is-active");
 
     zoommap.invalidateSize();
-    console.log(zoommap.getBounds())
     zoomOverlay.setBounds(zoommap.getBounds())
     // zoommap.panTo([e.LatLng[0][0], e.LatLng[0][1]]);
 
@@ -126,19 +125,19 @@
       d.LatLng = xyToLatLng(d.x, d.y);
     });
 
-    // const svg = L.svg().addTo(map)
+    const svg = L.svg().addTo(map)
 
-    var svgElement = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "svg"
-    );
-    svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-    svgElement.innerHTML = "<g></g>";
+    // var svgElement = document.createElementNS(
+    //   "http://www.w3.org/2000/svg",
+    //   "svg"
+    // );
+    // svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    // svgElement.innerHTML = "<g></g>";
     
     
-    const svg = L.svgOverlay(svgElement, map.getBounds(), {
-      interactive: true
-    }).addTo(map);
+    // const svg = L.svgOverlay(svgElement, map.getBounds(), {
+    //   interactive: true
+    // }).addTo(map);
 
     
     d3.select(`#${mapname}`)
