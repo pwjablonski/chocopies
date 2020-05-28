@@ -35,14 +35,15 @@
     zoomControl: false,
     attributionControl: false,
     maxBounds: [[43, 124], [27, 134]],
-    maxZoom: 6,
-    minZoom: 6
-  }).setView([38, 127], 6);
+    maxZoom: 11,
+    minZoom: 11,
+  }).setView([38, 127], 11);
 
   mymap.getPane("mapPane").style.zIndex = 0;
   
   mymap.on('click', function(e){
     mainPieClicked(e)
+    zoommap.invalidateSize();
   })
 
   L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -62,7 +63,7 @@
   drawData(total, claimed);
   // addPiesToGroup(pies, mainPiesLayerGroup);
   // drawMap(pies)
-  // d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
+  d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
   d3Map(pies, mymap, "main-map", mainPieClicked);
 
   async function fetchPies() {
@@ -119,8 +120,8 @@
   }
 
   function mainPieClicked(e) {
-    console.log('test')
-    // zoommap.panTo(e.latlng);
+    console.log(e)
+    zoommap.panTo(e.latlng);
     // zoommap.panTo([e.LatLng[0][0], e.LatLng[0][1]]);
     let modal = document.querySelector("#viewPies");
     modal.classList.add("is-active");
@@ -131,37 +132,37 @@
       d.LatLng = xyToLatLng(d.x, d.y);
     });
 
-//     const svg = L.svg().addTo(map)
+    const svg = L.svg().addTo(map)
 
-//     d3.select(`#${mapname}`)
-//       .select("svg")
-//       .select("g")
-//       .selectAll(`#${mapname} image`)
-//       .data(pies)
-//       .enter()
-//       .append("image")
-//       .attr("id", (d)=> d.id)
-//       .attr("href", function(d) {
-//         return idToImageURL(d.id);
-//       })
-//       .attr("width", function(d) {
-//         return (
-//           map.latLngToLayerPoint(d.LatLng[1]).x -
-//           map.latLngToLayerPoint(d.LatLng[0]).x
-//         );
-//       })
-//       .attr("height", function(d) {
-//         return (
-//           map.latLngToLayerPoint(d.LatLng[1]).y -
-//           map.latLngToLayerPoint(d.LatLng[0]).y
-//         );
-//       })
-//       .attr("x", function(d) {
-//         return map.latLngToLayerPoint(d.LatLng[0]).x;
-//       })
-//       .attr("y", function(d) {
-//         return map.latLngToLayerPoint(d.LatLng[0]).y;
-//       })
+    d3.select(`#${mapname}`)
+      .select("svg")
+      .select("g")
+      .selectAll(`#${mapname} image`)
+      .data(pies)
+      .enter()
+      .append("image")
+      .attr("id", (d)=> d.id)
+      .attr("href", function(d) {
+        return idToImageURL(d.id);
+      })
+      .attr("width", function(d) {
+        return (
+          map.latLngToLayerPoint(d.LatLng[1]).x -
+          map.latLngToLayerPoint(d.LatLng[0]).x
+        );
+      })
+      .attr("height", function(d) {
+        return (
+          map.latLngToLayerPoint(d.LatLng[1]).y -
+          map.latLngToLayerPoint(d.LatLng[0]).y
+        );
+      })
+      .attr("x", function(d) {
+        return map.latLngToLayerPoint(d.LatLng[0]).x;
+      })
+      .attr("y", function(d) {
+        return map.latLngToLayerPoint(d.LatLng[0]).y;
+      })
     
   }
 
