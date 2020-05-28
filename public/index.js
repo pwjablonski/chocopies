@@ -19,9 +19,9 @@
   let pies = pieData.pies;
   let selectedPieId = null;
   
-  // d3.json("/pies", function(data) {
-  //   console.log(data);
-  // });
+  d3.json("/pies", function(data) {
+    console.log(data);
+  });
 
   let mymap = L.map("main-map", {
     zoomControl: false,
