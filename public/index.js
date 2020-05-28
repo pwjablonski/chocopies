@@ -40,9 +40,13 @@
   }).setView([38, 127], 11);
 
   mymap.getPane("mapPane").style.zIndex = 0;
+  
+  mymap.on('click', function(e){
+    console.log(e)
+  })
 
   // L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  //   maxZoom: 18
+  //   maxZoom: 18https://glitch.com/
   // }).addTo(mymap);
 
   // mainPiesLayerGroup.addTo(mymap);
@@ -131,6 +135,7 @@
       .data(pies)
       .enter()
       .append("image")
+      .attr("id", (d)=> d.id)
       .attr("href", function(d) {
         return idToImageURL(d.id);
       })
