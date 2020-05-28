@@ -46,11 +46,11 @@
     moneyDiv.innerHTML = `$ ${claimed}`;
   }
 
-  function xyToLatLng(x, y) {
-    const yOff = 0.08;
-    const xOff = 0.105;
-    return [43 - y * yOff, 124 + x * xOff];
-  }
+  // function xyToLatLng(x, y) {
+  //   const yOff = 0.08;
+  //   const xOff = 0.105;
+  //   return [43 - y * yOff, 124 + x * xOff];
+  // }
 
   function idToImageURL(id) {
     let imageURL;
@@ -83,11 +83,11 @@
 
   function mainPieClicked(e) {
     console.log(e)
-    // let modal = document.querySelector("#viewPies");
-    // modal.classList.add("is-active");
-    // zoommap.invalidateSize();
-    // zoommap.panTo([e.LatLng[0][0], e.LatLng[0][1]]);
-    // zoomOverlay =  d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
+    let modal = document.querySelector("#viewPies");
+    modal.classList.add("is-active");
+    zoommap.invalidateSize();
+    zoommap.panTo([e.lat, e.lng]);
+    zoomOverlay =  d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
   }
 
 
@@ -134,23 +134,18 @@
       .attr("href", function(d) {
         return idToImageURL(d.id);
       })
-      .attr("width", function(d) {
-        return (
-          map.latLngToLayerPoint(d.latlng[1]).x -
-          map.latLngToLayerPoint(d.latlng[0]).x
-        );
-      })
+      .attr("width", "0.08")
       .attr("height", function(d) {
         return (
-          map.latLngToLayerPoint(d.LatLng[1]).y -
-          map.latLngToLayerPoint(d.LatLng[0]).y
+          map.latLngToLayerPoint([d.lat, d.lng]).y -
+          map.latLngToLayerPoint([d.lat + 0.08, d.lng - 0.105]).y
         );
       })
       .attr("x", function(d) {
-        return map.latLngToLayerPoint(d.LatLng[0]).x;
+        return map.latLngToLayerPoint([d.lat, d.lng]).x;
       })
       .attr("y", function(d) {
-        return map.latLngToLayerPoint(d.LatLng[0]).y;
+        return map.latLngToLayerPoint([d.lat, d.lng]).y;
       })
       .on("dblclick", function(e) {
         onPieClick(e);
