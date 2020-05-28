@@ -49,7 +49,7 @@
     maxZoom: 18,
   }).addTo(mymap);
   
-    L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 18,
   }).addTo(zoommap);
 
@@ -131,37 +131,37 @@
       d.LatLng = xyToLatLng(d.x, d.y);
     });
 
-    const svg = L.svg().addTo(map)
+//     const svg = L.svg().addTo(map)
 
-    d3.select(`#${mapname}`)
-      .select("svg")
-      .select("g")
-      .selectAll(`#${mapname} image`)
-      .data(pies)
-      .enter()
-      .append("image")
-      .attr("id", (d)=> d.id)
-      .attr("href", function(d) {
-        return idToImageURL(d.id);
-      })
-      .attr("width", function(d) {
-        return (
-          map.latLngToLayerPoint(d.LatLng[1]).x -
-          map.latLngToLayerPoint(d.LatLng[0]).x
-        );
-      })
-      .attr("height", function(d) {
-        return (
-          map.latLngToLayerPoint(d.LatLng[1]).y -
-          map.latLngToLayerPoint(d.LatLng[0]).y
-        );
-      })
-      .attr("x", function(d) {
-        return map.latLngToLayerPoint(d.LatLng[0]).x;
-      })
-      .attr("y", function(d) {
-        return map.latLngToLayerPoint(d.LatLng[0]).y;
-      })
+//     d3.select(`#${mapname}`)
+//       .select("svg")
+//       .select("g")
+//       .selectAll(`#${mapname} image`)
+//       .data(pies)
+//       .enter()
+//       .append("image")
+//       .attr("id", (d)=> d.id)
+//       .attr("href", function(d) {
+//         return idToImageURL(d.id);
+//       })
+//       .attr("width", function(d) {
+//         return (
+//           map.latLngToLayerPoint(d.LatLng[1]).x -
+//           map.latLngToLayerPoint(d.LatLng[0]).x
+//         );
+//       })
+//       .attr("height", function(d) {
+//         return (
+//           map.latLngToLayerPoint(d.LatLng[1]).y -
+//           map.latLngToLayerPoint(d.LatLng[0]).y
+//         );
+//       })
+//       .attr("x", function(d) {
+//         return map.latLngToLayerPoint(d.LatLng[0]).x;
+//       })
+//       .attr("y", function(d) {
+//         return map.latLngToLayerPoint(d.LatLng[0]).y;
+//       })
     
   }
 
