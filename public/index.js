@@ -42,7 +42,6 @@
   mymap.getPane("mapPane").style.zIndex = 0;
   
   mymap.on('click', function(e){
-    
     mainPieClicked(e)
     zoommap.invalidateSize();
   })
@@ -64,7 +63,6 @@
   drawData(total, claimed);
   // addPiesToGroup(pies, mainPiesLayerGroup);
   // drawMap(pies)
-  d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
   d3Map(pies, mymap, "main-map", mainPieClicked);
 
   async function fetchPies() {
@@ -122,10 +120,11 @@
 
   function mainPieClicked(e) {
     console.log(e)
-    // zoommap.panTo(e.latlng);
+    zoommap.panTo(e.latlng);
     // zoommap.panTo([e.LatLng[0][0], e.LatLng[0][1]]);
     let modal = document.querySelector("#viewPies");
     modal.classList.add("is-active");
+    d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
   }
 
   function d3Map(pies, map, mapname, onPieClick) {
@@ -164,22 +163,7 @@
       .attr("y", function(d) {
         return map.latLngToLayerPoint(d.LatLng[0]).y;
       })
-      
-    map.on("resize", reset);
-    function reset(){
-      console.log('reset')
-      
-      d3.select(`#${mapname}`)
-      .select("svg")
-      .select("g")
-      .selectAll(`#${mapname} image`)
-      .attr("x", function(d) {
-        return map.latLngToLayerPoint(d.LatLng[0]).x;
-      })
-      .attr("y", function(d) {
-        return map.latLngToLayerPoint(d.LatLng[0]).y;
-      })
-    }
+    
   }
 
   // function addPiesToGroup(pies, mainPiesLayerGroup) {
