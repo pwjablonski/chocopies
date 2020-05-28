@@ -106,25 +106,26 @@
   }
 
   function zoomPieClicked(e) {
-    let modal = document.querySelector("#sendPie");
-    modal.classList.add("is-active");
-    selectedPieId = e.id;
-    let pieImgSend = document.querySelector(".share_choco");
-    let pieImgShare = document.querySelector(".send_choco");
-    pieImgSend.src = idToImageURL(e.id);
-    pieImgShare.src = idToImageURL(e.id);
+    // let modal = document.querySelector("#sendPie");
+    // modal.classList.add("is-active");
+    // selectedPieId = e.id;
+    // let pieImgSend = document.querySelector(".share_choco");
+    // let pieImgShare = document.querySelector(".send_choco");
+    // pieImgSend.src = idToImageURL(e.id);
+    // pieImgShare.src = idToImageURL(e.id);
   }
 
   function mainPieClicked(e) {
-    zoommap.panTo(e.latlng);
-    zoommap.eachLayer(function(layer){
-      zoommap.removeLayer(layer)
-    })
+    console.log(e)
+    // zoommap.panTo(e.latlng);
+    // zoommap.eachLayer(function(layer){
+    //   zoommap.removeLayer(layer)
+    // })
     // zoommap.panTo([e.LatLng[0][0], e.LatLng[0][1]]);
-    let modal = document.querySelector("#viewPies");
-    modal.classList.add("is-active");
-    d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
-        zoommap.invalidateSize();
+    // let modal = document.querySelector("#viewPies");
+    // modal.classList.add("is-active");
+    // d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
+    // zoommap.invalidateSize();
   }
 
   function d3Map(pies, map, mapname, onPieClick) {
@@ -132,7 +133,16 @@
       d.LatLng = xyToLatLng(d.x, d.y);
     });
 
-    const svg = L.svg().addTo(map)
+    // const svg = L.svg().addTo(map)
+    
+    var svgElement = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "svg"
+    );
+    svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    svgElement.innerHTML = "<g></g>"
+    const svg = L.svgOverlay(svgElement, map.getBounds(), {interactive:true}).addTo(map)
+
 
     d3.select(`#${mapname}`)
       .select("svg")
@@ -162,6 +172,9 @@
       })
       .attr("y", function(d) {
         return map.latLngToLayerPoint(d.LatLng[0]).y;
+      })
+      .on('click', function(){
+        console.log('click')
       })
     
   }
