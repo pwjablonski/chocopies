@@ -35,9 +35,9 @@
     zoomControl: false,
     attributionControl: false,
     maxBounds: [[43, 124], [27, 134]],
-    maxZoom: 11,
-    minZoom: 11,
-  }).setView([38, 127], 11);
+    maxZoom: 8,
+    minZoom: 8,
+  }).setView([38, 127], 8);
 
   mymap.getPane("mapPane").style.zIndex = 0;
   
@@ -119,13 +119,15 @@
   function mainPieClicked(e) {
     console.log(e)
     // zoommap.panTo(e.latlng);
-    // zoommap.eachLayer(function(layer){
-    //   zoommap.removeLayer(layer)
-    // })
-    // zoommap.panTo([e.LatLng[0][0], e.LatLng[0][1]]);
+    zoommap.eachLayer(function(layer){
+      zoommap.removeLayer(layer)
+    })
+    
     let modal = document.querySelector("#viewPies");
     modal.classList.add("is-active");
+    
     zoommap.invalidateSize();
+    zoommap.panTo([e.LatLng[0][0], e.LatLng[0][1]]);
     d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
   }
 
@@ -143,7 +145,10 @@
     svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
     svgElement.innerHTML = "<g></g>"
     const svg = L.svgOverlay(svgElement, map.getBounds(), {interactive:true}).addTo(map)
-
+    map.on('move', function(){
+      console.log('resize')
+      svg.setBounds(map.getBounds())
+    })
 
     d3.select(`#${mapname}`)
       .select("svg")
