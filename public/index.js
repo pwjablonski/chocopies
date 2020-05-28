@@ -18,6 +18,10 @@
   let total = pieData.total;
   let pies = pieData.pies;
   let selectedPieId = null;
+  
+  // d3.json("/pies", function(data) {
+  //   console.log(data);
+  // });
 
   // const mainPiesLayerGroup = L.featureGroup();
   // const zoomPiesLayerGroup = L.layerGroup();
@@ -155,7 +159,7 @@
       .attr("y", function(d) {
         return map.latLngToLayerPoint(d.LatLng[0]).y;
       })
-      .on("click", function(e) {
+      .on("dblclick", function(e) {
         onPieClick(e);
       });
     
