@@ -35,16 +35,14 @@
     zoomControl: false,
     attributionControl: false,
     maxBounds: [[43, 124], [27, 134]],
-    maxZoom: 8,
-    minZoom: 8,
-  }).setView([38, 127], 8);
+    maxZoom: 11,
+    minZoom: 11,
+  }).setView([38, 127], 11);
 
   mymap.getPane("mapPane").style.zIndex = 0;
   
-  mymap.on('click', function(e){
-    mainPieClicked(e)
-    zoommap.invalidateSize();
-  })
+  mymap.on('click', mainPieClicked)
+  zoommap.on('click', mainPieClicked)
 
   L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 18,
@@ -108,7 +106,6 @@
   }
 
   function zoomPieClicked(e) {
-    console.log('test')
     let modal = document.querySelector("#sendPie");
     modal.classList.add("is-active");
     selectedPieId = e.id;
@@ -119,12 +116,15 @@
   }
 
   function mainPieClicked(e) {
-    console.log(e)
     zoommap.panTo(e.latlng);
+    zoommap.eachLayer(function(layer){
+      zoommap.removeLayer(layer)
+    })
     // zoommap.panTo([e.LatLng[0][0], e.LatLng[0][1]]);
     let modal = document.querySelector("#viewPies");
     modal.classList.add("is-active");
     d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
+        zoommap.invalidateSize();
   }
 
   function d3Map(pies, map, mapname, onPieClick) {
