@@ -23,9 +23,6 @@
   //   console.log(data);
   // });
 
-  // const mainPiesLayerGroup = L.featureGroup();
-  // const zoomPiesLayerGroup = L.layerGroup();
-
   let mymap = L.map("main-map", {
     zoomControl: false,
     attributionControl: false,
