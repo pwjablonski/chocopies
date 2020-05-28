@@ -54,7 +54,6 @@
   // drawMap(pies)
   const mainOverlay = d3Map(pies, mymap, "main-map", mainPieClicked);
   const zoomOverlay =  d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
-  console.log(zoomOverlay)
 
   async function fetchPies() {
     const req = await fetch("/pies");
@@ -114,8 +113,7 @@
     modal.classList.add("is-active");
 
     zoommap.invalidateSize();
-    zoomOverlay.setBounds(zoommap.getBounds())
-    // zoommap.panTo([e.LatLng[0][0], e.LatLng[0][1]]);
+    zoommap.panTo([e.LatLng[0][0], e.LatLng[0][1]]);
 
   }
 
@@ -138,7 +136,9 @@
     // const svg = L.svgOverlay(svgElement, map.getBounds(), {
     //   interactive: true
     // }).addTo(map);
-
+    
+    d3.selectAll("svg")
+      .attr('pointer-events', "all");
     
     d3.select(`#${mapname}`)
       .select("svg")
@@ -172,6 +172,7 @@
       .on("click", function(e) {
         onPieClick(e);
       });
+    
     return svg
   }
 
