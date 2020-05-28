@@ -52,8 +52,9 @@
   drawData(total, claimed);
   // addPiesToGroup(pies, mainPiesLayerGroup);
   // drawMap(pies)
-  d3Map(pies, mymap, "main-map", mainPieClicked);
-  d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
+  const mainOverlay = d3Map(pies, mymap, "main-map", mainPieClicked);
+  const zoomOverlay =  d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
+  console.log(zoomOverlay)
 
   async function fetchPies() {
     const req = await fetch("/pies");
@@ -113,7 +114,8 @@
     modal.classList.add("is-active");
 
     zoommap.invalidateSize();
-    // setBounds(zoommap.getBounds())
+    console.log(zoommap.getBounds())
+    zoomOverlay.setBounds(zoommap.getBounds())
     // zoommap.panTo([e.LatLng[0][0], e.LatLng[0][1]]);
 
   }
@@ -171,6 +173,7 @@
       .on("click", function(e) {
         onPieClick(e);
       });
+    return svg
   }
 
   // function addPiesToGroup(pies, mainPiesLayerGroup) {
