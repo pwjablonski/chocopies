@@ -168,6 +168,17 @@
     map.on("resize", reset);
     function reset(){
       console.log('reset')
+      
+      d3.select(`#${mapname}`)
+      .select("svg")
+      .select("g")
+      .selectAll(`#${mapname} image`)
+      .attr("x", function(d) {
+        return map.latLngToLayerPoint(d.LatLng[0]).x;
+      })
+      .attr("y", function(d) {
+        return map.latLngToLayerPoint(d.LatLng[0]).y;
+      })
     }
   }
 
