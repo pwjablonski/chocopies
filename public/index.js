@@ -35,9 +35,9 @@
     zoomControl: false,
     attributionControl: false,
     maxBounds: [[43, 124], [27, 134]],
-    maxZoom: 11,
-    minZoom: 11,
-  }).setView([38, 127], 11);
+    maxZoom: 8,
+    minZoom: 8,
+  }).setView([38, 127], 8);
 
   mymap.getPane("mapPane").style.zIndex = 0;
   
