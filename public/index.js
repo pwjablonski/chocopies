@@ -35,19 +35,19 @@
     zoomControl: false,
     attributionControl: false,
     maxBounds: [[43, 124], [27, 134]],
-    maxZoom: 8,
-    minZoom: 8,
-  }).setView([38, 127], 8);
+    maxZoom: 11,
+    minZoom: 11,
+  }).setView([38, 127], 11);
 
   mymap.getPane("mapPane").style.zIndex = 0;
 
-  L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 18
-  }).addTo(mymap);
+//   L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+//     maxZoom: 18
+//   }).addTo(mymap);
 
-  L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 18
-  }).addTo(zoommap);
+//   L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+//     maxZoom: 18
+//   }).addTo(zoommap);
 
   drawData(total, claimed);
 
