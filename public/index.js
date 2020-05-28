@@ -41,9 +41,6 @@
 
   mymap.getPane("mapPane").style.zIndex = 0;
   
-  // mymap.on('click', mainPieClicked)
-  // zoommap.on('click', zoomPieClicked)
-
   L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 18,
   }).addTo(mymap);
@@ -51,12 +48,6 @@
   L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 18,
   }).addTo(zoommap);
-
-  // mainPiesLayerGroup.addTo(mymap);
-  // mainPiesLayerGroup.on("click", function(e) {
-  //   console.log(e);
-  // });
-  // zoomPiesLayerGroup.addTo(zoommap);
 
   drawData(total, claimed);
   // addPiesToGroup(pies, mainPiesLayerGroup);
@@ -145,7 +136,7 @@
     );
     svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
     svgElement.innerHTML = "<g></g>"
-    const svg = L.svgOverlay(svgElement, map.getBounds(), {interactive:true}).addTo(map)    
+    const svg = L.svgOverlay(svgElement, [[43, 124], [27, 134]], {interactive:true}).addTo(map)    
 
     d3.select(`#${mapname}`)
       .select("svg")
