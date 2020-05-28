@@ -139,11 +139,12 @@
       "svg"
     );
     svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    svgElement.innerHTML = "<g></g>"
     L.svgOverlay(svgElement, [[43, 124], [27, 130]]).addTo(map);
 
     d3.select(`#${mapname}`)
       .select("svg")
-      // .select("g")
+      .select("g")
       .selectAll(`#${mapname} image`)
       .data(pies)
       .enter()
