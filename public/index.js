@@ -108,12 +108,6 @@
   }
 
   function mainPieClicked(e) {
-    console.log(e);
-    // zoommap.panTo(e.latlng);
-    zoommap.eachLayer(function(layer) {
-      zoommap.removeLayer(layer);
-    });
-
     let modal = document.querySelector("#viewPies");
     modal.classList.add("is-active");
 
