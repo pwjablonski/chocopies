@@ -45,9 +45,13 @@
     mainPieClicked(e)
   })
 
-  // L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  //   maxZoom: 18https://glitch.com/
-  // }).addTo(mymap);
+  L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 18,
+  }).addTo(mymap);
+  
+    L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 18,
+  }).addTo(zoommap);
 
   // mainPiesLayerGroup.addTo(mymap);
   // mainPiesLayerGroup.on("click", function(e) {
@@ -58,7 +62,7 @@
   drawData(total, claimed);
   // addPiesToGroup(pies, mainPiesLayerGroup);
   // drawMap(pies)
-  d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
+  // d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
   d3Map(pies, mymap, "main-map", mainPieClicked);
 
   async function fetchPies() {
