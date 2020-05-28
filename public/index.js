@@ -100,6 +100,7 @@
   }
 
   function zoomPieClicked(e) {
+    console.log('test')
     let modal = document.querySelector("#sendPie");
     modal.classList.add("is-active");
     selectedPieId = e.id;
@@ -121,11 +122,11 @@
       d.LatLng = xyToLatLng(d.x, d.y);
     });
 
-    L.svg().addTo(map)
+    const svg = L.svg().addTo(map)
 
     d3.select(`#${mapname}`)
       .select("svg")
-      .
+      .select("g")
       .selectAll(`#${mapname} image`)
       .data(pies)
       .enter()
@@ -151,7 +152,7 @@
       .attr("y", function(d) {
         return map.latLngToLayerPoint(d.LatLng[0]).y;
       })
-      .on("click", onPieClick);
+    
   }
 
   // function addPiesToGroup(pies, mainPiesLayerGroup) {
