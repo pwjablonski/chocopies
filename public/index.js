@@ -165,7 +165,7 @@
         return map.latLngToLayerPoint(d.LatLng[0]).y;
       })
       
-    map.on("viewreset", reset);
+    map.on("resize", reset);
     function reset(){
       console.log('reset')
     }
