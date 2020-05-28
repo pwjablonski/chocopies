@@ -18,19 +18,19 @@
   let total = pieData.total;
   let pies = pieData.pies;
   let selectedPieId = null;
-  
+
   let zoommap = L.map("zoom-map", {
     zoomControl: false,
     attributionControl: false,
     maxBounds: [[43, 124], [27, 134]],
     maxZoom: 11,
-    minZoom: 11,
-  }).setView([38, 127], 11);
+    minZoom: 11
+  }).setView([38, 127], 8);
 
   drawData(total, claimed);
-  drawMainMap(pies)
+  drawMainMap(pies);
   let zoomOverlay;
-  
+
   async function fetchPies() {
     const req = await fetch("/pies");
     const resp = await req.json();
@@ -45,12 +45,6 @@
     claimedDiv.innerHTML = claimed;
     moneyDiv.innerHTML = `$ ${claimed}`;
   }
-
-  // function xyToLatLng(x, y) {
-  //   const yOff = 0.08;
-  //   const xOff = 0.105;
-  //   return [43 - y * yOff, 124 + x * xOff];
-  // }
 
   function idToImageURL(id) {
     let imageURL;
@@ -78,20 +72,19 @@
     let pieImgShare = document.querySelector(".send_choco");
     pieImgSend.src = idToImageURL(e.id);
     pieImgShare.src = idToImageURL(e.id);
-    zoomOverlay.remove()
+    zoomOverlay.remove();
   }
 
   function mainPieClicked(e) {
-    console.log(e)
+    console.log(e);
     let modal = document.querySelector("#viewPies");
     modal.classList.add("is-active");
     zoommap.invalidateSize();
     zoommap.panTo([e.lat, e.lng]);
-    zoomOverlay =  d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
+    zoomOverlay = d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
   }
 
-
-  function drawMainMap(){
+  function drawMainMap() {
     d3.select("#main-map")
       .append("svg")
       .attr("height", "50%")
@@ -109,20 +102,19 @@
       .attr("width", "1")
       .attr("height", "1")
       .attr("x", function(d) {
-        return d.x
+        return d.x;
       })
       .attr("y", function(d) {
         return d.y;
       })
       .on("click", mainPieClicked);
   }
-  
+
   function d3Map(pies, map, mapname, onPieClick) {
     const svg = L.svg().addTo(map);
-    
-    d3.selectAll("svg")
-      .attr('pointer-events', "all");
-    
+
+    d3.selectAll("svg").attr("pointer-events", "all");
+
     d3.select(`#${mapname}`)
       .select("svg")
       .select("g")
@@ -134,11 +126,16 @@
       .attr("href", function(d) {
         return idToImageURL(d.id);
       })
-      .attr("width", "0.08")
+      .attr("width", function(d) {
+        return (
+          map.latLngToLayerPoint([d.lat - 0.08, d.lng + 0.105]).x -
+          map.latLngToLayerPoint([d.lat, d.lng]).x
+        );
+      })
       .attr("height", function(d) {
         return (
-          map.latLngToLayerPoint([d.lat, d.lng]).y -
-          map.latLngToLayerPoint([d.lat + 0.08, d.lng - 0.105]).y
+          map.latLngToLayerPoint([d.lat - 0.08, d.lng + 0.105]).y -
+          map.latLngToLayerPoint([d.lat, d.lng]).y
         );
       })
       .attr("x", function(d) {
@@ -150,8 +147,8 @@
       .on("dblclick", function(e) {
         onPieClick(e);
       });
-    
-    return svg
+
+    return svg;
   }
 
   d.addEventListener("click", function(e) {
@@ -175,8 +172,8 @@
       modals.forEach(function(modal) {
         modal.classList.remove("is-active");
       });
-      if(zoomOverlay){
-        zoomOverlay.remove()
+      if (zoomOverlay) {
+        zoomOverlay.remove();
       }
     }
     if (e.target.classList.contains("modal-background")) {
