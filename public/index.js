@@ -104,12 +104,12 @@
           return idToImageURL(d.id);
         })
         .attr("width", "1")
-        .attr("height", "1")
+        .attr("height", ".66")
         .attr("x", function(d) {
           return d.x;
         })
         .attr("y", function(d) {
-          return d.y;
+          return d.y * .66;
         })
         .on("click", mainPieClicked);
     
@@ -118,7 +118,7 @@
         .append("svg")
         .attr("id", d => d.id)
         .attr("width", "1")
-        .attr("height", "1")
+        .attr("height", "0.75")
         .attr("x", function(d) {
           return d.x;
         })
