@@ -132,41 +132,60 @@
     const pieRects = d3.select(`#${mapname}`)
       .select("svg")
       .select("g")
-      .selectAll(`#${mapname} image`)
+      .selectAll('.pie')
       .data(pies)
       .enter()
     
     
     pieRects.append("image")
       .filter(function(d){return !d.isClaimed })
-      .attr("id", d => d.id)
-      .attr("href", function(d) {
-        return idToImageURL(d.id);
-      })
-      .attr("width", function(d) {
-        return (
-          map.latLngToLayerPoint([d.lat - 0.08, d.lng + 0.105]).x -
-          map.latLngToLayerPoint([d.lat, d.lng]).x
-        );
-      })
-      .attr("height", function(d) {
-        return (
-          map.latLngToLayerPoint([d.lat - 0.08, d.lng + 0.105]).y -
-          map.latLngToLayerPoint([d.lat, d.lng]).y
-        );
-      })
-      .attr("x", function(d) {
-        return map.latLngToLayerPoint([d.lat, d.lng]).x;
-      })
-      .attr("y", function(d) {
-        return map.latLngToLayerPoint([d.lat, d.lng]).y;
-      })
-      .on("dblclick", function(e) {
-        onPieClick(e);
-      });
+        .attr("id", d => d.id)
+        .attr("href", function(d) {
+          return idToImageURL(d.id);
+        })
+        .attr("width", function(d) {
+          return (
+            map.latLngToLayerPoint([d.lat - 0.08, d.lng + 0.105]).x -
+            map.latLngToLayerPoint([d.lat, d.lng]).x
+          );
+        })
+        .attr("height", function(d) {
+          return (
+            map.latLngToLayerPoint([d.lat - 0.08, d.lng + 0.105]).y -
+            map.latLngToLayerPoint([d.lat, d.lng]).y
+          );
+        })
+        .attr("x", function(d) {
+          return map.latLngToLayerPoint([d.lat, d.lng]).x;
+        })
+        .attr("y", function(d) {
+          return map.latLngToLayerPoint([d.lat, d.lng]).y;
+        })
+        .on("dblclick", function(e) {
+          onPieClick(e);
+        });
     
     pieRects.append("rect")
       .filter(function(d){return d.isClaimed })
+          .attr("id", d => d.id)
+          .attr("width", function(d) {
+            return (
+              map.latLngToLayerPoint([d.lat - 0.08, d.lng + 0.105]).x -
+              map.latLngToLayerPoint([d.lat, d.lng]).x
+            );
+          })
+          .attr("height", function(d) {
+            return (
+              map.latLngToLayerPoint([d.lat - 0.08, d.lng + 0.105]).y -
+              map.latLngToLayerPoint([d.lat, d.lng]).y
+            );
+          })
+          .attr("x", function(d) {
+            return map.latLngToLayerPoint([d.lat, d.lng]).x;
+          })
+          .attr("y", function(d) {
+            return map.latLngToLayerPoint([d.lat, d.lng]).y;
+          })
 
     return svg;
   }
