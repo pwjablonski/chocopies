@@ -95,20 +95,21 @@
       .data(pies)
       .enter()
       .append("g")
-      .attr("id", d => d.id)
-      .append("image")
-      .attr("href", function(d) {
-        return idToImageURL(d.id);
-      })
-      .attr("width", "1")
-      .attr("height", "1")
-      .attr("x", function(d) {
-        return d.x;
-      })
-      .attr("y", function(d) {
-        return d.y;
-      })
-      .on("click", mainPieClicked);
+      .filter(function(d){return d.isClaimed === false })
+        .attr("id", d => d.id)
+        .append("image")
+        .attr("href", function(d) {
+          return idToImageURL(d.id);
+        })
+        .attr("width", "1")
+        .attr("height", "1")
+        .attr("x", function(d) {
+          return d.x;
+        })
+        .attr("y", function(d) {
+          return d.y;
+        })
+        .on("click", mainPieClicked);
   }
 
   function d3Map(pies, map, mapname, onPieClick) {
@@ -204,10 +205,10 @@
 
     await sendPie(selectedPieId, data);
     
-    d3.select(`#${selectedPieId}`)
-      .append("rect")
-      .attr("x", "inherit")
-      .attr("y", "inherit")
+    // d3.select(`#${selectedPieId}`)
+    //   .append("rect")
+    //   .attr("x", "inherit")
+    //   .attr("y", "inherit")
     
     
     claimed += 1;
