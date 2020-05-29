@@ -96,8 +96,9 @@
       .append("g")
       .attr("id", d => d.id)
     
-    pieRects.append("image")
+    const uneatenPies = pieRects
       .filter(function(d){return !d.isClaimed })
+        .append("image")
         .attr("id", d => d.id)
         .attr("href", function(d) {
           return idToImageURL(d.id);
@@ -112,8 +113,9 @@
         })
         .on("click", mainPieClicked);
     
-    pieRects.append("svg")
+    const eatenPies = pieRects
       .filter(function(d){return d.isClaimed })
+        .append("svg")
         .attr("id", d => d.id)
         .attr("width", "1")
         .attr("height", "1")
@@ -124,12 +126,21 @@
           return d.y;
         })
         .on("click", mainPieClicked)
+    
+    eatenPies
+        .append("rect")
+        .attr("height", "100%")
+        .attr("width", "100%")
+        .attr("fill", "black")
+    
+    eatenPies
         .append("text")
         .attr("y","50%")
         .attr("x","50%")
         .attr("dominant-baseline", "middle")
         .attr("text-anchor", "middle")
         .text("chocppie")
+        .attr("fill", "white")
 
   }
 
@@ -148,36 +159,12 @@
       .attr("id", d => d.id)
     
     
-    pieRects
-      .append("image")
+    const uneatenPies = pieRects
       .filter(function(d){return !d.isClaimed })
-        .attr("href", function(d) {
-          return idToImageURL(d.id);
-        })
-        .attr("width", function(d) {
-          return (
-            map.latLngToLayerPoint([d.lat - 0.08, d.lng + 0.105]).x -
-            map.latLngToLayerPoint([d.lat, d.lng]).x
-          );
-        })
-        .attr("height", function(d) {
-          return (
-            map.latLngToLayerPoint([d.lat - 0.08, d.lng + 0.105]).y -
-            map.latLngToLayerPoint([d.lat, d.lng]).y
-          );
-        })
-        .attr("x", function(d) {
-          return map.latLngToLayerPoint([d.lat, d.lng]).x;
-        })
-        .attr("y", function(d) {
-          return map.latLngToLayerPoint([d.lat, d.lng]).y;
-        })
-        .on("dblclick", function(e) {
-          onPieClick(e);
-        });
-    
-    pieRects.append("svg")
-      .filter(function(d){return d.isClaimed })
+        .append("image")
+          .attr("href", function(d) {
+            return idToImageURL(d.id);
+          })
           .attr("width", function(d) {
             return (
               map.latLngToLayerPoint([d.lat - 0.08, d.lng + 0.105]).x -
@@ -196,15 +183,46 @@
           .attr("y", function(d) {
             return map.latLngToLayerPoint([d.lat, d.lng]).y;
           })
-          // .append("rect")
-          // .attr("height", "100%")
-          // .attr("width", "100%")
-          .append("text")
-          .attr("y","50%")
-          .attr("x","50%")
-          .attr("dominant-baseline", "middle")
-          .attr("text-anchor", "middle")
-          .text("chocppie")
+          .on("dblclick", function(e) {
+            onPieClick(e);
+          });
+    
+    const eatenPies = pieRects
+      .filter(function(d){return d.isClaimed })
+          .append("svg")
+          .attr("width", function(d) {
+            return (
+              map.latLngToLayerPoint([d.lat - 0.08, d.lng + 0.105]).x -
+              map.latLngToLayerPoint([d.lat, d.lng]).x
+            );
+          })
+          .attr("height", function(d) {
+            return (
+              map.latLngToLayerPoint([d.lat - 0.08, d.lng + 0.105]).y -
+              map.latLngToLayerPoint([d.lat, d.lng]).y
+            );
+          })
+          .attr("x", function(d) {
+            return map.latLngToLayerPoint([d.lat, d.lng]).x;
+          })
+          .attr("y", function(d) {
+            return map.latLngToLayerPoint([d.lat, d.lng]).y;
+          })
+    
+    eatenPies
+        .append("rect")
+        .attr("height", "100%")
+        .attr("width", "100%")
+        .attr("fill", "black")
+    
+    eatenPies
+        .append("text")
+        .attr("y","50%")
+        .attr("x","50%")
+        .attr("dominant-baseline", "middle")
+        .attr("text-anchor", "middle")
+        .text("chocppie")
+        .attr("fill", "white")
 
     return svg;
   }
