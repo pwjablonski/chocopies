@@ -94,8 +94,9 @@
       .selectAll("image")
       .data(pies)
       .enter()
-      .append("image")
+      .append("g")
       .attr("id", d => d.id)
+      .append("image")
       .attr("href", function(d) {
         return idToImageURL(d.id);
       })
@@ -202,10 +203,15 @@
     data.signUp = e.target[5].checked;
 
     await sendPie(selectedPieId, data);
-    let pieRect = document.getElementById(selectedPieId);
+    
+    d3.select(`#${selectedPieId}`)
+      .append("rect")
+      .attr("x", "inherit")
+      .attr("y", "inherit")
+    
+    
     claimed += 1;
     drawData(total, claimed);
-    // drawClaimedPie(pieRect);
     let modal = document.querySelector("#confirmation");
     modal.classList.add("is-active");
   });
