@@ -85,16 +85,18 @@
   }
 
   function drawMainMap() {
-    d3.select("#main-map")
+    
+    const svg = d3.select("#main-map")
       .select("svg")
       .select("g")
-      .selectAll("g")
+    
+    const pieRects = svg.selectAll(".pie")
       .data(pies)
       .enter()
-      .append("g")
-      .filter(function(d){return d.isClaimed === false })
+    
+    pieRects.append("image")
+      .filter(function(d){return !d.isClaimed })
         .attr("id", d => d.id)
-        .append("image")
         .attr("href", function(d) {
           return idToImageURL(d.id);
         })
@@ -107,6 +109,19 @@
           return d.y;
         })
         .on("click", mainPieClicked);
+    
+    pieRects.append("rect")
+      .filter(function(d){return d.isClaimed })
+        .attr("id", d => d.id)
+        .attr("width", "1")
+        .attr("height", "1")
+        .attr("x", function(d) {
+          return d.x;
+        })
+        .attr("y", function(d) {
+          return d.y;
+        })
+
   }
 
   function d3Map(pies, map, mapname, onPieClick) {
@@ -114,13 +129,16 @@
 
     d3.selectAll("svg").attr("pointer-events", "all");
 
-    d3.select(`#${mapname}`)
+    const pieRects = d3.select(`#${mapname}`)
       .select("svg")
       .select("g")
       .selectAll(`#${mapname} image`)
       .data(pies)
       .enter()
-      .append("image")
+    
+    
+    pieRects.append("image")
+      .filter(function(d){return !d.isClaimed })
       .attr("id", d => d.id)
       .attr("href", function(d) {
         return idToImageURL(d.id);
@@ -146,6 +164,9 @@
       .on("dblclick", function(e) {
         onPieClick(e);
       });
+    
+    pieRects.append("rect")
+      .filter(function(d){return d.isClaimed })
 
     return svg;
   }
