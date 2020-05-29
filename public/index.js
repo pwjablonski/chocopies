@@ -203,11 +203,13 @@
             );
           })
           .attr("x", function(d) {
-            return map.latLngToLayerPoint([d.lat, d.lng]).x;
+            return map.latLngToLayerPoint([d.lat - 0.04, d.lng + 0.0525]).x;
           })
           .attr("y", function(d) {
-            return map.latLngToLayerPoint([d.lat, d.lng]).y;
+            return map.latLngToLayerPoint([d.lat - 0.04, d.lng + 0.0525]).y;
           })
+          .attr("fill","white")
+          .text("Chocopie Eaten")
 
     return svg;
   }
