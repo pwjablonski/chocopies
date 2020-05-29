@@ -110,7 +110,7 @@
         })
         .on("click", mainPieClicked);
     
-    pieRects.append("rect")
+    pieRects.append("svg")
       .filter(function(d){return d.isClaimed })
         .attr("id", d => d.id)
         .attr("width", "1")
@@ -121,6 +121,7 @@
         .attr("y", function(d) {
           return d.y;
         })
+        .append("rect")
 
   }
 
@@ -167,7 +168,7 @@
           onPieClick(e);
         });
     
-    pieRects.append("rect")
+    pieRects.append("svg")
       .filter(function(d){return d.isClaimed })
           .attr("width", function(d) {
             return (
@@ -187,29 +188,37 @@
           .attr("y", function(d) {
             return map.latLngToLayerPoint([d.lat, d.lng]).y;
           })
-    
-    pieRects.append("text")
-      .filter(function(d){return d.isClaimed })
-          .attr("width", function(d) {
-            return (
-              map.latLngToLayerPoint([d.lat - 0.08, d.lng + 0.105]).x -
-              map.latLngToLayerPoint([d.lat, d.lng]).x
-            );
-          })
-          .attr("height", function(d) {
-            return (
-              map.latLngToLayerPoint([d.lat - 0.08, d.lng + 0.105]).y -
-              map.latLngToLayerPoint([d.lat, d.lng]).y
-            );
-          })
-          .attr("x", function(d) {
-            return map.latLngToLayerPoint([d.lat - 0.04, d.lng + 0.0525]).x;
-          })
-          .attr("y", function(d) {
-            return map.latLngToLayerPoint([d.lat - 0.04, d.lng + 0.0525]).y;
-          })
+          .append("rect")
+          .attr("height", "100%")
+          .attr("width", "100%")
+          .append("text")
           .attr("fill","white")
-          .text("Chocopie Eaten")
+          .attr("cy","50%")
+          .attr("cx","50%")
+          .text("chocppie")
+    
+    // pieRects.append("text")
+    //   .filter(function(d){return d.isClaimed })
+    //       .attr("width", function(d) {
+    //         return (
+    //           map.latLngToLayerPoint([d.lat - 0.08, d.lng + 0.105]).x -
+    //           map.latLngToLayerPoint([d.lat, d.lng]).x
+    //         );
+    //       })
+    //       .attr("height", function(d) {
+    //         return (
+    //           map.latLngToLayerPoint([d.lat - 0.08, d.lng + 0.105]).y -
+    //           map.latLngToLayerPoint([d.lat, d.lng]).y
+    //         );
+    //       })
+    //       .attr("x", function(d) {
+    //         return map.latLngToLayerPoint([d.lat - 0.04, d.lng + 0.0525]).x;
+    //       })
+    //       .attr("y", function(d) {
+    //         return map.latLngToLayerPoint([d.lat - 0.04, d.lng + 0.0525]).y;
+    //       })
+    //       .attr("fill","white")
+    //       .text("Chocopie Eaten")
 
     return svg;
   }
