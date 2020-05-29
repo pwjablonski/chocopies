@@ -132,14 +132,16 @@
     const pieRects = d3.select(`#${mapname}`)
       .select("svg")
       .select("g")
-      .selectAll('.pie')
+      .selectAll('g')
       .data(pies)
       .enter()
+      .append("g")
+      .attr("id", d => d.id)
     
     
-    pieRects.append("image")
+    pieRects
+      .append("image")
       .filter(function(d){return !d.isClaimed })
-        .attr("id", d => d.id)
         .attr("href", function(d) {
           return idToImageURL(d.id);
         })
@@ -167,7 +169,27 @@
     
     pieRects.append("rect")
       .filter(function(d){return d.isClaimed })
-          .attr("id", d => d.id)
+          .attr("width", function(d) {
+            return (
+              map.latLngToLayerPoint([d.lat - 0.08, d.lng + 0.105]).x -
+              map.latLngToLayerPoint([d.lat, d.lng]).x
+            );
+          })
+          .attr("height", function(d) {
+            return (
+              map.latLngToLayerPoint([d.lat - 0.08, d.lng + 0.105]).y -
+              map.latLngToLayerPoint([d.lat, d.lng]).y
+            );
+          })
+          .attr("x", function(d) {
+            return map.latLngToLayerPoint([d.lat, d.lng]).x;
+          })
+          .attr("y", function(d) {
+            return map.latLngToLayerPoint([d.lat, d.lng]).y;
+          })
+    
+    pieRects.append("text")
+      .filter(function(d){return d.isClaimed })
           .attr("width", function(d) {
             return (
               map.latLngToLayerPoint([d.lat - 0.08, d.lng + 0.105]).x -
