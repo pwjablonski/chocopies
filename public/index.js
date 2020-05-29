@@ -90,9 +90,11 @@
       .select("svg")
       .select("g")
     
-    const pieRects = svg.selectAll(".pie")
+    const pieRects = svg.selectAll("g")
       .data(pies)
       .enter()
+      .append("g")
+      .attr("id", d => d.id)
     
     pieRects.append("image")
       .filter(function(d){return !d.isClaimed })
@@ -121,7 +123,13 @@
         .attr("y", function(d) {
           return d.y;
         })
-        .append("rect")
+        .on("click", mainPieClicked)
+        .append("text")
+        .attr("y","50%")
+        .attr("x","50%")
+        .attr("dominant-baseline", "middle")
+        .attr("text-anchor", "middle")
+        .text("chocppie")
 
   }
 
@@ -188,37 +196,15 @@
           .attr("y", function(d) {
             return map.latLngToLayerPoint([d.lat, d.lng]).y;
           })
-          .append("rect")
-          .attr("height", "100%")
-          .attr("width", "100%")
+          // .append("rect")
+          // .attr("height", "100%")
+          // .attr("width", "100%")
           .append("text")
-          .attr("fill","white")
-          .attr("cy","50%")
-          .attr("cx","50%")
+          .attr("y","50%")
+          .attr("x","50%")
+          .attr("dominant-baseline", "middle")
+          .attr("text-anchor", "middle")
           .text("chocppie")
-    
-    // pieRects.append("text")
-    //   .filter(function(d){return d.isClaimed })
-    //       .attr("width", function(d) {
-    //         return (
-    //           map.latLngToLayerPoint([d.lat - 0.08, d.lng + 0.105]).x -
-    //           map.latLngToLayerPoint([d.lat, d.lng]).x
-    //         );
-    //       })
-    //       .attr("height", function(d) {
-    //         return (
-    //           map.latLngToLayerPoint([d.lat - 0.08, d.lng + 0.105]).y -
-    //           map.latLngToLayerPoint([d.lat, d.lng]).y
-    //         );
-    //       })
-    //       .attr("x", function(d) {
-    //         return map.latLngToLayerPoint([d.lat - 0.04, d.lng + 0.0525]).x;
-    //       })
-    //       .attr("y", function(d) {
-    //         return map.latLngToLayerPoint([d.lat - 0.04, d.lng + 0.0525]).y;
-    //       })
-    //       .attr("fill","white")
-    //       .text("Chocopie Eaten")
 
     return svg;
   }
