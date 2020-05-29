@@ -24,8 +24,13 @@
     attributionControl: false,
     maxBounds: [[43, 124], [27, 134]],
     maxZoom: 11,
-    minZoom: 11
-  }).setView([38, 127], 8);
+    minZoom: 6
+  }).setView([38, 127], 6);
+  
+    
+  L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 18,
+  }).addTo(zoommap);
 
   drawData(total, claimed);
   drawMainMap(pies);
