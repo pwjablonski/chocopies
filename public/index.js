@@ -86,12 +86,9 @@
 
   function drawMainMap() {
     d3.select("#main-map")
-      .append("svg")
-      .attr("height", "50%")
-      .attr("width", "50%")
-      .attr("viewBox", "0 0 75 125")
-      .append("g")
-      .selectAll("image")
+      .select("svg")
+      .select("g")
+      .selectAll("g")
       .data(pies)
       .enter()
       .append("g")
