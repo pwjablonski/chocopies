@@ -99,7 +99,8 @@
       .data(pies)
       .enter()
       .append("g")
-      .attr("id", d => d.id);
+      .attr("id", d => d.id)
+      .attr("cursor","pointer")
 
     const uneatenPies = pieRects
       .filter(function(d) {
@@ -149,7 +150,8 @@
       .attr("dominant-baseline", "middle")
       .attr("text-anchor", "middle")
       .text("chocppie")
-      .attr("fill", "white");
+      .attr("fill", "white")
+
   }
 
   function d3Map(pies, map, mapname, onPieClick) {
@@ -271,10 +273,8 @@
 
     await sendPie(selectedPieId, data);
 
-    d3.select(`#${selectedPieId}`)
-      .append("rect")
-      .attr("x", "inherit")
-      .attr("y", "inherit")
+    // d3.select(`${selectedPieId}`)
+    //   .html("")
 
     claimed += 1;
     drawData(total, claimed);
