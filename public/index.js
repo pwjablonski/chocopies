@@ -13,6 +13,8 @@
   const LOVE =
     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.03%20PM.png?v=1590357838973";
 
+  // const result = await d3.json("/pies")
+  // console.log(result)
   let pieData = await fetchPies();
   let claimed = pieData.claimed;
   let total = pieData.total;
@@ -30,6 +32,10 @@
   // L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   //   maxZoom: 18,
   // }).addTo(zoommap);
+  
+//   d3.json("/pies", function(pies){
+//     console.log(pies)
+//   })
 
   drawData(total, claimed);
   drawMainMap(pies);
