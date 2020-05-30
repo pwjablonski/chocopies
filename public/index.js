@@ -25,7 +25,7 @@
     maxBounds: [[43, 124], [27, 134]],
     maxZoom: 11,
     minZoom: 6
-  }).setView([38, 127], 6);
+  }).setView([38, 127], 11);
   
     
   L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -172,13 +172,13 @@
           })
           .attr("width", function(d) {
             return (
-              map.latLngToLayerPoint([d.lat - 0.15, d.lng + 0.15]).x -
+              map.latLngToLayerPoint([d.lat - 0.1, d.lng + 0.15]).x -
               map.latLngToLayerPoint([d.lat, d.lng]).x
             );
           })
           .attr("height", function(d) {
             return (
-              map.latLngToLayerPoint([d.lat - 0.1, d.lng + 0.1]).y -
+              map.latLngToLayerPoint([d.lat - 0.1, d.lng + 0.15]).y -
               map.latLngToLayerPoint([d.lat, d.lng]).y
             );
           })
@@ -186,7 +186,7 @@
             return map.latLngToLayerPoint([d.lat, d.lng]).x;
           })
           .attr("y", function(d) {
-            return map.latLngToLayerPoint([d.lat, d.lng]).y * 0.66;
+            return map.latLngToLayerPoint([d.lat, d.lng]).y * .8;
           })
           .on("dblclick", function(e) {
             onPieClick(e);
