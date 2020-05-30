@@ -26,10 +26,10 @@
     maxZoom: 11,
     minZoom: 11
   }).setView([38, 127], 11);
-  
-  L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 18,
-  }).addTo(zoommap);
+
+  // L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  //   maxZoom: 18,
+  // }).addTo(zoommap);
 
   drawData(total, claimed);
   drawMainMap(pies);
@@ -89,63 +89,67 @@
   }
 
   function drawMainMap() {
-    
-    const svg = d3.select("#main-map")
+    const svg = d3
+      .select("#main-map")
       .select("svg")
-      .select("g")
-    
-    const pieRects = svg.selectAll("g")
+      .select("g");
+
+    const pieRects = svg
+      .selectAll("g")
       .data(pies)
       .enter()
       .append("g")
-      .attr("id", d => d.id)
-    
-    const uneatenPies = pieRects
-      .filter(function(d){return !d.isClaimed })
-        .append("image")
-        .attr("id", d => d.id)
-        .attr("href", function(d) {
-          return idToImageURL(d.id);
-        })
-        .attr("width", "1")
-        .attr("height", ".66")
-        .attr("x", function(d) {
-          return d.x;
-        })
-        .attr("y", function(d) {
-          return d.y * 0.66;
-        })
-        .on("click", mainPieClicked);
-    
-    const eatenPies = pieRects
-      .filter(function(d){return d.isClaimed })
-        .append("svg")
-        .attr("id", d => d.id)
-        .attr("width", "1")
-        .attr("height", "0.66")
-        .attr("x", function(d) {
-          return d.x;
-        })
-        .attr("y", function(d) {
-          return d.y * 0.66;
-        })
-        .on("click", mainPieClicked)
-    
-    eatenPies
-        .append("rect")
-        .attr("height", "100%")
-        .attr("width", "100%")
-        .attr("fill", "black")
-    
-    eatenPies
-        .append("text")
-        .attr("y","50%")
-        .attr("x","50%")
-        .attr("dominant-baseline", "middle")
-        .attr("text-anchor", "middle")
-        .text("chocppie")
-        .attr("fill", "white")
+      .attr("id", d => d.id);
 
+    const uneatenPies = pieRects
+      .filter(function(d) {
+        return !d.isClaimed;
+      })
+      .append("image")
+      .attr("id", d => d.id)
+      .attr("href", function(d) {
+        return idToImageURL(d.id);
+      })
+      .attr("width", "1")
+      .attr("height", ".75")
+      .attr("x", function(d) {
+        return d.x;
+      })
+      .attr("y", function(d) {
+        return d.y * 0.75;
+      })
+      .on("click", mainPieClicked);
+
+    const eatenPies = pieRects
+      .filter(function(d) {
+        return d.isClaimed;
+      })
+      .append("svg")
+      .attr("id", d => d.id)
+      .attr("width", "1")
+      .attr("height", "0.75")
+      .attr("x", function(d) {
+        return d.x;
+      })
+      .attr("y", function(d) {
+        return d.y * 0.75;
+      })
+      .on("click", mainPieClicked);
+
+    eatenPies
+      .append("rect")
+      .attr("height", "100%")
+      .attr("width", "100%")
+      .attr("fill", "black");
+
+    eatenPies
+      .append("text")
+      .attr("y", "50%")
+      .attr("x", "50%")
+      .attr("dominant-baseline", "middle")
+      .attr("text-anchor", "middle")
+      .text("chocppie")
+      .attr("fill", "white");
   }
 
   function d3Map(pies, map, mapname, onPieClick) {
@@ -153,60 +157,64 @@
 
     d3.selectAll("svg").attr("pointer-events", "all");
 
-    const pieRects = d3.select(`#${mapname}`)
+    const pieRects = d3
+      .select(`#${mapname}`)
       .select("svg")
       .select("g")
-      .selectAll('g')
+      .selectAll("g")
       .data(pies)
       .enter()
       .append("g")
-      .attr("id", d => d.id)
-    
-    
+      .attr("id", d => d.id);
+
     const uneatenPies = pieRects
-      .filter(function(d){return !d.isClaimed })
-        .append("image")
-          .attr("href", function(d) {
-            return idToImageURL(d.id);
-          })
-          .attr("height", "100")
-          .attr("width", "150")
-          .attr("x", function(d) {
-            return map.latLngToLayerPoint([d.lat, d.lng]).x;
-          })
-          .attr("y", function(d) {
-            return map.latLngToLayerPoint([d.lat, d.lng]).y;
-          })
-          .on("dblclick", function(e) {
-            onPieClick(e);
-          });
-    
+      .filter(function(d) {
+        return !d.isClaimed;
+      })
+      .append("image")
+      .attr("href", function(d) {
+        return idToImageURL(d.id);
+      })
+      .attr("height", "100")
+      .attr("width", "150")
+      .attr("x", function(d) {
+        return map.latLngToLayerPoint([d.lat, d.lng]).x;
+      })
+      .attr("y", function(d) {
+        return map.latLngToLayerPoint([d.lat, d.lng]).y;
+      })
+      .on("dblclick", function(e) {
+        onPieClick(e);
+      });
+
     const eatenPies = pieRects
-      .filter(function(d){return d.isClaimed })
-          .append("svg")
-          .attr("height", "100")
-          .attr("width", "150")
-          .attr("x", function(d) {
-            return map.latLngToLayerPoint([d.lat, d.lng]).x;
-          })
-          .attr("y", function(d) {
-            return map.latLngToLayerPoint([d.lat, d.lng]).y;
-          })
-    
+      .filter(function(d) {
+        return d.isClaimed;
+      })
+      .append("svg")
+      .attr("height", "100")
+      .attr("width", "150")
+      .attr("x", function(d) {
+        return map.latLngToLayerPoint([d.lat, d.lng]).x;
+      })
+      .attr("y", function(d) {
+        return map.latLngToLayerPoint([d.lat, d.lng]).y;
+      });
+
     eatenPies
-        .append("rect")
-        .attr("height", "100%")
-        .attr("width", "100%")
-        .attr("fill", "black")
-    
+      .append("rect")
+      .attr("height", "100%")
+      .attr("width", "100%")
+      .attr("fill", "black");
+
     eatenPies
-        .append("text")
-        .attr("y","50%")
-        .attr("x","50%")
-        .attr("dominant-baseline", "middle")
-        .attr("text-anchor", "middle")
-        .text("chocppie")
-        .attr("fill", "white")
+      .append("text")
+      .attr("y", "50%")
+      .attr("x", "50%")
+      .attr("dominant-baseline", "middle")
+      .attr("text-anchor", "middle")
+      .text("chocppie")
+      .attr("fill", "white");
 
     return svg;
   }
@@ -262,13 +270,12 @@
     data.signUp = e.target[5].checked;
 
     await sendPie(selectedPieId, data);
-    
-    // d3.select(`#${selectedPieId}`)
-    //   .append("rect")
-    //   .attr("x", "inherit")
-    //   .attr("y", "inherit")
-    
-    
+
+    d3.select(`#${selectedPieId}`)
+      .append("rect")
+      .attr("x", "inherit")
+      .attr("y", "inherit")
+
     claimed += 1;
     drawData(total, claimed);
     let modal = document.querySelector("#confirmation");

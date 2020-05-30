@@ -76,7 +76,13 @@ async function setup() {
     for (var x = 0; x < width; x++) {
       var pixel = Jimp.intToRGBA(image.getPixelColor(x, y));
       if (!(pixel.r === 255 && pixel.g === 255 && pixel.b === 255)) {
-        Pie.create({ x, y, lat: 43 - y * 0.05, lng: 124 + x * 0.1 , isClaimed: false });
+        Pie.create({
+          x,
+          y,
+          lat: 43 - y * 0.05,
+          lng: 124 + x * 0.1,
+          isClaimed: false
+        });
       }
     }
   }
@@ -121,14 +127,14 @@ app.post("/pies", async function(request, response) {
   const pie = await Pie.update(
     { isClaimed: true },
     {
-      where: { id: request.body.pieId },
+      where: { id: request.body.pieId }
     }
   );
 
-  response.send(pie)
+  response.send(pie);
   // email
   const msg = {
-    to: request.body.data.recipientEmail ,
+    to: request.body.data.recipientEmail,
     from: "pwjablonski@gmail.com",
     subject: `Hi ${request.body.data.recipientName}!`,
     text: request.body.data.message,
