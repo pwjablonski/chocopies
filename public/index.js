@@ -27,9 +27,9 @@
     minZoom: 11
   }).setView([38, 127], 11);
   
-  // L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  //   maxZoom: 18,
-  // }).addTo(zoommap);
+  L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 18,
+  }).addTo(zoommap);
 
   drawData(total, claimed);
   drawMainMap(pies);
@@ -169,25 +169,13 @@
           .attr("href", function(d) {
             return idToImageURL(d.id);
           })
-          // .attr("width", function(d) {
-          //   return (
-          //     map.latLngToLayerPoint([d.lat - 0.1, d.lng + 0.15]).x -
-          //     map.latLngToLayerPoint([d.lat, d.lng]).x
-          //   );
-          // })
-          // .attr("height", function(d) {
-          //   return (
-          //     map.latLngToLayerPoint([d.lat - 0.1, d.lng + 0.15]).y -
-          //     map.latLngToLayerPoint([d.lat, d.lng]).y
-          //   );
-          // })
           .attr("height", "100")
           .attr("width", "150")
           .attr("x", function(d) {
             return map.latLngToLayerPoint([d.lat, d.lng]).x;
           })
           .attr("y", function(d) {
-            return map.latLngToLayerPoint([d.lat, d.lng]).y * .8;
+            return map.latLngToLayerPoint([d.lat, d.lng]).y;
           })
           .on("dblclick", function(e) {
             onPieClick(e);
@@ -196,25 +184,13 @@
     const eatenPies = pieRects
       .filter(function(d){return d.isClaimed })
           .append("svg")
-          // .attr("width", function(d) {
-          //   return (
-          //     map.latLngToLayerPoint([d.lat - 0.1, d.lng + 0.15]).x -
-          //     map.latLngToLayerPoint([d.lat, d.lng]).x
-          //   );
-          // })
-          // .attr("height", function(d) {
-          //   return (
-          //     map.latLngToLayerPoint([d.lat - 0.1, d.lng + 0.15]).y -
-          //     map.latLngToLayerPoint([d.lat, d.lng]).y
-          //   );
-          // })
           .attr("height", "100")
           .attr("width", "150")
           .attr("x", function(d) {
             return map.latLngToLayerPoint([d.lat, d.lng]).x;
           })
           .attr("y", function(d) {
-            return map.latLngToLayerPoint([d.lat, d.lng]).y * .8;
+            return map.latLngToLayerPoint([d.lat, d.lng]).y;
           })
     
     eatenPies

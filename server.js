@@ -76,7 +76,7 @@ async function setup() {
     for (var x = 0; x < width; x++) {
       var pixel = Jimp.intToRGBA(image.getPixelColor(x, y));
       if (!(pixel.r === 255 && pixel.g === 255 && pixel.b === 255)) {
-        Pie.create({ x, y, lat: 43 - y * 0.1, lng: 124 + x * 0.15 , isClaimed: false });
+        Pie.create({ x, y, lat: 43 - y * 0.05, lng: 124 + x * 0.1 , isClaimed: false });
       }
     }
   }
