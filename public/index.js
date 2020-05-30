@@ -169,18 +169,20 @@
           .attr("href", function(d) {
             return idToImageURL(d.id);
           })
-          .attr("width", function(d) {
-            return (
-              map.latLngToLayerPoint([d.lat - 0.1, d.lng + 0.15]).x -
-              map.latLngToLayerPoint([d.lat, d.lng]).x
-            );
-          })
-          .attr("height", function(d) {
-            return (
-              map.latLngToLayerPoint([d.lat - 0.1, d.lng + 0.15]).y -
-              map.latLngToLayerPoint([d.lat, d.lng]).y
-            );
-          })
+          // .attr("width", function(d) {
+          //   return (
+          //     map.latLngToLayerPoint([d.lat - 0.1, d.lng + 0.15]).x -
+          //     map.latLngToLayerPoint([d.lat, d.lng]).x
+          //   );
+          // })
+          // .attr("height", function(d) {
+          //   return (
+          //     map.latLngToLayerPoint([d.lat - 0.1, d.lng + 0.15]).y -
+          //     map.latLngToLayerPoint([d.lat, d.lng]).y
+          //   );
+          // })
+          .attr("height", "100")
+          .attr("width", "150")
           .attr("x", function(d) {
             return map.latLngToLayerPoint([d.lat, d.lng]).x;
           })
@@ -194,18 +196,20 @@
     const eatenPies = pieRects
       .filter(function(d){return d.isClaimed })
           .append("svg")
-          .attr("width", function(d) {
-            return (
-              map.latLngToLayerPoint([d.lat - 0.1, d.lng + 0.15]).x -
-              map.latLngToLayerPoint([d.lat, d.lng]).x
-            );
-          })
-          .attr("height", function(d) {
-            return (
-              map.latLngToLayerPoint([d.lat - 0.1, d.lng + 0.15]).y -
-              map.latLngToLayerPoint([d.lat, d.lng]).y
-            );
-          })
+          // .attr("width", function(d) {
+          //   return (
+          //     map.latLngToLayerPoint([d.lat - 0.1, d.lng + 0.15]).x -
+          //     map.latLngToLayerPoint([d.lat, d.lng]).x
+          //   );
+          // })
+          // .attr("height", function(d) {
+          //   return (
+          //     map.latLngToLayerPoint([d.lat - 0.1, d.lng + 0.15]).y -
+          //     map.latLngToLayerPoint([d.lat, d.lng]).y
+          //   );
+          // })
+          .attr("height", "100")
+          .attr("width", "150")
           .attr("x", function(d) {
             return map.latLngToLayerPoint([d.lat, d.lng]).x;
           })
