@@ -49,7 +49,7 @@ body {
 
 .pie:hover {
   stroke: yellow;
-  stroke-width: .02
+  stroke-width: 5;
 }
 
 .pie.eat {
@@ -72,11 +72,6 @@ body {
   filter: url(#share);
 }
 
-.pie:hover {
-  border: 1px solid yellow;
-  /*   stroke: yellow;
-  stroke-width: 0.02; */
-}
 
 .send {
   display: flex;

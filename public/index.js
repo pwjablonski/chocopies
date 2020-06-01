@@ -191,6 +191,8 @@
       .filter(function(d) {
         return !d.isClaimed;
       })
+    
+    uneatenPies
       .append("image")
       .attr("href", function(d) {
         return idToImageURL(d.id);
@@ -207,6 +209,21 @@
         onPieClick(e);
       });
 
+    uneatenPies
+      .append("rect")
+      .attr("class", "pie")
+      .attr("height", "100")
+      .attr("width", "150")
+      .attr("x", function(d) {
+        return map.latLngToLayerPoint([d.lat, d.lng]).x;
+      })
+      .attr("y", function(d) {
+        return map.latLngToLayerPoint([d.lat, d.lng]).y;
+      })
+      .attr("fill", "none")
+      // .attr("stroke", "none")
+      .attr("stroke-width", "10");
+    
     const eatenPies = pieRects
       .filter(function(d) {
         return d.isClaimed;
