@@ -149,14 +149,25 @@
       .attr("width", "100%")
       .attr("fill", "black");
 
-    eatenPies
+    const eatPieText = eatenPies
       .append("text")
       .attr("y", "50%")
       .attr("x", "50%")
       .attr("dominant-baseline", "middle")
       .attr("text-anchor", "middle")
+      .attr("fill", "white");
+    
+    eatPieText
+      .append("tspan")
+      .attr("x", "50%")
+      .attr("dy", "-1em")
       .text((d) => d.senderName)
-      .attr("fill", "white")
+    
+    eatPieText
+      .append("tspan")
+      .attr("x", "50%")
+      .attr("dy", "2em")
+      .text((d) => d.updatedAt)
 
   }
 
@@ -215,14 +226,35 @@
       .attr("width", "100%")
       .attr("fill", "black");
 
-    eatenPies
+    const eatPieText = eatenPies
       .append("text")
       .attr("y", "50%")
       .attr("x", "50%")
       .attr("dominant-baseline", "middle")
       .attr("text-anchor", "middle")
-      .text((d) => d.senderName)
       .attr("fill", "white");
+   
+    
+    eatPieText
+      .append("tspan")
+      .attr("x", "50%")
+      .attr("dy", "-1.5em")
+      .text("SHARED BY")
+    
+    eatPieText
+      .append("tspan")
+      .attr("x", "50%")
+      .attr("dy", "0em")
+      .text((d) => d.senderName)
+    
+    eatPieText
+      .append("tspan")
+      .attr("x", "50%")
+      .attr("dy", "3em")
+      .text((d) => {
+        const date = new Date(d.updatedAt)
+        
+      })
 
     return svg;
   }
