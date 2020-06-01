@@ -10,6 +10,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
+const EAT =
+  "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.08%20PM.png?v=1590353733200";
+const UNITE =
+  "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.35%20PM.png?v=1590357736162";
+const SHARE =
+  "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.48%20PM.png?v=1590357768554";
+const PEACE =
+  "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.36%20PM.png?v=1590357805566";
+const LOVE =
+  "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.03%20PM.png?v=1590357838973";
 // Database
 let Pie;
 
@@ -166,14 +176,17 @@ app.post("/pies", async function(request, response) {
     }
   );
 
+  const imageURL = idToImageURL(pieId);
   response.send(pie);
   // email
   const msg = {
     to: recipientEmail,
     from: "pwjablonski@gmail.com",
-    subject: `Hi ${recipientName}!`,
-    text: message,
-    html: `<strong>${message}</strong>`
+    subject: `A Chocopie has been shared with you!`,
+    html: `<p>Hi ${recipientName}!</p>
+          <p>${recipientName} has shared a chocopie with you!</p>
+          <p>Click here to eat it <a href='https://chocopie.glitch.me/pie/${pieId}'> !</p>
+          <img src=${imageURL}>`
   };
   try {
     await sgMail.send(msg);
@@ -181,6 +194,24 @@ app.post("/pies", async function(request, response) {
     console.log(e);
   }
 });
+
+function idToImageURL(id) {
+  let imageURL;
+  const idModFive = id % 5;
+
+  if (idModFive === 0) {
+    imageURL = EAT;
+  } else if (idModFive == 1) {
+    imageURL = UNITE;
+  } else if (idModFive === 2) {
+    imageURL = PEACE;
+  } else if (idModFive === 3) {
+    imageURL = SHARE;
+  } else if (idModFive === 4) {
+    imageURL = LOVE;
+  }
+  return imageURL;
+}
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function() {

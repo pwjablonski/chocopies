@@ -147,7 +147,9 @@
       .append("rect")
       .attr("height", "100%")
       .attr("width", "100%")
-      .attr("fill", "black");
+      .attr("fill", "white")
+      .attr("stroke", "black")
+      .attr("stroke-width", "10");
 
 //     const eatPieText = eatenPies
 //       .append("text")
@@ -225,7 +227,7 @@
       .attr("width", "100%")
       .attr("fill", "white")
       .attr("stroke", "black")
-      .attr("stroke-width", "5");
+      .attr("stroke-width", "10");
 
     const eatPieText = eatenPies
       .append("text")
@@ -233,6 +235,7 @@
       .attr("x", "50%")
       .attr("dominant-baseline", "middle")
       .attr("text-anchor", "middle")
+      .attr("font-weight", "bold")
    
     
     eatPieText
@@ -314,8 +317,10 @@
     // d3.select(`${selectedPieId}`)
     //   .html("")
 
-    claimed += 1;
-    drawData(total, claimed);
+    pieData = await fetchPies()
+    drawData(pieData.total, pieData.claimed);
+    drawMainMap(pieData.pies);
+    
     let modal = document.querySelector("#confirmation");
     modal.classList.add("is-active");
   });
