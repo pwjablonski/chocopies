@@ -221,7 +221,7 @@
       .attr("x", "50%")
       .attr("dominant-baseline", "middle")
       .attr("text-anchor", "middle")
-      .text("chocppie")
+      .text((d) => d.senderName)
       .attr("fill", "white");
 
     return svg;

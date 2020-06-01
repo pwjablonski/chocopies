@@ -52,6 +52,21 @@ sequelize
       },
       isClaimed: {
         type: Sequelize.BOOLEAN
+      },
+      senderName: {
+        type: Sequelize.TEXT
+      },
+      senderEmail: {
+        type: Sequelize.TEXT
+      },
+      recipientName: {
+        type: Sequelize.TEXT
+      },
+      recipientEmail: {
+        type: Sequelize.TEXT
+      },
+      message: {
+        type: Sequelize.TEXT
       }
     });
 
@@ -81,7 +96,7 @@ async function setup() {
           y,
           lat: 43 - y * 0.05,
           lng: 124 + x * 0.1,
-          isClaimed: false
+          isClaimed: false, 
         });
       }
     }
@@ -124,21 +139,24 @@ app.get("/pies/:id", async function(request, response) {
 });
 
 app.post("/pies", async function(request, response) {
+  
+  const {pieId, message, senderName, senderEmail,recipientName, recipientEmail} = request.body
+  
   const pie = await Pie.update(
-    { isClaimed: true },
+    { isClaimed: true, senderName, senderEmail, recipientName, recipientEmail, message },
     {
-      where: { id: request.body.pieId }
+      where: { id: pieId }
     }
   );
 
   response.send(pie);
   // email
   const msg = {
-    to: request.body.data.recipientEmail,
+    to: recipientEmail,
     from: "pwjablonski@gmail.com",
-    subject: `Hi ${request.body.data.recipientName}!`,
-    text: request.body.data.message,
-    html: `<strong>${request.body.data.message}</strong>`
+    subject: `Hi ${recipientName}!`,
+    text: message,
+    html: `<strong>${message}</strong>`
   };
   try {
     await sgMail.send(msg);
