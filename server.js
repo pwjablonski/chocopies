@@ -96,7 +96,7 @@ async function setup() {
           y,
           lat: 43 - y * 0.05,
           lng: 124 + x * 0.1,
-          isClaimed: false, 
+          isClaimed: false
         });
       }
     }
@@ -139,11 +139,28 @@ app.get("/pies/:id", async function(request, response) {
 });
 
 app.post("/pies", async function(request, response) {
-  
-  const {pieId, message, senderName, senderEmail,recipientName, recipientEmail} = request.body
-  
+  const {
+    pieId,
+    data: { message, senderName, senderEmail, recipientName, recipientEmail }
+  } = request.body;
+
+  console.log(
+    pieId,
+    message,
+    senderName,
+    senderEmail,
+    recipientName,
+    recipientEmail
+  );
   const pie = await Pie.update(
-    { isClaimed: true, senderName, senderEmail, recipientName, recipientEmail, message },
+    {
+      isClaimed: true,
+      senderName,
+      senderEmail,
+      recipientName,
+      recipientEmail,
+      message
+    },
     {
       where: { id: pieId }
     }
