@@ -185,7 +185,6 @@ app.post("/pies", async function(request, response) {
     subject: `A Chocopie has been shared with you!`,
     html: `<p>Hi ${recipientName}!</p>
           <p>${recipientName} has shared a chocopie with you!</p>
-          <p>Click here to eat it <a href='https://chocopie.glitch.me/pie/${pieId}'> !</p>
           <img src=${imageURL}>`
   };
   try {

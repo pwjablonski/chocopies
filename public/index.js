@@ -317,10 +317,8 @@
     // d3.select(`${selectedPieId}`)
     //   .html("")
 
-    pieData = await fetchPies()
-    drawData(pieData.total, pieData.claimed);
-    drawMainMap(pieData.pies);
-    
+    claimed += 1;
+    drawData(total, claimed);
     let modal = document.querySelector("#confirmation");
     modal.classList.add("is-active");
   });
