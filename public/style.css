@@ -8,6 +8,10 @@
   justify-content:center;
 }
 
+.main-map__loading{
+  position: relative;
+}
+
 #zoom-map {
   height: 100%;
   width: 100%;
