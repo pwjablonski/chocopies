@@ -20,6 +20,9 @@
   let total = pieData.total;
   let pies = pieData.pies;
   let selectedPieId = null;
+  let param = window.location.search
+  
+  console.log(location)
 
   let zoommap = L.map("zoom-map", {
     zoomControl: false,
