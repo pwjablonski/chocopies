@@ -177,6 +177,7 @@ app.post("/pies", async function(request, response) {
   );
 
   const imageURL = idToImageURL(pieId);
+  const pieURL = `https://chocopie.glitch.me/?pieID=${pieId}`
   response.send(pie);
   // email
   const msg = {
@@ -185,7 +186,7 @@ app.post("/pies", async function(request, response) {
     subject: `A Chocopie has been shared with you!`,
     html: `<p>Hi ${recipientName}!</p>
           <p>${recipientName} has shared a chocopie with you!</p>
-          <img src=${imageURL}>`
+          <a href=${pieURL}><img src=${imageURL}></a>`
   };
   try {
     await sgMail.send(msg);

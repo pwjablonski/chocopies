@@ -31,10 +31,6 @@
     minZoom: 11
   }).setView([38, 127], 11);
 
-  if(pieID && pieID <= total  && pieID > 0){
-    console.log(pieData)
-    mainPieClicked(pies[pieID - 1])
-  }
   // L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   //   maxZoom: 18,
   // }).addTo(zoommap);
@@ -46,6 +42,11 @@
   drawData(total, claimed);
   drawMainMap(pies);
   let zoomOverlay;
+  
+  if(pieID && pieID <= total  && pieID > 0){
+    console.log(pieData)
+    mainPieClicked(pies[pieID - 1])
+  }
 
   async function fetchPies() {
     const req = await fetch("/pies");
