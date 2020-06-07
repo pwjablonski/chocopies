@@ -196,6 +196,7 @@
       .data(pies)
       .enter()
       .append("g")
+      .attr("cursor","pointer")
       .attr("id", d => d.id)
       .attr("class", "pie-group");
 
