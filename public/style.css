@@ -100,7 +100,7 @@ body {
 }
 
 /*  Checkbox */
-.checkbox {
+/* .checkbox {
   display: inline-flex;
   cursor: pointer;
   position: relative;
@@ -196,7 +196,7 @@ body {
 /*Adding focus styles on the outer-box of the fake checkbox*/
 .checkbox input[type="checkbox"]:focus + label::before {
   outline: rgb(59, 153, 252) auto 5px;
-}
+} */
 
 
 
