@@ -32,31 +32,20 @@ body {
   height: 100vh;
 }
 
-/* header {
-  height: 75px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.75);
-  position: absolute;
-  width: 100%;
-  font-size: 1.5em;
-} */
-
 .navbar-item {
   cursor: pointer;
   text-decoration: underline;
 }
-
 
 .pie-group:hover .pie-rect{
   stroke: yellow;
   stroke-width: 5;
 }
 
-.send {
-  display: flex;
-  height: 100%;
+.send_choco,
+.share_choco {
+  width: 300px;
+  height: 200px;
 }
 
 .checkout {
@@ -108,19 +97,6 @@ body {
 
 .checkout__form-submit:hover {
   color: grey;
-}
-
-.customize {
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-}
-
-.send_choco,
-.share_choco {
-  width: 300px;
-  height: 200px;
 }
 
 /*  Checkbox */
@@ -222,6 +198,11 @@ body {
   outline: rgb(59, 153, 252) auto 5px;
 }
 
+
+
+/* Modal */
+
+
 .modal {
   display: none;
   position: fixed;
@@ -241,7 +222,7 @@ body {
   margin: auto;
   width: 75%;
   height: 90%;
-  text-align: center;
+/*   text-align: center; */
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
@@ -267,20 +248,4 @@ body {
     top: 0;
     opacity: 1;
   }
-}
-
-#mainViewContainer {
-  width: 95%;
-  height: 95%;
-  border: 1px solid black;
-  margin: 10px;
-  padding: 3px;
-  overflow: hidden;
-}
-
-#mainView {
-  width: 100%;
-  height: 100%;
-  min-height: 100%;
-  display: inline;
 }
