@@ -48,35 +48,11 @@ body {
   text-decoration: underline;
 }
 
-.pie {
-  cursor: pointer;
-}
 
-.pie:hover {
+.pie-group:hover .pie-rect{
   stroke: yellow;
   stroke-width: 5;
 }
-
-.pie.eat {
-  filter: url(#eat);
-}
-
-.pie.unite {
-  filter: url(#unite);
-}
-
-.pie.love {
-  filter: url(#love);
-}
-
-.pie.peace {
-  filter: url(#peace);
-}
-
-.pie.share {
-  filter: url(#share);
-}
-
 
 .send {
   display: flex;

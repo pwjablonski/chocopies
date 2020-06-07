@@ -212,10 +212,11 @@
       .attr("fill", "none")
       // .attr("stroke", "none")
       .attr("stroke-width", "10")
-      .attr("class", "pie-group");
+      .attr("class", "pie-rect");
     
     uneatenPies
       .append("image")
+      .attr("class", "pie-image")
       .attr("href", function(d) {
         return idToImageURL(d.id);
       })
@@ -236,8 +237,8 @@
         return d.isClaimed;
       })
       .append("svg")
-      .attr("height", "100")
-      .attr("width", "150")
+      .attr("height", "90")
+      .attr("width", "140")
       .attr("x", function(d) {
         return map.latLngToLayerPoint([d.lat, d.lng]).x;
       })
