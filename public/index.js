@@ -181,7 +181,7 @@
 
     d3.selectAll("svg").attr("pointer-events", "all");
 
-    const pieRects = d3
+    const pieGroup = d3
       .select(`#${mapname}`)
       .select("svg")
       .select("g")
@@ -189,9 +189,10 @@
       .data(pies)
       .enter()
       .append("g")
-      .attr("id", d => d.id);
+      .attr("id", d => d.id)
+      .attr("class", "pie-group");
 
-    const uneatenPies = pieRects
+    const uneatenPies = pieGroup
       .filter(function(d) {
         return !d.isClaimed;
       })
@@ -200,8 +201,8 @@
     uneatenPies
       .append("rect")
       .attr("class", "pie")
-      .attr("height", "100")
-      .attr("width", "150")
+      .attr("height", "90")
+      .attr("width", "140")
       .attr("x", function(d) {
         return map.latLngToLayerPoint([d.lat, d.lng]).x;
       })
@@ -210,15 +211,16 @@
       })
       .attr("fill", "none")
       // .attr("stroke", "none")
-      .attr("stroke-width", "10");
+      .attr("stroke-width", "10")
+      .attr("class", "pie-group");
     
     uneatenPies
       .append("image")
       .attr("href", function(d) {
         return idToImageURL(d.id);
       })
-      .attr("height", "100")
-      .attr("width", "150")
+      .attr("height", "90")
+      .attr("width", "140")
       .attr("x", function(d) {
         return map.latLngToLayerPoint([d.lat, d.lng]).x;
       })
@@ -229,7 +231,7 @@
         onPieClick(e);
       });
     
-    const eatenPies = pieRects
+    const eatenPies = pieGroup
       .filter(function(d) {
         return d.isClaimed;
       })
