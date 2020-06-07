@@ -20,10 +20,9 @@
   let total = pieData.total;
   let pies = pieData.pies;
   let selectedPieId = null;
-  let param = window.location.search
+  let params = new URLSearchParams(document.location.search.substring(1));
+  let pieID = params.get("pieID");
   
-  console.log(location)
-
   let zoommap = L.map("zoom-map", {
     zoomControl: false,
     attributionControl: false,
@@ -32,6 +31,10 @@
     minZoom: 11
   }).setView([38, 127], 11);
 
+  if(pieID && pieID <= total  && pieID > 0){
+    console.log(pieData)
+    mainPieClicked(pies[pieID - 1])
+  }
   // L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   //   maxZoom: 18,
   // }).addTo(zoommap);
