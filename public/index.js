@@ -95,6 +95,12 @@
   }
 
   function drawMainMap() {
+    const loading = d3
+      .select(".main-map__loading")
+      // .style({'display': 'none'})
+      .attr("display","none")
+    
+    
     const svg = d3
       .select("#main-map")
       .select("svg")
