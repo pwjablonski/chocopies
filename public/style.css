@@ -123,10 +123,6 @@ body {
   height: 200px;
 }
 
-.social {
-  font-size: 2.5em;
-}
-
 /*  Checkbox */
 .checkbox {
   display: inline-flex;
@@ -252,10 +248,6 @@ body {
   animation-duration: 0.4s;
 }
 
-.modal-header {
-  text-align: center;
-}
-
 @-webkit-keyframes animatetop {
   from {
     top: -300px;
@@ -291,25 +283,4 @@ body {
   height: 100%;
   min-height: 100%;
   display: inline;
-}
-
-.thumbViewClass {
-  border: 1px solid black;
-  position: absolute;
-  bottom: 5px;
-  left: 5px;
-  width: 20%;
-  height: 30%;
-  margin: 3px;
-  padding: 3px;
-  overflow: hidden;
-}
-
-#thumbView {
-  z-index: 110;
-  background: white;
-}
-
-#scopeContainer {
-  z-index: 120;
 }
