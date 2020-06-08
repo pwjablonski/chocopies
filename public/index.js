@@ -344,13 +344,20 @@
     const response = await sendPie(selectedPieId, data);
     console.log(response.error.type);
     if (response.error.type) {
-      console.log(response.error.message)
+      let senderEmailHelp = document.querySelector(".sender-email .help");
+      senderEmailHelp.innerHTML = response.error.message;
     } else {
       sent += 1;
       drawData(total, sent);
       let modal = document.querySelector("#confirmation");
       modal.classList.add("is-active");
     }
+    e.target[0].value = "";
+    e.target[1].value = "";
+    e.target[2].value = "";
+    e.target[3].value = "";
+    e.target[4].value = "";
+    e.target[5].checked = false;
     // d3.select(`${selectedPieId}`)
     //   .html(""
   });
