@@ -182,11 +182,11 @@ app.post("/pies", async function(request, response) {
   console.log(sentPie);
 
   if (sentPie) {
-    console.log("wait 1 hour");
+    response.send({error: {type:"too many requests", message: "User has already claimed a pie in the last hour"}});
   } else {
     const pie = await Pie.update(
       {
-        sentAt: moment().getDate(),
+        sentAt: moment().toDate(),
         senderName,
         senderEmail,
         recipientName,
@@ -198,26 +198,26 @@ app.post("/pies", async function(request, response) {
       }
     );
 
-    //   const imageURL = idToImageURL(pieId);
-    //   const pieURL = `https://chocopie.glitch.me/?pieID=${pieId}`
-    //   response.send(pie);
-    //   // email
-    //   const msg = {
-    //     to: recipientEmail,
-    //     from: "pwjablonski@gmail.com",
-    //     subject: `A Chocopie has been shared with you!`,
-    //     html: `<p>Hi ${recipientName}!</p>
-    //           <p>${senderName} has shared a chocopie with you! Click on the below pie to eat</p>
-    //           <a href=${pieURL}><img src=${imageURL} height="25%" width="25%"></a>
-    //           <p>Sincerely,</p>
-    //           <p> Asia Society </p>
-    //           `
-    //   };
-    //   try {
-    //     await sgMail.send(msg);
-    //   } catch (e) {
-    //     console.log(e);
-    //   }
+    const imageURL = idToImageURL(pieId);
+    const pieURL = `https://chocopie.glitch.me/?pieID=${pieId}`;
+    response.send(pie);
+    // email
+    const msg = {
+      to: recipientEmail,
+      from: "pwjablonski@gmail.com",
+      subject: `A Chocopie has been shared with you!`,
+      html: `<p>Hi ${recipientName}!</p>
+              <p>${senderName} has shared a chocopie with you! Click on the below pie to eat</p>
+              <a href=${pieURL}><img src=${imageURL} height="25%" width="25%"></a>
+              <p>Sincerely,</p>
+              <p> Asia Society </p>
+              `
+    };
+    try {
+      await sgMail.send(msg);
+    } catch (e) {
+      console.log(e);
+    }
   }
 });
 
