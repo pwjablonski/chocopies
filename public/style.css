@@ -8,7 +8,7 @@
 body {
   margin: 0;
   font-family: helvetica, arial, sans-serif;
-  height: 100vh;
+  height: calc(100vh - 7.5em);
 }
 
 #main-map {
@@ -34,7 +34,7 @@ body {
 
 .navbar {
   background-color: darkblue;
-  border-bottom: .5em solid red;
+  border-bottom: 0.5em solid red;
 }
 
 .navbar-item {
@@ -42,25 +42,29 @@ body {
   cursor: pointer;
 }
 
-main {
-  height:100%;
+.main {
+  height: 100%;
+}
+
+.main-container {
+  
 }
 
 .footer {
-  padding: .5em 1.5em;
+  padding: 0.5em 1.5em;
   background-color: darkblue;
   color: white;
-  border-top: .25em solid red;
+  border-top: 0.25em solid red;
 }
 
 .footer-start {
   display: flex;
 }
 
-.footer-item{
+.footer-item {
   line-height: 1.5;
-    padding: .5rem .5rem;
-    position: relative;
+  padding: 0.5rem 0.5rem;
+  position: relative;
 }
 
 .pie-group:hover .pie-rect {
