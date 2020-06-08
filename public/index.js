@@ -160,13 +160,14 @@
       });
   }
 
-  function drawMainMap() {
+  function drawMainMap(pies) {
     const loading = d3.select(".main-map__loading").style("display", "none");
 
     const svg = d3
       .select("#main-map")
       .select("svg")
-      .select("g");
+      .select("g")
+      .html("");
 
     const pieGroups = svg
       .selectAll("g")
@@ -294,6 +295,7 @@
     data.recipientEmail = e.target[3].value;
     data.message = e.target[4].value;
     data.signUp = e.target[5].checked;
+    data.sentAt = new Date();
 
     const response = await sendPie(selectedPieId, data);
 
@@ -306,41 +308,28 @@
       let modal = document.querySelector("#confirmation");
       modal.classList.add("is-active");
 
-      pies[selectedPieId].senderName = e.target[0].value;
-      pies[selectedPieId] = e.target[1].value;
-      pies[selectedPieId] = e.target[2].value;
-      pies[selectedPieId] = e.target[3].value;
-      pies[selectedPieId] = e.target[4].value;
-      pies[selectedPieId] = e.target[5].checked;
-      
-      drawMainMap(pies);
+      pies[selectedPieId - 1].senderName = e.target[0].value;
+      pies[selectedPieId - 1].senderEmail = e.target[1].value;
+      pies[selectedPieId - 1].recipientName = e.target[2].value;
+      pies[selectedPieId - 1].recipientEmail = e.target[3].value;
+      pies[selectedPieId - 1].message = e.target[4].value;
+      pies[selectedPieId - 1].signUp = e.target[5].checked;
+      pies[selectedPieId - 1].sentAt = new Date();
 
-
-      //       const mainMapPie = d3
-      //         .select("#main-map")
-      //         .select("svg")
-      //         .select("g")
-      //         .select(`#pie-${selectedPieId}`)
-      //         .select('svg');
-
-      //       const zoomMapPie = d3
-      //         .select("#zoom-map-svg")
-      //         .select("svg")
-      //         .select("g")
-      //         .select(`#pie-${selectedPieId}`)
-      //         .select('svg')
-      //         .html('');
-
-      //       drawEatenPies(mainMapPie)
-      //       drawEatenPies(zoomMapPie)
+      const mainMapPie = d3
+        .select("#main-map")
+        .select("svg")
+        .select("g")
+        .select(`#pie-${selectedPieId}`)
+        .select('svg');
+      drawEatenPies(mainMapPie)
     }
+    
     e.target[0].value = "";
     e.target[1].value = "";
     e.target[2].value = "";
     e.target[3].value = "";
     e.target[4].value = "";
     e.target[5].checked = false;
-    // d3.select(`${selectedPieId}`)
-    //   .html(""
   });
 })(document, L, d3);
