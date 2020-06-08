@@ -344,7 +344,7 @@
     const response = await sendPie(selectedPieId, data);
     console.log(response.error.type);
     if (response.error.type) {
-      console.log(response.error.type)
+      console.log(response.error.message)
     } else {
       sent += 1;
       drawData(total, sent);
