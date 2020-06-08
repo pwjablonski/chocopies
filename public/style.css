@@ -41,6 +41,18 @@ body {
   cursor: pointer;
 }
 
+.footer {
+  padding: 1em 1.5em 1em;
+  background-color: darkblue;
+  color: white;
+}
+
+.footer-start {
+  display: flex;
+}
+
+.foot
+
 .pie-group:hover .pie-rect {
   stroke: yellow;
   stroke-width: 5;
