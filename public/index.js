@@ -100,6 +100,26 @@
     zoomOverlay = d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
   }
 
+  function drawUneatenPies(uneatenPies){
+    uneatenPies
+      .append("image")
+      .attr("href", function(d) {
+        return idToImageURL(d.id);
+      })
+      .attr("height", "100%")
+      .attr("width", "100%")
+  }
+  
+  function drawEatenPies(eatenPies){
+    eatenPies
+      .append("rect")
+      .attr("height", "100%")
+      .attr("width", "100%")
+      .attr("fill", "white")
+      .attr("stroke", "black")
+      .attr("stroke-width", "10");
+  }
+  
   function drawMainMap() {
     const loading = d3.select(".main-map__loading").style("display", "none");
 
@@ -114,17 +134,14 @@
       .enter()
       .append("g")
       .attr("id", d => `pie-${d.id}`)
-      .attr("cursor", "pointer");
+      .attr("cursor", "pointer")
+      .on("click", mainPieClicked);
 
     const uneatenPies = pieGroups
       .filter(function(d) {
         return !d.sentAt;
       })
       .append("svg")
-      .append("image")
-      .attr("href", function(d) {
-        return idToImageURL(d.id);
-      })
       .attr("width", "1")
       .attr("height", ".75")
       .attr("x", function(d) {
@@ -133,7 +150,6 @@
       .attr("y", function(d) {
         return d.y * 0.75;
       })
-      .on("click", mainPieClicked);
 
     const eatenPies = pieGroups
       .filter(function(d) {
@@ -148,34 +164,9 @@
       .attr("y", function(d) {
         return d.y * 0.75;
       })
-      .on("click", mainPieClicked);
-
-    eatenPies
-      .append("rect")
-      .attr("height", "100%")
-      .attr("width", "100%")
-      .attr("fill", "white")
-      .attr("stroke", "black")
-      .attr("stroke-width", "10");
-
-    //     const eatPieText = eatenPies
-    //       .append("text")
-    //       .attr("y", "50%")
-    //       .attr("x", "50%")
-    //       .attr("dominant-baseline", "middle")
-    //       .attr("text-anchor", "middle")
-    //       .attr("fill", "white");
-
-    //     eatPieText
-    //       .append("tspan")
-    //       .attr("x", "50%")
-    //       .attr("dy", "-1.5em")
-    //       .text("SHARED BY")
-
-    //     eatPieText
-    //       .append("tspan")
-    //       .attr("x", "50%")
-    //       .attr("dy", "1.5em")
+    
+    drawUneatenPies(uneatenPies);
+    drawEatenPies(eatenPies);
   }
 
   function d3Map(pies, map, mapname, onPieClick) {
@@ -195,9 +186,10 @@
       .attr("id", d => `pie-${d.id}`)
       .attr("class", "pie-group");
 
-    const uneatenPies = pieGroups.filter(function(d) {
-      return !d.sentAt;
-    });
+    const uneatenPies = pieGroups
+      .filter(function(d) {
+        return !d.sentAt;
+      });
 
     uneatenPies
       .append("rect")
