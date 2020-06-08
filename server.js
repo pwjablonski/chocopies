@@ -185,7 +185,7 @@ app.post("/pies", async function(request, response) {
     from: "pwjablonski@gmail.com",
     subject: `A Chocopie has been shared with you!`,
     html: `<p>Hi ${recipientName}!</p>
-          <p>${recipientName} has shared a chocopie with you! Click on the below pie to eat</p>
+          <p>${senderName} has shared a chocopie with you! Click on the below pie to eat</p>
           <a href=${pieURL}><img src=${imageURL} height="25%" width="25%"></a>
           <p>Sincerely,</p>
           <p> Asia Society </p>
