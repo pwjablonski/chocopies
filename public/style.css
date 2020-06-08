@@ -47,7 +47,16 @@ body {
 }
 
 .main-container {
-  
+  height: 100%;
+}
+
+
+.main-container__columns{
+  height: 100%;
+}
+
+.main-container__map{
+  height: 100%;
 }
 
 .footer {
