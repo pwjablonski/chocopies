@@ -3,6 +3,8 @@ const Sequelize = require("sequelize");
 const Jimp = require("jimp");
 const bodyParser = require("body-parser");
 const sgMail = require("@sendgrid/mail");
+const { Op } = require("sequelize");
+const moment = require("moment");
 
 const app = express();
 
@@ -161,44 +163,54 @@ app.post("/pies", async function(request, response) {
     }
   } = request.body;
 
-  const pie = await Pie.findOne({
-    where: { id: pieId, senderEmail, updatedAt: {$lt: sequelize.fn('scheduleEndDate')}}
+  const claimedPie = await Pie.findOne({
+    where: {
+      senderEmail,
+      updatedAt: {
+        [Op.gt]: moment()
+          .subtract(1, "hours")
+          .toDate()
+      }
+    }
   });
 
-  //   const pie = await Pie.update(
-  //     {
-  //       isClaimed: true,
-  //       senderName,
-  //       senderEmail,
-  //       recipientName,
-  //       recipientEmail,
-  //       message
-  //     },
-  //     {
-  //       where: { id: pieId }
-  //     }
-  //   );
+  if (claimedPie) {
+  } else {
+    const pie = await Pie.update(
+      {
+        isClaimed: true,
+        senderName,
+        senderEmail,
+        recipientName,
+        recipientEmail,
+        message
+      },
+      {
+        where: { id: pieId }
+      }
+    );
 
-  //   const imageURL = idToImageURL(pieId);
-  //   const pieURL = `https://chocopie.glitch.me/?pieID=${pieId}`
-  //   response.send(pie);
-  //   // email
-  //   const msg = {
-  //     to: recipientEmail,
-  //     from: "pwjablonski@gmail.com",
-  //     subject: `A Chocopie has been shared with you!`,
-  //     html: `<p>Hi ${recipientName}!</p>
-  //           <p>${senderName} has shared a chocopie with you! Click on the below pie to eat</p>
-  //           <a href=${pieURL}><img src=${imageURL} height="25%" width="25%"></a>
-  //           <p>Sincerely,</p>
-  //           <p> Asia Society </p>
-  //           `
-  //   };
-  //   try {
-  //     await sgMail.send(msg);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
+    //   const imageURL = idToImageURL(pieId);
+    //   const pieURL = `https://chocopie.glitch.me/?pieID=${pieId}`
+    //   response.send(pie);
+    //   // email
+    //   const msg = {
+    //     to: recipientEmail,
+    //     from: "pwjablonski@gmail.com",
+    //     subject: `A Chocopie has been shared with you!`,
+    //     html: `<p>Hi ${recipientName}!</p>
+    //           <p>${senderName} has shared a chocopie with you! Click on the below pie to eat</p>
+    //           <a href=${pieURL}><img src=${imageURL} height="25%" width="25%"></a>
+    //           <p>Sincerely,</p>
+    //           <p> Asia Society </p>
+    //           `
+    //   };
+    //   try {
+    //     await sgMail.send(msg);
+    //   } catch (e) {
+    //     console.log(e);
+    //   }
+  }
 });
 
 function idToImageURL(id) {

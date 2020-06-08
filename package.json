@@ -12,7 +12,8 @@
     "body-parser": "^1.19.0",
     "sequelize": "*",
     "sqlite3": "*",
-    "@sendgrid/mail": "^7.1.0"
+    "@sendgrid/mail": "^7.1.0",
+    "moment": "^2.26.0"
   },
   "engines": {
     "node": "12.x"
