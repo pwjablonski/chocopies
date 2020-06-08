@@ -35,16 +35,15 @@
   //   maxZoom: 18,
   // }).addTo(zoommap);
   
-//   d3.json("/pies", function(pies){
-//     console.log(pies)
-//   })
+  d3.json("/pies", function(pies){
+    console.log(pies)
+  })
 
   drawData(total, claimed);
   drawMainMap(pies);
   let zoomOverlay;
   
   if(pieID && pieID <= total  && pieID > 0){
-    console.log(pieData)
     mainPieClicked(pies[pieID - 1])
   }
 
