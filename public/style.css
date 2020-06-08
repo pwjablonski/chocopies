@@ -10,7 +10,7 @@ body {
 }
 
 #main-map {
-  height: calc(100vh - 15em);
+  height: calc(100vh - 13.5em);
   width: 100%;
   display: flex;
   justify-content: center;

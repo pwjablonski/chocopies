@@ -237,6 +237,9 @@
       })
       .on("dblclick", function(e) {
         onPieClick(e);
+      })
+      .on("touchend", function(e) {
+        onPieClick(e);
       });
     
     const eatenPies = pieGroup
