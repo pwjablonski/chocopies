@@ -202,19 +202,34 @@ app.post("/pies", async function(request, response) {
     const pieURL = `https://chocopie.glitch.me/?pieID=${pieId}`;
     response.send(pie);
     // email
-    const msg = {
+    const msgRecipient = {
       to: recipientEmail,
-      from: "pwjablonski@gmail.com",
+      from: senderEmail,
       subject: `A Chocopie has been shared with you!`,
       html: `<p>Hi ${recipientName}!</p>
               <p>${senderName} has shared a chocopie with you! Click on the below pie to eat</p>
+              <p>${message}</p>
               <a href=${pieURL}><img src=${imageURL} height="25%" width="25%"></a>
               <p>Sincerely,</p>
               <p> Asia Society </p>
               `
     };
+    
+    const msgSender = {
+      to: senderEmail,
+      from: senderEmail,
+      subject: `Thank you for sharing a Chocopie`,
+      html: `<p>Hi ${senderName}!</p>
+              <p>Thanks for sharin a chocopie! Click on the below pie to see it on the map!</p>
+              <a href=${pieURL}><img src=${imageURL} height="25%" width="25%"></a>
+              <p>Sincerely,</p>
+              <p> Asia Society </p>
+              `
+    };
+    
     try {
-      await sgMail.send(msg);
+      await sgMail.send(msgRecipient);
+      await sgMail.send(msgSender);
     } catch (e) {
       console.log(e);
     }
