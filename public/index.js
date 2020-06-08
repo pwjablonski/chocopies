@@ -100,24 +100,65 @@
     zoomOverlay = d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
   }
 
-  function drawUneatenPies(uneatenPies){
+  function drawUneatenPies(uneatenPies){    
+    uneatenPies
+      .append("rect")
+      .attr("class", "pie-rect")
+      .attr("height", "100%")
+      .attr("width", "100%")
+      .attr("fill", "none")
+      .attr("stroke-width", "10");
+      
+
     uneatenPies
       .append("image")
+      .attr("class", "pie-image")
+      .attr("height", "96%")
+      .attr("width", "96%")
+      .attr("x", "2%")
+      .attr("y", "2%")
       .attr("href", function(d) {
         return idToImageURL(d.id);
       })
-      .attr("height", "100%")
-      .attr("width", "100%")
   }
   
   function drawEatenPies(eatenPies){
-    eatenPies
+        eatenPies
       .append("rect")
       .attr("height", "100%")
       .attr("width", "100%")
       .attr("fill", "white")
       .attr("stroke", "black")
       .attr("stroke-width", "10");
+
+    const eatPieText = eatenPies
+      .append("text")
+      .attr("y", "50%")
+      .attr("x", "50%")
+      .attr("dominant-baseline", "middle")
+      .attr("text-anchor", "middle")
+      .attr("font-weight", "bold");
+
+    eatPieText
+      .append("tspan")
+      .attr("x", "50%")
+      .attr("dy", "-1.5em")
+      .text("SHARED BY");
+
+    eatPieText
+      .append("tspan")
+      .attr("x", "50%")
+      .attr("dy", "1.5em")
+      .text(d => d.senderName);
+
+    eatPieText
+      .append("tspan")
+      .attr("x", "50%")
+      .attr("dy", "1.5em")
+      .text(d => {
+        const date = new Date(d.updatedAt);
+        return date.toLocaleDateString();
+      });
   }
   
   function drawMainMap() {
@@ -202,61 +243,8 @@
         return d.sentAt;
       })
 
-      
-    uneatenPies
-      .append("rect")
-      .attr("class", "pie-rect")
-      .attr("height", "100%")
-      .attr("width", "100%")
-      .attr("fill", "none")
-      .attr("stroke-width", "10");
-      
-
-    uneatenPies
-      .append("image")
-      .attr("class", "pie-image")
-      .attr("height", "100%")
-      .attr("width", "100%")
-      .attr("href", function(d) {
-        return idToImageURL(d.id);
-      })
-
-    eatenPies
-      .append("rect")
-      .attr("height", "100%")
-      .attr("width", "100%")
-      .attr("fill", "white")
-      .attr("stroke", "black")
-      .attr("stroke-width", "10");
-
-    const eatPieText = eatenPies
-      .append("text")
-      .attr("y", "50%")
-      .attr("x", "50%")
-      .attr("dominant-baseline", "middle")
-      .attr("text-anchor", "middle")
-      .attr("font-weight", "bold");
-
-    eatPieText
-      .append("tspan")
-      .attr("x", "50%")
-      .attr("dy", "-1.5em")
-      .text("SHARED BY");
-
-    eatPieText
-      .append("tspan")
-      .attr("x", "50%")
-      .attr("dy", "1.5em")
-      .text(d => d.senderName);
-
-    eatPieText
-      .append("tspan")
-      .attr("x", "50%")
-      .attr("dy", "1.5em")
-      .text(d => {
-        const date = new Date(d.updatedAt);
-        return date.toLocaleDateString();
-      });
+    drawUneatenPies(uneatenPies)
+    drawEatenPies(eatenPies)
 
     return svg;
   }
@@ -323,13 +311,24 @@
       modal.classList.add("is-active");
       
       
-      // const pie = d3
-      //   .select("#main-map")
-      //   .select("svg")
-      //   .select("g")
-      //   .select(`#pie-${selectedPieId}`)
-      //   .;
-
+      const mainMapPie = d3
+        .select("#main-map")
+        .select("svg")
+        .select("g")
+        .select(`#pie-${selectedPieId}`)
+        .select('svg');
+      
+      const zoomMapPie = d3
+        .select("#zoom-map")
+        .select("svg")
+        .select("g")
+        .select(`#pie-${selectedPieId}`)
+        .select('svg')
+        .;
+      
+      
+      drawEatenPies(mainMapPie)
+      drawEatenPies(zoomMapPie)
     }
     e.target[0].value = "";
     e.target[1].value = "";
