@@ -113,7 +113,7 @@
       .data(pies)
       .enter()
       .append("g")
-      .attr("id", d => d.id)
+      .attr("id", d => `$pie-{${d.id}`)
       .attr("cursor", "pointer");
 
     const uneatenPies = pieRects
@@ -121,7 +121,7 @@
         return !d.sentAt;
       })
       .append("image")
-      .attr("id", d => d.id)
+      // .attr("id", d => `$pie-{${d.id}`)
       .attr("href", function(d) {
         return idToImageURL(d.id);
       })
@@ -140,7 +140,7 @@
         return d.sentAt;
       })
       .append("svg")
-      .attr("id", d => d.id)
+      // .attr("id", d => d.id)
       .attr("width", "1")
       .attr("height", "0.75")
       .attr("x", function(d) {
@@ -193,7 +193,7 @@
       .enter()
       .append("g")
       .attr("cursor", "pointer")
-      .attr("id", d => d.id)
+      .attr("id", d => `pie-${d.id}`)
       .attr("class", "pie-group");
 
     const uneatenPies = pieGroup.filter(function(d) {
@@ -351,7 +351,14 @@
       drawData(total, sent);
       let modal = document.querySelector("#confirmation");
       modal.classList.add("is-active");
-      console.log('sent')
+      
+      
+      const pie = d3
+        .select("#main-map")
+        .select("svg")
+        .select("g")
+        .select(`#pie-${selectedPieId}`);
+
     }
     e.target[0].value = "";
     e.target[1].value = "";
