@@ -108,20 +108,20 @@
       .select("svg")
       .select("g");
 
-    const pieRects = svg
+    const pieGroups = svg
       .selectAll("g")
       .data(pies)
       .enter()
       .append("g")
-      .attr("id", d => `$pie-{${d.id}`)
+      .attr("id", d => `pie-${d.id}`)
       .attr("cursor", "pointer");
 
-    const uneatenPies = pieRects
+    const uneatenPies = pieGroups
       .filter(function(d) {
         return !d.sentAt;
       })
+      .append("svg")
       .append("image")
-      // .attr("id", d => `$pie-{${d.id}`)
       .attr("href", function(d) {
         return idToImageURL(d.id);
       })
@@ -135,12 +135,11 @@
       })
       .on("click", mainPieClicked);
 
-    const eatenPies = pieRects
+    const eatenPies = pieGroups
       .filter(function(d) {
         return d.sentAt;
       })
       .append("svg")
-      // .attr("id", d => d.id)
       .attr("width", "1")
       .attr("height", "0.75")
       .attr("x", function(d) {
@@ -184,7 +183,7 @@
 
     d3.selectAll("svg").attr("pointer-events", "all");
 
-    const pieGroup = d3
+    const pieGroups = d3
       .select(`#${mapname}`)
       .select("svg")
       .select("g")
@@ -196,7 +195,7 @@
       .attr("id", d => `pie-${d.id}`)
       .attr("class", "pie-group");
 
-    const uneatenPies = pieGroup.filter(function(d) {
+    const uneatenPies = pieGroups.filter(function(d) {
       return !d.sentAt;
     });
 
@@ -237,7 +236,7 @@
         onPieClick(e);
       });
 
-    const eatenPies = pieGroup
+    const eatenPies = pieGroups
       .filter(function(d) {
         return d.sentAt;
       })
@@ -353,11 +352,12 @@
       modal.classList.add("is-active");
       
       
-      const pie = d3
-        .select("#main-map")
-        .select("svg")
-        .select("g")
-        .select(`#pie-${selectedPieId}`);
+      // const pie = d3
+      //   .select("#main-map")
+      //   .select("svg")
+      //   .select("g")
+      //   .select(`#pie-${selectedPieId}`)
+      //   .;
 
     }
     e.target[0].value = "";
