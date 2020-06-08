@@ -62,8 +62,8 @@ sequelize
       lng: {
         type: Sequelize.FLOAT
       },
-      isClaimed: {
-        type: Sequelize.BOOLEAN
+      sentAt: {
+        type: Sequelize.DATE
       },
       senderName: {
         type: Sequelize.TEXT
@@ -90,7 +90,7 @@ sequelize
 
 // populate table with default users
 async function setup() {
-  await Pie.sync({ force: false });
+  await Pie.sync({ force: true });
 
   const image = await Jimp.read(
     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fkorea-2500.png?v=1590524307186"
@@ -108,7 +108,6 @@ async function setup() {
           y,
           lat: 43 - y * 0.05,
           lng: 124 + x * 0.1,
-          isClaimed: false
         });
       }
     }
@@ -134,7 +133,7 @@ app.get("/pies", async function(request, response) {
     total: 0,
     pies: []
   };
-  data.claimed = await Pie.count({ where: { isClaimed: true } });
+  data.claimed = await Pie.count({ where: { sentAt: true } });
   const { count, rows } = await Pie.findAndCountAll();
   data.total = count;
   rows.forEach(function(pie) {
@@ -174,7 +173,10 @@ app.post("/pies", async function(request, response) {
     }
   });
 
+  console.log(claimedPie)
+  
   if (claimedPie) {
+    console.log("wait 1 hour")
   } else {
     const pie = await Pie.update(
       {
