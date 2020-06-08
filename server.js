@@ -107,7 +107,7 @@ async function setup() {
           x,
           y,
           lat: 43 - y * 0.05,
-          lng: 124 + x * 0.1,
+          lng: 124 + x * 0.1
         });
       }
     }
@@ -129,11 +129,17 @@ app.get("/old", function(request, response) {
 
 app.get("/pies", async function(request, response) {
   const data = {
-    claimed: 0,
+    sent: 0,
     total: 0,
     pies: []
   };
-  data.claimed = await Pie.count({ where: { sentAt: true } });
+  data.sent = await Pie.count({
+    where: {
+      sentAt: {
+        [Op.ne]: null
+      }
+    }
+  });
   const { count, rows } = await Pie.findAndCountAll();
   data.total = count;
   rows.forEach(function(pie) {
@@ -162,7 +168,7 @@ app.post("/pies", async function(request, response) {
     }
   } = request.body;
 
-  const claimedPie = await Pie.findOne({
+  const sentPie = await Pie.findOne({
     where: {
       senderEmail,
       updatedAt: {
@@ -173,14 +179,14 @@ app.post("/pies", async function(request, response) {
     }
   });
 
-  console.log(claimedPie)
-  
-  if (claimedPie) {
-    console.log("wait 1 hour")
+  console.log(sentPie);
+
+  if (sentPie) {
+    console.log("wait 1 hour");
   } else {
     const pie = await Pie.update(
       {
-        isClaimed: true,
+        sentAt: moment().getDate(),
         senderName,
         senderEmail,
         recipientName,

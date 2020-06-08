@@ -16,7 +16,7 @@
   // const result = await d3.json("/pies")
   // console.log(result)
   let pieData = await fetchPies();
-  let claimed = pieData.claimed;
+  let sent = pieData.sent;
   let total = pieData.total;
   let pies = pieData.pies;
   let selectedPieId = null;
@@ -39,7 +39,7 @@
     console.log(pies)
   })
 
-  drawData(total, claimed);
+  drawData(total, sent);
   drawMainMap(pies);
   let zoomOverlay;
   
@@ -53,13 +53,13 @@
     return resp;
   }
 
-  function drawData(total, claimed) {
+  function drawData(total, sent) {
     const totalDiv = document.querySelector("#totalPies");
-    const claimedDiv = document.querySelector("#piesClaimed");
+    const sentDiv = document.querySelector("#piesSent");
     const moneyDiv = document.querySelector("#moneyRaised");
     totalDiv.innerHTML = total;
-    claimedDiv.innerHTML = claimed;
-    moneyDiv.innerHTML = `$ ${claimed}`;
+    sentDiv.innerHTML = sent;
+    moneyDiv.innerHTML = `$ ${sent}`;
   }
 
   function idToImageURL(id) {
@@ -120,7 +120,7 @@
 
     const uneatenPies = pieRects
       .filter(function(d) {
-        return !d.isClaimed;
+        return !d.sentAt;
       })
       .append("image")
       .attr("id", d => d.id)
@@ -139,7 +139,7 @@
 
     const eatenPies = pieRects
       .filter(function(d) {
-        return d.isClaimed;
+        return d.sentAt;
       })
       .append("svg")
       .attr("id", d => d.id)
@@ -201,7 +201,7 @@
 
     const uneatenPies = pieGroup
       .filter(function(d) {
-        return !d.isClaimed;
+        return !d.sentAt;
       })
     
 
@@ -244,7 +244,7 @@
     
     const eatenPies = pieGroup
       .filter(function(d) {
-        return d.isClaimed;
+        return d.sentAt;
       })
       .append("svg")
       .attr("height", "90")
@@ -352,8 +352,8 @@
     // d3.select(`${selectedPieId}`)
     //   .html("")
 
-    claimed += 1;
-    drawData(total, claimed);
+    sent += 1;
+    drawData(total, sent);
     let modal = document.querySelector("#confirmation");
     modal.classList.add("is-active");
   });
