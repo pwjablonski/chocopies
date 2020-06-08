@@ -162,7 +162,7 @@ app.post("/pies", async function(request, response) {
   } = request.body;
 
   const pie = await Pie.findOne({
-    where: { id: pieId, senderEmail,   }
+    where: { id: pieId, senderEmail, updatedAt: {$lt: sequelize.fn('scheduleEndDate')}}
   });
 
   //   const pie = await Pie.update(
