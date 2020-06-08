@@ -179,10 +179,13 @@ app.post("/pies", async function(request, response) {
     }
   });
 
-  console.log(sentPie);
-
   if (sentPie) {
-    response.send({error: {type:"too many requests", message: "User has already claimed a pie in the last hour"}});
+    response.send({
+      error: {
+        type: "too many requests",
+        message: "You've already claimed a pie in the last hour"
+      }
+    });
   } else {
     const pie = await Pie.update(
       {
@@ -214,7 +217,7 @@ app.post("/pies", async function(request, response) {
               <p> Asia Society </p>
               `
     };
-    
+
     const msgSender = {
       to: senderEmail,
       from: senderEmail,
@@ -226,7 +229,7 @@ app.post("/pies", async function(request, response) {
               <p> Asia Society </p>
               `
     };
-    
+
     try {
       await sgMail.send(msgRecipient);
       await sgMail.send(msgSender);

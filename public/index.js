@@ -342,8 +342,8 @@
     data.signUp = e.target[5].checked;
 
     const response = await sendPie(selectedPieId, data);
-    console.log(response.error.type);
-    if (response.error.type) {
+
+    if (response.error) {
       let senderEmailHelp = document.querySelector(".sender-email .help");
       senderEmailHelp.innerHTML = response.error.message;
     } else {
@@ -351,6 +351,7 @@
       drawData(total, sent);
       let modal = document.querySelector("#confirmation");
       modal.classList.add("is-active");
+      console.log('sent')
     }
     e.target[0].value = "";
     e.target[1].value = "";
