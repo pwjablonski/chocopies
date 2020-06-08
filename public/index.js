@@ -134,13 +134,6 @@
       .enter()
       .append("g")
       .attr("id", d => `pie-${d.id}`)
-      .attr("cursor", "pointer")
-      .on("click", mainPieClicked);
-
-    const uneatenPies = pieGroups
-      .filter(function(d) {
-        return !d.sentAt;
-      })
       .append("svg")
       .attr("width", "1")
       .attr("height", ".75")
@@ -150,19 +143,17 @@
       .attr("y", function(d) {
         return d.y * 0.75;
       })
+      .attr("cursor", "pointer")
+      .on("click", mainPieClicked);
+
+    const uneatenPies = pieGroups
+      .filter(function(d) {
+        return !d.sentAt;
+      })
 
     const eatenPies = pieGroups
       .filter(function(d) {
         return d.sentAt;
-      })
-      .append("svg")
-      .attr("width", "1")
-      .attr("height", "0.75")
-      .attr("x", function(d) {
-        return d.x;
-      })
-      .attr("y", function(d) {
-        return d.y * 0.75;
       })
     
     drawUneatenPies(uneatenPies);
@@ -184,35 +175,8 @@
       .append("g")
       .attr("cursor", "pointer")
       .attr("id", d => `pie-${d.id}`)
-      .attr("class", "pie-group");
-
-    const uneatenPies = pieGroups
-      .filter(function(d) {
-        return !d.sentAt;
-      });
-
-    uneatenPies
-      .append("rect")
-      .attr("class", "pie")
-      .attr("height", "90")
-      .attr("width", "140")
-      .attr("x", function(d) {
-        return map.latLngToLayerPoint([d.lat, d.lng]).x;
-      })
-      .attr("y", function(d) {
-        return map.latLngToLayerPoint([d.lat, d.lng]).y;
-      })
-      .attr("fill", "none")
-      // .attr("stroke", "none")
-      .attr("stroke-width", "10")
-      .attr("class", "pie-rect");
-
-    uneatenPies
-      .append("image")
-      .attr("class", "pie-image")
-      .attr("href", function(d) {
-        return idToImageURL(d.id);
-      })
+      .attr("class", "pie-group")
+      .append("svg")
       .attr("height", "90")
       .attr("width", "140")
       .attr("x", function(d) {
@@ -228,19 +192,34 @@
         onPieClick(e);
       });
 
+    const uneatenPies = pieGroups
+      .filter(function(d) {
+        return !d.sentAt;
+      })
+    
     const eatenPies = pieGroups
       .filter(function(d) {
         return d.sentAt;
       })
-      .append("svg")
-      .attr("height", "90")
-      .attr("width", "140")
-      .attr("x", function(d) {
-        return map.latLngToLayerPoint([d.lat, d.lng]).x;
+
+      
+    uneatenPies
+      .append("rect")
+      .attr("class", "pie-rect")
+      .attr("height", "100%")
+      .attr("width", "100%")
+      .attr("fill", "none")
+      .attr("stroke-width", "10");
+      
+
+    uneatenPies
+      .append("image")
+      .attr("class", "pie-image")
+      .attr("height", "100%")
+      .attr("width", "100%")
+      .attr("href", function(d) {
+        return idToImageURL(d.id);
       })
-      .attr("y", function(d) {
-        return map.latLngToLayerPoint([d.lat, d.lng]).y;
-      });
 
     eatenPies
       .append("rect")
