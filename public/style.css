@@ -34,6 +34,7 @@ body {
 
 .navbar {
   background-color: darkblue;
+  border-bottom: .5em solid red;
 }
 
 .navbar-item {
@@ -41,17 +42,26 @@ body {
   cursor: pointer;
 }
 
+main {
+  height:100%;
+}
+
 .footer {
-  padding: 1em 1.5em 1em;
+  padding: .5em 1.5em;
   background-color: darkblue;
   color: white;
+  border-top: .25em solid red;
 }
 
 .footer-start {
   display: flex;
 }
 
-.foot
+.footer-item{
+  line-height: 1.5;
+    padding: .5rem .5rem;
+    position: relative;
+}
 
 .pie-group:hover .pie-rect {
   stroke: yellow;
