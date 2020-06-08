@@ -35,9 +35,9 @@
   //   maxZoom: 18,
   // }).addTo(zoommap);
 
-  d3.json("/pies", function(pies) {
-    console.log(pies);
-  });
+  // d3.json("/pies", function(pies) {
+  //   console.log(pies);
+  // });
 
   drawData(total, sent);
   drawMainMap(pies);
@@ -100,7 +100,7 @@
     zoomOverlay = d3Map(pies, zoommap, "zoom-map", zoomPieClicked);
   }
 
-  function drawUneatenPies(uneatenPies){    
+  function drawUneatenPies(uneatenPies) {
     uneatenPies
       .append("rect")
       .attr("class", "pie-rect")
@@ -108,7 +108,6 @@
       .attr("width", "100%")
       .attr("fill", "none")
       .attr("stroke-width", "10");
-      
 
     uneatenPies
       .append("image")
@@ -119,11 +118,11 @@
       .attr("y", "2%")
       .attr("href", function(d) {
         return idToImageURL(d.id);
-      })
+      });
   }
-  
-  function drawEatenPies(eatenPies){
-        eatenPies
+
+  function drawEatenPies(eatenPies) {
+    eatenPies
       .append("rect")
       .attr("height", "100%")
       .attr("width", "100%")
@@ -160,7 +159,7 @@
         return date.toLocaleDateString();
       });
   }
-  
+
   function drawMainMap() {
     const loading = d3.select(".main-map__loading").style("display", "none");
 
@@ -187,16 +186,14 @@
       .attr("cursor", "pointer")
       .on("click", mainPieClicked);
 
-    const uneatenPies = pieGroups
-      .filter(function(d) {
-        return !d.sentAt;
-      })
+    const uneatenPies = pieGroups.filter(function(d) {
+      return !d.sentAt;
+    });
 
-    const eatenPies = pieGroups
-      .filter(function(d) {
-        return d.sentAt;
-      })
-    
+    const eatenPies = pieGroups.filter(function(d) {
+      return d.sentAt;
+    });
+
     drawUneatenPies(uneatenPies);
     drawEatenPies(eatenPies);
   }
@@ -209,6 +206,7 @@
     const pieGroups = d3
       .select(`#${mapname}`)
       .select("svg")
+      .attr("id", "zoom-map-svg")
       .select("g")
       .selectAll("g")
       .data(pies)
@@ -233,18 +231,16 @@
         onPieClick(e);
       });
 
-    const uneatenPies = pieGroups
-      .filter(function(d) {
-        return !d.sentAt;
-      })
-    
-    const eatenPies = pieGroups
-      .filter(function(d) {
-        return d.sentAt;
-      })
+    const uneatenPies = pieGroups.filter(function(d) {
+      return !d.sentAt;
+    });
 
-    drawUneatenPies(uneatenPies)
-    drawEatenPies(eatenPies)
+    const eatenPies = pieGroups.filter(function(d) {
+      return d.sentAt;
+    });
+
+    drawUneatenPies(uneatenPies);
+    drawEatenPies(eatenPies);
 
     return svg;
   }
@@ -309,26 +305,34 @@
       drawData(total, sent);
       let modal = document.querySelector("#confirmation");
       modal.classList.add("is-active");
+
+      pies[selectedPieId].senderName = e.target[0].value;
+      pies[selectedPieId] = e.target[1].value;
+      pies[selectedPieId] = e.target[2].value;
+      pies[selectedPieId] = e.target[3].value;
+      pies[selectedPieId] = e.target[4].value;
+      pies[selectedPieId] = e.target[5].checked;
       
-      
-      const mainMapPie = d3
-        .select("#main-map")
-        .select("svg")
-        .select("g")
-        .select(`#pie-${selectedPieId}`)
-        .select('svg');
-      
-      const zoomMapPie = d3
-        .select("#zoom-map")
-        .select("svg")
-        .select("g")
-        .select(`#pie-${selectedPieId}`)
-        .select('svg')
-        .;
-      
-      
-      drawEatenPies(mainMapPie)
-      drawEatenPies(zoomMapPie)
+      drawMainMap(pies);
+
+
+      //       const mainMapPie = d3
+      //         .select("#main-map")
+      //         .select("svg")
+      //         .select("g")
+      //         .select(`#pie-${selectedPieId}`)
+      //         .select('svg');
+
+      //       const zoomMapPie = d3
+      //         .select("#zoom-map-svg")
+      //         .select("svg")
+      //         .select("g")
+      //         .select(`#pie-${selectedPieId}`)
+      //         .select('svg')
+      //         .html('');
+
+      //       drawEatenPies(mainMapPie)
+      //       drawEatenPies(zoomMapPie)
     }
     e.target[0].value = "";
     e.target[1].value = "";
