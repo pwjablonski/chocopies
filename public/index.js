@@ -224,6 +224,11 @@
       })
       .attr("y", function(d) {
         return map.latLngToLayerPoint([d.lat, d.lng]).y;
+      });
+
+    const uneatenPies = pieGroups
+      .filter(function(d) {
+        return !d.sentAt;
       })
       .on("dblclick", function(e) {
         onPieClick(e);
@@ -231,10 +236,6 @@
       .on("touchend", function(e) {
         onPieClick(e);
       });
-
-    const uneatenPies = pieGroups.filter(function(d) {
-      return !d.sentAt;
-    });
 
     const eatenPies = pieGroups.filter(function(d) {
       return d.sentAt;
@@ -321,10 +322,10 @@
         .select("svg")
         .select("g")
         .select(`#pie-${selectedPieId}`)
-        .select('svg');
-      drawEatenPies(mainMapPie)
+        .select("svg");
+      drawEatenPies(mainMapPie);
     }
-    
+
     e.target[0].value = "";
     e.target[1].value = "";
     e.target[2].value = "";
