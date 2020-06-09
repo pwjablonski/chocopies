@@ -40,6 +40,13 @@ body {
   cursor: pointer;
 }
 
+.section {
+  background-image:url(https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FSUN-BURST-BG.JPG?v=1591664122066);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
 .footer {
   padding: 0.5em 1.5em;
   background-color: darkblue;
