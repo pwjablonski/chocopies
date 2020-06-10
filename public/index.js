@@ -230,6 +230,10 @@
       .filter(function(d) {
         return !d.sentAt;
       })
+      .on("drag",function(e){
+        console.log(e)
+        // console.log(d3.event)
+      })
       .on("dblclick", function(e) {
         onPieClick(e);
       })
