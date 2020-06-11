@@ -15,7 +15,6 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!--     <link rel="stlyesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css" /> -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"
@@ -40,47 +39,106 @@
 
       <div id="navbarBasicExample" class="navbar-menu has-text-justified">
         <div class="navbar-end">
-          <div class="navbar-item" data-toggle="modal" data-target="#about">
-            ABOUT
-          </div>
-          <div class="navbar-item" data-toggle="modal" data-target="#artist">
-            HOW IT WORKS
-          </div>
-          <div class="navbar-item" data-toggle="modal" data-target="#triennial">
-            ASIA SOCIETY TRIENNIAL
-          </div>
+          <a href="/about" class="navbar-item">ABOUT</a>
+          <a href="/howitworks" class="navbar-item">HOW IT WORKS</a>
+          <a href="/triennial" class="navbar-item"> ASIA SOCIETY TRIENNIAL </a>
         </div>
       </div>
     </nav>
     <section class="section">
       <div class="container">
-            <div class="modal" id="about">
-      <div class="modal-background"></div>
-      <button class="modal-close is-large" aria-label="close"></button>
-      <div class="modal-content">
-        <h1 class="title is-1 has-text-centered">About</h1>
-        <h2>History of Choco Pies</h2>
-        <p>
-          Choco Pies, a South Korean confectionary, became one of the most desirable consumer products in North Korea, ever since they were donated by South Korean workers to their peers from the North at the jointly managed Kaesong Industrial Complex. In 2014, South Korean activists even used helium balloons to launch 10,000 Choco Pies over the border to North Korea, some with messages of love and care as well as foreign media. It has thus become a symbol of Korean cooperation.
-          For the inaugural Asia Society Triennial (October 27, 2020 - June 27, 2021), a festival of art, ideas and innovation, Korean-American artist Mina Cheon’s signature artwork for Korean unification “Eat Chocopie Together,” will be installed at the David Geffen Hall of Lincoln Center in New York City. Hosted by the New York Philharmonic, this special performative installation will feature 10,000 Choco Pies arranged in the shape of the Korean peninsula for the public audience to freely eat. For Cheon, the symbolic gesture of eating Choco Pie represents “taking a bite for peace”, thus sharing a piece of the dream towards global peace.
-          In addition to the physical art installation, this website presents a special virtual version of “Eat Chocopie Together” as part of the inaugural Asia Society Triennial. Responding to the socially distant conditions of our time and the global devastation of the COVID-19 pandemic at a time where compassion and humanity is much needed for healing, this initiative hopes to allow anyone, from anywhere, to extend love and peace in the time of the Coronavirus by virtually sharing and enjoying Choco Pies with friends, families, and loved ones. There are five different Choco Pies designs, specially designed by Cheon to represent important aspects: LOVE, UNITY, PEACE, SHARE, EAT.
-        </p>
-        <h2>Giving Back</h2>
-        <p>
-          Not only is eating a Choco Pie with a friend an action towards peace and friendship, but for each Choco Pie shared between two friends, $2 will be raised in their names to charity, The Korean American Community Foundation’s COVID-19 Action Fund, up to a total of $5,000.
-          In March, KACF launched their COVID-19 Community Action Fund to provide immediate and longer-term support to their nonprofit partners, organizations that are working in the frontline of this pandemic to provide essential services to the most vulnerable Korean Americans. The funds will be used to spearhead urgent relief efforts for individuals and families affected by COVID-19, including Korean language assistance in completing unemployment and small business applications, increased domestic violence counseling, meal delivery, a Korean language COVID-19 health hotline, mental health support, emergency cash assistance for those excluded from federal emergency payments, and shelter for homeless Korean Americans. With the funds, KACF will also support the important work to address growing anti-Asian racism in our community. 
-          Learn more about the charity fund: https://kacfny.org/covid-19-community-action-fund/
-        </p>
-        <h2>About the Artist</h2>
-        <p>
-          Mina Cheon (천민정 PhD, MFA) is a Korean-American global new media artist, scholar, and educator who divides her time between Korea and the United States. Cheon has exhibited her political pop art known as “Polipop” internationally and draws inspiration from global media and popular culture to produce work that intersects politics and pop art in evocative ways. While she creates work that ranges in medium from new media, video, installation, performance, and public projects to traditional media of painting and sculptures, the content of the work is in historic alignment to appropriation art and global activism art.
-          In particular, Cheon has worked on North Korean awareness and global peace projects since 2004, and while assuming different artistic pseudonyms for the past twenty years such as Minaliza1000, M-1000, Jae Son, Cheon’s latest avatar and alter ego is a North Korean artist named KIM IL SOON who made her first international public appearance at the Pulse Art Fair NY in 2013.
-          Cheon's states, "As a Korean, the idea of having two artistic identities, South Korean Mina Cheon and North Korean Kim Il Soon, is an obvious reflection on the country’s state of being divided. It makes all the sense in the world that if a country is split so should the artist in practice"
-          While Cheon’s “Video Art History Lessons by Professor Kim” has been sent into North Korea since 2017 by USB drives and SD cards, the chocopie installation promotes her global artistic activism to bring awareness about the state of Koreas that has been working towards peace. “Eat Chocopie Together” became a national sensation when it was first featured at the 2018 Busan Biennale in Korea; even the South Korean President Moon and First Lady visited amidst Korea’s media buzz and slogan for “A New Future” of Korea.
-          Learn more about Mina Cheon at:  http://www.minacheon.com/
-        </p>
-      </div>
-    </div>
+        <div class="modal" id="about">
+          <div class="modal-background"></div>
+          <button class="modal-close is-large" aria-label="close"></button>
+          <div class="modal-content">
+            <h1 class="title is-1 has-text-centered">About</h1>
+            <h2>History of Choco Pies</h2>
+            <p>
+              Choco Pies, a South Korean confectionary, became one of the most
+              desirable consumer products in North Korea, ever since they were
+              donated by South Korean workers to their peers from the North at
+              the jointly managed Kaesong Industrial Complex. In 2014, South
+              Korean activists even used helium balloons to launch 10,000 Choco
+              Pies over the border to North Korea, some with messages of love
+              and care as well as foreign media. It has thus become a symbol of
+              Korean cooperation. For the inaugural Asia Society Triennial
+              (October 27, 2020 - June 27, 2021), a festival of art, ideas and
+              innovation, Korean-American artist Mina Cheon’s signature artwork
+              for Korean unification “Eat Chocopie Together,” will be installed
+              at the David Geffen Hall of Lincoln Center in New York City.
+              Hosted by the New York Philharmonic, this special performative
+              installation will feature 10,000 Choco Pies arranged in the shape
+              of the Korean peninsula for the public audience to freely eat. For
+              Cheon, the symbolic gesture of eating Choco Pie represents “taking
+              a bite for peace”, thus sharing a piece of the dream towards
+              global peace. In addition to the physical art installation, this
+              website presents a special virtual version of “Eat Chocopie
+              Together” as part of the inaugural Asia Society Triennial.
+              Responding to the socially distant conditions of our time and the
+              global devastation of the COVID-19 pandemic at a time where
+              compassion and humanity is much needed for healing, this
+              initiative hopes to allow anyone, from anywhere, to extend love
+              and peace in the time of the Coronavirus by virtually sharing and
+              enjoying Choco Pies with friends, families, and loved ones. There
+              are five different Choco Pies designs, specially designed by Cheon
+              to represent important aspects: LOVE, UNITY, PEACE, SHARE, EAT.
+            </p>
+            <h2>Giving Back</h2>
+            <p>
+              Not only is eating a Choco Pie with a friend an action towards
+              peace and friendship, but for each Choco Pie shared between two
+              friends, $2 will be raised in their names to charity, The Korean
+              American Community Foundation’s COVID-19 Action Fund, up to a
+              total of $5,000. In March, KACF launched their COVID-19 Community
+              Action Fund to provide immediate and longer-term support to their
+              nonprofit partners, organizations that are working in the
+              frontline of this pandemic to provide essential services to the
+              most vulnerable Korean Americans. The funds will be used to
+              spearhead urgent relief efforts for individuals and families
+              affected by COVID-19, including Korean language assistance in
+              completing unemployment and small business applications, increased
+              domestic violence counseling, meal delivery, a Korean language
+              COVID-19 health hotline, mental health support, emergency cash
+              assistance for those excluded from federal emergency payments, and
+              shelter for homeless Korean Americans. With the funds, KACF will
+              also support the important work to address growing anti-Asian
+              racism in our community. Learn more about the charity fund:
+              https://kacfny.org/covid-19-community-action-fund/
+            </p>
+            <h2>About the Artist</h2>
+            <p>
+              Mina Cheon (천민정 PhD, MFA) is a Korean-American global new media
+              artist, scholar, and educator who divides her time between Korea
+              and the United States. Cheon has exhibited her political pop art
+              known as “Polipop” internationally and draws inspiration from
+              global media and popular culture to produce work that intersects
+              politics and pop art in evocative ways. While she creates work
+              that ranges in medium from new media, video, installation,
+              performance, and public projects to traditional media of painting
+              and sculptures, the content of the work is in historic alignment
+              to appropriation art and global activism art. In particular, Cheon
+              has worked on North Korean awareness and global peace projects
+              since 2004, and while assuming different artistic pseudonyms for
+              the past twenty years such as Minaliza1000, M-1000, Jae Son,
+              Cheon’s latest avatar and alter ego is a North Korean artist named
+              KIM IL SOON who made her first international public appearance at
+              the Pulse Art Fair NY in 2013. Cheon's states, "As a Korean, the
+              idea of having two artistic identities, South Korean Mina Cheon
+              and North Korean Kim Il Soon, is an obvious reflection on the
+              country’s state of being divided. It makes all the sense in the
+              world that if a country is split so should the artist in practice"
+              While Cheon’s “Video Art History Lessons by Professor Kim” has
+              been sent into North Korea since 2017 by USB drives and SD cards,
+              the chocopie installation promotes her global artistic activism to
+              bring awareness about the state of Koreas that has been working
+              towards peace. “Eat Chocopie Together” became a national sensation
+              when it was first featured at the 2018 Busan Biennale in Korea;
+              even the South Korean President Moon and First Lady visited amidst
+              Korea’s media buzz and slogan for “A New Future” of Korea. Learn
+              more about Mina Cheon at: http://www.minacheon.com/
+            </p>
+          </div>
+        </div>
       </div>
     </section>
     <footer class="footer">

@@ -123,8 +123,16 @@ app.get("/", function(request, response) {
   response.sendFile(__dirname + "/views/index.html");
 });
 
-app.get("/old", function(request, response) {
-  response.sendFile(__dirname + "/views/old.html");
+app.get("/about", function(request, response) {
+  response.sendFile(__dirname + "/views/about.html");
+});
+
+app.get("/howitworks", function(request, response) {
+  response.sendFile(__dirname + "/views/howitworks.html");
+});
+
+app.get("/triennial", function(request, response) {
+  response.sendFile(__dirname + "/views/triennial.html");
 });
 
 app.get("/pies", async function(request, response) {
