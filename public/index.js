@@ -29,7 +29,8 @@
     attributionControl: false,
     maxBounds: [[43, 124], [27, 134]],
     maxZoom: 11,
-    minZoom: 11
+    minZoom: 11,
+    tap: false
   }).setView([38, 127], 11);
 
   
