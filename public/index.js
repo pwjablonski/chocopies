@@ -87,15 +87,17 @@
   function zoomPieClicked(e) {
     console.log(d3.event)
     console.log(e);
+    
+    d3.event.path[1].classList.add("selected")
 
-    // let modal = document.querySelector("#sendPie");
-    // modal.classList.add("is-active");
-    // selectedPieId = e.id;
-    // let pieImgSend = document.querySelector(".share_choco");
-    // let pieImgShare = document.querySelector(".send_choco");
-    // pieImgSend.src = idToImageURL(e.id);
-    // pieImgShare.src = idToImageURL(e.id);
-    // zoomOverlay.remove();
+    let modal = document.querySelector("#sendPie");
+    modal.classList.add("is-active");
+    selectedPieId = e.id;
+    let pieImgSend = document.querySelector(".share_choco");
+    let pieImgShare = document.querySelector(".send_choco");
+    pieImgSend.src = idToImageURL(e.id);
+    pieImgShare.src = idToImageURL(e.id);
+    zoomOverlay.remove();
   }
 
   function mainPieClicked(e) {
