@@ -33,14 +33,16 @@
   }).setView([38, 127], 11);
 
   zoommap.on('movestart', function(e){
-    isMoving = true;
-    console.log(isMoving)
+    console.log(e)
+    d3.selectAll(".pie-group svg").on('click',null);
+  
   })
   
   zoommap.on('moveend', function(e){
-    isMoving = false;
-    console.log(isMoving)
+    d3.selectAll(".pie-group svg").on('click',zoomPieClicked);
+  
   })
+
 
   // L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   //   maxZoom: 18,
@@ -92,12 +94,7 @@
   }
 
   function zoomPieClicked(e) {
-    console.log(isMoving)
-    if(isMoving){
-      console.log('moving')
-    } else {
-      console.log('not moving')
-    }
+    console.log('clicked')
     // if (this.classList.contains("selected")) {
     //   d3.selectAll(".selected").attr("class", "");
     //   let modal = document.querySelector("#sendPie");
