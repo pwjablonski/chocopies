@@ -35,6 +35,10 @@ body {
   border-bottom: 0.5em solid red;
 }
 
+.navbar-menu {
+  background-color: darkblue;
+}
+
 .navbar-item {
   color: white;
   cursor: pointer;
