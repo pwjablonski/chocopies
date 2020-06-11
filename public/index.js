@@ -22,7 +22,7 @@
   let selectedPieId = null;
   let params = new URLSearchParams(document.location.search.substring(1));
   let pieID = params.get("pieID");
-  let isMoving = false
+  let wasMoved = false
 
   let zoommap = L.map("zoom-map", {
     zoomControl: false,
@@ -32,17 +32,12 @@
     minZoom: 11
   }).setView([38, 127], 11);
 
-  zoommap.on('movestart', function(e){
-    console.log(e)
-    d3.selectAll(".pie-group svg").on('click',null);
   
+  
+  zoommap.on('move', function(e){
+    wasMoved = true;
   })
   
-  zoommap.on('moveend', function(e){
-    d3.selectAll(".pie-group svg").on('click',zoomPieClicked);
-  
-  })
-
 
   // L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   //   maxZoom: 18,
@@ -250,7 +245,7 @@
         return !d.sentAt;
       })
       .on("click", onPieClick)
-      .on("touchend", onPieClick);
+      // .on("touchend", onPieClick);
 
     const eatenPies = pieGroups.filter(function(d) {
       return d.sentAt;
