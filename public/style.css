@@ -69,10 +69,10 @@ body {
   stroke-width: 5;
 }
 
-/* .pie-group .selected .pie-rect{
-  stroke: yellow;
+.pie-group .selected .pie-rect{
+  stroke: red;
   stroke-width: 5;
-} */
+}
 
 .send_choco,
 .share_choco {

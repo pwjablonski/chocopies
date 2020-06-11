@@ -30,7 +30,7 @@
     maxZoom: 11,
     minZoom: 11
   }).setView([38, 127], 11);
-  
+
   // zoommap.on('click', function(e){
   //   console.log(e)
   // })
@@ -85,21 +85,20 @@
   }
 
   function zoomPieClicked(e) {
-    console.log(e);
-    d3.selectAll(".selected")
-      .attr('class', "")
-    
-    d3.select(this)
-      .attr('class', "selected")
-
-    // let modal = document.querySelector("#sendPie");
-    // modal.classList.add("is-active");
-    // selectedPieId = e.id;
-    // let pieImgSend = document.querySelector(".share_choco");
-    // let pieImgShare = document.querySelector(".send_choco");
-    // pieImgSend.src = idToImageURL(e.id);
-    // pieImgShare.src = idToImageURL(e.id);
-    // zoomOverlay.remove();
+    if (this.classList.contains("selected")) {
+      d3.selectAll(".selected").attr("class", "");
+      let modal = document.querySelector("#sendPie");
+      modal.classList.add("is-active");
+      selectedPieId = e.id;
+      let pieImgSend = document.querySelector(".share_choco");
+      let pieImgShare = document.querySelector(".send_choco");
+      pieImgSend.src = idToImageURL(e.id);
+      pieImgShare.src = idToImageURL(e.id);
+      zoomOverlay.remove();
+    } else {
+      d3.selectAll(".selected").attr("class", "");
+      d3.select(this).attr("class", "selected");
+    }
   }
 
   function mainPieClicked(e) {
@@ -240,7 +239,7 @@
       .filter(function(d) {
         return !d.sentAt;
       })
-      .on("dblclick", onPieClick)
+      .on("click", onPieClick)
       .on("touchend", onPieClick);
 
     const eatenPies = pieGroups.filter(function(d) {
