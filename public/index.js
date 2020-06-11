@@ -85,7 +85,7 @@
   }
 
   function zoomPieClicked(e) {
-
+    console.log(d3.event)
     console.log(e);
 
     let modal = document.querySelector("#sendPie");
