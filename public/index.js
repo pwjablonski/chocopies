@@ -22,6 +22,7 @@
   let selectedPieId = null;
   let params = new URLSearchParams(document.location.search.substring(1));
   let pieID = params.get("pieID");
+  let isMoving = false
 
   let zoommap = L.map("zoom-map", {
     zoomControl: false,
@@ -31,8 +32,14 @@
     minZoom: 11
   }).setView([38, 127], 11);
 
-  zoommap.on('click', function(e){
-    console.log(e)
+  zoommap.on('movestart', function(e){
+    isMoving = true;
+    console.log(isMoving)
+  })
+  
+  zoommap.on('moveend', function(e){
+    isMoving = false;
+    console.log(isMoving)
   })
 
   // L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -85,20 +92,26 @@
   }
 
   function zoomPieClicked(e) {
-    if (this.classList.contains("selected")) {
-      d3.selectAll(".selected").attr("class", "");
-      let modal = document.querySelector("#sendPie");
-      modal.classList.add("is-active");
-      selectedPieId = e.id;
-      let pieImgSend = document.querySelector(".share_choco");
-      let pieImgShare = document.querySelector(".send_choco");
-      pieImgSend.src = idToImageURL(e.id);
-      pieImgShare.src = idToImageURL(e.id);
-      zoomOverlay.remove();
+    console.log(isMoving)
+    if(isMoving){
+      console.log('moving')
     } else {
-      d3.selectAll(".selected").attr("class", "");
-      d3.select(this).attr("class", "selected");
+      console.log('not moving')
     }
+    // if (this.classList.contains("selected")) {
+    //   d3.selectAll(".selected").attr("class", "");
+    //   let modal = document.querySelector("#sendPie");
+    //   modal.classList.add("is-active");
+    //   selectedPieId = e.id;
+    //   let pieImgSend = document.querySelector(".share_choco");
+    //   let pieImgShare = document.querySelector(".send_choco");
+    //   pieImgSend.src = idToImageURL(e.id);
+    //   pieImgShare.src = idToImageURL(e.id);
+    //   zoomOverlay.remove();
+    // } else {
+    //   d3.selectAll(".selected").attr("class", "");
+    //   d3.select(this).attr("class", "selected");
+    // }
   }
 
   function mainPieClicked(e) {
