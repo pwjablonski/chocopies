@@ -31,9 +31,9 @@
     minZoom: 11
   }).setView([38, 127], 11);
   
-  zoommap.on('click', function(e){
-    console.log(e)
-  })
+  // zoommap.on('click', function(e){
+  //   console.log(e)
+  // })
 
   // L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   //   maxZoom: 18,
@@ -85,6 +85,9 @@
   }
 
   function zoomPieClicked(e) {
+
+    console.log(e);
+
     let modal = document.querySelector("#sendPie");
     modal.classList.add("is-active");
     selectedPieId = e.id;
@@ -96,7 +99,6 @@
   }
 
   function mainPieClicked(e) {
-    console.log(e);
     let modal = document.querySelector("#viewPies");
     modal.classList.add("is-active");
     zoommap.invalidateSize();
@@ -234,12 +236,8 @@
       .filter(function(d) {
         return !d.sentAt;
       })
-      .on("dblclick", function(e) {
-        onPieClick(e);
-      })
-      .on("touchend", function(e) {
-        onPieClick(e);
-      });
+      .on("dblclick", onPieClick)
+      .on("touchend", onPieClick);
 
     const eatenPies = pieGroups.filter(function(d) {
       return d.sentAt;
