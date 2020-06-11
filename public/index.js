@@ -38,6 +38,9 @@
     wasMoved = true;
   })
   
+  zoommap.on('moveend', function(e){
+    wasMoved = false;
+  })
 
   // L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   //   maxZoom: 18,
@@ -89,7 +92,19 @@
   }
 
   function zoomPieClicked(e) {
-    console.log('clicked')
+    if(!wasMoved){
+      console.log('clicked')
+      d3.selectAll(".selected").attr("class", "");
+      let modal = document.querySelector("#sendPie");
+      modal.classList.add("is-active");
+      selectedPieId = e.id;
+      let pieImgSend = document.querySelector(".share_choco");
+      let pieImgShare = document.querySelector(".send_choco");
+      pieImgSend.src = idToImageURL(e.id);
+      pieImgShare.src = idToImageURL(e.id);
+      zoomOverlay.remove();
+    }
+    
     // if (this.classList.contains("selected")) {
     //   d3.selectAll(".selected").attr("class", "");
     //   let modal = document.querySelector("#sendPie");
@@ -244,8 +259,7 @@
       .filter(function(d) {
         return !d.sentAt;
       })
-      .on("click", onPieClick)
-      // .on("touchend", onPieClick);
+      .on("mouseup", onPieClick)
 
     const eatenPies = pieGroups.filter(function(d) {
       return d.sentAt;
