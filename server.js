@@ -150,7 +150,8 @@ app.get("/pies", async function(request, response) {
 
 app.get("/pies/:id", async function(request, response) {
   const pie = await Pie.findAll({
-    where: { id: request.params.id }
+    where: { id: request.params.id },
+    attributes: ['x', 'y', 'lng','lat','sentAt','recipientName']
   });
   response.send(pie);
 });

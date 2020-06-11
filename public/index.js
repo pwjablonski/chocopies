@@ -30,6 +30,10 @@
     maxZoom: 11,
     minZoom: 11
   }).setView([38, 127], 11);
+  
+  zoommap.on('click', function(e){
+    console.log(e)
+  })
 
   // L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   //   maxZoom: 18,
@@ -229,10 +233,6 @@
     const uneatenPies = pieGroups
       .filter(function(d) {
         return !d.sentAt;
-      })
-      .on("drag",function(e){
-        console.log(e)
-        // console.log(d3.event)
       })
       .on("dblclick", function(e) {
         onPieClick(e);
