@@ -19,6 +19,15 @@ h1.title, h2 {
   width: 70%;
   padding-bottom: 2em;
 }
+.section .container ul {
+  list-style: outside;
+}
+.section .container ul li {
+  padding: 5px;
+  width: 60%;
+  margin-left: 1em;
+}
+
 .section .container a {
   color: red;
   font-weight: bold;
