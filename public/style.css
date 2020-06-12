@@ -75,6 +75,7 @@ h1.title, h2 {
   font-weight: bold;
   color: white;
   -webkit-text-stroke: 1px red;
+  font-size: larger;
 }
 .navbar-brand a:hover {
   color: red;
