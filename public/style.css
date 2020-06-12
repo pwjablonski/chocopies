@@ -91,10 +91,16 @@ h1.title, h2 {
 }
 
 .footer-item {
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   padding: 0.5rem 0.5rem;
   position: relative;
+}
+.footer-item a {
+  color: white;
+}
+.footer-item a:hover {
+  color: yellow;
 }
 
 .pie-group:hover .pie-rect {
