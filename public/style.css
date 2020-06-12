@@ -80,7 +80,7 @@ h1.title, h2 {
 }
 
 .footer {
-  padding: 0.5em 1.5em;
+  padding: 0.2em 1.5em;
   background-color: darkblue;
   color: white;
   border-top: 0.25em solid red;
@@ -91,6 +91,7 @@ h1.title, h2 {
 }
 
 .footer-item {
+  font-size: 10px;
   line-height: 1.5;
   padding: 0.5rem 0.5rem;
   position: relative;
