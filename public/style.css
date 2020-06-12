@@ -76,6 +76,10 @@ h1.title, h2 {
   color: white;
   -webkit-text-stroke: 1px red;
 }
+.navbar-brand a:hover {
+  color: red;
+   background: none;
+}
 .navbar-end a {
   font-weight: bold;
   color: white;
@@ -83,6 +87,11 @@ h1.title, h2 {
 .navbar-end a:hover {
   color: yellow;
   background: none;
+}
+.stats{
+    -webkit-text-fill-color: yellow;
+    -webkit-text-stroke: 1px darkblue;
+  text-shadow: 1px 1px 1px darkblue, 1px 1px 4px darkblue;
 }
 .section {
   background-image:url(https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FSUN-BURST-BG.JPG?v=1591664122066);
