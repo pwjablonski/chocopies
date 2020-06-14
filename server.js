@@ -176,6 +176,15 @@ app.get("/pies/:id", async function(request, response) {
   response.send(pie);
 });
 
+
+app.get("/pies/:id/eat", async function(request, response) {
+  const pie = await Pie.update({
+    where: { id: request.params.id },
+    attributes: ['x', 'y', 'lng','lat','sentAt','recipientName']
+  });
+  response.redirect(`?pieID=${request.params.id}`);
+});
+
 app.post("/pies", async function(request, response) {
   const {
     pieId,
@@ -223,11 +232,12 @@ app.post("/pies", async function(request, response) {
     );
 
     const imageURL = idToImageURL(pieId);
-    const pieURL = `https://chocopie.glitch.me/?pieID=${pieId}`;
+    const eatURL = `https://eatchocopietogether.glitch.me/pies/${pieId}/eat`;
+    const redirectURL = `https://eatchocopietogether.glitch.me/?pieID=${pieId}`;
     response.send(pie);
     // email
     const recipientHtml = await ejs
-          .renderFile("views/email/recipient.ejs", {imageURL, pieURL, senderName, recipientName,message})
+          .renderFile("views/email/recipient.ejs", {imageURL, pieURL: eatURL, senderName, recipientName,message})
     const msgRecipient = {
       to: recipientEmail,
       from: senderEmail,
@@ -236,7 +246,7 @@ app.post("/pies", async function(request, response) {
     };
 
     const senderHtml = await ejs
-          .renderFile("views/email/sender.ejs", {imageURL, pieURL, senderName, recipientName, message})
+          .renderFile("views/email/sender.ejs", {imageURL, pieURL: redirectURL, senderName, recipientName, message})
     const msgSender = {
       to: senderEmail,
       from: senderEmail,
