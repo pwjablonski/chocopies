@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const sgMail = require("@sendgrid/mail");
 const { Op } = require("sequelize");
 const moment = require("moment");
+const ejs = require("ejs");
 
 const app = express();
 
@@ -120,6 +121,11 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 // ROUTES
 
 app.get("/", function(request, response) {
+  
+  ejs.renderFile("views/email/sender.ejs", {data:"test"}, null, function(err, str){
+    // str => Rendered HTML string
+    console.log(str)
+  })
   response.sendFile(__dirname + "/views/index.html");
 });
 
@@ -214,34 +220,43 @@ app.post("/pies", async function(request, response) {
     const pieURL = `https://chocopie.glitch.me/?pieID=${pieId}`;
     response.send(pie);
     // email
-    const msgRecipient = {
-      to: recipientEmail,
-      from: senderEmail,
-      subject: `A Chocopie has been shared with you!`,
-      html: `<p>Hi ${recipientName}!</p>
-              <p>${senderName} has shared a chocopie with you! Click on the below pie to eat</p>
-              <p>${message}</p>
-              <a href=${pieURL}><img src=${imageURL} height="25%" width="25%"></a>
-              <p>Sincerely,</p>
-              <p> Asia Society </p>
-              `
-    };
+    
+    
+    // const msgRecipient = {
+    //   to: recipientEmail,
+    //   from: senderEmail,
+    //   subject: `A Chocopie has been shared with you!`,
+    //   html: "test"
+    // };
+    
+    // const msgRecipient = {
+    //   to: recipientEmail,
+    //   from: senderEmail,
+    //   subject: `A Chocopie has been shared with you!`,
+    //   html: `<p>Hi ${recipientName}!</p>
+    //           <p>${senderName} has shared a chocopie with you! Click on the below pie to eat</p>
+    //           <p>${message}</p>
+    //           <a href=${pieURL}><img src=${imageURL} height="25%" width="25%"></a>
+    //           <p>Sincerely,</p>
+    //           <p> Asia Society </p>
+    //           `
+    // };
 
-    const msgSender = {
-      to: senderEmail,
-      from: senderEmail,
-      subject: `Thank you for sharing a Chocopie`,
-      html: `<p>Hi ${senderName}!</p>
-              <p>Thanks for sharin a chocopie! Click on the below pie to see it on the map!</p>
-              <a href=${pieURL}><img src=${imageURL} height="25%" width="25%"></a>
-              <p>Sincerely,</p>
-              <p> Asia Society </p>
-              `
-    };
+    // const msgSender = {
+    //   to: senderEmail,
+    //   from: senderEmail,
+    //   subject: `Thank you for sharing a Chocopie`,
+    //   html: `<p>Hi ${senderName}!</p>
+    //           <p>Thanks for sharin a chocopie! Click on the below pie to see it on the map!</p>
+    //           <a href=${pieURL}><img src=${imageURL} height="25%" width="25%"></a>
+    //           <p>Sincerely,</p>
+    //           <p> Asia Society </p>
+    //           `
+    // };
 
     try {
       await sgMail.send(msgRecipient);
-      await sgMail.send(msgSender);
+      // await sgMail.send(msgSender);
     } catch (e) {
       console.log(e);
     }
