@@ -125,10 +125,6 @@ app.get("/", function(request, response) {
 });
 
 app.get("/about", async function(request, response) {
-  const html = await ejs
-          .renderFile("views/email/sender.ejs", {model: "test" })
-          .then(output => output);
-  console.log(html)
   response.sendFile(__dirname + "/views/about.html");
 });
 
@@ -220,26 +216,14 @@ app.post("/pies", async function(request, response) {
     response.send(pie);
     // email
     
-    
-    // const msgRecipient = {
-    //   to: recipientEmail,
-    //   from: senderEmail,
-    //   subject: `A Chocopie has been shared with you!`,
-    //   html: "test"
-    // };
-    
-    // const msgRecipient = {
-    //   to: recipientEmail,
-    //   from: senderEmail,
-    //   subject: `A Chocopie has been shared with you!`,
-    //   html: `<p>Hi ${recipientName}!</p>
-    //           <p>${senderName} has shared a chocopie with you! Click on the below pie to eat</p>
-    //           <p>${message}</p>
-    //           <a href=${pieURL}><img src=${imageURL} height="25%" width="25%"></a>
-    //           <p>Sincerely,</p>
-    //           <p> Asia Society </p>
-    //           `
-    // };
+    const msgRecipient = {
+      to: recipientEmail,
+      from: senderEmail,
+      subject: `A Chocopie has been shared with you!`,
+      html: await ejs
+          .renderFile("views/email/sender.ejs", {senderName: "test", pieURL:"test", imageURL:"test" })
+              `
+    };
 
     // const msgSender = {
     //   to: senderEmail,
