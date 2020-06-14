@@ -136,6 +136,17 @@ app.get("/triennial", function(request, response) {
   response.sendFile(__dirname + "/views/triennial.html");
 });
 
+app.get("/terms", function(request, response) {
+  response.sendFile(__dirname + "/views/terms.html");
+});
+
+
+app.get("/privacy", function(request, response) {
+  response.sendFile(__dirname + "/views/privacy.html");
+});
+
+
+
 app.get("/pies", async function(request, response) {
   const data = {
     sent: 0,
@@ -215,31 +226,27 @@ app.post("/pies", async function(request, response) {
     const pieURL = `https://chocopie.glitch.me/?pieID=${pieId}`;
     response.send(pie);
     // email
-    
+    const recipientHtml = await ejs
+          .renderFile("views/email/recipient.ejs", {imageURL, pieURL, senderName, recipientName})
     const msgRecipient = {
       to: recipientEmail,
       from: senderEmail,
       subject: `A Chocopie has been shared with you!`,
-      html: await ejs
-          .renderFile("views/email/sender.ejs", {senderName: "test", pieURL:"test", imageURL:"test" })
-              `
+      html: recipientHtml
     };
 
-    // const msgSender = {
-    //   to: senderEmail,
-    //   from: senderEmail,
-    //   subject: `Thank you for sharing a Chocopie`,
-    //   html: `<p>Hi ${senderName}!</p>
-    //           <p>Thanks for sharin a chocopie! Click on the below pie to see it on the map!</p>
-    //           <a href=${pieURL}><img src=${imageURL} height="25%" width="25%"></a>
-    //           <p>Sincerely,</p>
-    //           <p> Asia Society </p>
-    //           `
-    // };
+    const senderHtml = await ejs
+          .renderFile("views/email/sender.ejs", {imageURL, pieURL, senderName, recipientName, message})
+    const msgSender = {
+      to: senderEmail,
+      from: senderEmail,
+      subject: `Thank you for sharing a Chocopie`,
+      html: senderHtml
+    };
 
     try {
       await sgMail.send(msgRecipient);
-      // await sgMail.send(msgSender);
+      await sgMail.send(msgSender);
     } catch (e) {
       console.log(e);
     }
