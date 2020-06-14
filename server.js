@@ -227,7 +227,7 @@ app.post("/pies", async function(request, response) {
     response.send(pie);
     // email
     const recipientHtml = await ejs
-          .renderFile("views/email/recipient.ejs", {imageURL, pieURL, senderName, recipientName})
+          .renderFile("views/email/recipient.ejs", {imageURL, pieURL, senderName, recipientName,message})
     const msgRecipient = {
       to: recipientEmail,
       from: senderEmail,
