@@ -78,6 +78,9 @@ sequelize
       recipientEmail: {
         type: Sequelize.TEXT
       },
+      eatenAt: {
+        type: Sequelize.DATE
+      },
       message: {
         type: Sequelize.TEXT
       }
@@ -140,12 +143,9 @@ app.get("/terms", function(request, response) {
   response.sendFile(__dirname + "/views/terms.html");
 });
 
-
 app.get("/privacy", function(request, response) {
   response.sendFile(__dirname + "/views/privacy.html");
 });
-
-
 
 app.get("/pies", async function(request, response) {
   const data = {
@@ -171,17 +171,20 @@ app.get("/pies", async function(request, response) {
 app.get("/pies/:id", async function(request, response) {
   const pie = await Pie.findAll({
     where: { id: request.params.id },
-    attributes: ['x', 'y', 'lng','lat','sentAt','recipientName']
+    attributes: ["x", "y", "lng", "lat", "sentAt", "recipientName"]
   });
   response.send(pie);
 });
 
-
 app.get("/pies/:id/eat", async function(request, response) {
-  const pie = await Pie.update({
-    where: { id: request.params.id },
-    attributes: ['x', 'y', 'lng','lat','sentAt','recipientName']
-  });
+  const pie = await Pie.update(
+    {
+      eatenAt: moment().toDate()
+    },
+    {
+      where: { id: request.params.id }
+    }
+  );
   response.redirect(`?pieID=${request.params.id}`);
 });
 
@@ -194,14 +197,14 @@ app.post("/pies", async function(request, response) {
       senderEmail,
       recipientName,
       recipientEmail,
-      updatedAt
+      sentAt
     }
   } = request.body;
 
   const sentPie = await Pie.findOne({
     where: {
       senderEmail,
-      updatedAt: {
+      sentAt: {
         [Op.gt]: moment()
           .subtract(1, "hours")
           .toDate()
@@ -236,8 +239,13 @@ app.post("/pies", async function(request, response) {
     const redirectURL = `https://eatchocopietogether.glitch.me/?pieID=${pieId}`;
     response.send(pie);
     // email
-    const recipientHtml = await ejs
-          .renderFile("views/email/recipient.ejs", {imageURL, pieURL: eatURL, senderName, recipientName,message})
+    const recipientHtml = await ejs.renderFile("views/email/recipient.ejs", {
+      imageURL,
+      pieURL: eatURL,
+      senderName,
+      recipientName,
+      message
+    });
     const msgRecipient = {
       to: recipientEmail,
       from: senderEmail,
@@ -245,8 +253,13 @@ app.post("/pies", async function(request, response) {
       html: recipientHtml
     };
 
-    const senderHtml = await ejs
-          .renderFile("views/email/sender.ejs", {imageURL, pieURL: redirectURL, senderName, recipientName, message})
+    const senderHtml = await ejs.renderFile("views/email/sender.ejs", {
+      imageURL,
+      pieURL: redirectURL,
+      senderName,
+      recipientName,
+      message
+    });
     const msgSender = {
       to: senderEmail,
       from: senderEmail,
