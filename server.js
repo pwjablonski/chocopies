@@ -185,7 +185,7 @@ app.get("/pies/:id/eat", async function(request, response) {
       where: { id: request.params.id }
     }
   );
-  response.redirect(`?pieID=${request.params.id}`);
+  response.redirect(`/?pieID=${request.params.id}`);
 });
 
 app.post("/pies", async function(request, response) {
