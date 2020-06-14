@@ -17,6 +17,7 @@
   // console.log(result)
   let pieData = await fetchPies();
   let sent = pieData.sent;
+  let eaten = pieData.eaten;
   let total = pieData.total;
   let pies = pieData.pies;
   let selectedPieId = null;
@@ -51,7 +52,7 @@
   //   console.log(pies);
   // });
 
-  drawData(total, sent);
+  drawData(total, sent, eaten);
   drawMainMap(pies);
   let zoomOverlay;
 
@@ -65,13 +66,13 @@
     return resp;
   }
 
-  function drawData(total, sent) {
+  function drawData(total, sent, eaten) {
     const totalDiv = document.querySelector("#totalPies");
     const sentDiv = document.querySelector("#piesSent");
     const moneyDiv = document.querySelector("#moneyRaised");
     totalDiv.innerHTML = total;
     sentDiv.innerHTML = sent;
-    moneyDiv.innerHTML = `$ ${sent}`;
+    moneyDiv.innerHTML = `$ ${sent + eaten}`;
   }
 
   function idToImageURL(id) {
@@ -330,7 +331,7 @@
       senderEmailHelp.innerHTML = response.error.message;
     } else {
       sent += 1;
-      drawData(total, sent);
+      drawData(total, sent, eaten);
       let modal = document.querySelector("#confirmation");
       modal.classList.add("is-active");
 

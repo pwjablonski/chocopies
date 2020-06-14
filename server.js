@@ -150,12 +150,20 @@ app.get("/privacy", function(request, response) {
 app.get("/pies", async function(request, response) {
   const data = {
     sent: 0,
+    eaten: 0,
     total: 0,
     pies: []
   };
   data.sent = await Pie.count({
     where: {
       sentAt: {
+        [Op.ne]: null
+      }
+    }
+  });
+  data.eaten = await Pie.count({
+    where: {
+      eatenAt: {
         [Op.ne]: null
       }
     }
