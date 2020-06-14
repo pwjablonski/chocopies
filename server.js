@@ -121,15 +121,14 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 // ROUTES
 
 app.get("/", function(request, response) {
-  
-  ejs.renderFile("views/email/sender.ejs", {data:"test"}, null, function(err, str){
-    // str => Rendered HTML string
-    console.log(str)
-  })
   response.sendFile(__dirname + "/views/index.html");
 });
 
-app.get("/about", function(request, response) {
+app.get("/about", async function(request, response) {
+  const html = await ejs
+          .renderFile("views/email/sender.ejs", {model: "test" })
+          .then(output => output);
+  console.log(html)
   response.sendFile(__dirname + "/views/about.html");
 });
 
