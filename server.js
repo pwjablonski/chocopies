@@ -256,7 +256,7 @@ app.post("/pies", async function(request, response) {
     });
     const msgRecipient = {
       to: recipientEmail,
-      from: "info@asiasociety.org",
+      from: "pwjablonski@gmail.com",
       subject: `A Chocopie has been shared with you!`,
       html: recipientHtml
     };
@@ -270,7 +270,7 @@ app.post("/pies", async function(request, response) {
     });
     const msgSender = {
       to: senderEmail,
-      from: "info@asiasociety.org",
+      from: "pwjablonski@gmail.com",
       subject: `Thank you for sharing a Chocopie`,
       html: senderHtml
     };
