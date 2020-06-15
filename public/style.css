@@ -6,7 +6,8 @@
 
 body {
   margin: 0;
-  font-family: helvetica, arial, sans-serif
+  font-family: helvetica, arial, sans-serif;
+  overflow: hidden;
 }
 
 h1.title, h2 {
