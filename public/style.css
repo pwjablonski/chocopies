@@ -328,3 +328,27 @@ h2.title.is-3{
 
 .checkbox input[type="chec153, 252) auto 5px;
 } */
+
+
+/* ANIMATION TEST */
+
+div.intro {
+  width: 100px;
+  height: 50px;
+  background-color: red;
+  font-weight: bold;
+  position: relative;
+  animation: mymove .5s infinite;
+  animation-direction: alternate;
+
+}
+
+#div1 {animation-timing-function: linear;}
+#div2 {animation-timing-function: ease;}
+#div3 {animation-timing-function: ease-in;}
+
+
+@keyframes mymove {
+  from {width: 0;}
+  to {width: 100px;}
+}
