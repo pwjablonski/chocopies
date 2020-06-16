@@ -338,7 +338,7 @@ div.intro {
   height: 50px;
   position: absolute;
   animation-timing-function: ease-in-out;
-  animation-direction: alternate;
+  animation-direction: alternate-reverse;
   animation: 
     step1 1s forwards, 
     step2 1s 5s forwards;  
@@ -362,8 +362,10 @@ div.intro {
 
 
 @keyframes step1 {
+  from {opacity: 0%;}
   to {opacity: 100%;}
 }
 @keyframes step2 {
+  from {opacity: 100%;}
   to {opacity: 0%;}
 }
