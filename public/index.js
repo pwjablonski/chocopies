@@ -360,3 +360,7 @@
     e.target[5].checked = false;
   });
 })(document, L, d3);
+
+window.onload = function() {
+  document.getElementById('div1').className = 'introAnimate';
+};
