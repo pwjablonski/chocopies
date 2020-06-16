@@ -333,11 +333,14 @@ h2.title.is-3{
 /* ANIMATION TEST */
 
 #intromaster {
+  width: 100vh;
+  height: 100vh;
   position: relative;
+  border: 1px solid red;
 }
 
 div.intro {
-  width: 100px;
+  width: 50px;
   height: 50px;
   background-color: red;
   font-weight: bold;
@@ -347,12 +350,24 @@ div.intro {
 
 }
 
-#div1 {animation-timing-function: linear;}
-#div2 {animation-timing-function: ease;}
-#div3 {animation-timing-function: ease-in;}
+#div1 {
+  top: 0;
+  left: 0;
+  animation-timing-function: linear;
+}
+#div2 {
+  top: 20vh;
+  left: 20vw;
+  animation-timing-function: ease;
+}
+#div3 {
+    top: 70vh;
+  left: 70vw;
+  animation-timing-function: ease-in;
+}
 
 
 @keyframes mymove {
-  from {width: 0;}
-  to {width: 100px;}
+  from {opacity: 0;}
+  to {opacity: 100%;}
 }
