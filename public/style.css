@@ -332,12 +332,16 @@ h2.title.is-3{
 
 /* ANIMATION TEST */
 
+#intromaster {
+  position: relative;
+}
+
 div.intro {
   width: 100px;
   height: 50px;
   background-color: red;
   font-weight: bold;
-  position: relative;
+  position: absolute;
   animation: mymove .5s infinite;
   animation-direction: alternate;
 
