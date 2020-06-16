@@ -335,39 +335,40 @@ h2.title.is-3{
 #intromaster {
   width: 100vh;
   height: 100vh;
-  position: relative;
+  position: absolute;
   border: 1px solid red;
 }
 
 div.intro {
   width: 50px;
   height: 50px;
-  background-color: red;
-  font-weight: bold;
-  position: absolute;
+  position: relative;
   animation: mymove .5s infinite;
   animation-direction: alternate;
 
 }
 
 #div1 {
-  top: 0;
-  left: 0;
+  top: 10%;
+  left: 10%;
+  background-color: red;
   animation-timing-function: linear;
 }
 #div2 {
-  top: 20vh;
-  left: 20vw;
-  animation-timing-function: ease;
+  top: 2v%
+  left: 205%
+
+  background-color: darkblue;  animation-timing-function: ease;
 }
 #div3 {
-    top: 70vh;
-  left: 70vw;
-  animation-timing-function: ease-in;
+  top: 75v%
+  left: 200%
+
+  background-color: black;  animation-timing-function: ease-in;
 }
 
 
 @keyframes mymove {
   from {opacity: 0;}
   to {opacity: 100%;}
-}
+}5
