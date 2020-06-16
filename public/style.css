@@ -337,7 +337,7 @@ div.intro {
   height: 50px;
   position: absolute;
   animation: mymove .5s infinite;
-  animation-direction: alternate;
+  animation-direction: normal;
   animation-timing-function: ease-in-out;
 }
 
@@ -359,6 +359,6 @@ div.intro {
 
 
 @keyframes mymove {
-  from {opacity: 0;}
-  to {opacity: 100%;}
+  0% {opacity: 0;}
+  100% {opacity: 100%;}
 }
