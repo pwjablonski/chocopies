@@ -333,12 +333,15 @@ h2.title.is-3{
 /* ANIMATION TEST */
 
 div.intro {
+  opacity: 0;
   width: 50px;
   height: 50px;
-  opacity: 0;
   position: absolute;
-  transition: all .5s;
-
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+  animation: 
+    step1 1s forwards, 
+    step2 1s 5s forwards;  
 }
 
 #div1 {
@@ -358,7 +361,9 @@ div.intro {
 }
 
 
-@keyframes mymove {
-  0% {opacity: 0;}
-  100% {opacity: 100%;}
+@keyframes step1 {
+  to {opacity: 100%;}
+}
+@keyframes step2 {
+  to {opacity: 0%;}
 }
