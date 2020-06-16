@@ -341,19 +341,19 @@ div.intro {
 }
 
 #div1 {
-  top: 10%;
-  left: 35%;
+  top: 15%;
+  left: 39%;
   background-color: red;
   animation-timing-function: linear;
 }
 #div2 {
-  top: 35%;
-  left: 50%;
+  top: 37%;
+  left: 52%;
   background-color: darkblue;  animation-timing-function: ease;
 }
 #div3 {
-  top: 60%;
-  left: 30%;
+  top: 63%;
+  left: 42%;
   background-color: black;  animation-timing-function: ease-in;
 }
 
