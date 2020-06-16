@@ -338,27 +338,27 @@ div.intro {
   position: absolute;
   animation: mymove .5s infinite;
   animation-direction: alternate;
+  animation-timing-function: ease-in-out;
 }
 
 #div1 {
   top: 15%;
   left: 39%;
   background-color: red;
-  animation-timing-function: linear;
 }
 #div2 {
   top: 37%;
   left: 52%;
-  background-color: darkblue;  animation-timing-function: ease;
+  background-color: darkblue;  
 }
 #div3 {
   top: 63%;
   left: 42%;
-  background-color: black;  animation-timing-function: ease-in;
+  background-color: black;  
 }
 
 
 @keyframes mymove {
   from {opacity: 0;}
   to {opacity: 100%;}
-}5
+}
