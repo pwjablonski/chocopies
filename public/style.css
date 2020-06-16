@@ -332,12 +332,15 @@ h2.title.is-3{
 
 /* ANIMATION TEST */
 
-div.intro {
-  width: 0px;height: 0px;display:none;
+#div1, #div2, #div3 {
+  width: 0px;
+  height: 0px;
+  display:none;
   position: absolute;
 }
 .introAnimate{
-    animation-timing-function: ease-in-out;
+  display:block;
+  animation-timing-function: ease-in-out;
   animation: 
     step1 .5s forwards, 
     step2 .1s 3s infinite;  

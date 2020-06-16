@@ -363,4 +363,6 @@
 
 window.onload = function() {
   document.getElementById('div1').className = 'introAnimate';
+  document.getElementById('div2').className = 'introAnimate';
+  document.getElementById('div3').className = 'introAnimate';
 };
