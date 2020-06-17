@@ -338,7 +338,6 @@ h2.title.is-3{
   position: absolute;
   animation-name: intro;
   animation-iteration-count: infinite;
-  animation-delay: 0;
   animation-duration: 10s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
@@ -346,34 +345,28 @@ h2.title.is-3{
 }
 
 @keyframes intro {
-  0% {transform:scale(0); transform:rotate(0deg);}
-  2% {transform:scale(50); transform:rotate(0deg);}
-  10% {transform:scale(50); transform:rotate(0deg);}
-  11% {transform:scale(50); transform:rotate(5deg);}
-  12% {transform:scale(50); transform:rotate(0deg);}
-  13% {transform:scale(50); transform:rotate(5deg);}
-  14% {transform:scale(50); transform:rotate(0deg);}
-  15% {transform:scale(50); transform:rotate(5deg);}
-  16% {transform:scale(50); transform:rotate(0deg);}
-  50% {transform:scale(50); transform:rotate(0deg);}
-  55% {transform:scale(0); transform:rotate(0deg);}
-  100% {transform:scale(0); transform:rotate(0deg);}
+  0% {transform:scale(0); }
+  2% {transform:scale(50); }
+
 }
 
 #div1 {
   top: 15%;
   left: 39%;
   background-color: red;
+  animation-delay: 1s;
 }
 #div2 {
   top: 37%;
   left: 52%;
   background-color: darkblue;  
+    animation-delay: 2s;
 }
 #div3 {
   top: 63%;
   left: 42%;
-  background-color: black;  
+  background-color: black;    
+  animation-delay: 3s;
 }
 
 
