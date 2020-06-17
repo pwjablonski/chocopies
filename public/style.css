@@ -335,11 +335,11 @@ h2.title.is-3{
 #div1, #div2, #div3 {
   width: 0px;
   height: 0px;
-  display:none;
+
   position: absolute;
 }
 .introAnimate{
-  display:block;
+
   animation-timing-function: ease-in-out;
   animation: 
     step1 .5s forwards, 
