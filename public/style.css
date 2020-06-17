@@ -338,16 +338,23 @@ h2.title.is-3{
   position: absolute;
   animation-name: intro;
   animation-iteration-count: infinite;
-  animation-duration: 10s;
+  animation-duration: 5s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
 
 }
 
 @keyframes intro {
-  0% {transform:scale(0); }
-  2% {transform:scale(50); }
-
+  0% {transform:scale(0) rotate(0deg); }
+  2% {transform:scale(50) rotate(0deg); }
+  10% {transform:scale(50) rotate(0deg); }
+  11% {transform:scale(50) rotate(5deg); }
+  12% {transform:scale(50) rotate(0deg); }
+  13% {transform:scale(50) rotate(5deg); }
+  14% {transform:scale(50) rotate(0deg); }
+  70% {transform:scale(50) rotate(0deg); }
+  75% {transform:scale(0) rotate(0deg); }
+  100% {transform:scale(0) rotate(0deg); }
 }
 
 #div1 {
