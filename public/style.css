@@ -333,9 +333,10 @@ h2.title.is-3{
 /* ANIMATION TEST */
 
 #div1, #div2, #div3 {
-  width: 1px;
-  height: 1px;
+  width: 90px;
+  height: 93px;
   position: absolute;
+  background-repeat: no-repeat;
   animation-name: intro;
   animation-iteration-count: infinite;
   animation-duration: 5s;
@@ -346,34 +347,34 @@ h2.title.is-3{
 
 @keyframes intro {
   0% {transform:scale(0) rotate(0deg); }
-  2% {transform:scale(50) rotate(0deg); }
-  10% {transform:scale(50) rotate(0deg); }
-  11% {transform:scale(50) rotate(5deg); }
-  12% {transform:scale(50) rotate(0deg); }
-  13% {transform:scale(50) rotate(5deg); }
-  14% {transform:scale(50) rotate(0deg); }
-  70% {transform:scale(50) rotate(0deg); }
+  2% {transform:scale(1) rotate(0deg); }
+  10% {transform:scale(1) rotate(0deg); }
+  11% {transform:scale(1) rotate(5deg); }
+  12% {transform:scale(1) rotate(0deg); }
+  13% {transform:scale(1) rotate(5deg); }
+  14% {transform:scale(1) rotate(0deg); }
+  70% {transform:scale(1) rotate(0deg); }
   75% {transform:scale(0) rotate(0deg); }
   100% {transform:scale(0) rotate(0deg); }
 }
 
 #div1 {
-  top: 15%;
-  left: 39%;
-  background-color: red;
+  top: 10%;
+  left: 35%;
   animation-delay: 1s;
+  background-image: url(https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fintro-animation-div1.png?v=1592435276580);
 }
 #div2 {
-  top: 37%;
-  left: 52%;
-  background-color: darkblue;  
+  top: 36%;
+  left: 54%;
     animation-delay: 2s;
+  background-image: url(https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fintro-animation-div2.png?v=1592435265936);
 }
 #div3 {
-  top: 63%;
-  left: 42%;
-  background-color: black;    
+  top: 62%;
+  left: 38%;   
   animation-delay: 3s;
+    background-image: url(https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fintro-animation-div3.png?v=1592435255660);
 }
 
 
