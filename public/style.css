@@ -339,15 +339,18 @@ h2.title.is-3{
   animation-name: intro;
   animation-iteration-count: infinite;
   animation-delay: 0;
-  animation-duration: 2s;
+  animation-duration: 10s;
   animation-timing-function: ease-in-out;
-  animation-fill-mode: forwards; 
+  animation-fill-mode: forwards;
+
 }
 
 @keyframes intro {
-  0% {transform:scale(50);}
-75% {opacity:0;}
-  100% {opacity:1;}
+  0% {transform:scale(0);}
+  2% {transform:scale(50);}
+  50% {transform:scale(50);}
+  55% {transform:scale(0);}
+  100% {transform:scale(0);}
 }
 
 #div1 {
