@@ -193,12 +193,6 @@
 
   function drawMainMap(pies) {
     const loading = d3.select(".main-map__loading").style("display", "none");
-    
-    const loading = d3
-    .select("#div1")
-    .select("#div2")
-    .select("#div3")
-    .attr("class","introAnimate");
 
     const svg = d3
       .select("#main-map")
