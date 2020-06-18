@@ -144,7 +144,7 @@
       .attr("width", "100%")
       .attr("fill", "white")
       .attr("stroke", "blue")
-      .attr("stroke-width", "1");
+      .attr("stroke-width", "10%");
 
     const eatPieText = eatenPies
       .append("text")
@@ -314,6 +314,7 @@
   }
 
   document.addEventListener("submit", async function(e) {
+    console.log(e)
     e.preventDefault();
     const data = {};
     data.senderName = e.target[0].value;
@@ -323,6 +324,8 @@
     data.message = e.target[4].value;
     data.signUp = e.target[5].checked;
     data.sentAt = new Date();
+    
+    e.submitter.disabled = true;
 
     const response = await sendPie(selectedPieId, data);
 
