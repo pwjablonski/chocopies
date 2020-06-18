@@ -22,32 +22,9 @@
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a
-          role="button"
-          class="navbar-burger burger"
-          aria-label="menu"
-          aria-expanded="false"
-          data-target="navbarBasicExample"
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-
-      <div id="navbarBasicExample" class="navbar-menu has-text-justified">
-        <div class="navbar-brand">
-          <a href="/" class="navbar-item">EAT CHOCOPIE TOGETHER</a>
-        </div>
-        <div class="navbar-end">
-          <a href="/about" class="navbar-item">ABOUT</a>
-          <a href="/howitworks" class="navbar-item">HOW IT WORKS</a>
-          <a href="/triennial" class="navbar-item"> ASIA SOCIETY TRIENNIAL </a>
-        </div>
-      </div>
-    </nav>
+    <header>
+      <%- include('../partials/header'); %>
+    </header>
     <section class="section">
       <div class="container">
         <h1 class="title is-1 has-text-left">Privacy Statement</h1>
@@ -442,29 +419,7 @@
       </div>
     </section>
     <footer class="footer">
-      <div class="footer-start">
-        <div class="footer-item">
-          <span><a href="/privacy">Privacy</a></span>
-        </div>
-        <div class="footer-item">
-          <span><a href="/terms">Terms and Conditions</a></span>
-        </div>
-        <div class="footer-item">
-          <span>Follow on Instagram</span>
-          <span
-            ><a
-              target="_blank"
-              href="https://www.instagram.com/minacheonstudio/"
-              >@MinaCheon</a
-            ></span
-          >
-          <span
-            ><a target="_blank" href="https://www.instagram.com/asiasociety/"
-              >@AsiaSociety</a
-            ></span
-          >
-        </div>
-      </div>
+      <%- include('../partials/footer'); %> 
     </footer>
   </body>
 </html>
