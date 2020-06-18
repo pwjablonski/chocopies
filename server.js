@@ -9,6 +9,7 @@ const ejs = require("ejs");
 
 const app = express();
 
+app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -125,27 +126,28 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 // ROUTES
 
 app.get("/", function(request, response) {
-  response.sendFile(__dirname + "/views/index");
+  response.render('pages/index');
+  // response.sendFile(__dirname + "/views/pages/index.ejs");
 });
 
 app.get("/about", async function(request, response) {
-  response.sendFile(__dirname + "/pages/about");
+  response.sendFile(__dirname + "pages/about");
 });
 
 app.get("/howitworks", function(request, response) {
-  response.sendFile(__dirname + "/pages/howitworks");
+  response.sendFile(__dirname + "pages/howitworks");
 });
 
 app.get("/triennial", function(request, response) {
-  response.sendFile(__dirname + "/pages/triennial");
+  response.sendFile(__dirname + "pages/triennial");
 });
 
 app.get("/terms", function(request, response) {
-  response.sendFile(__dirname + "/pages/terms");
+  response.sendFile(__dirname + "pages/terms");
 });
 
 app.get("/privacy", function(request, response) {
-  response.sendFile(__dirname + "/pages/privacy");
+  response.sendFile(__dirname + "pages/privacy");
 });
 
 app.get("/pies", async function(request, response) {
