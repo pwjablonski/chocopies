@@ -127,27 +127,26 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 app.get("/", function(request, response) {
   response.render('pages/index');
-  // response.sendFile(__dirname + "/views/pages/index.ejs");
 });
 
 app.get("/about", async function(request, response) {
-  response.sendFile(__dirname + "pages/about");
+  response.sendFile("pages/about");
 });
 
 app.get("/howitworks", function(request, response) {
-  response.sendFile(__dirname + "pages/howitworks");
+  response.sendFile("pages/howitworks");
 });
 
 app.get("/triennial", function(request, response) {
-  response.sendFile(__dirname + "pages/triennial");
+  response.sendFile("pages/triennial");
 });
 
 app.get("/terms", function(request, response) {
-  response.sendFile(__dirname + "pages/terms");
+  response.sendFile("pages/terms");
 });
 
 app.get("/privacy", function(request, response) {
-  response.sendFile(__dirname + "pages/privacy");
+  response.sendFile("pages/privacy");
 });
 
 app.get("/pies", async function(request, response) {
