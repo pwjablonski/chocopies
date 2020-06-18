@@ -232,13 +232,14 @@
   }
   
   function drawIntroAnimation(){
-    let p = document.querySelector("#main-map");
-    let i1 = p.document.createElement("div");
-    let i2 = p.document.createElement("div");
-    let i3 = p.document.createElement("div");
-    i1.attr("id","div1");
-    i2.attr("id","div2");
-    i3.attr("id","div3");
+    var i1 = document.createElement("div");
+    var i2 = document.createElement("div");
+    var i3 = document.createElement("div");
+    
+    var p = document.getElementById("#main-map");
+    document.body.insertBefore(i1, p);
+    document.body.insertBefore(i1, p);
+    document.body.insertBefore(i1, p);
   }
 
   function d3Map(pies, map, mapname, onPieClick) {
