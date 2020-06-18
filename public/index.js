@@ -228,6 +228,11 @@
 
     drawUneatenPies(uneatenPies);
     drawEatenPies(eatenPies);
+    drawIntroAnimation();
+  }
+  
+  function drawIntroAnimation(){
+
   }
 
   function d3Map(pies, map, mapname, onPieClick) {
