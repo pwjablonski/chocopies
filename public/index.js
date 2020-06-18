@@ -106,21 +106,6 @@
       pieImgShare.src = idToImageURL(e.id);
       zoomOverlay.remove();
     }
-    
-    // if (this.classList.contains("selected")) {
-    //   d3.selectAll(".selected").attr("class", "");
-    //   let modal = document.querySelector("#sendPie");
-    //   modal.classList.add("is-active");
-    //   selectedPieId = e.id;
-    //   let pieImgSend = document.querySelector(".share_choco");
-    //   let pieImgShare = document.querySelector(".send_choco");
-    //   pieImgSend.src = idToImageURL(e.id);
-    //   pieImgShare.src = idToImageURL(e.id);
-    //   zoomOverlay.remove();
-    // } else {
-    //   d3.selectAll(".selected").attr("class", "");
-    //   d3.select(this).attr("class", "selected");
-    // }
   }
 
   function mainPieClicked(e) {
@@ -158,8 +143,8 @@
       .attr("height", "100%")
       .attr("width", "100%")
       .attr("fill", "white")
-      .attr("stroke", "black")
-      .attr("stroke-width", "10");
+      .attr("stroke", "blue")
+      .attr("stroke-width", "1");
 
     const eatPieText = eatenPies
       .append("text")
