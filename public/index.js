@@ -236,12 +236,13 @@
     let i2 = document.createElement("div");
     let i3 = document.createElement("div");
     i1.setAttribute("id","div1");
+    i2.setAttribute("id","div2");
+    i3.setAttribute("id","div3");
     
     var p = document.getElementById("main-map");
-    p.appendChild("i1");
-    console.log(i1);
-
-
+    p.appendChild(i1);
+    p.appendChild(i2);
+    p.appendChild(i3);
   }
 
   function d3Map(pies, map, mapname, onPieClick) {
