@@ -9,6 +9,7 @@ const ejs = require("ejs");
 
 const app = express();
 
+app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
@@ -124,27 +125,27 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 // ROUTES
 
 app.get("/", function(request, response) {
-  response.sendFile(__dirname + "/views/index.html");
+  response.sendFile(__dirname + "/views/index");
 });
 
 app.get("/about", async function(request, response) {
-  response.sendFile(__dirname + "/views/about.html");
+  response.sendFile(__dirname + "/pages/about");
 });
 
 app.get("/howitworks", function(request, response) {
-  response.sendFile(__dirname + "/views/howitworks.html");
+  response.sendFile(__dirname + "/pages/howitworks");
 });
 
 app.get("/triennial", function(request, response) {
-  response.sendFile(__dirname + "/views/triennial.html");
+  response.sendFile(__dirname + "/pages/triennial");
 });
 
 app.get("/terms", function(request, response) {
-  response.sendFile(__dirname + "/views/terms.html");
+  response.sendFile(__dirname + "/pages/terms");
 });
 
 app.get("/privacy", function(request, response) {
-  response.sendFile(__dirname + "/views/privacy.html");
+  response.sendFile(__dirname + "/pages/privacy");
 });
 
 app.get("/pies", async function(request, response) {
@@ -247,7 +248,7 @@ app.post("/pies", async function(request, response) {
     const redirectURL = `https://eatchocopietogether.glitch.me/?pieID=${pieId}`;
     response.send(pie);
     // email
-    const recipientHtml = await ejs.renderFile("views/email/recipient.ejs", {
+    const recipientHtml = await ejs.renderFile("views/emails/recipient.ejs", {
       imageURL,
       pieURL: eatURL,
       senderName,
@@ -261,7 +262,7 @@ app.post("/pies", async function(request, response) {
       html: recipientHtml
     };
 
-    const senderHtml = await ejs.renderFile("views/email/sender.ejs", {
+    const senderHtml = await ejs.renderFile("views/emails/sender.ejs", {
       imageURL,
       pieURL: redirectURL,
       senderName,
