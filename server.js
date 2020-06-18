@@ -130,23 +130,23 @@ app.get("/", function(request, response) {
 });
 
 app.get("/about", async function(request, response) {
-  response.sendFile("pages/about");
+  response.render("pages/about");
 });
 
 app.get("/howitworks", function(request, response) {
-  response.sendFile("pages/howitworks");
+  response.render("pages/howitworks");
 });
 
 app.get("/triennial", function(request, response) {
-  response.sendFile("pages/triennial");
+  response.render("pages/triennial");
 });
 
 app.get("/terms", function(request, response) {
-  response.sendFile("pages/terms");
+  response.render("pages/terms");
 });
 
 app.get("/privacy", function(request, response) {
-  response.sendFile("pages/privacy");
+  response.render("pages/privacy");
 });
 
 app.get("/pies", async function(request, response) {

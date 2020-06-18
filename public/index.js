@@ -325,7 +325,7 @@
     data.signUp = e.target[5].checked;
     data.sentAt = new Date();
     
-    e.submitter.disabled = true;
+    // e.submitter.disabled = true;
 
     const response = await sendPie(selectedPieId, data);
 
