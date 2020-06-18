@@ -235,9 +235,11 @@
     let i1 = document.createElement("div");
     let i2 = document.createElement("div");
     let i3 = document.createElement("div");
+    i1.setAttribute("id","div1");
     
-    let p = document.getElementById("#main-map");
-    p.append(i1);
+    var p = document.getElementById("main-map");
+    p.appendChild("i1");
+    console.log(i1);
 
 
   }
