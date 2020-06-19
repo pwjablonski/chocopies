@@ -1,6 +1,3 @@
-// client-side js
-// run by the browser each time your view template is loaded
-
 (async function(d, L, d3) {
   const EAT =
     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.56.08%20PM.png?v=1590353733200";
@@ -13,8 +10,6 @@
   const LOVE =
     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FScreen%20Shot%202020-05-24%20at%202.55.03%20PM.png?v=1590357838973";
 
-  // const result = await d3.json("/pies")
-  // console.log(result)
   let pieData = await fetchPies();
   let sent = pieData.sent;
   let eaten = pieData.eaten;
@@ -47,10 +42,6 @@
   // L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   //   maxZoom: 18,
   // }).addTo(zoommap);
-
-  // d3.json("/pies", function(pies) {
-  //   console.log(pies);
-  // });
 
   drawData(total, sent, eaten);
   drawMainMap(pies);
