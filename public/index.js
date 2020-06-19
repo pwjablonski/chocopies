@@ -133,9 +133,7 @@
       .append("rect")
       .attr("height", "100%")
       .attr("width", "100%")
-      .attr("fill", "white")
-      .attr("stroke", "blue")
-      .attr("stroke-width", "10%");
+      .attr("fill", "white");
 
     const eatPieText = eatenPies
       .append("text")
@@ -149,6 +147,7 @@
       .append("tspan")
       .attr("x", "50%")
       .attr("dy", "-1.5em")
+    .attr("style","color:red")
       .text(d => d.senderName);
     
     eatPieText
