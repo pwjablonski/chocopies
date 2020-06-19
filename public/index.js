@@ -153,7 +153,6 @@
       .attr("dominant-baseline", "middle")
       .attr("text-anchor", "middle")
       .attr("font-weight", "bold")
-      .attr("textLength", "100%");
 
     eatPieText
       .append("tspan")
