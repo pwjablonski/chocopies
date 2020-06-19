@@ -159,13 +159,20 @@
       .append("tspan")
       .attr("x", "50%")
       .attr("dy", "-1.5em")
-      .text("SHARED BY");
+      .text(d => d.senderName);
+    
+    eatPieText
+      .append("tspan")
+      .attr("x", "50%")
+      .attr("dy", "-1em")
+      .text("&");
+      
 
     eatPieText
       .append("tspan")
       .attr("x", "50%")
-      .attr("dy", "1.5em")
-      .text(d => d.senderName);
+      .attr("dy", "1em")
+      .text(d => d.recipientName);
 
     eatPieText
       .append("tspan")
@@ -193,6 +200,7 @@
       .append("g")
       .attr("id", d => `pie-${d.id}`)
       .append("svg")
+      .attr("class", "main-pie")
       .attr("width", "1")
       .attr("height", ".75")
       .attr("x", function(d) {

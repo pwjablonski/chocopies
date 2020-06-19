@@ -51,6 +51,10 @@ h1.title, h2 {
   position: absolute;
 }
 
+.main-pie text {
+  font-size: 0.5%;
+}
+
 #zoom-map {
   height: 100%;
   width: 100%;
