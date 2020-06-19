@@ -152,7 +152,8 @@
       .attr("x", "50%")
       .attr("dominant-baseline", "middle")
       .attr("text-anchor", "middle")
-      .attr("font-weight", "bold");
+      .attr("font-weight", "bold")
+      .attr("font-size", "smaller");
 
     eatPieText
       .append("tspan")
@@ -325,49 +326,46 @@
     data.signUp = e.target[5].checked;
     data.sentAt = new Date();
     
-    // e.submitter.disabled = true;
+    e.submitter.disabled = true;
+    e.submitter.value = "Sending..."
+
+    const response = await sendPie(selectedPieId, data);
     
-    e.submitter.innerHTML = `<span class="icon main-map__loading">
-                              <i class="fas fa-spinner fa-pulse"></i>
-                            </span>`;
-    console.log(e.submitter)
+    e.submitter.disabled = false;
+    e.submitter.value = "Send"
 
-//     const response = await sendPie(selectedPieId, data);
-    
-//     e.submitter.innerHTML = "Send"
+    if (response.error) {
+      let senderEmailHelp = document.querySelector(".sender-email .help");
+      senderEmailHelp.innerHTML = response.error.message;
+    } else {
+      sent += 1;
+      drawData(total, sent, eaten);
+      let modal = document.querySelector("#confirmation");
+      modal.classList.add("is-active");
 
-//     if (response.error) {
-//       let senderEmailHelp = document.querySelector(".sender-email .help");
-//       senderEmailHelp.innerHTML = response.error.message;
-//     } else {
-//       sent += 1;
-//       drawData(total, sent, eaten);
-//       let modal = document.querySelector("#confirmation");
-//       modal.classList.add("is-active");
+      pies[selectedPieId - 1].senderName = e.target[0].value;
+      pies[selectedPieId - 1].senderEmail = e.target[1].value;
+      pies[selectedPieId - 1].recipientName = e.target[2].value;
+      pies[selectedPieId - 1].recipientEmail = e.target[3].value;
+      pies[selectedPieId - 1].message = e.target[4].value;
+      pies[selectedPieId - 1].signUp = e.target[5].checked;
+      pies[selectedPieId - 1].sentAt = new Date();
 
-//       pies[selectedPieId - 1].senderName = e.target[0].value;
-//       pies[selectedPieId - 1].senderEmail = e.target[1].value;
-//       pies[selectedPieId - 1].recipientName = e.target[2].value;
-//       pies[selectedPieId - 1].recipientEmail = e.target[3].value;
-//       pies[selectedPieId - 1].message = e.target[4].value;
-//       pies[selectedPieId - 1].signUp = e.target[5].checked;
-//       pies[selectedPieId - 1].sentAt = new Date();
+      const mainMapPie = d3
+        .select("#main-map")
+        .select("svg")
+        .select("g")
+        .select(`#pie-${selectedPieId}`)
+        .select("svg");
+      drawEatenPies(mainMapPie);
+    }
 
-//       const mainMapPie = d3
-//         .select("#main-map")
-//         .select("svg")
-//         .select("g")
-//         .select(`#pie-${selectedPieId}`)
-//         .select("svg");
-//       drawEatenPies(mainMapPie);
-//     }
-
-//     e.target[0].value = "";
-//     e.target[1].value = "";
-//     e.target[2].value = "";
-//     e.target[3].value = "";
-//     e.target[4].value = "";
-//     e.target[5].checked = false;
+    e.target[0].value = "";
+    e.target[1].value = "";
+    e.target[2].value = "";
+    e.target[3].value = "";
+    e.target[4].value = "";
+    e.target[5].checked = false;
   });
 })(document, L, d3);
 
