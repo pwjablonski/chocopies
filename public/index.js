@@ -147,7 +147,6 @@
       .append("tspan")
       .attr("x", "50%")
       .attr("dy", "-1.5em")
-    .attr("style","color:red")
       .text(d => d.senderName);
     
     eatPieText
