@@ -210,7 +210,9 @@ app.post("/pies", async function(request, response) {
       sentAt
     }
   } = request.body;
-
+  
+  console.log("test-2")
+  
   const sentPie = await Pie.findOne({
     where: {
       senderEmail,
@@ -221,7 +223,8 @@ app.post("/pies", async function(request, response) {
       }
     }
   });
-
+  console.log("test-1")
+  
   if (sentPie) {
     response.send({
       error: {
@@ -245,12 +248,13 @@ app.post("/pies", async function(request, response) {
       }
     );
     
-    console.log("test")
+    console.log("test1")
     
     const imageURL = idToImageURL(pieId);
     const eatURL = `https://eatchocopietogether.glitch.me/pies/${pieId}/eat`;
     const redirectURL = `https://eatchocopietogether.glitch.me/?pieID=${pieId}`;
     response.send(pie);
+    console.log("test2")
     // email
     const recipientHtml = await ejs.renderFile("views/emails/recipient.ejs", {
       imageURL,
@@ -265,7 +269,9 @@ app.post("/pies", async function(request, response) {
       subject: `A Chocopie has been shared with you!`,
       html: recipientHtml
     };
-
+    
+    console.log("test3")
+    
     const senderHtml = await ejs.renderFile("views/emails/sender.ejs", {
       imageURL,
       pieURL: redirectURL,
@@ -279,10 +285,11 @@ app.post("/pies", async function(request, response) {
       subject: `Thank you for sharing a Chocopie`,
       html: senderHtml
     };
-
+    console.log("test4")
     try {
       await sgMail.send(msgRecipient);
       await sgMail.send(msgSender);
+      console.log("test5")
     } catch (e) {
       console.log(e);
     }
