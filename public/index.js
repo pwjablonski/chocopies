@@ -328,7 +328,7 @@
     e.submitter.value = "Sending..."
 
     const response = await sendPie(selectedPieId, data);
-    
+    console.log("test")
     e.submitter.disabled = false;
     e.submitter.value = "Send"
 

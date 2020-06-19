@@ -230,6 +230,7 @@ app.post("/pies", async function(request, response) {
       }
     });
   } else {
+    console.log("test")
     const pie = await Pie.update(
       {
         sentAt: moment().toDate(),
@@ -243,7 +244,9 @@ app.post("/pies", async function(request, response) {
         where: { id: pieId }
       }
     );
-
+    
+    console.log("test")
+    
     const imageURL = idToImageURL(pieId);
     const eatURL = `https://eatchocopietogether.glitch.me/pies/${pieId}/eat`;
     const redirectURL = `https://eatchocopietogether.glitch.me/?pieID=${pieId}`;
