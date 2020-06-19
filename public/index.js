@@ -164,7 +164,7 @@
     eatPieText
       .append("tspan")
       .attr("x", "50%")
-      .attr("dy", "-1em")
+      .attr("dy", "1em")
       .text("&");
       
 
