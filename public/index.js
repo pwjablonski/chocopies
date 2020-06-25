@@ -133,7 +133,8 @@
       .append("rect")
       .attr("height", "100%")
       .attr("width", "100%")
-      .attr("fill", "white");
+      .attr("fill", "white")
+    .attr("fill-opacity", "0");
 
     const eatPieText = eatenPies
       .append("text")
