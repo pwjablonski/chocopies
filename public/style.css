@@ -16,6 +16,10 @@ h1.title, h2 {
   text-transform: uppercase;
 }
 
+strong {
+  color: black;
+}
+
 
 .section .container p {
   width: 70%;
