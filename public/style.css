@@ -31,11 +31,12 @@ h1.title, h2 {
 }
 
 .section .container a {
-  color: red;
+  color: white;
   font-weight: bold;
+  text-decoration: underline;
 }
 .section .container a:hover {
-  color: darkred;
+  color: yellow;
 }
 
 
@@ -96,7 +97,6 @@ h1.title, h2 {
 }
 .stats{
     -webkit-text-fill-color: #fff600;
-    -webkit-text-stroke: 2px darkblue;
   text-shadow: 1px 1px 1px darkblue, 1px 1px 4px darkblue;
 }
 .title.is-1{
