@@ -65,12 +65,12 @@ h1.title, h2 {
 }
 
 .navbar {
-  background-color: darkblue;
-  border-bottom: 0.5em solid red;
+  background-color: #666;
+  border-bottom: 0.5em solid #fff200;
 }
 
 .navbar-menu {
-  background-color: darkblue;
+  background-color: #666;
 }
 
 .navbar-item {
@@ -79,8 +79,7 @@ h1.title, h2 {
 }
 .navbar-brand a {
   font-weight: bold;
-  color: white;
-  -webkit-text-stroke: 1px red;
+  color: #ff3366;
   font-size: larger;
 }
 .navbar-brand a:hover {
@@ -110,17 +109,14 @@ h2.title.is-3{
 }
 
 .section {
-  background-image:url(https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FSUN-BURST-BG.JPG?v=1591664122066);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  background-color: #0184ca;
 }
 
 .footer {
   padding: 0.2em 1.5em;
-  background-color: darkblue;
+  background-color: #666;
   color: white;
-  border-top: 0.25em solid red;
+  border-top: 0.25em solid #fff200;
 }
 
 .footer-start {
