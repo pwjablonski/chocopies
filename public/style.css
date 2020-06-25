@@ -65,12 +65,12 @@ h1.title, h2 {
 }
 
 .navbar {
-  background-color: #666;
+  background-color: #555;
   border-bottom: 0.5em solid #fff200;
 }
 
 .navbar-menu {
-  background-color: #666;
+  background-color: #555;
 }
 
 .navbar-item {
@@ -83,7 +83,7 @@ h1.title, h2 {
   font-size: larger;
 }
 .navbar-brand a:hover {
-  color: red;
+  color: white;
    background: none;
 }
 .navbar-end a {
@@ -114,7 +114,7 @@ h2.title.is-3{
 
 .footer {
   padding: 0.2em 1.5em;
-  background-color: #666;
+  background-color: #555;
   color: white;
   border-top: 0.25em solid #fff200;
 }
