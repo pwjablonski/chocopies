@@ -388,7 +388,7 @@ h2.title.is-3{
     display:none !important;
   }
   #main-map{
-    height: 
+    height: auto;
     
   }
 }
