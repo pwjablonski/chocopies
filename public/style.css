@@ -367,19 +367,19 @@ h2.title.is-3{
   top: 10%;
   left: 35%;
   animation-delay: 1s;
-  background-image: url(https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fintro-animation-div1.png?v=1592435276580);
+  background-image: url(https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fintro-animation-div1.png?v=1593203798002);
 }
 #div2 {
   top: 36%;
   left: 54%;
     animation-delay: 2s;
-  background-image: url(https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fintro-animation-div2.png?v=1592435265936);
+  background-image: url(https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fintro-animation-div2.png?v=1593203797862);
 }
 #div3 {
   top: 62%;
   left: 38%;   
   animation-delay: 3s;
-    background-image: url(https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fintro-animation-div3.png?v=1592435255660);
+    background-image: url(https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fintro-animation-div3.png?v=1593203798042);
 }
 
 @media only screen and (max-width: 768px) {
