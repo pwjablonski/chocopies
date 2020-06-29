@@ -85,6 +85,9 @@ sequelize
       },
       message: {
         type: Sequelize.TEXT
+      },
+      subscribedSender: {
+        type: Sequelize.BOOLEAN
       }
     });
 
@@ -207,7 +210,8 @@ app.post("/pies", async function(request, response) {
       senderEmail,
       recipientName,
       recipientEmail,
-      sentAt
+      sentAt,
+      subscribedSender
     }
   } = request.body;
   
@@ -241,7 +245,8 @@ app.post("/pies", async function(request, response) {
         senderEmail,
         recipientName,
         recipientEmail,
-        message
+        message,
+        subscribedSender,
       },
       {
         where: { id: pieId }

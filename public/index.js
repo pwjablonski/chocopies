@@ -320,7 +320,7 @@
     data.recipientName = e.target[2].value;
     data.recipientEmail = e.target[3].value;
     data.message = e.target[4].value;
-    data.signUp = e.target[5].checked;
+    data.subscribedSender = e.target[5].checked;
     data.sentAt = new Date();
     
     e.submitter.disabled = true;
@@ -345,7 +345,7 @@
       pies[selectedPieId - 1].recipientName = e.target[2].value;
       pies[selectedPieId - 1].recipientEmail = e.target[3].value;
       pies[selectedPieId - 1].message = e.target[4].value;
-      pies[selectedPieId - 1].signUp = e.target[5].checked;
+      pies[selectedPieId - 1].subscribedSender = e.target[5].checked;
       pies[selectedPieId - 1].sentAt = new Date();
 
       const mainMapPie = d3
