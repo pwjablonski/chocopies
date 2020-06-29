@@ -62,7 +62,7 @@
     const sentDiv = document.querySelector("#piesSent");
     const moneyDiv = document.querySelector("#moneyRaised");
     totalDiv.innerHTML = total;
-    sentDiv.innerHTML = sent;
+    sentDiv.innerHTML = sent + eaten;
     moneyDiv.innerHTML = `$ ${sent + eaten}`;
   }
 
