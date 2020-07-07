@@ -12,18 +12,19 @@ body {
 
 h1.title, h2 {
   font-weight: bold;
-  color: darkblue;
+  color: yellow;
   text-transform: uppercase;
 }
 
 strong {
-  color: black;
+  color: white;
 }
 
 
 .section .container p {
   width: 70%;
   padding-bottom: 2em;
+  color: white;
 }
 .section .container ul {
   list-style: outside;
@@ -32,6 +33,7 @@ strong {
   padding: 5px;
   width: 60%;
   margin-left: 1em;
+  color: white;
 }
 
 .section .container a {
@@ -40,7 +42,7 @@ strong {
   text-decoration: underline;
 }
 .section .container a:hover {
-  color: yellow;
+  color: darkblue;
 }
 
 
