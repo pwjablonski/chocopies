@@ -84,11 +84,11 @@ strong {
 }
 .navbar-brand a {
   font-weight: bold;
-  color: #ff3366;
+  color: yellow;
   font-size: larger;
 }
 .navbar-brand a:hover {
-  color: white;
+  color: #ff3366;
    background: none;
 }
 .navbar-end a {
