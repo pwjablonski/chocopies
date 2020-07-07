@@ -148,6 +148,10 @@ app.get("/terms", function(request, response) {
   response.render("pages/terms");
 });
 
+app.get("/shop", function(request, response) {
+  response.render("pages/shop");
+});
+
 app.get("/privacy", function(request, response) {
   response.render("pages/privacy");
 });
