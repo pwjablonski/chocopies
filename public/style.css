@@ -72,12 +72,12 @@ strong {
 }
 
 .navbar {
-  background-color: #555;
+  background-color: #444;
   border-bottom: 0.5em solid #fff200;
 }
 
 .navbar-menu {
-  background-color: #555;
+  background-color: #444;
 }
 
 .navbar-item {
@@ -86,11 +86,11 @@ strong {
 }
 .navbar-brand a {
   font-weight: bold;
-  color: yellow;
+  color: #ff6666;
   font-size: larger;
 }
 .navbar-brand a:hover {
-  color: #ff3366;
+  color: yellow;
    background: none;
 }
 .navbar-end a {
@@ -116,7 +116,7 @@ h2.title.is-3{
 }
 
 .section {
-  background-color: #0184ca;
+  background-color: #0066cc;
 }
 
 .footer {
