@@ -99,7 +99,7 @@ sequelize
 
 // populate table with default users
 async function setup() {
-  await Pie.sync({ force: true });
+  await Pie.sync({ force: false });
 
   const image = await Jimp.read(
     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fkorea-2500.png?v=1593401598746"
