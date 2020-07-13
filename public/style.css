@@ -41,6 +41,15 @@ strong {
   padding:1em 0;
             
 }
+table#howto-table{
+  width: 50%;
+  border: 1px solid white;
+}
+table#howto-table td{
+  text-align: center;
+  padding: 1em;
+  border: none;
+}
 
 
 .section .container a {
