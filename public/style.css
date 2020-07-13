@@ -15,6 +15,9 @@ h1.title, h2 {
   color: yellow;
   text-transform: uppercase;
 }
+h2.has-text-centered{
+  color: darkblue;
+}
 
 strong {
   color: white;
@@ -43,7 +46,7 @@ strong {
 }
 table#howto-table{
   width: 50%;
-  border: 1px solid white;
+  border: 2px solid yellow;
 }
 table#howto-table td{
   text-align: center;
