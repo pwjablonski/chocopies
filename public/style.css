@@ -111,11 +111,11 @@ strong {
 }
 
 h2.title.is-3{
-  color: #990033;
+  color: white; /* #990033; */
   font-size: 1.5rem;
 }
 h4.title {
-  color: #990033;
+  color: white;
   font-size: 1rem;
 }
 
