@@ -30,7 +30,7 @@ strong {
   list-style: outside;
 }
 .section .container ul li {
-  padding: 5px;
+  padding: 1.5em;
   width: 60%;
   margin-left: 1em;
   color: white;
