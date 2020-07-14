@@ -9,6 +9,12 @@ const ejs = require("ejs");
 
 const app = express();
 
+app.set('trust proxy', true); // <- required
+app.use((req, res, next) => {
+  if(!req.secure) return res.redirect('https://' + req.get('host') + req.url);
+  next();
+});
+
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
