@@ -23,6 +23,11 @@ strong {
   color: white;
 }
 
+::selection {
+  color: white;
+  background: darkblue;
+}
+
 
 .section .container p {
   width: 70%;
