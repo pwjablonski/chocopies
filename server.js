@@ -9,11 +9,24 @@ const ejs = require("ejs");
 
 const app = express();
 
-app.set('trust proxy', true); // <- required
-app.use((req, res, next) => {
-  if(!req.secure) return res.redirect('https://' + req.get('host') + req.url);
-  next();
-});
+// app.set('trust proxy', true); // <- required
+// app.use((req, res, next) => {
+//   if(!req.secure) return res.redirect('https://' + req.get('host') + req.url);
+//   next();
+// });
+function checkHttps(req, res, next){
+  // protocol check, if http, redirect to https
+  
+  if(req.get('X-Forwarded-Proto').indexOf("https")!=-1){
+    console.log("https, yo")
+    return next()
+  } else {
+    console.log("just http")
+    res.redirect('https://' + req.hostname + req.url);
+  }
+}
+
+app.all('*', checkHttps)
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
