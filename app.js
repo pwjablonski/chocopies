@@ -189,6 +189,7 @@ app.post("/pies", async function(request, response) {
     const msgRecipient = {
       to: recipientEmail,
       from: "eatingchocopietogether@gmail.com",
+      fromname:"Eat Chocopie Together",
       subject: `${recipientName} - A Chocopie has been shared with you!`,
       html: recipientHtml
     };
@@ -205,6 +206,7 @@ app.post("/pies", async function(request, response) {
     const msgSender = {
       to: senderEmail,
       from: "eatingchocopietogether@gmail.com",
+      fromname:"Eat Chocopie Together",
       subject: `Thank you for sharing a Chocopie - ${senderName}`,
       html: senderHtml
     };
