@@ -1,4 +1,9 @@
 (async function(d, L, d3) {
+  
+  if (location.protocol === "http:") {
+    location.replace(window.location.href.replace("http:", "https:"));
+  }
+  
   const EAT =
     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FEat-Chocopie-Together-Mina-Cheon-EAT.png?v=1593119005599";
   const UNITE =
