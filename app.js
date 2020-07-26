@@ -7,10 +7,7 @@ const { Op } = require("sequelize");
 const moment = require("moment");
 const ejs = require("ejs");
 const db = require('./models/index.js');
-
-
 const idToImageURL = require('./util/idToImageURL.js');
-
 
 const app = express();
 
@@ -20,104 +17,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-
-// Database
-// let Pie;
-
-// const sequelize = new Sequelize(
-//   "database",
-//   process.env.DB_USER,
-//   process.env.DB_PASS,
-//   {
-//     host: "0.0.0.0",
-//     dialect: "sqlite",
-//     pool: {
-//       max: 5,
-//       min: 0,
-//       idle: 10000
-//     },
-//     // Security note: the database is saved to the file `database.sqlite` on the local filesystem. It's deliberately placed in the `.data` directory
-//     // which doesn't get copied if someone remixes the project.
-//     storage: ".data/database.sqlite"
-//   }
-// );
-
-// authenticate with the database
-// sequelize
-//   .authenticate()
-//   .then(function(err) {
-//     console.log("Connection has been established successfully.");
-//     // define a new table 'users'
-//     Pie = sequelize.define("pies", {
-//       x: {
-//         type: Sequelize.INTEGER
-//       },
-//       y: {
-//         type: Sequelize.INTEGER
-//       },
-//       lat: {
-//         type: Sequelize.FLOAT
-//       },
-//       lng: {
-//         type: Sequelize.FLOAT
-//       },
-//       sentAt: {
-//         type: Sequelize.DATE
-//       },
-//       senderName: {
-//         type: Sequelize.TEXT
-//       },
-//       senderEmail: {
-//         type: Sequelize.TEXT
-//       },
-//       recipientName: {
-//         type: Sequelize.TEXT
-//       },
-//       recipientEmail: {
-//         type: Sequelize.TEXT
-//       },
-//       eatenAt: {
-//         type: Sequelize.DATE
-//       },
-//       message: {
-//         type: Sequelize.TEXT
-//       },
-//       subscribedSender: {
-//         type: Sequelize.BOOLEAN
-//       }
-//     });
-
-//     setup();
-//   })
-//   .catch(function(err) {
-//     console.log("Unable to connect to the database: ", err);
-//   });
-
-// populate table with default users
-// async function setup() {
-//   await db.Pie.sync({ force: true });
-
-//   const image = await Jimp.read(
-//     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fkorea-2500.png?v=1593401598746"
-//   );
-
-//   const width = image.bitmap.width;
-//   const height = image.bitmap.height;
-
-//   for (var y = 0; y < height; y++) {
-//     for (var x = 0; x < width; x++) {
-//       var pixel = Jimp.intToRGBA(image.getPixelColor(x, y));
-//       if (!(pixel.r === 255 && pixel.g === 255 && pixel.b === 255)) {
-//         db.Pie.create({
-//           x,
-//           y,
-//           lat: 43 - y * 0.05,
-//           lng: 124 + x * 0.1
-//         });
-//       }
-//     }
-//   }
-// }
 
 // email
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
