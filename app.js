@@ -1,6 +1,4 @@
 const express = require("express");
-const Sequelize = require("sequelize");
-const Jimp = require("jimp");
 const bodyParser = require("body-parser");
 const sgMail = require("@sendgrid/mail");
 const { Op } = require("sequelize");
@@ -118,7 +116,7 @@ app.get("/pies/:id/eat", async function(request, response) {
       where: { id: request.params.id }
     }
   );
-  response.redirect(`/?pieID=${request.params.id}`);
+  response.redirect(`/?pieID=${request.params.id}&live=true`);
 });
 
 app.post("/pies", async function(request, response) {
