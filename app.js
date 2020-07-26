@@ -177,7 +177,7 @@ app.post("/pies", async function(request, response) {
     
     const imageURL = idToImageURL(pieId);
     const eatURL = `https://eatchocopietogether.glitch.me/pies/${pieId}/eat`;
-    const redirectURL = `https://eatchocopietogether.glitch.me/?pieID=${pieId}`;
+    const redirectURL = `https://eatchocopietogether.glitch.me/?pieID=${pieId}&live=true`;
     response.send(pie);
     console.log("test2")
     // email
