@@ -9,7 +9,7 @@ const ejs = require("ejs");
 const db = require('./models/index.js');
 
 
-const {idToImageUrl} = require('./util/idToImageUrl.js');
+const {idToImageUrl} = require('./util/idToImageURL.js');
 
 
 const app = express();

@@ -1,3 +1,4 @@
+'use strict';
 
 const EAT =
   "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FEat-Chocopie-Together-Mina-Cheon-EAT.png?v=1593119005599";
@@ -10,7 +11,7 @@ const PEACE =
 const LOVE =
   "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FEat-Chocopie-Together-Mina-Cheon-LOVE.png?v=1593119005767";
 
-function idToImageURL(id) {
+const idToImageURL = function (id) {
   let imageURL;
   const idModFive = id % 5;
 
