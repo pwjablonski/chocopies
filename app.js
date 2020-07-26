@@ -4,30 +4,28 @@ const sgMail = require("@sendgrid/mail");
 const { Op } = require("sequelize");
 const moment = require("moment");
 const ejs = require("ejs");
-const db = require('./models/index.js');
-const idToImageURL = require('./util/idToImageURL.js');
+const db = require("./models/index.js");
+const idToImageURL = require("./util/idToImageURL.js");
 
 const app = express();
 
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
+app.set("views", __dirname + "/views");
+app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-
-function checkHttps(req, res, next){
+function checkHttps(req, res, next) {
   // protocol check, if http, redirect to https
-  
-  if(req.get('X-Forwarded-Proto').indexOf("https")!=-1){
-    return next()
+
+  if (req.get("X-Forwarded-Proto").indexOf("https") != -1) {
+    return next();
   } else {
-    res.redirect('https://' + req.hostname + req.url);
+    res.redirect("https://" + req.hostname + req.url);
   }
 }
 
-
-app.all('*', checkHttps);
+app.all("*", checkHttps);
 
 // email
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -35,15 +33,15 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 // ROUTES
 
 app.get("/", function(request, response) {
-  if(request.query.live === "true"){
-    response.render('pages/index'); 
-  } else{
-    response.redirect('/comingsoon')
+  if (request.query.live === "true") {
+    response.render("pages/index");
+  } else {
+    response.redirect("/comingsoon");
   }
 });
 
 app.get("/comingsoon", function(request, response) {
-  response.render('pages/comingsoon');
+  response.render("pages/comingsoon");
 });
 
 app.get("/about", async function(request, response) {
@@ -132,9 +130,9 @@ app.post("/pies", async function(request, response) {
       subscribedSender
     }
   } = request.body;
-  
-  console.log("test-2")
-  
+
+  console.log("test-2");
+
   const sentPie = await db.Pie.findOne({
     where: {
       senderEmail,
@@ -145,8 +143,8 @@ app.post("/pies", async function(request, response) {
       }
     }
   });
-  console.log("test-1")
-  
+  console.log("test-1");
+
   if (sentPie) {
     response.send({
       error: {
@@ -155,7 +153,7 @@ app.post("/pies", async function(request, response) {
       }
     });
   } else {
-    console.log("test")
+    console.log("test");
     const pie = await db.Pie.update(
       {
         sentAt: moment().toDate(),
@@ -164,20 +162,20 @@ app.post("/pies", async function(request, response) {
         recipientName,
         recipientEmail,
         message,
-        subscribedSender,
+        subscribedSender
       },
       {
         where: { id: pieId }
       }
     );
-    
-    console.log("test1")
-    
+
+    console.log("test1");
+
     const imageURL = idToImageURL(pieId);
     const eatURL = `https://eatchocopietogether.glitch.me/pies/${pieId}/eat`;
     const redirectURL = `https://eatchocopietogether.glitch.me/?pieID=${pieId}&live=true`;
     response.send(pie);
-    console.log("test2")
+    console.log("test2");
     // email
     const recipientHtml = await ejs.renderFile("views/emails/recipient.ejs", {
       imageURL,
@@ -188,14 +186,16 @@ app.post("/pies", async function(request, response) {
     });
     const msgRecipient = {
       to: recipientEmail,
-      from: "eatingchocopietogether@gmail.com",
-      fromname:"Eat Chocopie Together",
+      from: {
+        email: "eatingchocopietogether@gmail.com",
+        name: "Eat Chocopie Together"
+      },
       subject: `${recipientName} - A Chocopie has been shared with you!`,
       html: recipientHtml
     };
-    
-    console.log("test3")
-    
+
+    console.log("test3");
+
     const senderHtml = await ejs.renderFile("views/emails/sender.ejs", {
       imageURL,
       pieURL: redirectURL,
@@ -205,16 +205,19 @@ app.post("/pies", async function(request, response) {
     });
     const msgSender = {
       to: senderEmail,
-      from: "eatingchocopietogether@gmail.com",
-      fromname:"Eat Chocopie Together",
+      from: {
+        email: "eatingchocopietogether@gmail.com",
+        name: "Eat Chocopie Together"
+      },
+      fromname: "Eat Chocopie Together",
       subject: `Thank you for sharing a Chocopie - ${senderName}`,
       html: senderHtml
     };
-    console.log("test4")
+    console.log("test4");
     try {
       await sgMail.send(msgRecipient);
       await sgMail.send(msgSender);
-      console.log("test5")
+      console.log("test5");
     } catch (e) {
       console.log(e);
     }
