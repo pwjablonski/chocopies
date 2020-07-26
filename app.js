@@ -28,7 +28,14 @@ function checkHttps(req, res, next){
   }
 }
 
+function showLive(req, res, next){
+  if(req.query.live !== "true"){
+    res.redirect('/comingsoon')
+  } 
+}
+
 app.all('*', checkHttps);
+app.all('*', showLive);
 
 // email
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -36,10 +43,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 // ROUTES
 
 app.get("/", function(request, response) {
-  // if(){
-  //   response.render('pages/index');
-  // }
-  response.redirect('/comingsoon')
+  response.render('pages/index');
 });
 
 app.get("/comingsoon", function(request, response) {
