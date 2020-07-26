@@ -6,6 +6,11 @@ const sgMail = require("@sendgrid/mail");
 const { Op } = require("sequelize");
 const moment = require("moment");
 const ejs = require("ejs");
+const db = require('./models/index.js');
+
+
+const {idToImageUrl} = require('./util/idToImageUrl.js');
+
 
 const app = express();
 
@@ -15,91 +20,82 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-const EAT =
-  "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FEat-Chocopie-Together-Mina-Cheon-EAT.png?v=1593119005599";
-const UNITE =
-  "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FEat-Chocopie-Together-Mina-Cheon-UNITE.png?v=1593119006333";
-const SHARE =
-  "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FEat-Chocopie-Together-Mina-Cheon-SHARE.png?v=1593119006137";
-const PEACE =
-  "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FEat-Chocopie-Together-Mina-Cheon-PEACE.png?v=1593119005876";
-const LOVE =
-  "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FEat-Chocopie-Together-Mina-Cheon-LOVE.png?v=1593119005767";
-// Database
-let Pie;
 
-const sequelize = new Sequelize(
-  "database",
-  process.env.DB_USER,
-  process.env.DB_PASS,
-  {
-    host: "0.0.0.0",
-    dialect: "sqlite",
-    pool: {
-      max: 5,
-      min: 0,
-      idle: 10000
-    },
-    // Security note: the database is saved to the file `database.sqlite` on the local filesystem. It's deliberately placed in the `.data` directory
-    // which doesn't get copied if someone remixes the project.
-    storage: ".data/database.sqlite"
-  }
-);
+// Database
+// let Pie;
+
+// const sequelize = new Sequelize(
+//   "database",
+//   process.env.DB_USER,
+//   process.env.DB_PASS,
+//   {
+//     host: "0.0.0.0",
+//     dialect: "sqlite",
+//     pool: {
+//       max: 5,
+//       min: 0,
+//       idle: 10000
+//     },
+//     // Security note: the database is saved to the file `database.sqlite` on the local filesystem. It's deliberately placed in the `.data` directory
+//     // which doesn't get copied if someone remixes the project.
+//     storage: ".data/database.sqlite"
+//   }
+// );
 
 // authenticate with the database
-sequelize
-  .authenticate()
-  .then(function(err) {
-    console.log("Connection has been established successfully.");
-    // define a new table 'users'
-    Pie = sequelize.define("pies", {
-      x: {
-        type: Sequelize.INTEGER
-      },
-      y: {
-        type: Sequelize.INTEGER
-      },
-      lat: {
-        type: Sequelize.FLOAT
-      },
-      lng: {
-        type: Sequelize.FLOAT
-      },
-      sentAt: {
-        type: Sequelize.DATE
-      },
-      senderName: {
-        type: Sequelize.TEXT
-      },
-      senderEmail: {
-        type: Sequelize.TEXT
-      },
-      recipientName: {
-        type: Sequelize.TEXT
-      },
-      recipientEmail: {
-        type: Sequelize.TEXT
-      },
-      eatenAt: {
-        type: Sequelize.DATE
-      },
-      message: {
-        type: Sequelize.TEXT
-      },
-      subscribedSender: {
-        type: Sequelize.BOOLEAN
-      }
-    });
+// sequelize
+//   .authenticate()
+//   .then(function(err) {
+//     console.log("Connection has been established successfully.");
+//     // define a new table 'users'
+//     Pie = sequelize.define("pies", {
+//       x: {
+//         type: Sequelize.INTEGER
+//       },
+//       y: {
+//         type: Sequelize.INTEGER
+//       },
+//       lat: {
+//         type: Sequelize.FLOAT
+//       },
+//       lng: {
+//         type: Sequelize.FLOAT
+//       },
+//       sentAt: {
+//         type: Sequelize.DATE
+//       },
+//       senderName: {
+//         type: Sequelize.TEXT
+//       },
+//       senderEmail: {
+//         type: Sequelize.TEXT
+//       },
+//       recipientName: {
+//         type: Sequelize.TEXT
+//       },
+//       recipientEmail: {
+//         type: Sequelize.TEXT
+//       },
+//       eatenAt: {
+//         type: Sequelize.DATE
+//       },
+//       message: {
+//         type: Sequelize.TEXT
+//       },
+//       subscribedSender: {
+//         type: Sequelize.BOOLEAN
+//       }
+//     });
 
-    setup();
-  })
-  .catch(function(err) {
-    console.log("Unable to connect to the database: ", err);
-  });
+//     setup();
+//   })
+//   .catch(function(err) {
+//     console.log("Unable to connect to the database: ", err);
+//   });
 
 // populate table with default users
 async function setup() {
-  await Pie.sync({ force: true });
+  await db.Pie.sync({ force: true });
 
   const image = await Jimp.read(
     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fkorea-2500.png?v=1593401598746"
@@ -112,7 +108,7 @@ async function setup() {
     for (var x = 0; x < width; x++) {
       var pixel = Jimp.intToRGBA(image.getPixelColor(x, y));
       if (!(pixel.r === 255 && pixel.g === 255 && pixel.b === 255)) {
-        Pie.create({
+        db.Pie.create({
           x,
           y,
           lat: 43 - y * 0.05,
@@ -163,21 +159,21 @@ app.get("/pies", async function(request, response) {
     total: 0,
     pies: []
   };
-  data.sent = await Pie.count({
+  data.sent = await db.Pie.count({
     where: {
       sentAt: {
         [Op.ne]: null
       }
     }
   });
-  data.eaten = await Pie.count({
+  data.eaten = await db.Pie.count({
     where: {
       eatenAt: {
         [Op.ne]: null
       }
     }
   });
-  const { count, rows } = await Pie.findAndCountAll();
+  const { count, rows } = await db.Pie.findAndCountAll();
   data.total = count;
   rows.forEach(function(pie) {
     data.pies.push(pie);
@@ -186,7 +182,7 @@ app.get("/pies", async function(request, response) {
 });
 
 app.get("/pies/:id", async function(request, response) {
-  const pie = await Pie.findAll({
+  const pie = await db.Pie.findAll({
     where: { id: request.params.id },
     attributes: ["x", "y", "lng", "lat", "sentAt", "recipientName"]
   });
@@ -194,7 +190,7 @@ app.get("/pies/:id", async function(request, response) {
 });
 
 app.get("/pies/:id/eat", async function(request, response) {
-  const pie = await Pie.update(
+  const pie = await db.Pie.update(
     {
       eatenAt: moment().toDate()
     },
@@ -221,7 +217,7 @@ app.post("/pies", async function(request, response) {
   
   console.log("test-2")
   
-  const sentPie = await Pie.findOne({
+  const sentPie = await db.Pie.findOne({
     where: {
       senderEmail,
       sentAt: {
@@ -242,7 +238,7 @@ app.post("/pies", async function(request, response) {
     });
   } else {
     console.log("test")
-    const pie = await Pie.update(
+    const pie = await db.Pie.update(
       {
         sentAt: moment().toDate(),
         senderName,
@@ -304,23 +300,5 @@ app.post("/pies", async function(request, response) {
     }
   }
 });
-
-function idToImageURL(id) {
-  let imageURL;
-  const idModFive = id % 5;
-
-  if (idModFive === 0) {
-    imageURL = EAT;
-  } else if (idModFive == 1) {
-    imageURL = UNITE;
-  } else if (idModFive === 2) {
-    imageURL = PEACE;
-  } else if (idModFive === 3) {
-    imageURL = SHARE;
-  } else if (idModFive === 4) {
-    imageURL = LOVE;
-  }
-  return imageURL;
-}
 
 module.exports = app;
