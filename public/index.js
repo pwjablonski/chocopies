@@ -92,9 +92,9 @@
       modal.classList.add("is-active");
       selectedPieId = e.id;
       let pieImgSend = document.querySelector(".share_choco");
-      let pieImgShare = document.querySelector(".send_choco");
+      // let pieImgShare = document.querySelector(".send_choco");
       pieImgSend.src = idToImageURL(e.id);
-      pieImgShare.src = idToImageURL(e.id);
+      // pieImgShare.src = idToImageURL(e.id);
       zoomOverlay.remove();
     }
   }
