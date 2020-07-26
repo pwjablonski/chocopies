@@ -9,7 +9,7 @@ const ejs = require("ejs");
 const db = require('./models/index.js');
 
 
-const {idToImageUrl} = require('./util/idToImageURL.js');
+const idToImageURL = require('./util/idToImageURL.js');
 
 
 const app = express();
@@ -94,30 +94,30 @@ app.use(express.static("public"));
 //   });
 
 // populate table with default users
-async function setup() {
-  await db.Pie.sync({ force: true });
+// async function setup() {
+//   await db.Pie.sync({ force: true });
 
-  const image = await Jimp.read(
-    "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fkorea-2500.png?v=1593401598746"
-  );
+//   const image = await Jimp.read(
+//     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fkorea-2500.png?v=1593401598746"
+//   );
 
-  const width = image.bitmap.width;
-  const height = image.bitmap.height;
+//   const width = image.bitmap.width;
+//   const height = image.bitmap.height;
 
-  for (var y = 0; y < height; y++) {
-    for (var x = 0; x < width; x++) {
-      var pixel = Jimp.intToRGBA(image.getPixelColor(x, y));
-      if (!(pixel.r === 255 && pixel.g === 255 && pixel.b === 255)) {
-        db.Pie.create({
-          x,
-          y,
-          lat: 43 - y * 0.05,
-          lng: 124 + x * 0.1
-        });
-      }
-    }
-  }
-}
+//   for (var y = 0; y < height; y++) {
+//     for (var x = 0; x < width; x++) {
+//       var pixel = Jimp.intToRGBA(image.getPixelColor(x, y));
+//       if (!(pixel.r === 255 && pixel.g === 255 && pixel.b === 255)) {
+//         db.Pie.create({
+//           x,
+//           y,
+//           lat: 43 - y * 0.05,
+//           lng: 124 + x * 0.1
+//         });
+//       }
+//     }
+//   }
+// }
 
 // email
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
