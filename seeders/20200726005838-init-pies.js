@@ -30,18 +30,20 @@ module.exports = {
               x,
               y,
               lat: 43 - y * 0.05,
-              lng: 124 + x * 0.1
+              lng: 124 + x * 0.1,
+              createdAt: new Date(),
+              updatedAt: new Date()
             }
           );
         }
       }
     }
     
-    queryInterface.bulkInsert("Pies", pies);
+    return queryInterface.bulkInsert("Pies", pies, {});
     
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete("Pies", null, {});
+    return queryInterface.bulkDelete("Pies", null, {});
   }
 };
