@@ -36,7 +36,14 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 // ROUTES
 
 app.get("/", function(request, response) {
-  response.render('pages/index');
+  // if(){
+  //   response.render('pages/index');
+  // }
+  response.redirect('/comingsoon')
+});
+
+app.get("/comingsoon", function(request, response) {
+  response.render('pages/comingsoon');
 });
 
 app.get("/about", async function(request, response) {
