@@ -352,7 +352,7 @@
       pies[selectedPieId - 1].message = e.target[4].value;
       pies[selectedPieId - 1].subscribedSender = e.target[5].checked;
       pies[selectedPieId - 1].sentAt = new Date();
-
+      console.log()
       const mainMapPie = d3
         .select("#main-map")
         .select("svg")
