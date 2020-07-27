@@ -190,7 +190,7 @@ app.post("/pies", async function(request, response) {
         email: "eatingchocopietogether@gmail.com",
         name: "Eat Chocopie Together"
       },
-      subject: `${recipientName} - A Chocopie has been shared with you!`,
+      subject: `A Chocopie For You From ${recipientName}`,
       html: recipientHtml
     };
 
