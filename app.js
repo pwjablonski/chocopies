@@ -33,11 +33,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 // ROUTES
 
 app.get("/", function(request, response) {
-  if (request.query.live === "true") {
-    response.render("pages/index");
-  } else {
-    response.redirect("/comingsoon");
-  }
+  response.render("pages/index");
 });
 
 app.get("/comingsoon", function(request, response) {
@@ -131,8 +127,6 @@ app.post("/pies", async function(request, response) {
     }
   } = request.body;
 
-  console.log("test-2");
-
   const sentPies = await db.Pie.count({
     where: {
       senderEmail,
@@ -149,7 +143,8 @@ app.post("/pies", async function(request, response) {
     response.send({
       error: {
         type: "too many requests",
-        message: "You've already claimed 10 pies in the last hour. Come back later to share more pies!"
+        message:
+          "You've already claimed 10 pies in the last hour. Come back later to share more pies!"
       }
     });
   } else {
@@ -171,8 +166,11 @@ app.post("/pies", async function(request, response) {
     const imageURL = idToImageURL(pieId);
     const eatURL = `https://eatchocopietogether.glitch.me/pies/${pieId}/eat`;
     const redirectURL = `https://eatchocopietogether.glitch.me/?pieID=${pieId}&live=true`;
-    
-    await response.send(pie);
+    try {
+      await response.send(pie);
+    } catch (e) {
+      console.log(e);
+    }
     // email
     const recipientHtml = await ejs.renderFile("views/emails/recipient.ejs", {
       imageURL,
@@ -208,11 +206,9 @@ app.post("/pies", async function(request, response) {
       subject: `Thank you for sharing a Chocopie - ${senderName}`,
       html: senderHtml
     };
-    console.log("test4");
     try {
       await sgMail.send(msgRecipient);
       await sgMail.send(msgSender);
-      console.log("test5");
     } catch (e) {
       console.log(e);
     }
