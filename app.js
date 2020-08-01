@@ -133,7 +133,7 @@ app.post("/pies", async function(request, response) {
 
   console.log("test-2");
 
-  const sentPie = await db.Pie.findOne({
+  const sentPies = await db.Pie.count({
     where: {
       senderEmail,
       sentAt: {
@@ -143,17 +143,16 @@ app.post("/pies", async function(request, response) {
       }
     }
   });
-  console.log("test-1");
+  console.log(sentPies);
 
-  if (sentPie) {
+  if (sentPies > 9) {
     response.send({
       error: {
         type: "too many requests",
-        message: "You've already claimed a pie in the last hour"
+        message: "You've already claimed 10 pies in the last hour. Come back later to share more pies!"
       }
     });
   } else {
-    console.log("test");
     const pie = await db.Pie.update(
       {
         sentAt: moment().toDate(),
@@ -169,13 +168,11 @@ app.post("/pies", async function(request, response) {
       }
     );
 
-    console.log("test1");
-
     const imageURL = idToImageURL(pieId);
     const eatURL = `https://eatchocopietogether.glitch.me/pies/${pieId}/eat`;
     const redirectURL = `https://eatchocopietogether.glitch.me/?pieID=${pieId}&live=true`;
-    response.send(pie);
-    console.log("test2");
+    
+    await response.send(pie);
     // email
     const recipientHtml = await ejs.renderFile("views/emails/recipient.ejs", {
       imageURL,
@@ -193,8 +190,6 @@ app.post("/pies", async function(request, response) {
       subject: `A Chocopie For You From ${recipientName}`,
       html: recipientHtml
     };
-
-    console.log("test3");
 
     const senderHtml = await ejs.renderFile("views/emails/sender.ejs", {
       imageURL,
