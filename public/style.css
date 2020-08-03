@@ -43,6 +43,9 @@ strong {
   margin-left: 1em;
   color: white;
 }
+.section .container ul.nopad li {
+  padding: 1.5em 0em;
+}
 .howto-img{
   display:block;
   width:200px;
