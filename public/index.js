@@ -68,7 +68,7 @@
     const moneyDiv = document.querySelector("#moneyRaised");
     totalDiv.innerHTML = total * 2;
     sentDiv.innerHTML = sent + eaten;
-    moneyDiv.innerHTML = `$ ${sent + eaten}`;
+    moneyDiv.innerHTML = `$${sent + eaten}`;
   }
 
   function idToImageURL(id) {
