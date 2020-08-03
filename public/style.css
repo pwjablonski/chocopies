@@ -43,8 +43,8 @@ strong {
   margin-left: 1em;
   color: white;
 }
-.section .container ul.nopad li {
-  padding: 1.5em 0em;
+ul.nopad li {
+  padding: 0em !important;
 }
 .howto-img{
   display:block;
