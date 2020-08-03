@@ -423,7 +423,7 @@ h4.title {
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
   #div1 {
-  top: 31%;
+  top: 29%;
   left: 8%;
   animation-delay: 1s;
   background-image: url(https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fintro-animation-div1.png?v=1593203798002);
