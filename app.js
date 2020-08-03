@@ -203,7 +203,7 @@ app.post("/pies", async function(request, response) {
         name: "EatChocopieTogether"
       },
       fromname: "EatChocopieTogether",
-      subject: `Thank you for sharing a Chocopie - ${senderName}`,
+      subject: `Thank you for sharing a Chocopie`,
       html: senderHtml
     };
     try {
