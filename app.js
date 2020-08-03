@@ -164,8 +164,8 @@ app.post("/pies", async function(request, response) {
     );
 
     const imageURL = idToImageURL(pieId);
-    const eatURL = `https://eatchocopietogether.glitch.me/pies/${pieId}/eat`;
-    const redirectURL = `https://eatchocopietogether.glitch.me/?pieID=${pieId}&live=true`;
+    const eatURL = `https://eatchocopietogether.com/pies/${pieId}/eat`;
+    const redirectURL = `https://eatchocopietogether.com/?pieID=${pieId}`; //&live=true
     try {
       await response.send(pie);
     } catch (e) {
@@ -183,9 +183,9 @@ app.post("/pies", async function(request, response) {
       to: recipientEmail,
       from: {
         email: "eatingchocopietogether@gmail.com",
-        name: "Eat Chocopie Together"
+        name: "EatChocopieTogether"
       },
-      subject: `A Chocopie For You From ${recipientName}`,
+      subject: `A Chocopie For You, From ${senderName}`,
       html: recipientHtml
     };
 
@@ -200,9 +200,9 @@ app.post("/pies", async function(request, response) {
       to: senderEmail,
       from: {
         email: "eatingchocopietogether@gmail.com",
-        name: "Eat Chocopie Together"
+        name: "EatChocopieTogether"
       },
-      fromname: "Eat Chocopie Together",
+      fromname: "EatChocopieTogether",
       subject: `Thank you for sharing a Chocopie - ${senderName}`,
       html: senderHtml
     };
