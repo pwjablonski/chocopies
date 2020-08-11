@@ -102,7 +102,7 @@ app.get("/pies/:id", async function(request, response) {
 });
 
 app.get("/pies/:id/eat", async function(request, response) {
-  const {recipientEmail = null} = request.query
+  const { recipientEmail = 'No Email' } = request.query
   const { id } = request.params
   
   const pie = await db.Pie.update(
@@ -113,6 +113,9 @@ app.get("/pies/:id/eat", async function(request, response) {
       where: { id, recipientEmail } // update
     }
   );
+  
+  console.log(pie)
+  
   response.redirect(`/?pieID=${id}`); //&live=true
 });
 
