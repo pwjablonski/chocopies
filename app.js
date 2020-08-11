@@ -102,15 +102,18 @@ app.get("/pies/:id", async function(request, response) {
 });
 
 app.get("/pies/:id/eat", async function(request, response) {
+  const {recipientEmail = null} = request.query
+  const { id } = request.params
+  
   const pie = await db.Pie.update(
     {
       eatenAt: moment().toDate()
     },
     {
-      where: { id: request.params.id } // update
+      where: { id, recipientEmail } // update
     }
   );
-  response.redirect(`/?pieID=${request.params.id}`); //&live=true
+  response.redirect(`/?pieID=${id}`); //&live=true
 });
 
 app.post("/pies", async function(request, response) {
