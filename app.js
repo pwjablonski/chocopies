@@ -107,7 +107,7 @@ app.get("/pies/:id/eat", async function(request, response) {
       eatenAt: moment().toDate()
     },
     {
-      where: { id: request.params.id }
+      where: { id: request.params.id } // update
     }
   );
   response.redirect(`/?pieID=${request.params.id}`); //&live=true
@@ -164,7 +164,7 @@ app.post("/pies", async function(request, response) {
     );
 
     const imageURL = idToImageURL(pieId);
-    const eatURL = `https://eatchocopietogether.com/pies/${pieId}/eat`;
+    const eatURL = `https://eatchocopietogether.com/pies/${pieId}/eat?recipientEmail=${recipientEmail}`;
     const redirectURL = `https://eatchocopietogether.com/?pieID=${pieId}`; //&live=true
     try {
       await response.send(pie);
