@@ -6,6 +6,7 @@ const moment = require("moment");
 const ejs = require("ejs");
 const db = require("./models/index.js");
 const idToImageURL = require("./util/idToImageURL.js");
+const { body } = require('express-validator');  
 
 const app = express();
 
