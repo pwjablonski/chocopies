@@ -39,7 +39,7 @@ strong {
 }
 .section .container ul li {
   padding: 1.5em .5em;
-  width: 80%;
+  width: 60%;
   margin-left: 1em;
   color: white;
 }
@@ -451,5 +451,8 @@ h4.title {
   }
   table#howto-table{
   width: 100%;
+}
+  .section .container ul li {
+  width: 90%;
 }
 }
