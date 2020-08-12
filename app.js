@@ -6,7 +6,7 @@ const moment = require("moment");
 const ejs = require("ejs");
 const db = require("./models/index.js");
 const idToImageURL = require("./util/idToImageURL.js");
-const { body } = require('express-validator');  
+const { body } = require("express-validator");
 
 const app = express();
 
@@ -103,9 +103,9 @@ app.get("/pies/:id", async function(request, response) {
 });
 
 app.get("/pies/:id/eat", async function(request, response) {
-  const { recipientEmail = 'No Email' } = request.query
-  const { id } = request.params
-  
+  const { recipientEmail = "No Email" } = request.query;
+  const { id } = request.params;
+
   const pie = await db.Pie.update(
     {
       eatenAt: moment().toDate()
@@ -114,112 +114,139 @@ app.get("/pies/:id/eat", async function(request, response) {
       where: { id, recipientEmail } // update
     }
   );
-  
-  console.log(pie)
-  
+
+  console.log(pie);
+
   response.redirect(`/?pieID=${id}`); //&live=true
 });
 
-app.post("/pies", async function(request, response) {
-  const {
-    pieId,
-    data: {
-      message,
-      senderName,
-      senderEmail,
-      recipientName,
-      recipientEmail,
-      sentAt,
-      subscribedSender
-    }
-  } = request.body;
-
-  const sentPies = await db.Pie.count({
-    where: {
-      senderEmail,
-      sentAt: {
-        [Op.gt]: moment()
-          .subtract(1, "hours")
-          .toDate()
-      }
-    }
-  });
-  console.log(sentPies);
-
-  if (sentPies > 9) {
-    response.send({
-      error: {
-        type: "too many requests",
-        message:
-          "You've already claimed 10 pies in the last hour. Come back later to share more pies!"
-      }
-    });
-  } else {
-    const pie = await db.Pie.update(
-      {
-        sentAt: moment().toDate(),
+app.post(
+  "/pies",
+  [
+    body("senderEmail")
+      .isEmail()
+      .normalizeEmail(),
+    body("recipientEmail")
+      .isEmail()
+      .normalizeEmail(),
+    body("senderName")
+      .not()
+      .isEmpty()
+      .trim()
+      .escape(),
+    body("recipientName")
+      .not()
+      .isEmpty()
+      .trim()
+      .escape(),
+    body("message")
+      .not()
+      .isEmpty()
+      .trim()
+      .escape(),
+    body("subscribedSender").toBoolean()
+  ],
+  async function(request, response) {
+    const {
+      pieId,
+      data: {
+        message,
         senderName,
         senderEmail,
         recipientName,
         recipientEmail,
-        message,
+        sentAt,
         subscribedSender
-      },
-      {
-        where: { id: pieId }
       }
-    );
+    } = request.body;
 
-    const imageURL = idToImageURL(pieId);
-    const eatURL = `https://eatchocopietogether.com/pies/${pieId}/eat?recipientEmail=${recipientEmail}`;
-    const redirectURL = `https://eatchocopietogether.com/?pieID=${pieId}`; //&live=true
-    try {
-      await response.send(pie);
-    } catch (e) {
-      console.log(e);
-    }
-    // email
-    const recipientHtml = await ejs.renderFile("views/emails/recipient.ejs", {
-      imageURL,
-      pieURL: eatURL,
-      senderName,
-      recipientName,
-      message
+    const sentPies = await db.Pie.count({
+      where: {
+        senderEmail,
+        sentAt: {
+          [Op.gt]: moment()
+            .subtract(1, "hours")
+            .toDate()
+        }
+      }
     });
-    const msgRecipient = {
-      to: recipientEmail,
-      from: {
-        email: "eatingchocopietogether@gmail.com",
-        name: "EatChocopieTogether"
-      },
-      subject: `A Chocopie For You, From ${senderName}`,
-      html: recipientHtml
-    };
+    console.log(sentPies);
 
-    const senderHtml = await ejs.renderFile("views/emails/sender.ejs", {
-      imageURL,
-      pieURL: redirectURL,
-      senderName,
-      recipientName,
-      message
-    });
-    const msgSender = {
-      to: senderEmail,
-      from: {
-        email: "eatingchocopietogether@gmail.com",
-        name: "EatChocopieTogether"
-      },
-      fromname: "EatChocopieTogether",
-      subject: `Thank you for sharing a Chocopie`,
-      html: senderHtml
-    };
-    try {
-      await sgMail.send(msgRecipient);
-      await sgMail.send(msgSender);
-    } catch (e) {
-      console.log(e);
+    if (sentPies > 9) {
+      response.send({
+        error: {
+          type: "too many requests",
+          message:
+            "You've already claimed 10 pies in the last hour. Come back later to share more pies!"
+        }
+      });
+    } else {
+      const pie = await db.Pie.update(
+        {
+          sentAt: moment().toDate(),
+          senderName,
+          senderEmail,
+          recipientName,
+          recipientEmail,
+          message,
+          subscribedSender
+        },
+        {
+          where: { id: pieId }
+        }
+      );
+
+      const imageURL = idToImageURL(pieId);
+      const eatURL = `https://eatchocopietogether.com/pies/${pieId}/eat?recipientEmail=${recipientEmail}`;
+      const redirectURL = `https://eatchocopietogether.com/?pieID=${pieId}`; //&live=true
+      try {
+        await response.send(pie);
+      } catch (e) {
+        console.log(e);
+      }
+      // email
+      const recipientHtml = await ejs.renderFile("views/emails/recipient.ejs", {
+        imageURL,
+        pieURL: eatURL,
+        senderName,
+        recipientName,
+        message
+      });
+      const msgRecipient = {
+        to: recipientEmail,
+        from: {
+          email: "eatingchocopietogether@gmail.com",
+          name: "EatChocopieTogether"
+        },
+        subject: `A Chocopie For You, From ${senderName}`,
+        html: recipientHtml
+      };
+
+      const senderHtml = await ejs.renderFile("views/emails/sender.ejs", {
+        imageURL,
+        pieURL: redirectURL,
+        senderName,
+        recipientName,
+        message
+      });
+      const msgSender = {
+        to: senderEmail,
+        from: {
+          email: "eatingchocopietogether@gmail.com",
+          name: "EatChocopieTogether"
+        },
+        fromname: "EatChocopieTogether",
+        subject: `Thank you for sharing a Chocopie`,
+        html: senderHtml
+      };
+      try {
+        await sgMail.send(msgRecipient);
+        await sgMail.send(msgSender);
+      } catch (e) {
+        console.log(e);
+      }
     }
   }
-});
+);
 
 module.exports = app;
