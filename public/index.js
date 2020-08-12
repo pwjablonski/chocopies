@@ -277,17 +277,17 @@
   }
 
   d.addEventListener("click", function(e) {
-    if (e.target.classList.contains("navbar-burger")) {
-      console.log(e.target);
-      let dropdown = document.querySelector(`#${e.target.dataset.target}`);
-      if (e.target.classList.contains("is-active")) {
-        e.target.classList.remove("is-active");
-        dropdown.classList.remove("is-active");
-      } else {
-        e.target.classList.add("is-active");
-        dropdown.classList.add("is-active");
-      }
-    }
+    // if (e.target.classList.contains("navbar-burger")) {
+    //   console.log(e.target);
+    //   let dropdown = document.querySelector(`#${e.target.dataset.target}`);
+    //   if (e.target.classList.contains("is-active")) {
+    //     e.target.classList.remove("is-active");
+    //     dropdown.classList.remove("is-active");
+    //   } else {
+    //     e.target.classList.add("is-active");
+    //     dropdown.classList.add("is-active");
+    //   }
+    // }
     if (e.target.dataset.toggle == "modal") {
       let modal = document.querySelector(e.target.dataset.target);
       modal.classList.add("is-active");

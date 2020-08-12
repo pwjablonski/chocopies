@@ -39,7 +39,7 @@ strong {
 }
 .section .container ul li {
   padding: 1.5em .5em;
-  width: 60%;
+  width: 80%;
   margin-left: 1em;
   color: white;
 }
@@ -422,6 +422,11 @@ h4.title {
 
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
+  
+  .section .container p {
+  width: 100%;
+  }
+  
   #div1 {
   top: 29%;
   left: 8%;
@@ -444,4 +449,7 @@ h4.title {
     height: auto;
     
   }
+  table#howto-table{
+  width: 100%;
+}
 }
