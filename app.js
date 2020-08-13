@@ -106,19 +106,22 @@ app.get("/pies/:id/eat", async function(request, response) {
   const { recipientEmail = "No Email" } = request.query;
   const { id } = request.params;
 
-  
-  // const pit = await 
-  const pie = await db.Pie.update(
-    {
-      eatenAt: moment().toDate()
-    },
-    {
-      where: { id, recipientEmail, eatenAt: null } // update
-    }
-  );
-  
-  if(pie){
-    
+  const pie = await db.Pie.findOne({
+    where: { id, recipientEmail, eaten: null }
+  });
+
+  console.log(pie);
+
+  if (pie) {
+    const success = await db.Pie.update(
+      {
+        eatenAt: moment().toDate()
+      },
+      {
+        where: { id } // update
+      }
+    );
+    console.log(success)
     // const notificationHtml = await ejs.renderFile("views/emails/notification.ejs", {
     //   senderName,
     // });
