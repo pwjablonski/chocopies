@@ -240,6 +240,7 @@ app.post(
       });
       const msgRecipient = {
         to: recipientEmail,
+        //cc: senderEmail,
         from: {
           email: "eatingchocopietogether@gmail.com",
           name: "EatChocopieTogether"
