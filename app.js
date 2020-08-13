@@ -107,13 +107,15 @@ app.get("/pies/:id/eat", async function(request, response) {
   const { id } = request.params;
 
   const pie = await db.Pie.findOne({
-    where: { id, recipientEmail, eaten: null }
+    where: { id, recipientEmail }
   });
 
-  console.log(pie);
-
   if (pie) {
-    const success = await db.Pie.update(
+    const {
+      dataValues
+    } = pie;
+
+    await db.Pie.update(
       {
         eatenAt: moment().toDate()
       },
@@ -121,7 +123,8 @@ app.get("/pies/:id/eat", async function(request, response) {
         where: { id } // update
       }
     );
-    console.log(success)
+    console.log(pie.dataValues);
+    console.log(dataValues)
     // const notificationHtml = await ejs.renderFile("views/emails/notification.ejs", {
     //   senderName,
     // });
@@ -193,7 +196,6 @@ app.post(
         }
       }
     });
-    console.log(sentPies);
 
     if (sentPies > 9) {
       response.send({
