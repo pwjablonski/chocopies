@@ -106,14 +106,34 @@ app.get("/pies/:id/eat", async function(request, response) {
   const { recipientEmail = "No Email" } = request.query;
   const { id } = request.params;
 
+  
+  // const pit = await 
   const pie = await db.Pie.update(
     {
       eatenAt: moment().toDate()
     },
     {
-      where: { id, recipientEmail } // update
+      where: { id, recipientEmail, eatenAt: null } // update
     }
   );
+  
+  if(pie){
+    
+    // const notificationHtml = await ejs.renderFile("views/emails/notification.ejs", {
+    //   senderName,
+    // });
+    // const msgNotification = {
+    //   to: senderEmail,
+    //   from: {
+    //     email: "eatingchocopietogether@gmail.com",
+    //     name: "EatChocopieTogether"
+    //   },
+    //   fromname: "EatChocopieTogether",
+    //   subject: `${recipientName} Has Eaten The Chocopie You Shared`,
+    //   html: notificationHtml
+    // };
+    // await sgMail.send(msgNotification);
+  }
 
   console.log(pie);
 
@@ -188,7 +208,7 @@ app.post(
           senderEmail,
           recipientName,
           recipientEmail,
-          message,
+          // message,
           subscribedSender
         },
         {
