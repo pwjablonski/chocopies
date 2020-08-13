@@ -107,12 +107,12 @@ app.get("/pies/:id/eat", async function(request, response) {
   const { id } = request.params;
 
   const pie = await db.Pie.findOne({
-    where: { id, recipientEmail }
+    where: { id, recipientEmail, eatenAt: null }
   });
 
   if (pie) {
     const {
-      dataValues
+      dataValues: { recipientName, senderName, senderEmail }
     } = pie;
 
     await db.Pie.update(
@@ -120,28 +120,29 @@ app.get("/pies/:id/eat", async function(request, response) {
         eatenAt: moment().toDate()
       },
       {
-        where: { id } // update
+        where: { id }
       }
     );
-    console.log(pie.dataValues);
-    console.log(dataValues)
-    // const notificationHtml = await ejs.renderFile("views/emails/notification.ejs", {
-    //   senderName,
-    // });
-    // const msgNotification = {
-    //   to: senderEmail,
-    //   from: {
-    //     email: "eatingchocopietogether@gmail.com",
-    //     name: "EatChocopieTogether"
-    //   },
-    //   fromname: "EatChocopieTogether",
-    //   subject: `${recipientName} Has Eaten The Chocopie You Shared`,
-    //   html: notificationHtml
-    // };
-    // await sgMail.send(msgNotification);
-  }
 
-  console.log(pie);
+    const notificationHtml = await ejs.renderFile(
+      "views/emails/notification.ejs",
+      {
+        senderName,
+        recipientName
+      }
+    );
+    const msgNotification = {
+      to: senderEmail,
+      from: {
+        email: "eatingchocopietogether@gmail.com",
+        name: "EatChocopieTogether"
+      },
+      fromname: "EatChocopieTogether",
+      subject: `${recipientName} Has Eaten The Chocopie You Shared`,
+      html: notificationHtml
+    };
+    await sgMail.send(msgNotification);
+  }
 
   response.redirect(`/?pieID=${id}`); //&live=true
 });
