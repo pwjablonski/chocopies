@@ -320,41 +320,38 @@
     e.submitter.disabled = true;
     e.submitter.value = "Sending..."
 
-    const response = await sendPie(selectedPieId, data);
-    console.log("test")
+    sendPie(selectedPieId, data);
     e.submitter.disabled = false;
     e.submitter.value = "Send"
+    
+    const checkoutForm = d.querySelector('.checkout__form')
+    checkoutForm.innerHTML = "Sending your pie...." 
 
-    if (response.error) {
-      let senderEmailHelp = document.querySelector(".sender-email .help");
-      senderEmailHelp.innerHTML = response.error.message;
-    } else {
-      sent += 1;
-      drawData(total, sent, eaten);
-      let modal = document.querySelector("#confirmation");
-      modal.classList.add("is-active");
+    sent += 1;
+    drawData(total, sent, eaten);
+    let modal = document.querySelector("#confirmation");
+    modal.classList.add("is-active");
 
-      pies[selectedPieId - 1].senderName = e.target[0].value;
-      pies[selectedPieId - 1].senderEmail = e.target[1].value;
-      pies[selectedPieId - 1].recipientName = e.target[2].value;
-      pies[selectedPieId - 1].recipientEmail = e.target[3].value;
-      pies[selectedPieId - 1].message = e.target[4].value;
-      pies[selectedPieId - 1].subscribedSender = e.target[5].checked;
-      pies[selectedPieId - 1].sentAt = new Date();
-      console.log(selectedPieId)
-      const mainMapPie = d3
-        .select("#main-map")
-        .select("svg")
-        .select("g")
-        .select(`#pie-${selectedPieId}`)
-        .select("svg");
-      
-      mainMapPie
-        .selectAll("*").remove()
-      
-      console.log(mainMapPie)
-      drawEatenPies(mainMapPie);
-    }
+    pies[selectedPieId - 1].senderName = e.target[0].value;
+    pies[selectedPieId - 1].senderEmail = e.target[1].value;
+    pies[selectedPieId - 1].recipientName = e.target[2].value;
+    pies[selectedPieId - 1].recipientEmail = e.target[3].value;
+    pies[selectedPieId - 1].message = e.target[4].value;
+    pies[selectedPieId - 1].subscribedSender = e.target[5].checked;
+    pies[selectedPieId - 1].sentAt = new Date();
+    console.log(selectedPieId)
+    const mainMapPie = d3
+      .select("#main-map")
+      .select("svg")
+      .select("g")
+      .select(`#pie-${selectedPieId}`)
+      .select("svg");
+
+    mainMapPie
+      .selectAll("*").remove()
+
+    console.log(mainMapPie)
+    drawEatenPies(mainMapPie);
 
     e.target[0].value = "";
     e.target[1].value = "";
