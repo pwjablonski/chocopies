@@ -315,14 +315,14 @@
 
     e.submitter.disabled = true;
     e.submitter.value = "Your pie is sending...";
-    const sendingIcon = d.querySelector(".form__sending-icon");
-    sendingIcon.classList.remove("hidden");
+    // const sendingIcon = d.querySelector(".form__sending-icon");
+    // sendingIcon.classList.remove("hidden");
 
     const response = await sendPie(selectedPieId, data);
     console.log("test");
     e.submitter.disabled = false;
     e.submitter.value = "Send";
-    sendingIcon.classList.add("hidden");
+    // sendingIcon.classList.add("hidden");
 
     if (response.error) {
       let senderEmailHelp = document.querySelector(".sender-email .help");
