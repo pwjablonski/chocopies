@@ -319,15 +319,15 @@
     data.subscribedSender = e.target[5].checked;
     data.sentAt = new Date();
 
-    e.submitter.disabled = true;
-    e.submitter.value = "Your pie is sending...";
+    e.target[6].disabled = true;
+    e.target[6].value = "Your pie is sending...";
     // const sendingIcon = d.querySelector(".form__sending-icon");
     // sendingIcon.classList.remove("hidden");
 
     const response = await sendPie(selectedPieId, data);
     console.log("test");
-    e.submitter.disabled = false;
-    e.submitter.value = "Send";
+    e.target[6].disabled = false;
+    e.target[6].value = "Send";
     // sendingIcon.classList.add("hidden");
 
     if (response.error) {
