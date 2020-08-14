@@ -350,7 +350,6 @@
 
       mainMapPie.selectAll("*").remove();
 
-      console.log(mainMapPie);
       drawEatenPies(mainMapPie);
     }
 

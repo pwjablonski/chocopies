@@ -227,7 +227,9 @@ app.post(
       const eatURL = `https://eatchocopietogether.com/pies/${pieId}/eat?recipientEmail=${recipientEmail}`;
       const redirectURL = `https://eatchocopietogether.com/?pieID=${pieId}`; //&live=true
       try {
+        console.log('send-before')
         await response.send(pie);
+        console.log('send-after')
       } catch (e) {
         console.log(e);
       }
