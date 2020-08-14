@@ -301,6 +301,11 @@
     return resp;
   }
 
+  d.addEventListener('invalid', (e)=>{
+    
+  })
+  
+  
   const form = d.querySelector(".checkout__form")
   form.addEventListener("submit", async function(e) {
     console.log(e);
