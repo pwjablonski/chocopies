@@ -1,9 +1,8 @@
 (async function(d, L, d3) {
-  
   if (location.protocol === "http:") {
     location.replace(window.location.href.replace("http:", "https:"));
   }
-  
+
   const EAT =
     "https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2FEat-Chocopie-Together-Mina-Cheon-EAT.png?v=1593119005599";
   const UNITE =
@@ -23,7 +22,7 @@
   let selectedPieId = null;
   let params = new URLSearchParams(document.location.search.substring(1));
   let pieID = params.get("pieID");
-  let wasMoved = false
+  let wasMoved = false;
 
   let zoommap = L.map("zoom-map", {
     zoomControl: false,
@@ -34,15 +33,13 @@
     tap: false
   }).setView([38, 127], 11);
 
-  
-  
-  zoommap.on('move', function(e){
+  zoommap.on("move", function(e) {
     wasMoved = true;
-  })
-  
-  zoommap.on('moveend', function(e){
+  });
+
+  zoommap.on("moveend", function(e) {
     wasMoved = false;
-  })
+  });
 
   // L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   //   maxZoom: 18,
@@ -90,8 +87,8 @@
   }
 
   function zoomPieClicked(e) {
-    if(!wasMoved){
-      console.log('clicked')
+    if (!wasMoved) {
+      console.log("clicked");
       d3.selectAll(".selected").attr("class", "");
       let modal = document.querySelector("#sendPie");
       modal.classList.add("is-active");
@@ -139,7 +136,7 @@
       .attr("height", "100%")
       .attr("width", "100%")
       .attr("fill", "white")
-    .attr("fill-opacity", "0");
+      .attr("fill-opacity", "0");
 
     const eatPieText = eatenPies
       .append("text")
@@ -147,20 +144,19 @@
       .attr("x", "50%")
       .attr("dominant-baseline", "middle")
       .attr("text-anchor", "middle")
-      .attr("font-weight", "bold")
+      .attr("font-weight", "bold");
 
     eatPieText
       .append("tspan")
       .attr("x", "50%")
       .attr("dy", "-1.5em")
       .text(d => d.senderName);
-    
+
     eatPieText
       .append("tspan")
       .attr("x", "50%")
       .attr("dy", "1em")
       .text("&");
-      
 
     eatPieText
       .append("tspan")
@@ -218,15 +214,15 @@
     drawEatenPies(eatenPies);
     drawIntroAnimation();
   }
-  
-  function drawIntroAnimation(){
+
+  function drawIntroAnimation() {
     let i1 = document.createElement("div");
     let i2 = document.createElement("div");
     let i3 = document.createElement("div");
-    i1.setAttribute("id","div1");
-    i2.setAttribute("id","div2");
-    i3.setAttribute("id","div3");
-    
+    i1.setAttribute("id", "div1");
+    i2.setAttribute("id", "div2");
+    i3.setAttribute("id", "div3");
+
     var p = document.getElementById("main-map");
     p.appendChild(i1);
     p.appendChild(i2);
@@ -264,7 +260,7 @@
       .filter(function(d) {
         return !d.sentAt;
       })
-      .on("mouseup", onPieClick)
+      .on("mouseup", onPieClick);
 
     const eatenPies = pieGroups.filter(function(d) {
       return d.sentAt;
@@ -306,7 +302,7 @@
   }
 
   document.addEventListener("submit", async function(e) {
-    console.log(e)
+    console.log(e);
     e.preventDefault();
     const data = {};
     data.senderName = e.target[0].value;
@@ -316,17 +312,17 @@
     data.message = e.target[4].value;
     data.subscribedSender = e.target[5].checked;
     data.sentAt = new Date();
-    
+
     e.submitter.disabled = true;
-    e.submitter.value = "Your pie is sending..."
-    const sendingIcon = d.querySelector(".form__sending-icon")
-    sendingIcon.classList.remove('hidden')
+    e.submitter.value = "Your pie is sending...";
+    const sendingIcon = d.querySelector(".form__sending-icon");
+    sendingIcon.classList.remove("hidden");
 
     const response = await sendPie(selectedPieId, data);
-    console.log("test")
+    console.log("test");
     e.submitter.disabled = false;
-    e.submitter.value = "Send"
-    sendingIcon.classList.add('hidden')
+    e.submitter.value = "Send";
+    sendingIcon.classList.add("hidden");
 
     if (response.error) {
       let senderEmailHelp = document.querySelector(".sender-email .help");
@@ -344,18 +340,17 @@
       pies[selectedPieId - 1].message = e.target[4].value;
       pies[selectedPieId - 1].subscribedSender = e.target[5].checked;
       pies[selectedPieId - 1].sentAt = new Date();
-      console.log(selectedPieId)
+      console.log(selectedPieId);
       const mainMapPie = d3
         .select("#main-map")
         .select("svg")
         .select("g")
         .select(`#pie-${selectedPieId}`)
         .select("svg");
-      
-      mainMapPie
-        .selectAll("*").remove()
-      
-      console.log(mainMapPie)
+
+      mainMapPie.selectAll("*").remove();
+
+      console.log(mainMapPie);
       drawEatenPies(mainMapPie);
     }
 
@@ -367,4 +362,3 @@
     e.target[5].checked = false;
   });
 })(document, L, d3);
-
