@@ -432,19 +432,19 @@ h4.title {
   }
   
   #div1 {
-  top: 34%;
+  top: 32%;
   left: 8%;
   animation-delay: 1s;
   background-image: url(https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fintro-animation-div1.png?v=1593203798002);
 }
 #div2 {
-  top: 45%;
+  top: 43%;
   left: 60%;
     animation-delay: 2s;
   background-image: url(https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fintro-animation-div2.png?v=1593203797862);
 }
 #div3 {
-  top: 60%;
+  top: 55%;
   left: 11%;   
   animation-delay: 3s;
     background-image: url(https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fintro-animation-div3.png?v=1593203798042);
