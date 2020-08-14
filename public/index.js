@@ -301,7 +301,8 @@
     return resp;
   }
 
-  document.addEventListener("submit", async function(e) {
+  const form = d.querySelector(".checkout__form")
+  form.addEventListener("submit", async function(e) {
     console.log(e);
     e.preventDefault();
     const data = {};
