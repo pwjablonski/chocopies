@@ -320,7 +320,7 @@
     data.sentAt = new Date();
 
     e.target[6].disabled = true;
-    e.target[6].value = "Your pie is sending...";
+    e.target[6].value = "Sending your Chocopie...";
     // const sendingIcon = d.querySelector(".form__sending-icon");
     // sendingIcon.classList.remove("hidden");
 

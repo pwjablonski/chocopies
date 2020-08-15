@@ -199,12 +199,12 @@ app.post(
       }
     });
 
-    if (sentPies > 9) {
+    if (sentPies > 29) {
       response.send({
         error: {
           type: "too many requests",
           message:
-            "You've already claimed 10 pies in the last hour. Come back later to share more pies!"
+            "You've shared too many Chocopies in the last hour. Please come back later!"
         }
       });
     } else {
