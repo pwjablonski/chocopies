@@ -274,6 +274,9 @@ app.post(
         await sgMail.send(msgSender);
       } catch (e) {
         console.log(e);
+        console.log(e.response);
+        console.log(e.response.body);
+        console.log(e.response.body.errors);
       }
     }
   }
