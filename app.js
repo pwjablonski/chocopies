@@ -62,7 +62,7 @@ app.get("/shop", function(request, response) {
 });
 
 app.get("/privacy", function(request, response) {
-  // db.Pie.update({eatenAt:null, sentAt:null, senderName: null, senderEmail:null, recipientName: null, recipientEmail: null, subscribedSender: null, message:null}, {where:{id:1}})
+  db.Pie.update({eatenAt:null, sentAt:null, senderName: null, senderEmail:null, recipientName: null, recipientEmail: null, subscribedSender: null, message:null}, {where:{id:1}})
   response.render("pages/privacy");
 });
 
