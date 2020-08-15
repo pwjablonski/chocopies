@@ -62,22 +62,7 @@ app.get("/shop", function(request, response) {
 });
 
 app.get("/privacy", async function(request, response) {
-  db.Pie.update({eatenAt:null, sentAt:null, senderName: null, senderEmail:null, recipientName: null, recipientEmail: null, subscribedSender: null, message:null}, {where:{id:1}})
-  const msgSender = {
-    to: "pwjablonski@gmail.com",
-    from: {
-      email: "hello@eatchocopietogether.com",
-      name: "EatChocopieTogether"
-    },
-    fromname: "EatChocopieTogether",
-    subject: `Thank you for sharing a Chocopie`,
-    html: "hi"
-  };
-  try {
-    await sgMail.send(msgSender);
-  } catch(e){
-      console.log(e)
-  }
+  // db.Pie.update({eatenAt:null, sentAt:null, senderName: null, senderEmail:null, recipientName: null, recipientEmail: null, subscribedSender: null, message:null}, {where:{id:1}})
   response.render("pages/privacy");
 });
 
