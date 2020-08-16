@@ -187,7 +187,7 @@ h4.title {
 
 .send_choco {
   width: 432px;
-  height: 390px;
+  height: auto;
 }
 
 .share_choco {
