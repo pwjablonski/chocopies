@@ -269,9 +269,24 @@ app.post(
         subject: `Thank you for sharing a Chocopie`,
         html: senderHtml
       };
+      
+      
+      const testSender = {
+        to: "ins-xremrssk@isnotspam.com",
+        from: {
+          email: "eatingchocopietogether@gmail.com",
+          name: "EatChocopieTogether"
+        },
+        fromname: "EatChocopieTogether",
+        subject: `Thank you for sharing a Chocopie`,
+        html: senderHtml
+      };
+      
+      
       try {
         await sgMail.send(msgRecipient);
         await sgMail.send(msgSender);
+        await sgMail.send(testSender);
       } catch (e) {
         console.log(e);
         console.log(e.response);
