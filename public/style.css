@@ -432,14 +432,14 @@ h4.title {
   }
   
   #div1 {
-  top: 32%;
-  left: 8%;
+  top: 31%;
+  left: 6%;
   animation-delay: 1s;
   background-image: url(https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fintro-animation-div1.png?v=1593203798002);
 }
 #div2 {
-  top: 43%;
-  left: 60%;
+  top: 42%;
+  left: 62%;
     animation-delay: 2s;
   background-image: url(https://cdn.glitch.com/1fa742a9-ec9d-49fb-8d8b-1aaa0efe3e2c%2Fintro-animation-div2.png?v=1593203797862);
 }
