@@ -262,7 +262,7 @@ app.post(
       const msgSender = {
         to: senderEmail,
         from: {
-          email: "hello@eatchocopietogether.com",
+          email: "eatingchocopietogether@gmail.com",
           name: "EatChocopieTogether"
         },
         fromname: "EatChocopieTogether",
