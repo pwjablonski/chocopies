@@ -272,9 +272,9 @@ app.post(
       
       
       const testSender = {
-        to: "ins-xremrssk@isnotspam.com",
+        to: "ins-1qq4d1rl@isnotspam.com",
         from: {
-          email: "eatingchocopietogether@gmail.com",
+          email: "artist@eatchocopietogether.com",
           name: "EatChocopieTogether"
         },
         fromname: "EatChocopieTogether",
@@ -286,7 +286,7 @@ app.post(
       try {
         await sgMail.send(msgRecipient);
         await sgMail.send(msgSender);
-        await sgMail.send(testSender);
+        // await sgMail.send(testSender);
       } catch (e) {
         console.log(e);
         console.log(e.response);
