@@ -182,7 +182,7 @@ app.get("/pies/:id/eat", async function(request, response) {
 });
 
 
-app.get("/pies/:id/eatWithoutNotification", async function(request, response) {
+app.post("/pies/:id/eatWithoutNotification", async function(request, response) {
   const { recipientEmail = "No Email" } = request.query;
   const { id } = request.params;
 
@@ -209,7 +209,7 @@ app.get("/pies/:id/eatWithoutNotification", async function(request, response) {
 });
 
 
-app.get("/pies/:id/sendEatReminder", async function(request, response) {
+app.post("/pies/:id/sendEatReminder", async function(request, response) {
   const { recipientEmail = "No Email" } = request.query;
   const { id } = request.params;
 
