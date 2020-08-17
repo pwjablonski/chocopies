@@ -39,8 +39,15 @@
             if(pie.sentAt && !pie.eatenAt){
               const pieEatButton = d.createElement("a")
               pieEatButton.innerHTML = "Eat Pie"
-              pieEatButton.href = `https://eatchocopietogether.com/pies/${pie.id}/eat?recipientEmail=${pie.recipientEmail}`
+              pieEatButton.href = `https://eatchocopietogether.com/pies/${pie.id}/eatWithoutNotification?recipientEmail=${pie.recipientEmail}`
               pieEatenAt.append(pieEatButton)
+              
+              pieEatenAt.append(" | ")
+              
+              const pieReminderButton = d.createElement("a")
+              pieReminderButton.innerHTML = "Send Reminder"
+              pieReminderButton.href = `https://eatchocopietogether.com/pies/${pie.id}/sendEatReminder?recipientEmail=${pie.recipientEmail}`
+              pieEatenAt.append(pieReminderButton)
             }
 
             if(pie.id== 258){

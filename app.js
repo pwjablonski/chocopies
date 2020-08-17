@@ -95,7 +95,7 @@ app.get("/manage", function(request, response) {
 });
 
 app.get("/privacy", async function(request, response) {
-  // db.Pie.update({eatenAt:null, sentAt:null, senderName: null, senderEmail:null, recipientName: null, recipientEmail: null, subscribedSender: null, message:null}, {where:{id:1}})
+  db.Pie.update({eatenAt:null, sentAt:null, senderName: null, senderEmail:null, recipientName: null, recipientEmail: null, subscribedSender: null, message:null}, {where:{id:1}})
   response.render("pages/privacy");
 });
 
@@ -181,7 +181,8 @@ app.get("/pies/:id/eat", async function(request, response) {
   response.redirect(`/?pieID=${id}`); //&live=true
 });
 
-app.get("/pies/:id/sendEatReminder", async function(request, response) {
+
+app.get("/pies/:id/eatWithoutNotification", async function(request, response) {
   const { recipientEmail = "No Email" } = request.query;
   const { id } = request.params;
 
@@ -193,6 +194,33 @@ app.get("/pies/:id/sendEatReminder", async function(request, response) {
     const {
       dataValues: { recipientName, senderName, senderEmail }
     } = pie;
+
+    await db.Pie.update(
+      {
+        eatenAt: moment().toDate()
+      },
+      {
+        where: { id }
+      }
+    );
+  }
+
+  response.redirect(`/manage`); //&live=true
+});
+
+
+app.get("/pies/:id/sendEatReminder", async function(request, response) {
+  const { recipientEmail = "No Email" } = request.query;
+  const { id } = request.params;
+
+  const pie = await db.Pie.findOne({
+    where: { id, recipientEmail, eatenAt: null }
+  });
+
+  if (pie) {
+    const {
+      dataValues: { recipientName, senderName, senderEmail, message }
+    } = pie;
    const imageURL = idToImageURL(id);
    const eatURL = `https://eatchocopietogether.com/pies/${id}/eat?recipientEmail=${recipientEmail}`;
       const recipientHtml = await ejs.renderFile("views/emails/recipient.ejs", {
@@ -200,7 +228,7 @@ app.get("/pies/:id/sendEatReminder", async function(request, response) {
         pieURL: eatURL,
         senderName,
         recipientName,
-        message: ""
+        message
       });
       const msgRecipient = {
         to: recipientEmail,
