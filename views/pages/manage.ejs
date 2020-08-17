@@ -15,11 +15,15 @@
         let pies = pieData.pies;
         const piesTable = d.querySelector(".pies__list")
         
+        
+        pies = sortPies(pies, "sentAt")
         drawPies(pies)
         
         
-        function sortPies(){
-          
+        function sortPies(pies, value){
+          return pies.sort(function(a,b){
+            return a[value] - b[value] 
+          })
         }
         
         function drawPies(pies){
