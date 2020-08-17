@@ -11,6 +11,18 @@ const { body } = require("express-validator");
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
+// passport.use(new GoogleStrategy({
+//     clientID: GOOGLE_CLIENT_ID,
+//     clientSecret: GOOGLE_CLIENT_SECRET,
+//     callbackURL: "http://www.example.com/auth/google/callback"
+//   },
+//   function(accessToken, refreshToken, profile, done) {
+//        User.findOrCreate({ googleId: profile.id }, function (err, user) {
+//          return done(err, user);
+//        });
+//   }
+// ));
+
 const app = express();
 
 app.set("views", __dirname + "/views");
@@ -18,6 +30,10 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
+
+
+
+
 
 function checkHttps(req, res, next) {
   // protocol check, if http, redirect to https
