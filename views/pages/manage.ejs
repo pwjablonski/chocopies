@@ -23,7 +23,6 @@
             const pieId = d.createElement("td")
             const pieSentAt = d.createElement("td")
             const pieEatenAt = d.createElement("td")
-            const pieEatButton = d.createElement("a")
 
             pieId.innerHTML = pie.id
             if(pie.sentAt){
@@ -32,10 +31,16 @@
             if(pie.eatenAt){
                pieEatenAt.innerHTML = new Date(pie.eatenAt)
             }
-            if(pie.sentAt && !pie.eated){
-              pieEat
+            if(pie.sentAt && !pie.eatenAt){
+              const pieEatButton = d.createElement("a")
+              pieEatButton.innerHTML = "Eat Pie"
+              pieEatButton.href = `https://eatchocopietogether.com/pies/${pie.id}/eat?recipientEmail=${pie.recipientEmail}`
+              pieEatenAt.append(pieEatButton)
             }
 
+            if(pie.id== 258){
+              console.log(pie)
+            }
             pieRow.append(pieId)
             pieRow.append(pieSentAt)
             pieRow.append(pieEatenAt)
