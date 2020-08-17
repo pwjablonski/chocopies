@@ -248,7 +248,7 @@ app.post(
           email: "eatingchocopietogether@gmail.com",
           name: "EatChocopieTogether"
         },
-        subject: `A Chocopie For You, From ${senderName}`,
+        subject: `A Chocopie From ${senderName}`,
         html: recipientHtml
       };
 
