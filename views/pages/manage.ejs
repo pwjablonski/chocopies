@@ -15,39 +15,34 @@
         let pies = pieData.pies;
         const piesTable = d.querySelector(".pies__list")
         
-        
-        pies = sortPies(pies, "sentAt")
         drawPies(pies)
-        
-        
-        function sortPies(pies, value){
-          return pies.sort(function(a,b){
-            return a[value] - b[value] 
-          })
-        }
         
         function drawPies(pies){
           pies.forEach(function(pie){
-          const pieRow = d.createElement("tr")
-          const pieId = d.createElement("td")
-          const pieSentAt = d.createElement("td")
-          const pieEatenAt = d.createElement("td")
+            const pieRow = d.createElement("tr")
+            const pieId = d.createElement("td")
+            const pieSentAt = d.createElement("td")
+            const pieEatenAt = d.createElement("td")
+            const pieEatButton = d.createElement("a")
 
-          pieId.innerHTML = pie.id
-          if(pie.sentAt){
-             pieSentAt.innerHTML = new Date(pie.sentAt)
-          }
-          if(pie.eatenAt){
-             pieEatenAt.innerHTML = new Date(pie.eatenAt)
-          }
-          
-          pieRow.append(pieId)
-          pieRow.append(pieSentAt)
-          pieRow.append(pieEatenAt)
-          
-          
-          piesTable.append(pieRow)
-        })
+            pieId.innerHTML = pie.id
+            if(pie.sentAt){
+               pieSentAt.innerHTML = new Date(pie.sentAt)
+            }
+            if(pie.eatenAt){
+               pieEatenAt.innerHTML = new Date(pie.eatenAt)
+            }
+            if(pie.sentAt && !pie.eated){
+              pieEat
+            }
+
+            pieRow.append(pieId)
+            pieRow.append(pieSentAt)
+            pieRow.append(pieEatenAt)
+
+
+            piesTable.append(pieRow)
+          })
         }
         
         
