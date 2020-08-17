@@ -181,6 +181,43 @@ app.get("/pies/:id/eat", async function(request, response) {
   response.redirect(`/?pieID=${id}`); //&live=true
 });
 
+app.get("/pies/:id/sendEatReminder", async function(request, response) {
+  const { recipientEmail = "No Email" } = request.query;
+  const { id } = request.params;
+
+  const pie = await db.Pie.findOne({
+    where: { id, recipientEmail, eatenAt: null }
+  });
+
+  if (pie) {
+    const {
+      dataValues: { recipientName, senderName, senderEmail }
+    } = pie;
+   const imageURL = idToImageURL(id);
+   const eatURL = `https://eatchocopietogether.com/pies/${id}/eat?recipientEmail=${recipientEmail}`;
+      const recipientHtml = await ejs.renderFile("views/emails/recipient.ejs", {
+        imageURL,
+        pieURL: eatURL,
+        senderName,
+        recipientName,
+        message: ""
+      });
+      const msgRecipient = {
+        to: recipientEmail,
+        //cc: senderEmail,
+        from: {
+          email: "eatingchocopietogether@gmail.com",
+          name: "EatChocopieTogether"
+        },
+        subject: `A Chocopie From ${senderName}`,
+        html: recipientHtml
+      };
+    await sgMail.send(msgRecipient);
+  }
+
+  response.redirect(`/manage`); //&live=true
+});
+
 app.post(
   "/pies",
   [
