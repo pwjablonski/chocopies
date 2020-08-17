@@ -8,6 +8,9 @@ const db = require("./models/index.js");
 const idToImageURL = require("./util/idToImageURL.js");
 const { body } = require("express-validator");
 
+var passport = require('passport');
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
 const app = express();
 
 app.set("views", __dirname + "/views");
