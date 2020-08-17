@@ -7,8 +7,25 @@
     <%- include('../partials/head'); %>
     <title>Eat Chocopie Together - About</title>
     <script>
-      (function(d){
-        const pies = d.querySelector(".pies__list")
+      (async function(d){
+        let pieData = await fetchPies();
+        let sent = pieData.sent;
+        let eaten = pieData.eaten;
+        let total = pieData.total;
+        let pies = pieData.pies;
+        const piesDiv = d.querySelector(".pies__list")
+        
+        pies.forEach(function(pie){
+          const pieDiv = d.createElement("div")
+          pieDiv.innerHTML = pie.id
+          piesDiv.append(pieDiv)
+        })
+        
+        async function fetchPies() {
+          const req = await fetch("/pies");
+          const resp = await req.json();
+          return resp;
+        }
         
       })(document)
     </script>
