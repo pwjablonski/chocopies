@@ -21,10 +21,15 @@
           pies.forEach(function(pie){
             const pieRow = d.createElement("tr")
             const pieId = d.createElement("td")
+            const pieSender = d.createElement("td")
+            const pieRecipient = d.createElement("td")
             const pieSentAt = d.createElement("td")
             const pieEatenAt = d.createElement("td")
 
             pieId.innerHTML = pie.id
+            pieSender.innerHTML = pie.senderName
+            pieRecipient.innerHTML = pie.recipientName
+            
             if(pie.sentAt){
                pieSentAt.innerHTML = new Date(pie.sentAt)
             }
@@ -42,6 +47,8 @@
               console.log(pie)
             }
             pieRow.append(pieId)
+            pieRow.append(pieSender)
+            pieRow.append(pieRecipient)
             pieRow.append(pieSentAt)
             pieRow.append(pieEatenAt)
 
@@ -67,7 +74,9 @@
     <section class="section">
       <table class="pies__list table">
         <thead>
-          <th>Id</th>
+          <th>id</th>
+          <th>Sender</th>
+          <th>Recipient</th>
           <th>Sent At</th>
           <th>Eaten At</th>
         </thead>
