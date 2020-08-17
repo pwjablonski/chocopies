@@ -15,20 +15,37 @@
         let pies = pieData.pies;
         const piesTable = d.querySelector(".pies__list")
         
-        pies.forEach(function(pie){
+        drawPies(pies)
+        
+        
+        function sortPies(){
+          
+        }
+        
+        function drawPies(pies){
+          pies.forEach(function(pie){
+          const pieRow = d.createElement("tr")
           const pieId = d.createElement("td")
           const pieSentAt = d.createElement("td")
           const pieEatenAt = d.createElement("td")
 
           pieId.innerHTML = pie.id
-          pieSentAt.innerHTML = pie.sentAt
-          pieEatenAt.innerHTML = pie.eatenAt
-
+          if(pie.sentAt){
+             pieSentAt.innerHTML = new Date(pie.sentAt)
+          }
+          if(pie.eatenAt){
+             pieEatenAt.innerHTML = new Date(pie.eatenAt)
+          }
           
-          const pieRow = d.createElement("tr")
           pieRow.append(pieId)
+          pieRow.append(pieSentAt)
+          pieRow.append(pieEatenAt)
+          
+          
           piesTable.append(pieRow)
         })
+        }
+        
         
         async function fetchPies() {
           const req = await fetch("/pies");
