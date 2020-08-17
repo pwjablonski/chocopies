@@ -13,12 +13,21 @@
         let eaten = pieData.eaten;
         let total = pieData.total;
         let pies = pieData.pies;
-        const piesDiv = d.querySelector(".pies__list")
+        const piesTable = d.querySelector(".pies__list")
         
         pies.forEach(function(pie){
-          const pieDiv = d.createElement("div")
-          pieDiv.innerHTML = pie.id
-          piesDiv.append(pieDiv)
+          const pieId = d.createElement("td")
+          const pieSentAt = d.createElement("td")
+          const pieEatenAt = d.createElement("td")
+
+          pieId.innerHTML = pie.id
+          pieSentAt.innerHTML = pie.sentAt
+          pieEatenAt.innerHTML = pie.eatenAt
+
+          
+          const pieRow = d.createElement("tr")
+          pieRow.append(pieId)
+          piesTable.append(pieRow)
         })
         
         async function fetchPies() {
@@ -35,9 +44,14 @@
       <%- include('../partials/header'); %>
     </header>
     <section class="section">
-      <div class="pies__list">
+      <table class="pies__list table">
+        <thead>
+          <th>Id</th>
+          <th>Sent At</th>
+          <th>Eaten At</th>
+        </thead>
         
-      </div>
+      </table>
     </section>
     <footer class="footer">
       <%- include('../partials/footer'); %>
