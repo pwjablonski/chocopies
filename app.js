@@ -119,7 +119,7 @@ app.get("/shop", function(request, response) {
   response.render("pages/shop");
 });
 
-app.get("/manage", function(request, response) {
+app.get("/manage", isUserAuthenticated, function(request, response) {
   response.render("pages/manage");
 });
 
