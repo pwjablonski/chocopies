@@ -83,6 +83,11 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 // ROUTES
 
 
+app.get('login', 
+  function(req, res) {
+    res.redirect('/auth/google');
+  });
+
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
 
