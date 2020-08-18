@@ -19,7 +19,7 @@ passport.use(new GoogleStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
       console.log(profile)
-       // done(null, profile);
+       done(null, profile);
        // db.User.findOrCreate({ googleId: profile.id }, function (err, user) {
        //   return done(err, user);
        // });
@@ -38,6 +38,7 @@ passport.deserializeUser((user, done) => {
 
 // Middleware to check if the user is authenticated
 function isUserAuthenticated(req, res, next) {
+    console.log(req.user)
     if (req.user) {
         next();
     } else {
