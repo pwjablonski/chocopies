@@ -42,7 +42,7 @@ function isUserAuthenticated(req, res, next) {
     if (req.user) {
         next();
     } else {
-        res.send('You must login!');
+        res.redirect('/');
     }
 }
 
@@ -83,7 +83,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 // ROUTES
 
 
-app.get('login', 
+app.get('/login', 
   function(req, res) {
     res.redirect('/auth/google');
   });
