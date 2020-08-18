@@ -220,11 +220,10 @@ app.get("/pies/:id/eat", async function(request, response) {
 
 
 app.post("/pies/:id/eatWithoutNotification", async function(request, response) {
-  const { recipientEmail = "No Email" } = request.query;
   const { id } = request.params;
 
   const pie = await db.Pie.findOne({
-    where: { id, recipientEmail, eatenAt: null }
+    where: { id, eatenAt: null }
   });
 
   if (pie) {
@@ -246,17 +245,16 @@ app.post("/pies/:id/eatWithoutNotification", async function(request, response) {
 });
 
 
-app.post("/pies/:id/sendEatReminder", async function(request, response) {
-  const { recipientEmail = "No Email" } = request.query;
+app.post("/pies/:id/sendReminder", async function(request, response) {
   const { id } = request.params;
 
   const pie = await db.Pie.findOne({
-    where: { id, recipientEmail, eatenAt: null }
+    where: { id, eatenAt: null }
   });
 
   if (pie) {
     const {
-      dataValues: { recipientName, senderName, senderEmail, message }
+      dataValues: { recipientEmail, recipientName, senderName, senderEmail, message }
     } = pie;
    const imageURL = idToImageURL(id);
    const eatURL = `https://eatchocopietogether.com/pies/${id}/eat?recipientEmail=${recipientEmail}`;
