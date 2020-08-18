@@ -53,16 +53,21 @@
 
       piesTable.append(pieRow);
     });
-
-    d.addEventListener("click", function(e) {
-      if (e.target.classList.contains("eat-button")) {
-        
-        eatPie(e.target.dataset.id);
-      } else if (e.target.classList.contains("reminder-button")) {
-        sendReminder(e.target.dataset.id);
-      }
-    });
   }
+
+  d.addEventListener("click", async function(e) {
+    if (e.target.classList.contains("eat-button")) {
+      const okay = confirm("Are you sure you want to eat this pie?");
+      if (okay) {
+        await eatPie(e.target.dataset.id);
+      }
+    } else if (e.target.classList.contains("reminder-button")) {
+      const okay = confirm("Are you sure you want to send a reminder email");
+      if (okay) {
+        // sendReminder(e.target.dataset.id);
+      }
+    }
+  });
 
   async function eatPie(pieId) {
     const req = await fetch(`/pies/${pieId}/eatWithoutNotification`, {
@@ -70,8 +75,8 @@
       body: JSON.stringify({ pieId }),
       headers: { "Content-Type": "application/json" }
     });
-    const resp = await req.json();
-    return resp;
+    // const resp = await req.json();
+    // return resp;
   }
 
   async function sendReminder(pieId) {

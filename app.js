@@ -225,23 +225,23 @@ app.post("/pies/:id/eatWithoutNotification", async function(request, response) {
   const pie = await db.Pie.findOne({
     where: { id, eatenAt: null }
   });
+  console.log(pie)
+//   if (pie) {
+//     const {
+//       dataValues: { recipientName, senderName, senderEmail }
+//     } = pie;
 
-  if (pie) {
-    const {
-      dataValues: { recipientName, senderName, senderEmail }
-    } = pie;
+//     await db.Pie.update(
+//       {
+//         eatenAt: moment().toDate()
+//       },
+//       {
+//         where: { id }
+//       }
+//     );
+//   }
 
-    await db.Pie.update(
-      {
-        eatenAt: moment().toDate()
-      },
-      {
-        where: { id }
-      }
-    );
-  }
-
-  response.redirect(`/manage`); //&live=true
+  await response.send(pie);
 });
 
 
