@@ -37,22 +37,23 @@
                pieEatenAt.innerHTML = new Date(pie.eatenAt)
             }
             if(pie.sentAt && !pie.eatenAt){
-              const pieEatButton = d.createElement("a")
+              const pieEatButton = d.createElement("button")
               pieEatButton.innerHTML = "Eat Pie"
-              pieEatButton.href = `https://eatchocopietogether.com/pies/${pie.id}/eatWithoutNotification?recipientEmail=${pie.recipientEmail}`
+              pieEatButton.classList.add('eat-button')
+              pieEatButton.dataset.id = pie.id
+              // pieEatButton.href = `https://eatchocopietogether.com/pies/${pie.id}/eatWithoutNotification?recipientEmail=${pie.recipientEmail}`
               pieEatenAt.append(pieEatButton)
               
               pieEatenAt.append(" | ")
               
-              const pieReminderButton = d.createElement("a")
+              const pieReminderButton = d.createElement("button")
               pieReminderButton.innerHTML = "Send Reminder"
-              pieReminderButton.href = `https://eatchocopietogether.com/pies/${pie.id}/sendEatReminder?recipientEmail=${pie.recipientEmail}`
+              pieReminderButton.classList.add('reminder-button')
+              pieReminderButton.dataset.id = pie.id
+              // pieReminderButton.href = `https://eatchocopietogether.com/pies/${pie.id}/sendEatReminder?recipientEmail=${pie.recipientEmail}`
               pieEatenAt.append(pieReminderButton)
             }
 
-            if(pie.id== 258){
-              console.log(pie)
-            }
             pieRow.append(pieId)
             pieRow.append(pieSender)
             pieRow.append(pieRecipient)
@@ -61,8 +62,18 @@
 
 
             piesTable.append(pieRow)
+          });
+          
+          d.addEventListener('click', function(e){
+            if(e.target.classList.contains("eat-button")){
+              console.log('eat')
+            } else if(e.target.classList.contains("reminder-button")){
+              
+            }
           })
+          
         }
+        
         
         
         async function fetchPies() {
