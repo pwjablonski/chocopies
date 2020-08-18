@@ -19,6 +19,7 @@ passport.use(new GoogleStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
       console.log(profile)
+       // done(null, profile);
        // db.User.findOrCreate({ googleId: profile.id }, function (err, user) {
        //   return done(err, user);
        // });
@@ -118,9 +119,9 @@ app.get("/shop", function(request, response) {
   response.render("pages/shop");
 });
 
-// app.get("/manage", function(request, response) {
-//   response.render("pages/manage");
-// });
+app.get("/manage", function(request, response) {
+  response.render("pages/manage");
+});
 
 app.get("/privacy", async function(request, response) {
   // db.Pie.update({eatenAt:null, sentAt:null, senderName: null, senderEmail:null, recipientName: null, recipientEmail: null, subscribedSender: null, message:null}, {where:{id:1}})
