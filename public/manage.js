@@ -60,11 +60,13 @@
       const okay = confirm("Are you sure you want to eat this pie?");
       if (okay) {
         await eatPie(e.target.dataset.id);
+        window.location.replace("/manage");
       }
     } else if (e.target.classList.contains("reminder-button")) {
       const okay = confirm("Are you sure you want to send a reminder email");
       if (okay) {
         // sendReminder(e.target.dataset.id);
+        window.location.replace("/manage");
       }
     }
   });
@@ -75,8 +77,8 @@
       body: JSON.stringify({ pieId }),
       headers: { "Content-Type": "application/json" }
     });
-    // const resp = await req.json();
-    // return resp;
+    const resp = await req.json();
+    return resp;
   }
 
   async function sendReminder(pieId) {
