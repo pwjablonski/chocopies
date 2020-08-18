@@ -10,6 +10,7 @@ const { body } = require("express-validator");
 
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const cookieSession = require('cookie-session');
 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -31,7 +32,14 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
+// cookieSession config
+app.use(cookieSession({
+    maxAge: 24 * 60 * 60 * 1000, // One day in milliseconds
+    keys: ['randomstringhere']
+}));
 
+app.use(passport.initialize()); // Used to initialize passport
+app.use(passport.session()); // Used to persist login sessions
 
 
 
