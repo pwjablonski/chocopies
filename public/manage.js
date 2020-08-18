@@ -4,7 +4,15 @@
   let eaten = pieData.eaten;
   let total = pieData.total;
   let pies = pieData.pies;
+  
   const piesTable = d.querySelector(".pies__list");
+  const eatenDiv = d.querySelector(".eaten");
+  const sentDiv = d.querySelector(".sent");
+  
+  eatenDiv.innerHtml = `pies eaten`
+  sentDiv.innerHtml = `pies sent`
+  
+  console.log(eatenDiv)
 
   drawPies(pies);
 
