@@ -62,9 +62,6 @@ app.use(cookieSession({
 app.use(passport.initialize()); // Used to initialize passport
 app.use(passport.session()); // Used to persist login sessions
 
-
-
-
 function checkHttps(req, res, next) {
   // protocol check, if http, redirect to https
 
@@ -88,13 +85,18 @@ app.get('/login',
     res.redirect('/auth/google');
   });
 
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
 
 app.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/');
+    res.redirect('/manage');
   });
 
 app.get("/", function(request, response) {
