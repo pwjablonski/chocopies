@@ -14,7 +14,7 @@ window.onload = async function(d) {
     const sentDiv = d.querySelector("#sent");
     
     const dataDiv = d.querySelector(".data");
-    const eatenText = d.createElement("div");
+    let eatenText = d.createElement("div");
     eatenText.innerHtml = "hi"
     dataDiv.append(eatenText)
 
