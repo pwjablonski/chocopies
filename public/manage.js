@@ -1,4 +1,4 @@
-(async function(d) {
+window.onload = async function(d) {
   let pieData = await fetchPies();
   let sent = pieData.sent;
   let eaten = pieData.eaten;
@@ -12,6 +12,11 @@
   function drawData(sent, eaten){
     const eatenDiv = d.querySelector("#eaten");
     const sentDiv = d.querySelector("#sent");
+    
+    const dataDiv = d.querySelector(".data");
+    const eatenText = d.createElement("div");
+    eatenText.innerHtml = "hi"
+    dataDiv.append(eatenText)
 
     eatenDiv.innerHtml = "pies eaten";
     sentDiv.innerHtml = "pies sent";
@@ -120,4 +125,4 @@
     const resp = await req.json();
     return resp;
   }
-})(document);
+}(document);

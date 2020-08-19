@@ -20,7 +20,6 @@ passport.use(
       callbackURL: "https://eatchocopietogether.com/auth/google/callback"
     },
     function(accessToken, refreshToken, profile, done) {
-      console.log(profile);
       done(null, profile);
       // db.User.findOrCreate({ googleId: profile.id }, function (err, user) {
       //   return done(err, user);
@@ -41,7 +40,6 @@ passport.deserializeUser((user, done) => {
 
 // Middleware to check if the user is authenticated
 function isUserAuthenticated(req, res, next) {
-  console.log(req.user);
   if (req.user.id === process.env.GOOGLE_ID) {
     next();
   } else {
@@ -426,9 +424,6 @@ app.post(
         // await sgMail.send(testSender);
       } catch (e) {
         console.log(e);
-        console.log(e.response);
-        console.log(e.response.body);
-        console.log(e.response.body.errors);
       }
     }
   }
