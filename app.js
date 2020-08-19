@@ -241,7 +241,7 @@ app.post("/pies/:id/eatWithoutNotification", async function(request, response) {
 //     );
 //   }
 
-  await response.send(pie);
+  response.send(pie);
 });
 
 
@@ -254,16 +254,15 @@ app.post("/pies/:id/sendReminder", async function(request, response) {
 
   if (pie) {
     const {
-      dataValues: { recipientEmail, recipientName, senderName, senderEmail, message }
+      dataValues: { recipientEmail, recipientName, senderName, senderEmail }
     } = pie;
    const imageURL = idToImageURL(id);
    const eatURL = `https://eatchocopietogether.com/pies/${id}/eat?recipientEmail=${recipientEmail}`;
-      const recipientHtml = await ejs.renderFile("views/emails/recipient.ejs", {
+      const recipientHtml = await ejs.renderFile("views/emails/reminder.ejs", {
         imageURL,
         pieURL: eatURL,
         senderName,
         recipientName,
-        message
       });
       const msgRecipient = {
         to: recipientEmail,
@@ -278,7 +277,7 @@ app.post("/pies/:id/sendReminder", async function(request, response) {
     await sgMail.send(msgRecipient);
   }
 
-  response.redirect(`/manage`); //&live=true
+  response.send(pie);//&live=true
 });
 
 app.post(
@@ -361,7 +360,7 @@ app.post(
       const redirectURL = `https://eatchocopietogether.com/?pieID=${pieId}`; //&live=true
       try {
         console.log('send-before')
-        await response.send(pie);
+        response.send(pie);
         console.log('send-after')
       } catch (e) {
         console.log(e);
