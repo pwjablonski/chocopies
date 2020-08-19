@@ -73,8 +73,8 @@
     } else if (e.target.classList.contains("reminder-button")) {
       const okay = confirm("Are you sure you want to send a reminder email");
       if (okay) {
-        // sendReminder(e.target.dataset.id);
-        window.location.replace("/manage");
+        sendReminder(e.target.dataset.id);
+        alert('Message Sent!')
       }
     }
   });

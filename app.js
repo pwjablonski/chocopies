@@ -8,42 +8,45 @@ const db = require("./models/index.js");
 const idToImageURL = require("./util/idToImageURL.js");
 const { body } = require("express-validator");
 
-var passport = require('passport');
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-const cookieSession = require('cookie-session');
+var passport = require("passport");
+var GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
+const cookieSession = require("cookie-session");
 
-passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "https://eatchocopietogether.com/auth/google/callback"
-  },
-  function(accessToken, refreshToken, profile, done) {
-      console.log(profile)
-       done(null, profile);
-       // db.User.findOrCreate({ googleId: profile.id }, function (err, user) {
-       //   return done(err, user);
-       // });
-  }
-));
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: "https://eatchocopietogether.com/auth/google/callback"
+    },
+    function(accessToken, refreshToken, profile, done) {
+      console.log(profile);
+      done(null, profile);
+      // db.User.findOrCreate({ googleId: profile.id }, function (err, user) {
+      //   return done(err, user);
+      // });
+    }
+  )
+);
 
 // Used to stuff a piece of information into a cookie
 passport.serializeUser((user, done) => {
-    done(null, user);
+  done(null, user);
 });
 
 // Used to decode the received cookie and persist session
 passport.deserializeUser((user, done) => {
-    done(null, user);
+  done(null, user);
 });
 
 // Middleware to check if the user is authenticated
 function isUserAuthenticated(req, res, next) {
-    console.log(req.user)
-    if (req.user) {
-        next();
-    } else {
-        res.redirect('/');
-    }
+  console.log(req.user);
+  if (req.user.id === process.env.GOOGLE_ID) {
+    next();
+  } else {
+    res.redirect("/");
+  }
 }
 
 const app = express();
@@ -54,10 +57,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
 // cookieSession config
-app.use(cookieSession({
+app.use(
+  cookieSession({
     maxAge: 24 * 60 * 60 * 1000, // One day in milliseconds
-    keys: ['randomstringhere']
-}));
+    keys: ["randomstringhere"]
+  })
+);
 
 app.use(passport.initialize()); // Used to initialize passport
 app.use(passport.session()); // Used to persist login sessions
@@ -79,25 +84,29 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // ROUTES
 
-
-app.get('/login', 
-  function(req, res) {
-    res.redirect('/auth/google');
-  });
-
-app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
+app.get("/login", function(req, res) {
+  res.redirect("/auth/google");
 });
 
-app.get('/auth/google',
-  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+app.get("/logout", function(req, res) {
+  req.logout();
+  res.redirect("/");
+});
 
-app.get('/auth/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/login' }),
+app.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: ["https://www.googleapis.com/auth/plus.login"]
+  })
+);
+
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/login" }),
   function(req, res) {
-    res.redirect('/manage');
-  });
+    res.redirect("/manage");
+  }
+);
 
 app.get("/", function(request, response) {
   response.render("pages/index");
@@ -218,32 +227,30 @@ app.get("/pies/:id/eat", async function(request, response) {
   response.redirect(`/?pieID=${id}`); //&live=true
 });
 
-
 app.post("/pies/:id/eatWithoutNotification", async function(request, response) {
   const { id } = request.params;
 
   const pie = await db.Pie.findOne({
     where: { id, eatenAt: null }
   });
-  console.log(pie)
-//   if (pie) {
-//     const {
-//       dataValues: { recipientName, senderName, senderEmail }
-//     } = pie;
 
-//     await db.Pie.update(
-//       {
-//         eatenAt: moment().toDate()
-//       },
-//       {
-//         where: { id }
-//       }
-//     );
-//   }
+  if (pie) {
+    const {
+      dataValues: { recipientName, senderName, senderEmail }
+    } = pie;
+
+    await db.Pie.update(
+      {
+        eatenAt: moment().toDate()
+      },
+      {
+        where: { id }
+      }
+    );
+  }
 
   response.send(pie);
 });
-
 
 app.post("/pies/:id/sendReminder", async function(request, response) {
   const { id } = request.params;
@@ -256,28 +263,28 @@ app.post("/pies/:id/sendReminder", async function(request, response) {
     const {
       dataValues: { recipientEmail, recipientName, senderName, senderEmail }
     } = pie;
-   const imageURL = idToImageURL(id);
-   const eatURL = `https://eatchocopietogether.com/pies/${id}/eat?recipientEmail=${recipientEmail}`;
-      const recipientHtml = await ejs.renderFile("views/emails/reminder.ejs", {
-        imageURL,
-        pieURL: eatURL,
-        senderName,
-        recipientName,
-      });
-      const msgRecipient = {
-        to: recipientEmail,
-        //cc: senderEmail,
-        from: {
-          email: "eatingchocopietogether@gmail.com",
-          name: "EatChocopieTogether"
-        },
-        subject: `A Chocopie From ${senderName}`,
-        html: recipientHtml
-      };
+    const imageURL = idToImageURL(id);
+    const eatURL = `https://eatchocopietogether.com/pies/${id}/eat?recipientEmail=${recipientEmail}`;
+    const recipientHtml = await ejs.renderFile("views/emails/reminder.ejs", {
+      imageURL,
+      pieURL: eatURL,
+      senderName,
+      recipientName
+    });
+    const msgRecipient = {
+      to: recipientEmail,
+      //cc: senderEmail,
+      from: {
+        email: "eatingchocopietogether@gmail.com",
+        name: "EatChocopieTogether"
+      },
+      subject: `Reminder: A Chocopie From ${senderName}`,
+      html: recipientHtml
+    };
     await sgMail.send(msgRecipient);
   }
 
-  response.send(pie);//&live=true
+  response.send(pie); //&live=true
 });
 
 app.post(
@@ -359,9 +366,9 @@ app.post(
       const eatURL = `https://eatchocopietogether.com/pies/${pieId}/eat?recipientEmail=${recipientEmail}`;
       const redirectURL = `https://eatchocopietogether.com/?pieID=${pieId}`; //&live=true
       try {
-        console.log('send-before')
+        console.log("send-before");
         response.send(pie);
-        console.log('send-after')
+        console.log("send-after");
       } catch (e) {
         console.log(e);
       }
@@ -401,8 +408,7 @@ app.post(
         subject: `Thank you for sharing a Chocopie`,
         html: senderHtml
       };
-      
-      
+
       const testSender = {
         to: "ins-1qq4d1rl@isnotspam.com",
         from: {
@@ -413,8 +419,7 @@ app.post(
         subject: `Thank you for sharing a Chocopie`,
         html: senderHtml
       };
-      
-      
+
       try {
         await sgMail.send(msgRecipient);
         await sgMail.send(msgSender);
