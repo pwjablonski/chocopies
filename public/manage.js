@@ -4,19 +4,25 @@
   let eaten = pieData.eaten;
   let total = pieData.total;
   let pies = pieData.pies;
-  
-  const piesTable = d.querySelector(".pies__list");
-  const eatenDiv = d.querySelector(".eaten");
-  const sentDiv = d.querySelector(".sent");
-  
-  eatenDiv.innerHtml = `pies eaten`
-  sentDiv.innerHtml = `pies sent`
-  
-  console.log(eatenDiv)
 
+
+  drawData(sent, eaten);
   drawPies(pies);
+  
+  function drawData(sent, eaten){
+    const eatenDiv = d.querySelector("#eaten");
+    const sentDiv = d.querySelector("#sent");
+
+    eatenDiv.innerHtml = "pies eaten";
+    sentDiv.innerHtml = "pies sent";
+    console.log(eatenDiv.innerHtml)
+    console.log(eatenDiv)
+
+  }
 
   function drawPies(pies) {
+    const piesTable = d.querySelector(".pies__list");
+
     pies.forEach(function(pie) {
       const pieRow = d.createElement("tr");
       const pieId = d.createElement("td");
