@@ -16,7 +16,7 @@ window.onload = async function(d) {
     const dataDiv = d.querySelector(".data");
 
     eatenDiv.innerHTML = `${eaten} pies eaten`;
-    sentDiv.innerHTML = `${sent} pies sent`;
+    sentDiv.innerHTML = `${sent} pies shared`;
 
   }
 
