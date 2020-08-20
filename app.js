@@ -276,7 +276,7 @@ app.post("/pies/:id/sendReminder", async function(request, response) {
         email: "eatingchocopietogether@gmail.com",
         name: "EatChocopieTogether"
       },
-      subject: `Reminder: A Chocopie From ${senderName}`,
+      subject: `A Chocopie From ${senderName}`,
       html: recipientHtml
     };
     await sgMail.send(msgRecipient);
