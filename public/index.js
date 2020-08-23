@@ -58,6 +58,7 @@
     const resp = await req.json();
     return resp;
   }
+  
 
   function drawData(total, sent, eaten) {
     const totalDiv = document.querySelector("#totalPies");
