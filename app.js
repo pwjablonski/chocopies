@@ -336,7 +336,7 @@ app.post(
       }
     });
 
-    if (sentPies > 29) {
+    if (sentPies > 49) {
       response.send({
         error: {
           type: "too many requests",
