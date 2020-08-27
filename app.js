@@ -140,6 +140,7 @@ app.get("/manage", isUserAuthenticated, function(request, response) {
 
 app.get("/privacy", async function(request, response) {
   // db.Pie.update({eatenAt:null, sentAt:null, senderName: null, senderEmail:null, recipientName: null, recipientEmail: null, subscribedSender: null, message:null}, {where:{id:1}})
+  // db.Pie.update({senderName: "Anonymous"}, {where:{senderEmail:"maher@grassitup.ae"}})
   response.render("pages/privacy");
 });
 
