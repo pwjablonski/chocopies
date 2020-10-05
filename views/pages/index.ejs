@@ -12,8 +12,20 @@
       integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
       crossorigin=""
     />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript">
+			$(document).ready(function($) {
+				$.notify({
+					type: "error",
+					text: "This is a automatic example using the long form!",
+					close: true,
+					timeout : 9000
+				});
+			});
+		</script>
   </head>
   <body>
+    <div id="notify"></div>
     <header>
       <%- include('../partials/header'); %>
     </header>
