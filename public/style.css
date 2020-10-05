@@ -468,33 +468,22 @@ h4.title {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	font-weight: bold;
-	height: 30px;
+	height: 40px;
 	margin: 0;
 	padding: 15px 0 5px;
 	position: fixed;
 	text-align: center;
 	z-index: 1000;
 	width: 100%;
-	bottom: 0;
+	top: 55px;
 }
 
 /* Signaling Message */
 #notify.shout {
-	background: #F8FE65;
-	color: #333;
+	background: yellow;
+	color: #000;
 }
 
-/* Error Message */
-#notify.error {
-	background: #FE3D26 ;
-	color: #FCFCFC;
-}
-
-/* Success Message */
-#notify.success {
-	background: #67A05F;
-	color: #FCFCFC;
-}
 
 /* Close Button */
 #notify span.close {
