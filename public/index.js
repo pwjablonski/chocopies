@@ -65,7 +65,7 @@
     const sentDiv = document.querySelector("#piesSent");
     const moneyDiv = document.querySelector("#moneyRaised");
     totalDiv.innerHTML = total * 2;
-    sentDiv.innerHTML = Math.round(((sent+eaten)/total) *100) + '%'; //sent + eaten;
+    sentDiv.innerHTML = '100%'; //Math.round(((sent+eaten)/total) *100) + '%'; //sent + eaten;
     //console.log( Math.round(((sent+eaten)/total) *100) ); 
     moneyDiv.innerHTML = `$${sent + eaten}`;
   }
