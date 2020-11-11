@@ -7,12 +7,13 @@ const ejs = require("ejs");
 const db = require("./models/index.js");
 const idToImageURL = require("./util/idToImageURL.js");
 const { body } = require("express-validator");
-const xl = require('excel4node');
-
+var json2xls = require('json2xls');
 
 var passport = require("passport");
 var GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 const cookieSession = require("cookie-session");
+
+app.use(json2xls.middleware);
 
 passport.use(
   new GoogleStrategy(
@@ -141,34 +142,10 @@ app.get("/manage", isUserAuthenticated, function(request, response) {
   response.render("pages/manage");
 });
 
-app.get("/manage/data", isUserAuthenticated, async function(request, response) {
+app.get("/manage/download", isUserAuthenticated, async function(request, response) {
   const pies = await db.Pie.findAll();
 
-  const wb = new xl.Workbook();
-  const ws = wb.addWorksheet('Chocopie Data');
-  const headingColumnNames = [
-    "senderName", "senderEmail", "recipientName", "recipientEmail"
-  ]
-  
-//   let headingColumnIndex = 1;
-//   headingColumnNames.forEach(heading => {
-//       // ws.cell(1, headingColumnIndex++)
-//       //     .string(heading)
-//   });
-  
-  let rowIndex = 2;
-  pies.forEach( record => {
-      let columnIndex = 1;
-      Object.keys(record ).forEach(columnName =>{
-          console.log(record[columnName])
-          
-      });
-      rowIndex++;
-  });
-  
-  // wb.write('chocopies.xlsx');
-  
-  response.send(wb);
+  response.xls('data.xlsx', pies);
 });
 
 app.get("/privacy", async function(request, response) {

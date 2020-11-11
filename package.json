@@ -22,7 +22,7 @@
     "passport-google-oauth": "^2.0.0",
     "passport": "^0.4.1",
     "cookie-session": "^1.4.0",
-    "excel4node": "^1.7.2"
+    "json2xls": "^0.1.2"
   },
   "devDependencies": {
     "mocha": "^6.1.4",
