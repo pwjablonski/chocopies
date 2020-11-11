@@ -7,6 +7,8 @@ const ejs = require("ejs");
 const db = require("./models/index.js");
 const idToImageURL = require("./util/idToImageURL.js");
 const { body } = require("express-validator");
+const xl = require('excel4node');
+
 
 var passport = require("passport");
 var GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
@@ -142,9 +144,32 @@ app.get("/manage", isUserAuthenticated, function(request, response) {
 app.get("/manage/data", isUserAuthenticated, async function(request, response) {
   const pies = await db.Pie.findAll();
 
-  console.log(pies);
+  const wb = new xl.Workbook();
+  const ws = wb.addWorksheet('Chocopie Data');
+  const headingColumnNames = [
+    "id", "x", "y", "lat","lng","sentAt",
+    "Sender Name", "Sender Email", "Recipient Name", "Recipient Email", "Eaten At"
+  ]
   
-  response.redirect("/manage");
+  let headingColumnIndex = 1;
+  headingColumnNames.forEach(heading => {
+      ws.cell(1, headingColumnIndex++)
+          .string(heading)
+  });
+  
+  let rowIndex = 2;
+  pies.forEach( record => {
+      let columnIndex = 1;
+      Object.keys(record ).forEach(columnName =>{
+          ws.cell(rowIndex,columnIndex++)
+              .string(record [columnName])
+      });
+      rowIndex++;
+  });
+  
+  wb.write('chocopies.xlsx');
+  
+  response.send(wb);
 });
 
 app.get("/privacy", async function(request, response) {
