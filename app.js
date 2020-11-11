@@ -40,6 +40,7 @@ passport.deserializeUser((user, done) => {
 
 // Middleware to check if the user is authenticated
 function isUserAuthenticated(req, res, next) {
+  console.log(req.user, process.env.GOOGLE_ID)
   if (req.user && req.user.id === process.env.GOOGLE_ID) {
     next();
   } else {
