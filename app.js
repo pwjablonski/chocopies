@@ -139,6 +139,14 @@ app.get("/manage", isUserAuthenticated, function(request, response) {
   response.render("pages/manage");
 });
 
+app.get("/manage/data", isUserAuthenticated, async function(request, response) {
+  const pies = await db.Pie.findAll();
+
+  console.log(pies);
+  
+  response.redirect("/manage");
+});
+
 app.get("/privacy", async function(request, response) {
   // db.Pie.update({eatenAt:null, sentAt:null, senderName: null, senderEmail:null, recipientName: null, recipientEmail: null, subscribedSender: null, message:null}, {where:{id:1}})
   // db.Pie.update({senderName: "Anonymous"}, {where:{senderEmail:"maher@grassitup.ae"}})
