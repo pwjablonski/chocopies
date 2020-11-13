@@ -13,8 +13,6 @@ var passport = require("passport");
 var GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 const cookieSession = require("cookie-session");
 
-// app.use(json2xls.middleware);
-
 passport.use(
   new GoogleStrategy(
     {
@@ -68,6 +66,8 @@ app.use(
 
 app.use(passport.initialize()); // Used to initialize passport
 app.use(passport.session()); // Used to persist login sessions
+
+app.use(json2xls.middleware);
 
 function checkHttps(req, res, next) {
   // protocol check, if http, redirect to https
@@ -142,11 +142,15 @@ app.get("/manage", isUserAuthenticated, function(request, response) {
   response.render("pages/manage");
 });
 
-// app.get("/manage/download", isUserAuthenticated, async function(request, response) {
-//   const pies = await db.Pie.findAll();
+app.get("/manage/download", isUserAuthenticated, async function(request, response) {
+  const pies = await db.Pie.findAll();
+  
+  console.log(pies)
+  
+  response.send(pies)
 
-//   response.xls('data.xlsx', pies);
-// });
+  // response.xls('data.xlsx', pies);
+});
 
 app.get("/privacy", async function(request, response) {
   // db.Pie.update({eatenAt:null, sentAt:null, senderName: null, senderEmail:null, recipientName: null, recipientEmail: null, subscribedSender: null, message:null}, {where:{id:1}})
