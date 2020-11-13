@@ -145,11 +145,14 @@ app.get("/manage", isUserAuthenticated, function(request, response) {
 app.get("/manage/download", isUserAuthenticated, async function(request, response) {
   const pies = await db.Pie.findAll();
   
-  console.log(pies)
+  const reducedPies = pies.reduce((arr, pie)=>{
+    arr.push(pie.dataValues)
+    return arr
+  }, [])
   
-  response.send(pies)
+  // response.send(reducedPies)
 
-  // response.xls('data.xlsx', pies);
+  response.xls('data.xlsx', reducedPies);
 });
 
 app.get("/privacy", async function(request, response) {
